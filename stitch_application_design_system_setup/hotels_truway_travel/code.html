@@ -1,0 +1,306 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Truway - Hotels</title>
+<!-- Tailwind CSS & Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "rating-amber": "#F59E0B",
+            "on-tertiary-container": "#c7ffca",
+            "background": "#faf8ff",
+            "on-tertiary": "#ffffff",
+            "on-secondary-fixed": "#0b1c30",
+            "on-error": "#ffffff",
+            "surface-container": "#eaedff",
+            "on-primary-container": "#eeefff",
+            "input-border": "#CBD5E1",
+            "on-tertiary-fixed-variant": "#005320",
+            "surface-variant": "#dae2fd",
+            "on-background": "#131b2e",
+            "on-error-container": "#93000a",
+            "on-secondary": "#ffffff",
+            "primary-fixed-dim": "#b4c5ff",
+            "on-tertiary-fixed": "#002109",
+            "outline": "#737686",
+            "primary-fixed": "#dbe1ff",
+            "secondary-fixed": "#d3e4fe",
+            "surface-container-low": "#f2f3ff",
+            "error": "#ba1a1a",
+            "card-border": "#E2E8F0",
+            "royal-blue-hover": "#1D4ED8",
+            "inverse-on-surface": "#eef0ff",
+            "on-surface-variant": "#434655",
+            "on-secondary-container": "#54647a",
+            "badge-discount-bg": "#DCFCE7",
+            "on-primary": "#ffffff",
+            "inverse-primary": "#b4c5ff",
+            "tertiary-fixed-dim": "#62df7d",
+            "secondary": "#505f76",
+            "primary-container": "#2563eb",
+            "badge-discount-text": "#15803D",
+            "error-container": "#ffdad6",
+            "on-primary-fixed-variant": "#003ea8",
+            "royal-blue-light": "#EFF6FF",
+            "surface-container-high": "#e2e7ff",
+            "inverse-surface": "#283044",
+            "secondary-fixed-dim": "#b7c8e1",
+            "secondary-container": "#d0e1fb",
+            "surface-canvas": "#F8FAFC",
+            "tertiary-fixed": "#7ffc97",
+            "primary": "#004ac6",
+            "surface-bright": "#faf8ff",
+            "tertiary-container": "#007f36",
+            "on-primary-fixed": "#00174b",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-highest": "#dae2fd",
+            "surface-tint": "#0053db",
+            "on-secondary-fixed-variant": "#38485d",
+            "tertiary": "#006329",
+            "surface-dim": "#d2d9f4",
+            "on-surface": "#131b2e",
+            "surface-card": "#FFFFFF",
+            "outline-variant": "#c3c6d7",
+            "surface": "#faf8ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin-mobile": "1rem",
+            "gutter": "1rem",
+            "margin": "1.25rem",
+            "space-lg": "1rem",
+            "space-xl": "1.5rem",
+            "gutter-mobile": "0.75rem",
+            "space-sm": "0.5rem",
+            "space-md": "0.75rem",
+            "space-xs": "0.25rem",
+            "space-2xl": "2rem"
+          },
+          "fontFamily": {
+            "body-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "body-sm": ["Inter"],
+            "label-lg": ["Inter"],
+            "title-md": ["Inter"],
+            "display-lg-mobile": ["Inter"],
+            "label-sm": ["Inter"],
+            "display-lg": ["Inter"],
+            "headline-md": ["Inter"],
+            "headline-sm": ["Inter"],
+            "label-md": ["Inter"],
+            "headline-lg": ["Inter"]
+          },
+          "fontSize": {
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "title-md": ["16px", { "lineHeight": "22px", "fontWeight": "600" }],
+            "display-lg-mobile": ["30px", { "lineHeight": "38px", "fontWeight": "700" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "500" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "fontWeight": "700" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-surface-canvas text-on-surface antialiased font-body-md flex justify-center min-h-screen">
+<!-- Mobile Viewport Container (Edge-to-Edge Mobile Simulation) -->
+<main class="w-full max-w-md bg-surface-card min-h-screen flex flex-col relative shadow-xl overflow-x-hidden pb-24">
+<!-- Status Bar (iOS Style Indicator) -->
+<div class="w-full flex justify-between items-center px-6 pt-3 pb-2 text-on-surface">
+<span class="text-[14px] font-semibold tracking-tight">9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[16px]">wifi</span>
+<span class="material-symbols-outlined text-[20px]">battery_full</span>
+</div>
+</div>
+<!-- Header / Top Bar -->
+<header class="flex justify-between items-center px-margin-mobile py-space-sm bg-surface-card">
+<button aria-label="Go back" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-container-high transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[24px] text-on-surface">arrow_back</span>
+</button>
+<h1 class="text-headline-sm font-headline-sm text-on-surface tracking-tight">Hotels</h1>
+<button aria-label="Filter hotels" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-container-high transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[22px] text-on-surface">tune</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<div class="flex flex-col gap-space-xl px-margin-mobile pt-space-xs">
+<!-- Search Input Field -->
+<section>
+<div class="relative flex items-center w-full">
+<span class="material-symbols-outlined absolute left-3.5 text-secondary text-[22px] pointer-events-none">search</span>
+<input class="w-full h-12 pl-11 pr-4 bg-surface-card rounded-xl border border-card-border text-on-surface placeholder:text-outline text-body-md focus:outline-none focus:ring-2 focus:ring-primary-container focus:border-transparent transition-all" placeholder="Search hotels, cities..." type="text">
+</div>
+</section>
+<!-- Category Filter Chips / Horizontal Scroll -->
+<section class="overflow-x-auto no-scrollbar -mx-margin-mobile px-margin-mobile flex items-center gap-space-sm pb-1">
+<button class="px-5 py-2 rounded-full bg-primary-container text-on-primary text-label-md font-label-md shrink-0 shadow-sm transition-transform active:scale-95">
+          All
+        </button>
+<button class="px-5 py-2 rounded-full bg-surface-canvas border border-card-border text-secondary text-label-md font-label-md hover:bg-royal-blue-light transition-colors shrink-0 active:scale-95">
+          Goa
+        </button>
+<button class="px-5 py-2 rounded-full bg-surface-canvas border border-card-border text-secondary text-label-md font-label-md hover:bg-royal-blue-light transition-colors shrink-0 active:scale-95">
+          Bali
+        </button>
+<button class="px-5 py-2 rounded-full bg-surface-canvas border border-card-border text-secondary text-label-md font-label-md hover:bg-royal-blue-light transition-colors shrink-0 active:scale-95">
+          Paris
+        </button>
+<button class="px-5 py-2 rounded-full bg-surface-canvas border border-card-border text-secondary text-label-md font-label-md hover:bg-royal-blue-light transition-colors shrink-0 active:scale-95">
+          Dubai
+        </button>
+</section>
+<!-- Featured / Hero Card: Luxury Beach Resort -->
+<section>
+<article class="relative w-full h-56 rounded-xl overflow-hidden shadow-sm group border border-card-border">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A breathtaking luxury beach resort situated on the coastline of Goa with an expansive turquoise infinity swimming pool bordered by tropical green palm trees and modern sun loungers. High-key bright tropical sunlight washes across clear blue skies, creating pristine azure reflections on the calm pool surface. The architecture exhibits clean white minimalist villas complementing an exotic vacation ambiance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdVG-MsIth_L6rPSiTh5ivbLWlKNfpeOatLh-h0oGliwfHZAqOLXR9k6v9v6TFLZIgUjwqZ28XX4v-aL2vUqe8gKysnjQm9yTJultZcM9wSbTiCKfKfyFzV9-QmQQitM6DSZ_aCbelAlCsTDVVdkcwI0i1AU-TDVOdZPzaWEf1R97FRvgoQv5sjHmT_JBrHv-fwWjB9kUeTyrLAG2IoE4UseqhNoPHSh76nyycmHU6m-5gaE0WoMjVQQ">
+<!-- Gradient Mask for Legibility -->
+<div class="absolute inset-0 bg-gradient-to-t from-[#0b1c30]/90 via-[#0b1c30]/25 to-transparent"></div>
+<!-- Top-Right Favorite Button -->
+<button aria-label="Save to favorites" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/30 transition-colors active:scale-90">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+<!-- Bottom Card Content -->
+<div class="absolute bottom-3 left-3 right-3 flex justify-between items-end text-white">
+<div>
+<h2 class="text-title-md font-title-md font-bold text-white tracking-tight leading-snug">Luxury Beach Resort</h2>
+<p class="text-body-sm font-body-sm text-surface-container-low opacity-95">Goa, India</p>
+</div>
+<div class="text-right">
+<span class="text-headline-sm font-headline-sm font-bold text-white tracking-tight">$120</span>
+<span class="text-body-sm font-body-sm text-surface-container-low opacity-90"> /night</span>
+</div>
+</div>
+</article>
+</section>
+<!-- Recommended Hotels Section -->
+<section class="flex flex-col gap-3">
+<!-- Section Header -->
+<div class="flex justify-between items-center">
+<h2 class="text-title-md font-title-md font-bold text-on-surface">Recommended Hotels</h2>
+<a class="text-label-md font-label-md text-primary-container hover:text-royal-blue-hover transition-colors" href="#">See All</a>
+</div>
+<!-- List Items (Horizontal Card Pattern) -->
+<div class="flex flex-col gap-3">
+<!-- Hotel 1: Beachside Retreat -->
+<article class="flex items-center p-2.5 bg-surface-card rounded-xl border border-card-border shadow-sm hover:shadow-md transition-shadow">
+<div class="w-20 h-20 rounded-lg overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="An inviting beachfront boutique villa hotel in Bali Indonesia facing the calm ocean shore with green tropical foliage, traditional wooden sun deck accents, and crisp daylight reflecting gentle ocean waves. Minimalist clean architectural elements blend with natural Balinese textures, presented under an airy bright tropical sky." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAT-PY-vscCjWQYh1ENqyv2lP4iXy1iPOEynglqMalPLwToRBAPeFjV6wEd-5UoDQk9Ykkb1quUyzwspQGQEm_IoBDGacaGV-oqMX3BXmYEfwobGSzZ-Q7bCG2t3KkdWx9xrK3lwz3tEuZ2kTBGzmHu0j3BLs71FMJ7OAXzRj9xcPCmVpJ595Tq6n4NN-iXX0vU1eHpduFpRQKmDTySXcrnNSfaj7sI6deNplSU3ybcZz5_ALPWiiQFaQ">
+</div>
+<div class="flex-1 min-w-0 ml-3.5 flex flex-col justify-between h-20 py-0.5">
+<div>
+<h3 class="text-label-lg font-label-lg text-on-surface truncate">Beachside Retreat</h3>
+<p class="text-body-sm font-body-sm text-secondary truncate">Bali, Indonesia</p>
+</div>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-rating-amber text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-md font-label-md text-on-surface ml-1">4.6</span>
+</div>
+</div>
+<div class="shrink-0 text-right pr-1 self-end pb-1">
+<span class="text-title-md font-title-md font-bold text-primary-container">$80</span>
+<span class="text-label-sm font-label-sm text-secondary block -mt-1">/night</span>
+</div>
+</article>
+<!-- Hotel 2: Sea View Resort -->
+<article class="flex items-center p-2.5 bg-surface-card rounded-xl border border-card-border shadow-sm hover:shadow-md transition-shadow">
+<div class="w-20 h-20 rounded-lg overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A modern luxury resort swimming pool in Goa overlooking a panoramic ocean coastline at daytime. Tall coconut palm trees cast gentle soft shadows across pristine paved sun terraces with chic loungers and bright sparkling sea waters beneath a soft hazy blue sky." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBz5yFHZycnD6-erX8j6IvoDk16dBGm70ILgAb0dsQtIggqZEulzMAlhO2SL7BoRI_gRyEoGX6hTjj3P4Wsxgp9UXbTUcypG2Qm4bXGQGVDyVDNHh8JglY9d9wQBSRaGjtkJDaMyf--VDf5yclwHE5oV01n3FeriIIFqdkILUQ3Z0MMDAIIG4KMqb8VVtuILYqHJImCGER2WnogoQhA3ssChBaDB734x0XMV4Iw0YOdrOf8yMBbuADjUQ">
+</div>
+<div class="flex-1 min-w-0 ml-3.5 flex flex-col justify-between h-20 py-0.5">
+<div>
+<h3 class="text-label-lg font-label-lg text-on-surface truncate">Sea View Resort</h3>
+<p class="text-body-sm font-body-sm text-secondary truncate">Goa, India</p>
+</div>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-rating-amber text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-md font-label-md text-on-surface ml-1">4.5</span>
+</div>
+</div>
+<div class="shrink-0 text-right pr-1 self-end pb-1">
+<span class="text-title-md font-title-md font-bold text-primary-container">$100</span>
+<span class="text-label-sm font-label-sm text-secondary block -mt-1">/night</span>
+</div>
+</article>
+<!-- Hotel 3: City Comfort Hotel -->
+<article class="flex items-center p-2.5 bg-surface-card rounded-xl border border-card-border shadow-sm hover:shadow-md transition-shadow">
+<div class="w-20 h-20 rounded-lg overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="An elegant Haussmann style boutique hotel facade in central Paris France featuring warm limestone exterior, ornate wrought iron French balconies, and welcoming golden entrance lights under soft morning European light. The composition features clean pavement and quintessential sophisticated Parisian architectural aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaAy6DRZm8dKiaUbhISYSlzphxm0z3Q7NEFHs6LJRRuZFanonTrEfVi81f7VLT_8c5gD6chLWewGAJAw0J62UJMcnI-xSe9FCz3qsN7N-LrDrEEwluUsn65RXytJRlzHN6iBcT8etlIz3zcAsn3mc6uqQSucA9TCN37k24MQaqH-wEaBDH7_7qqKjzdYF5dgrIf71BI5Q2U0Pu-6ppu9nCgFrI8-eOnOe_OjSpL-Pv28NDlrZ6sKm63g">
+</div>
+<div class="flex-1 min-w-0 ml-3.5 flex flex-col justify-between h-20 py-0.5">
+<div>
+<h3 class="text-label-lg font-label-lg text-on-surface truncate">City Comfort Hotel</h3>
+<p class="text-body-sm font-body-sm text-secondary truncate">Paris, France</p>
+</div>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-rating-amber text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-md font-label-md text-on-surface ml-1">4.4</span>
+</div>
+</div>
+<div class="shrink-0 text-right pr-1 self-end pb-1">
+<span class="text-title-md font-title-md font-bold text-primary-container">$90</span>
+<span class="text-label-sm font-label-sm text-secondary block -mt-1">/night</span>
+</div>
+</article>
+</div>
+</section>
+</div>
+<!-- Bottom Navigation Bar (Executed from Shared Components JSON) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-mobile h-16 bg-surface-card border-t border-card-border shadow-lg max-w-md mx-auto right-0">
+<!-- Home Tab (Inactive) -->
+<a class="flex flex-col items-center justify-center text-secondary py-1 hover:text-royal-blue-hover transition-colors duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="text-label-sm font-label-sm mt-0.5">Home</span>
+</a>
+<!-- My Trips Tab (Inactive) -->
+<a class="flex flex-col items-center justify-center text-secondary py-1 hover:text-royal-blue-hover transition-colors duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined text-[24px]">luggage</span>
+<span class="text-label-sm font-label-sm mt-0.5">My Trips</span>
+</a>
+<!-- Offers Tab (Inactive) -->
+<a class="flex flex-col items-center justify-center text-secondary py-1 hover:text-royal-blue-hover transition-colors duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined text-[24px]">local_offer</span>
+<span class="text-label-sm font-label-sm mt-0.5">Offers</span>
+</a>
+<!-- Profile Tab (Inactive) -->
+<a class="flex flex-col items-center justify-center text-secondary py-1 hover:text-royal-blue-hover transition-colors duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined text-[24px]">person</span>
+<span class="text-label-sm font-label-sm mt-0.5">Profile</span>
+</a>
+</nav>
+</main>
+<style>
+    /* Utility to hide standard scrollbar in chip slider */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</body></html>

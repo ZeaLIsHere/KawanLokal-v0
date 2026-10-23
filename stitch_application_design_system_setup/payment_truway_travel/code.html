@@ -1,0 +1,298 @@
+<!DOCTYPE html><html class="h-full" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Truway - Payment</title>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-bright": "#faf8ff",
+            "primary": "#004ac6",
+            "surface-variant": "#dae2fd",
+            "surface-container-low": "#f2f3ff",
+            "secondary-container": "#d0e1fb",
+            "error-container": "#ffdad6",
+            "on-secondary": "#ffffff",
+            "rating-amber": "#F59E0B",
+            "card-border": "#E2E8F0",
+            "on-error-container": "#93000a",
+            "on-primary-container": "#eeefff",
+            "surface-container": "#eaedff",
+            "on-background": "#131b2e",
+            "surface-container-highest": "#dae2fd",
+            "surface-card": "#FFFFFF",
+            "inverse-surface": "#283044",
+            "royal-blue-hover": "#1D4ED8",
+            "inverse-primary": "#b4c5ff",
+            "primary-container": "#2563eb",
+            "royal-blue-light": "#EFF6FF",
+            "on-tertiary": "#ffffff",
+            "background": "#faf8ff",
+            "primary-fixed-dim": "#b4c5ff",
+            "on-surface-variant": "#434655",
+            "on-secondary-fixed-variant": "#38485d",
+            "on-primary-fixed-variant": "#003ea8",
+            "input-border": "#CBD5E1",
+            "surface-tint": "#0053db",
+            "tertiary-fixed": "#7ffc97",
+            "secondary-fixed-dim": "#b7c8e1",
+            "badge-discount-text": "#15803D",
+            "outline-variant": "#c3c6d7",
+            "surface-container-high": "#e2e7ff",
+            "surface": "#faf8ff",
+            "tertiary": "#006329",
+            "badge-discount-bg": "#DCFCE7",
+            "tertiary-container": "#007f36",
+            "secondary": "#505f76",
+            "inverse-on-surface": "#eef0ff",
+            "error": "#ba1a1a",
+            "on-error": "#ffffff",
+            "outline": "#737686",
+            "on-secondary-container": "#54647a",
+            "on-tertiary-container": "#c7ffca",
+            "on-tertiary-fixed-variant": "#005320",
+            "primary-fixed": "#dbe1ff",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-fixed": "#00174b",
+            "secondary-fixed": "#d3e4fe",
+            "on-tertiary-fixed": "#002109",
+            "surface-canvas": "#F8FAFC",
+            "on-primary": "#ffffff",
+            "tertiary-fixed-dim": "#62df7d",
+            "on-secondary-fixed": "#0b1c30",
+            "surface-dim": "#d2d9f4",
+            "on-surface": "#131b2e"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin": "1.25rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "margin-mobile": "1rem",
+            "gutter": "1rem",
+            "gutter-mobile": "0.75rem",
+            "space-md": "0.75rem",
+            "space-xl": "1.5rem",
+            "space-lg": "1rem",
+            "space-2xl": "2rem"
+          },
+          "fontFamily": {
+            "headline-md": ["Inter"],
+            "display-lg-mobile": ["Inter"],
+            "label-lg": ["Inter"],
+            "body-lg": ["Inter"],
+            "headline-sm": ["Inter"],
+            "display-lg": ["Inter"],
+            "body-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-lg": ["Inter"],
+            "title-md": ["Inter"],
+            "label-md": ["Inter"],
+            "body-sm": ["Inter"]
+          },
+          "fontSize": {
+            "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "display-lg-mobile": ["30px", { "lineHeight": "38px", "fontWeight": "700" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "500" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+            "title-md": ["16px", { "lineHeight": "22px", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-surface-canvas text-on-surface antialiased min-h-screen flex items-center justify-center p-0 md:p-6 select-none">
+<!-- Mobile Device Frame Container -->
+<div class="relative w-full max-w-[412px] h-[892px] bg-surface-card rounded-[40px] shadow-2xl flex flex-col overflow-hidden border border-card-border">
+<!-- Status Bar (iOS style) -->
+<div class="w-full pt-3 px-6 pb-2 flex justify-between items-center text-on-surface shrink-0 z-20">
+<span class="text-label-lg font-label-lg tracking-tight font-semibold">9:41</span>
+<div class="flex items-center space-x-1.5">
+<span class="material-symbols-outlined text-[16px] leading-none" data-icon="signal_cellular_4_bar">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[16px] leading-none" data-icon="wifi">wifi</span>
+<span class="material-symbols-outlined text-[20px] leading-none" data-icon="battery_full">battery_full</span>
+</div>
+</div>
+<!-- Navigation Header -->
+<header class="flex items-center justify-between px-margin-mobile py-space-sm bg-surface-card shrink-0">
+<button aria-label="Go back" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-royal-blue-light transition-colors duration-150 active:scale-95 text-on-surface" type="button">
+<span class="material-symbols-outlined text-[24px]" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="text-headline-sm font-headline-sm text-on-surface tracking-tight">Payment</h1>
+<div class="w-10 h-10"></div>
+</header>
+<!-- Main Content Canvas (Scrollable) -->
+<main class="flex-1 overflow-y-auto px-margin-mobile py-space-md space-y-space-xl pb-32">
+<!-- Booking Summary Section -->
+<section class="space-y-space-sm">
+<h2 class="text-title-md font-title-md text-on-surface">Booking Summary</h2>
+<!-- Summary Card -->
+<div class="bg-surface-card border border-card-border rounded-xl p-space-md flex items-center justify-between shadow-[0_4px_12px_rgba(15,23,42,0.05)] hover:border-surface-variant transition-all duration-200">
+<div class="flex items-center space-x-space-md">
+<div class="w-14 h-14 rounded-lg overflow-hidden shrink-0 border border-card-border">
+<img class="w-full h-full object-cover" data-alt="A tranquil luxury beachfront villa resort in Bali with turquoise ocean waters, gentle golden sunset lighting, swaying tropical palm trees, and elegant modern infinity pool architecture under a clear vibrant sky, creating a serene high-end travel aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAF7ztsC-Vo8v2ac0bnB9buHIw2Mu4uDedN-W-8eOyyXGC1fxuuGEaEpKWtv1qGKNYSg1NI3mKrzBQHIn1GMwNQpVEDMVzrCGyqwi_8ME52JXzDVGIPHi1Nwfjp59FXbB2ks5mUi3utBB482azm9w-KNE5nXhr9wsNYisbRWuHiZKlZgpNx-lD2pmqOVx0C1prukZjTXyjTmXpBSpwF17gA2b9DWWWI7EpF-q2M9OvDNtEbstwBk7b-Og">
+</div>
+<div class="flex flex-col">
+<span class="text-title-md font-title-md text-on-surface leading-tight">Bali, Indonesia</span>
+<span class="text-body-sm font-body-sm text-secondary mt-0.5">Flight Package</span>
+</div>
+</div>
+<div class="text-right pl-2 shrink-0">
+<span class="text-headline-sm font-headline-sm text-on-surface">$499</span>
+</div>
+</div>
+</section>
+<!-- Payment Method Section -->
+<section class="space-y-space-sm">
+<h2 class="text-title-md font-title-md text-on-surface">Payment Method</h2>
+<!-- Options Card List -->
+<div class="bg-surface-card border border-card-border rounded-xl shadow-[0_4px_12px_rgba(15,23,42,0.05)] divide-y divide-card-border overflow-hidden">
+<!-- Option 1: Credit / Debit Card (Selected) -->
+<label class="flex items-center justify-between p-space-md min-h-[56px] cursor-pointer hover:bg-royal-blue-light/50 transition-colors duration-150 group">
+<div class="flex items-center space-x-space-md">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[20px]" data-icon="credit_card">credit_card</span>
+</div>
+<span class="text-label-lg font-label-lg text-on-surface">Credit / Debit Card</span>
+</div>
+<div class="relative flex items-center justify-center">
+<input checked="" class="sr-only peer" name="payment_method" type="radio" value="card">
+<!-- Outer radio ring -->
+<div class="w-5 h-5 rounded-full border-2 border-primary-container peer-checked:border-primary-container flex items-center justify-center transition-all duration-150">
+<!-- Inner filled dot -->
+<div class="w-2.5 h-2.5 rounded-full bg-primary-container"></div>
+</div>
+</div>
+</label>
+<!-- Option 2: UPI / Google Pay -->
+<label class="flex items-center justify-between p-space-md min-h-[56px] cursor-pointer hover:bg-royal-blue-light/50 transition-colors duration-150 group">
+<div class="flex items-center space-x-space-md">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]" data-icon="account_balance_wallet">account_balance_wallet</span>
+</div>
+<span class="text-label-lg font-label-lg text-on-surface">UPI / Google Pay</span>
+</div>
+<div class="relative flex items-center justify-center">
+<input class="sr-only peer" name="payment_method" type="radio" value="upi">
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant peer-checked:border-primary-container flex items-center justify-center transition-all duration-150">
+<div class="w-2.5 h-2.5 rounded-full bg-transparent peer-checked:bg-primary-container"></div>
+</div>
+</div>
+</label>
+<!-- Option 3: Net Banking -->
+<label class="flex items-center justify-between p-space-md min-h-[56px] cursor-pointer hover:bg-royal-blue-light/50 transition-colors duration-150 group">
+<div class="flex items-center space-x-space-md">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]" data-icon="account_balance">account_balance</span>
+</div>
+<span class="text-label-lg font-label-lg text-on-surface">Net Banking</span>
+</div>
+<div class="relative flex items-center justify-center">
+<input class="sr-only peer" name="payment_method" type="radio" value="netbanking">
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant peer-checked:border-primary-container flex items-center justify-center transition-all duration-150">
+<div class="w-2.5 h-2.5 rounded-full bg-transparent peer-checked:bg-primary-container"></div>
+</div>
+</div>
+</label>
+<!-- Option 4: Wallet -->
+<label class="flex items-center justify-between p-space-md min-h-[56px] cursor-pointer hover:bg-royal-blue-light/50 transition-colors duration-150 group">
+<div class="flex items-center space-x-space-md">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]" data-icon="wallet">wallet</span>
+</div>
+<span class="text-label-lg font-label-lg text-on-surface">Wallet</span>
+</div>
+<div class="relative flex items-center justify-center">
+<input class="sr-only peer" name="payment_method" type="radio" value="wallet">
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant peer-checked:border-primary-container flex items-center justify-center transition-all duration-150">
+<div class="w-2.5 h-2.5 rounded-full bg-transparent peer-checked:bg-primary-container"></div>
+</div>
+</div>
+</label>
+</div>
+</section>
+<!-- Security Trust Info Badge -->
+<div class="bg-surface-container-low rounded-xl p-space-md border border-card-border flex items-start space-x-space-md">
+<div class="w-8 h-8 rounded-full bg-badge-discount-bg text-badge-discount-text flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]" data-icon="verified_user">verified_user</span>
+</div>
+<div class="flex-1">
+<h3 class="text-label-md font-label-md text-on-surface">100% Refund Guarantee</h3>
+<p class="text-body-sm font-body-sm text-secondary mt-0.5">Free cancellation up to 48 hours before scheduled flight departure.</p>
+</div>
+</div>
+</main>
+<!-- Elevated Bottom Action Area (Sticky) -->
+<div class="absolute bottom-0 left-0 w-full bg-surface-card shadow-[0_-4px_16px_rgba(15,23,42,0.08)] px-margin-mobile pt-space-md pb-2 z-30">
+<!-- Primary Action CTA Button -->
+<button class="w-full h-12 bg-primary-container hover:bg-royal-blue-hover active:scale-[0.99] text-on-primary rounded-xl font-label-lg text-label-lg font-semibold flex items-center justify-center space-x-2 shadow-sm transition-all duration-150" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="lock" data-weight="fill" style="font-variation-settings: 'FILL' 1;">lock</span>
+<span>Pay $499</span>
+</button>
+<!-- Security Caption Reassurance -->
+<div class="flex items-center justify-center space-x-1 py-space-sm text-secondary">
+<span class="material-symbols-outlined text-[14px]" data-icon="shield">shield</span>
+<p class="text-label-sm font-label-sm text-secondary tracking-normal text-center">
+          Your payment is secured with 256-bit encryption.
+        </p>
+</div>
+<!-- iOS Home Indicator Bar -->
+<div class="w-full flex justify-center pb-1">
+<div class="w-32 h-1 bg-on-surface/20 rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Interactive Radio Behavior Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const labels = document.querySelectorAll('label');
+      labels.forEach(label => {
+        label.addEventListener('click', () => {
+          labels.forEach(l => {
+            const circle = l.querySelector('.w-5');
+            const dot = l.querySelector('.w-2\\.5');
+            if (circle && dot) {
+              circle.classList.remove('border-primary-container');
+              circle.classList.add('border-outline-variant');
+              dot.classList.remove('bg-primary-container');
+              dot.classList.add('bg-transparent');
+            }
+          });
+          const activeCircle = label.querySelector('.w-5');
+          const activeDot = label.querySelector('.w-2\\.5');
+          if (activeCircle && activeDot) {
+            activeCircle.classList.remove('border-outline-variant');
+            activeCircle.classList.add('border-primary-container');
+            activeDot.classList.remove('bg-transparent');
+            activeDot.classList.add('bg-primary-container');
+          }
+        });
+      });
+    });
+  </script>
+</body></html>

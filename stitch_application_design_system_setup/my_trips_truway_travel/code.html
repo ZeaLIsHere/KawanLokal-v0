@@ -1,0 +1,312 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Truway - My Trips</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "royal-blue-hover": "#1D4ED8",
+            "royal-blue-light": "#EFF6FF",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary-fixed-variant": "#38485d",
+            "rating-amber": "#F59E0B",
+            "on-error": "#ffffff",
+            "on-surface-variant": "#434655",
+            "on-tertiary-fixed": "#002109",
+            "input-border": "#CBD5E1",
+            "secondary": "#505f76",
+            "on-primary-container": "#eeefff",
+            "on-error-container": "#93000a",
+            "surface-container-high": "#e2e7ff",
+            "inverse-primary": "#b4c5ff",
+            "surface-container-low": "#f2f3ff",
+            "on-tertiary-fixed-variant": "#005320",
+            "error": "#ba1a1a",
+            "secondary-fixed": "#d3e4fe",
+            "on-surface": "#131b2e",
+            "tertiary-fixed": "#7ffc97",
+            "error-container": "#ffdad6",
+            "surface": "#faf8ff",
+            "on-primary": "#ffffff",
+            "surface-canvas": "#F8FAFC",
+            "surface-variant": "#dae2fd",
+            "primary-fixed-dim": "#b4c5ff",
+            "tertiary-fixed-dim": "#62df7d",
+            "surface-tint": "#0053db",
+            "surface-card": "#FFFFFF",
+            "card-border": "#E2E8F0",
+            "background": "#faf8ff",
+            "surface-container-highest": "#dae2fd",
+            "on-secondary-container": "#54647a",
+            "on-tertiary-container": "#c7ffca",
+            "surface-bright": "#faf8ff",
+            "badge-discount-bg": "#DCFCE7",
+            "on-secondary-fixed": "#0b1c30",
+            "primary-fixed": "#dbe1ff",
+            "inverse-on-surface": "#eef0ff",
+            "on-primary-fixed-variant": "#003ea8",
+            "on-secondary": "#ffffff",
+            "secondary-fixed-dim": "#b7c8e1",
+            "tertiary": "#006329",
+            "on-primary-fixed": "#00174b",
+            "outline": "#737686",
+            "tertiary-container": "#007f36",
+            "on-background": "#131b2e",
+            "badge-discount-text": "#15803D",
+            "inverse-surface": "#283044",
+            "primary": "#004ac6",
+            "surface-container": "#eaedff",
+            "outline-variant": "#c3c6d7",
+            "on-tertiary": "#ffffff",
+            "secondary-container": "#d0e1fb",
+            "surface-dim": "#d2d9f4",
+            "primary-container": "#2563eb"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter-mobile": "0.75rem",
+            "space-sm": "0.5rem",
+            "margin-mobile": "1rem",
+            "space-xs": "0.25rem",
+            "space-md": "0.75rem",
+            "space-xl": "1.5rem",
+            "gutter": "1rem",
+            "space-2xl": "2rem",
+            "space-lg": "1rem",
+            "margin": "1.25rem"
+          },
+          "fontFamily": {
+            "label-lg": ["Inter"],
+            "body-md": ["Inter"],
+            "label-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-lg": ["Inter"],
+            "display-lg-mobile": ["Inter"],
+            "body-lg": ["Inter"],
+            "label-sm": ["Inter"],
+            "display-lg": ["Inter"],
+            "headline-md": ["Inter"],
+            "title-md": ["Inter"],
+            "headline-sm": ["Inter"]
+          },
+          "fontSize": {
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+            "display-lg-mobile": ["30px", { "lineHeight": "38px", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "500" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "fontWeight": "700" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "title-md": ["16px", { "lineHeight": "22px", "fontWeight": "600" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 24px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: 'liga';
+      -webkit-font-smoothing: antialiased;
+    }
+    body {
+      -webkit-tap-highlight-color: transparent;
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-surface-canvas text-on-surface antialiased min-h-screen flex justify-center selection:bg-primary-container selection:text-on-primary">
+<!-- Mobile Frame Container (Max 430px representing iOS screen) -->
+<main class="w-full max-w-[430px] min-h-screen bg-surface-canvas flex flex-col relative pb-24 shadow-2xl">
+<!-- iOS Status Bar -->
+<div class="w-full h-11 pt-3 px-6 flex justify-between items-center text-on-surface bg-surface-card select-none">
+<span class="font-headline-sm text-label-md font-bold tracking-tight">9:41</span>
+<div class="flex items-center space-x-2 text-on-surface">
+<span class="material-symbols-outlined text-[17px]">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[17px]">wifi</span>
+<span class="material-symbols-outlined text-[20px]">battery_full</span>
+</div>
+</div>
+<!-- Top Navigation Header -->
+<header class="w-full px-margin-mobile py-3 bg-surface-card flex items-center justify-between sticky top-0 z-30 shadow-sm">
+<button aria-label="Go back" class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface hover:bg-royal-blue-light transition-colors duration-150 active:scale-95">
+<span class="material-symbols-outlined text-[22px]">arrow_back</span>
+</button>
+<h1 class="text-headline-sm font-headline-sm font-bold text-on-surface tracking-tight">My Trips</h1>
+<div class="w-10 h-10"></div>
+</header>
+<!-- Trip Category Segmented Filter Tabs -->
+<section class="px-margin-mobile pt-space-lg pb-space-sm">
+<div aria-label="Trip status" class="flex items-center justify-between gap-space-xs p-1 bg-surface-container-high rounded-full border border-card-border" role="tablist">
+<button aria-selected="true" class="flex-1 py-2 px-3 rounded-full text-center text-label-md font-label-md transition-all duration-200 bg-primary-container text-on-primary shadow-sm active:scale-95" role="tab">
+          Upcoming
+        </button>
+<button aria-selected="false" class="flex-1 py-2 px-3 rounded-full text-center text-label-md font-label-md text-secondary hover:text-on-surface transition-all duration-200 active:scale-95" role="tab">
+          Past
+        </button>
+<button aria-selected="false" class="flex-1 py-2 px-3 rounded-full text-center text-label-md font-label-md text-secondary hover:text-on-surface transition-all duration-200 active:scale-95" role="tab">
+          Cancelled
+        </button>
+</div>
+</section>
+<!-- Trips List Cards -->
+<section class="px-margin-mobile pt-space-sm space-y-space-md flex-1">
+<!-- Card 1: Paris, France -->
+<article class="bg-surface-card rounded-xl p-space-md border border-card-border shadow-[0_4px_12px_rgba(15,23,42,0.05)] hover:shadow-md transition-all duration-200 cursor-pointer active:scale-[0.99] group">
+<div class="flex items-center gap-space-md">
+<div class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container relative">
+<img alt="Eiffel Tower, Paris" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Stunning cinematic photograph of the Eiffel Tower in Paris soaring into a crisp azure summer sky, surrounded by manicured Parisian park grounds with clean soft morning sunlight, bright vibrant colors matching a premium modern travel lifestyle interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7fJJWaYL1a9Nj4qkTrLSZTP9XX67Ais_zBZN8jGL-ctaKEZoZYQyaXQeWIy2KM9ofd0ilfEMb4-4zcRaJaz2RyO9PY_xhZlbpUKrif28YHSOa5_Ogc_URjz6DqWLNSPiMSRfnqHPIryM3mZTVkd-4t3tmMtaXFIbUMmJeeUYXaXfyxPq92n-qxIdwXrWyf_bMNuFyTpam3W7OV2gx-Es5TVesRC5ibJyp81l-o6VoDyiXWNarhV1mGA">
+</div>
+<div class="flex-1 min-w-0 pr-1">
+<div class="flex items-center justify-between mb-1">
+<h2 class="text-title-md font-title-md text-on-surface truncate">Paris, France</h2>
+</div>
+<div class="flex items-center gap-1.5 text-secondary text-body-sm font-body-sm mb-1">
+<span class="material-symbols-outlined text-[15px] text-secondary">calendar_today</span>
+<span class="truncate">Fri, 23 Aug 2024</span>
+</div>
+<div class="flex items-center gap-1.5 text-secondary text-body-sm font-body-sm mb-2.5">
+<span class="material-symbols-outlined text-[15px] text-secondary">person</span>
+<span>2 Travelers</span>
+</div>
+<div>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-royal-blue-light text-primary-container font-medium border border-blue-100">
+                Upcoming
+              </span>
+</div>
+</div>
+<div class="flex-shrink-0 text-outline group-hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</div>
+</div>
+</article>
+<!-- Card 2: Goa, India -->
+<article class="bg-surface-card rounded-xl p-space-md border border-card-border shadow-[0_4px_12px_rgba(15,23,42,0.05)] hover:shadow-md transition-all duration-200 cursor-pointer active:scale-[0.99] group">
+<div class="flex items-center gap-space-md">
+<div class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container relative">
+<img alt="Tropical Beach in Goa" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Vibrant tropical shoreline in Goa India featuring pristine sandy beach with leaning green coconut palm trees against sparkling turquoise ocean waves with gentle bright natural daylight and airy vacation aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMDexoo7NNknHBUt4U3uC_sVRIlMj-2wIai6U2xfg6p6mhCTYhc-4KnppOmo_PgBlFosjrzWh_t7uTkQ3du4jk43JpmvU0BBmDn8CN7tqMEh7O8fjPyGE_bqdfb5-7J06GeFficwDRr_OzDy4hcXNRlLxddTj32w727CqYjbQBBHPnWuhYQy2GSosmFU6h3tgHeorsTgclYlMf_UuiupX1N8WsiEjubRuL9_WY4llRbtvcl7TaZx31Zw">
+</div>
+<div class="flex-1 min-w-0 pr-1">
+<div class="flex items-center justify-between mb-1">
+<h2 class="text-title-md font-title-md text-on-surface truncate">Goa, India</h2>
+</div>
+<div class="flex items-center gap-1.5 text-secondary text-body-sm font-body-sm mb-1">
+<span class="material-symbols-outlined text-[15px] text-secondary">calendar_today</span>
+<span class="truncate">Mon, 25 Aug 2024</span>
+</div>
+<div class="flex items-center gap-1.5 text-secondary text-body-sm font-body-sm mb-2.5">
+<span class="material-symbols-outlined text-[15px] text-secondary">person</span>
+<span>1 Traveler</span>
+</div>
+<div>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-royal-blue-light text-primary-container font-medium border border-blue-100">
+                Upcoming
+              </span>
+</div>
+</div>
+<div class="flex-shrink-0 text-outline group-hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</div>
+</div>
+</article>
+<!-- Card 3: Bali, Indonesia -->
+<article class="bg-surface-card rounded-xl p-space-md border border-card-border shadow-[0_4px_12px_rgba(15,23,42,0.05)] hover:shadow-md transition-all duration-200 cursor-pointer active:scale-[0.99] group">
+<div class="flex items-center gap-space-md">
+<div class="w-24 h-24 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container relative">
+<img alt="Balinese Temple" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Iconic multi-tiered Balinese temple shrine rising above calm serene lake reflection in Bedugul Bali Indonesia, surrounded by lush green mist-covered volcanic hills under soft diffused morning light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsJSqaRF996ywTI03He6TQbRHfEUGy_JkcZfGJYZRCyQwAZRCL4ZQGrau8vm4NWlI3zRrJbjZXbCjhNXOWgQRPxRPXD2rz48f9ibQcMQ1a8ENmhWUOTq5J1a9yBPx4apjgLlhOTAmqL29ss5A-cyg6Mud25RO6EVgCO8q3bX3Y-IcdNaFCS9mTEqy_r9-hwccA4bAZmoiHvtpzodwUYD9K0QTN1oRWVYIyXyjAlMlSon7vMtD5QORmqg">
+</div>
+<div class="flex-1 min-w-0 pr-1">
+<div class="flex items-center justify-between mb-1">
+<h2 class="text-title-md font-title-md text-on-surface truncate">Bali, Indonesia</h2>
+</div>
+<div class="flex items-center gap-1.5 text-secondary text-body-sm font-body-sm mb-1">
+<span class="material-symbols-outlined text-[15px] text-secondary">calendar_today</span>
+<span class="truncate">Thu, 11 Sep 2024</span>
+</div>
+<div class="flex items-center gap-1.5 text-secondary text-body-sm font-body-sm mb-2.5">
+<span class="material-symbols-outlined text-[15px] text-secondary">person</span>
+<span>2 Travelers</span>
+</div>
+<div>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-royal-blue-light text-primary-container font-medium border border-blue-100">
+                Upcoming
+              </span>
+</div>
+</div>
+<div class="flex-shrink-0 text-outline group-hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</div>
+</div>
+</article>
+</section>
+<!-- Shared Component: BottomNavBar -->
+<nav aria-label="Main Navigation" class="fixed bottom-0 left-0 right-0 max-w-[430px] mx-auto z-50 flex justify-around items-center px-margin-mobile h-16 bg-surface-card border-t border-card-border shadow-[0_-4px_16px_rgba(15,23,42,0.06)]">
+<!-- Item 1: Home (Inactive) -->
+<a aria-label="Home" class="flex flex-col items-center justify-center text-secondary py-1 hover:text-royal-blue-hover transition-colors duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined text-[22px]">home</span>
+<span class="text-label-sm font-label-sm mt-0.5">Home</span>
+</a>
+<!-- Item 2: My Trips (Active State determined by screen context) -->
+<a aria-current="page" aria-label="My Trips" class="flex flex-col items-center justify-center text-primary font-semibold py-1 hover:text-royal-blue-hover transition-colors duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">luggage</span>
+<span class="text-label-sm font-label-sm mt-0.5 font-bold">My Trips</span>
+</a>
+<!-- Item 3: Offers (Inactive) -->
+<a aria-label="Offers" class="flex flex-col items-center justify-center text-secondary py-1 hover:text-royal-blue-hover transition-colors duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined text-[22px]">local_offer</span>
+<span class="text-label-sm font-label-sm mt-0.5">Offers</span>
+</a>
+<!-- Item 4: Profile (Inactive) -->
+<a aria-label="Profile" class="flex flex-col items-center justify-center text-secondary py-1 hover:text-royal-blue-hover transition-colors duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined text-[22px]">person</span>
+<span class="text-label-sm font-label-sm mt-0.5">Profile</span>
+</a>
+</nav>
+<!-- iOS Home Indicator Indicator -->
+<div class="fixed bottom-1 left-0 right-0 max-w-[430px] mx-auto flex justify-center pointer-events-none z-50">
+<div class="w-32 h-1 bg-on-surface-variant/40 rounded-full"></div>
+</div>
+</main>
+<script>
+    // Tab switching interactivity
+    document.querySelectorAll('[role="tablist"] button').forEach((tab) => {
+      tab.addEventListener('click', (e) => {
+        const tabs = tab.closest('[role="tablist"]').querySelectorAll('button');
+        tabs.forEach((t) => {
+          t.setAttribute('aria-selected', 'false');
+          t.className = 'flex-1 py-2 px-3 rounded-full text-center text-label-md font-label-md text-secondary hover:text-on-surface transition-all duration-200 active:scale-95';
+        });
+        tab.setAttribute('aria-selected', 'true');
+        tab.className = 'flex-1 py-2 px-3 rounded-full text-center text-label-md font-label-md transition-all duration-200 bg-primary-container text-on-primary shadow-sm active:scale-95';
+      });
+    });
+  </script>
+</body></html>

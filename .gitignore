@@ -1,0 +1,26 @@
+# Node & dependencies
+node_modules/
+.npm
+package-lock.json
+
+# Expo
+.expo/
+dist/
+web-build/
+
+# Native builds
+android/
+ios/
+
+# Environment & keys
+.env
+.env*.local
+*.pem
+
+# IDE & OS
+.DS_Store
+*.log
+Thumbs.db
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json

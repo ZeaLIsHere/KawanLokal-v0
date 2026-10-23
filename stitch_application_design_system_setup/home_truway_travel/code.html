@@ -1,0 +1,313 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Truway Travel - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary-fixed": "#0b1c30",
+            "on-primary-container": "#eeefff",
+            "surface-card": "#FFFFFF",
+            "primary": "#004ac6",
+            "input-border": "#CBD5E1",
+            "primary-fixed-dim": "#b4c5ff",
+            "surface-container": "#eaedff",
+            "on-primary-fixed-variant": "#003ea8",
+            "surface-container-lowest": "#ffffff",
+            "primary-container": "#2563eb",
+            "outline": "#737686",
+            "on-tertiary-fixed": "#002109",
+            "surface-dim": "#d2d9f4",
+            "on-background": "#131b2e",
+            "outline-variant": "#c3c6d7",
+            "surface-container-highest": "#dae2fd",
+            "royal-blue-hover": "#1D4ED8",
+            "on-error-container": "#93000a",
+            "on-tertiary": "#ffffff",
+            "badge-discount-bg": "#DCFCE7",
+            "surface-container-high": "#e2e7ff",
+            "on-secondary-fixed-variant": "#38485d",
+            "error": "#ba1a1a",
+            "on-secondary-container": "#54647a",
+            "tertiary-fixed-dim": "#62df7d",
+            "inverse-surface": "#283044",
+            "primary-fixed": "#dbe1ff",
+            "badge-discount-text": "#15803D",
+            "secondary-container": "#d0e1fb",
+            "tertiary-fixed": "#7ffc97",
+            "surface-canvas": "#F8FAFC",
+            "surface-container-low": "#f2f3ff",
+            "on-tertiary-fixed-variant": "#005320",
+            "on-tertiary-container": "#c7ffca",
+            "on-primary": "#ffffff",
+            "on-secondary": "#ffffff",
+            "error-container": "#ffdad6",
+            "secondary-fixed-dim": "#b7c8e1",
+            "rating-amber": "#F59E0B",
+            "secondary-fixed": "#d3e4fe",
+            "background": "#faf8ff",
+            "tertiary": "#006329",
+            "inverse-on-surface": "#eef0ff",
+            "on-surface-variant": "#434655",
+            "royal-blue-light": "#EFF6FF",
+            "tertiary-container": "#007f36",
+            "inverse-primary": "#b4c5ff",
+            "surface-bright": "#faf8ff",
+            "surface-variant": "#dae2fd",
+            "on-primary-fixed": "#00174b",
+            "on-error": "#ffffff",
+            "surface": "#faf8ff",
+            "secondary": "#505f76",
+            "on-surface": "#131b2e",
+            "card-border": "#E2E8F0",
+            "surface-tint": "#0053db"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter-mobile": "0.75rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "space-2xl": "2rem",
+            "margin": "1.25rem",
+            "space-xl": "1.5rem",
+            "gutter": "1rem",
+            "space-md": "0.75rem",
+            "space-lg": "1rem",
+            "margin-mobile": "1rem"
+          },
+          "fontFamily": {
+            "headline-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-lg": ["Inter"],
+            "display-lg-mobile": ["Inter"],
+            "display-lg": ["Inter"],
+            "label-lg": ["Inter"],
+            "title-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "headline-sm": ["Inter"],
+            "body-md": ["Inter"]
+          },
+          "fontSize": {
+            "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "500" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+            "display-lg-mobile": ["30px", { "lineHeight": "38px", "fontWeight": "700" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "fontWeight": "700" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "title-md": ["16px", { "lineHeight": "22px", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-surface-canvas text-on-surface antialiased min-h-screen flex justify-center selection:bg-primary selection:text-on-primary">
+<!-- Mobile Viewport Wrapper (390px layout) -->
+<div class="w-full max-w-[420px] bg-surface-card min-h-screen shadow-2xl relative flex flex-col pb-24 overflow-x-hidden">
+<!-- Status Bar (iOS standard top indicators) -->
+<div class="w-full pt-3 px-6 pb-2 flex justify-between items-center text-on-surface select-none z-30">
+<span class="text-[14px] font-bold tracking-tight">9:41</span>
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-[17px]">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[17px]">wifi</span>
+<span class="material-symbols-outlined text-[20px]">battery_full</span>
+</div>
+</div>
+<!-- TopAppBar Shared Component -->
+<header class="flex justify-between items-center w-full px-margin-mobile py-space-sm bg-surface-card shadow-sm sticky top-0 z-20">
+<!-- Leading Menu Icon -->
+<button aria-label="Open menu" class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-royal-blue-light transition-colors duration-150 active:scale-95 text-secondary" type="button">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+<!-- Brand Logo / Headline -->
+<div class="flex items-center space-x-1.5">
+<div class="w-7 h-7 rounded-lg bg-primary-container flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-white text-[18px]">flight</span>
+</div>
+<span class="text-headline-md font-headline-md font-bold text-primary tracking-tight">Truway</span>
+</div>
+<!-- Trailing Avatar with Indicator -->
+<div class="relative">
+<button aria-label="User Profile Avatar" class="w-10 h-10 rounded-full overflow-hidden border border-card-border p-0.5 active:scale-95 transition-transform duration-100 focus:outline-none" type="button">
+<img class="w-full h-full object-cover rounded-full" data-alt="Close-up portrait of a cheerful young male traveler with a modern short haircut and light warm studio lighting, framed on a pure crisp slate minimalist background matching a mobile application profile tone." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA5WihJF4kFWiNvclOFZdm8QhOAqXl2qc37l9eYJHr80vnDHSEnBJelvfGuR5NFOquRitQmm21rEIVlM_ZRZmTWZ1NjmeW02wbGv-w-JXk1ktqKwR7DRQgaIyymz-CIRqe75vRsT8BRhFEI9he9JPJhvcBqiCyPUsWvYXB-d0NQ6EPxOf6sh4IfwiOx2zZxA9FNMmhXIA8-w4ie8X9SyojfiEr0uhoDik153otPNPzIjOoK4454VfnNw">
+</button>
+<span class="absolute top-0 right-0 w-2.5 h-2.5 bg-primary rounded-full border-2 border-surface-card"></span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-margin-mobile pt-4 space-y-5">
+<!-- Greeting & Header Prompt -->
+<section class="space-y-1">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="text-body-md font-body-md font-medium">Hi, Tanmoy</span>
+<span class="text-body-lg">👋</span>
+</div>
+<h1 class="text-headline-md font-headline-md font-bold text-on-surface tracking-tight leading-snug">
+          Where would you like<br>to travel today?
+        </h1>
+</section>
+<!-- Search Input Module -->
+<section>
+<div class="relative flex items-center w-full">
+<span class="material-symbols-outlined absolute left-4 text-outline text-[20px] pointer-events-none">search</span>
+<input class="w-full h-12 pl-11 pr-4 bg-surface-canvas rounded-xl border border-input-border text-body-md font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:ring-2 focus:ring-primary-container focus:border-transparent transition-all shadow-sm" placeholder="Search for destinations..." type="text">
+</div>
+</section>
+<!-- Category Quick Action Grid -->
+<section>
+<div class="grid grid-cols-4 gap-3">
+<!-- 1. Flights -->
+<button class="flex flex-col items-center group active:scale-95 transition-transform duration-150" type="button">
+<div class="w-14 h-14 rounded-2xl bg-royal-blue-light border border-card-border flex items-center justify-center shadow-sm group-hover:bg-primary-container group-hover:text-white transition-colors duration-200">
+<span class="material-symbols-outlined text-[26px] text-primary group-hover:text-white transition-colors">flight</span>
+</div>
+<span class="mt-2 text-label-md font-label-md text-on-surface font-medium">Flights</span>
+</button>
+<!-- 2. Hotels -->
+<button class="flex flex-col items-center group active:scale-95 transition-transform duration-150" type="button">
+<div class="w-14 h-14 rounded-2xl bg-surface-canvas border border-card-border flex items-center justify-center shadow-sm group-hover:bg-primary-container group-hover:text-white transition-colors duration-200">
+<span class="material-symbols-outlined text-[26px] text-secondary group-hover:text-white transition-colors">hotel</span>
+</div>
+<span class="mt-2 text-label-md font-label-md text-on-surface font-medium">Hotels</span>
+</button>
+<!-- 3. Packages -->
+<button class="flex flex-col items-center group active:scale-95 transition-transform duration-150" type="button">
+<div class="w-14 h-14 rounded-2xl bg-surface-canvas border border-card-border flex items-center justify-center shadow-sm group-hover:bg-primary-container group-hover:text-white transition-colors duration-200">
+<span class="material-symbols-outlined text-[26px] text-secondary group-hover:text-white transition-colors">work</span>
+</div>
+<span class="mt-2 text-label-md font-label-md text-on-surface font-medium">Packages</span>
+</button>
+<!-- 4. Cars -->
+<button class="flex flex-col items-center group active:scale-95 transition-transform duration-150" type="button">
+<div class="w-14 h-14 rounded-2xl bg-surface-canvas border border-card-border flex items-center justify-center shadow-sm group-hover:bg-primary-container group-hover:text-white transition-colors duration-200">
+<span class="material-symbols-outlined text-[26px] text-secondary group-hover:text-white transition-colors">directions_car</span>
+</div>
+<span class="mt-2 text-label-md font-label-md text-on-surface font-medium">Cars</span>
+</button>
+</div>
+</section>
+<!-- Popular Destinations Section -->
+<section class="space-y-3">
+<div class="flex items-center justify-between">
+<h2 class="text-headline-sm font-headline-sm text-on-surface font-bold">Popular Destinations</h2>
+<a class="text-label-md font-label-md text-primary hover:text-royal-blue-hover font-semibold transition-colors" href="#">See All</a>
+</div>
+<!-- 2-Column Responsive Card Grid -->
+<div class="grid grid-cols-2 gap-3">
+<!-- Destination Card 1: Bali, Indonesia -->
+<div class="bg-surface-card rounded-2xl border border-card-border overflow-hidden shadow-[0_4px_12px_rgba(15,23,42,0.05)] flex flex-col group hover:shadow-md transition-shadow">
+<div class="relative w-full aspect-[4/3] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="A picturesque view of the serene Ulun Danu Beratan water temple in Bali, Indonesia resting on a calm mirror-like lake framed by lush green misty tropical mountains under soft daylight with subtle blue hues reflecting a premium travel journal aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuApqVCaIv7Be1R-kOnJZpxWHRUM0zSRPniEBxRsMqzTYe41qiNP0U3HZjBanm7E5eGbzvAUMpcXpW98uGWyRJn7q1wll_-WcLPslXXSlbfeJEyxUbdBQ54tQUAlov5SAv3YuNCh2RF2XovYboKNdd_6yFJ0C3yk1lu7AWZPbi-xVBXfX96yYXqmnl1pWzJXHd__hHVeAmBXw-p_RhbjrMawqqUX-lBJzh08ULjqULFm8y8HbFqTcd08kA">
+<button aria-label="Save Bali to favorites" class="absolute top-2 right-2 w-8 h-8 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center text-secondary hover:text-error active:scale-90 transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="p-3 flex flex-col justify-between flex-1">
+<div>
+<h3 class="text-title-md font-title-md font-semibold text-on-surface leading-tight">Bali, Indonesia</h3>
+<div class="flex items-center mt-1 space-x-1">
+<span class="material-symbols-outlined text-rating-amber text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm font-label-sm font-semibold text-on-surface">4.8</span>
+</div>
+</div>
+<div class="mt-3 pt-2 border-t border-card-border flex items-center justify-between">
+<span class="text-body-sm font-body-sm text-secondary">Starting</span>
+<span class="text-title-md font-title-md font-bold text-primary">$499</span>
+</div>
+</div>
+</div>
+<!-- Destination Card 2: Paris, France -->
+<div class="bg-surface-card rounded-2xl border border-card-border overflow-hidden shadow-[0_4px_12px_rgba(15,23,42,0.05)] flex flex-col group hover:shadow-md transition-shadow">
+<div class="relative w-full aspect-[4/3] overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="The majestic Eiffel Tower in Paris captured on a vibrant sunny morning with soft blue sky and green Parisian park trees in the foreground, illuminated by golden soft sunlight highlighting modern clean architectural details and European charm." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsotFOXr9Hw6B0Yg_M2tdrZPkq0xgY7o23KdVslvYoHUhnAIbxhNA4JBRTLDoR1nnctsXyOQpqd98YClqpiaqxMwvWsjxuNjWh95xNYfOIv0a9xf_Gcehv-ewZt4CMmIs3-HzdRw13PDX2PjiOQQxW9RXgcHddKL_As8VjAJv9j4ZAkk78FhUZDJ4yx4UK5eayJOjkJj4RQ2ziY7pCeX9SW5iMak40aDLkqIq_zHgQFgUqQxUBycOH8Q">
+<button aria-label="Save Paris to favorites" class="absolute top-2 right-2 w-8 h-8 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center text-secondary hover:text-error active:scale-90 transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="p-3 flex flex-col justify-between flex-1">
+<div>
+<h3 class="text-title-md font-title-md font-semibold text-on-surface leading-tight">Paris, France</h3>
+<div class="flex items-center mt-1 space-x-1">
+<span class="material-symbols-outlined text-rating-amber text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm font-label-sm font-semibold text-on-surface">4.7</span>
+</div>
+</div>
+<div class="mt-3 pt-2 border-t border-card-border flex items-center justify-between">
+<span class="text-body-sm font-body-sm text-secondary">Starting</span>
+<span class="text-title-md font-title-md font-bold text-primary">$699</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Promo Offer Banner -->
+<section>
+<div class="relative overflow-hidden bg-gradient-to-r from-royal-blue-light via-surface-container to-surface-card border border-card-border rounded-2xl p-4 shadow-sm flex items-center justify-between">
+<div class="space-y-2 max-w-[65%] z-10">
+<span class="inline-block px-2.5 py-0.5 rounded-full bg-badge-discount-bg text-badge-discount-text text-[11px] font-bold tracking-wide">
+              LIMITED DEAL
+            </span>
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface leading-snug">
+              Up to 25% OFF<br><span class="text-body-md font-body-md font-medium text-secondary">on Domestic Flights</span>
+</h3>
+<button class="mt-1 inline-flex items-center text-label-md font-label-md font-bold text-primary hover:text-royal-blue-hover active:scale-95 transition-transform" type="button">
+              View Offers
+              <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</button>
+</div>
+<!-- Banner Graphic / Illustration representation -->
+<div class="w-24 h-24 flex items-center justify-center relative">
+<div class="w-20 h-20 bg-primary-container/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[42px] -rotate-45">flight_takeoff</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar Shared Component -->
+<!-- Strictly matches JSON definitions & layout -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-margin-mobile h-16 bg-surface-card shadow-lg max-w-[420px] left-1/2 -translate-x-1/2">
+<!-- Destination 1: Home (Active) -->
+<a class="flex flex-col items-center justify-center text-primary font-semibold py-1 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-label-sm font-label-sm mt-0.5">Home</span>
+</a>
+<!-- Destination 2: My Trips -->
+<a class="flex flex-col items-center justify-center text-secondary py-1 hover:text-royal-blue-hover transition-colors duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined text-[24px]">luggage</span>
+<span class="text-label-sm font-label-sm mt-0.5">My Trips</span>
+</a>
+<!-- Destination 3: Offers -->
+<a class="flex flex-col items-center justify-center text-secondary py-1 hover:text-royal-blue-hover transition-colors duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined text-[24px]">local_offer</span>
+<span class="text-label-sm font-label-sm mt-0.5">Offers</span>
+</a>
+<!-- Destination 4: Profile -->
+<a class="flex flex-col items-center justify-center text-secondary py-1 hover:text-royal-blue-hover transition-colors duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined text-[24px]">person</span>
+<span class="text-label-sm font-label-sm mt-0.5">Profile</span>
+</a>
+</nav>
+</div>
+</body></html>

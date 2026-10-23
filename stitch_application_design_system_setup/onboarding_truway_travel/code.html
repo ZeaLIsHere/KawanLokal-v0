@@ -1,0 +1,207 @@
+<!DOCTYPE html><html class="h-full" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Truway - Discover the World</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-tint": "#0053db",
+            "error-container": "#ffdad6",
+            "on-surface-variant": "#434655",
+            "on-background": "#131b2e",
+            "error": "#ba1a1a",
+            "primary-fixed": "#dbe1ff",
+            "tertiary": "#006329",
+            "on-tertiary-fixed-variant": "#005320",
+            "card-border": "#E2E8F0",
+            "tertiary-fixed-dim": "#62df7d",
+            "on-tertiary-fixed": "#002109",
+            "surface-container-highest": "#dae2fd",
+            "background": "#faf8ff",
+            "surface-container-lowest": "#ffffff",
+            "royal-blue-hover": "#1D4ED8",
+            "surface-card": "#FFFFFF",
+            "secondary-container": "#d0e1fb",
+            "on-secondary-container": "#54647a",
+            "royal-blue-light": "#EFF6FF",
+            "surface-container-low": "#f2f3ff",
+            "inverse-primary": "#b4c5ff",
+            "input-border": "#CBD5E1",
+            "tertiary-fixed": "#7ffc97",
+            "badge-discount-text": "#15803D",
+            "secondary-fixed-dim": "#b7c8e1",
+            "surface-dim": "#d2d9f4",
+            "on-tertiary-container": "#c7ffca",
+            "on-primary-fixed": "#00174b",
+            "on-primary-container": "#eeefff",
+            "on-surface": "#131b2e",
+            "surface-container-high": "#e2e7ff",
+            "inverse-on-surface": "#eef0ff",
+            "on-secondary-fixed-variant": "#38485d",
+            "outline-variant": "#c3c6d7",
+            "on-primary": "#ffffff",
+            "badge-discount-bg": "#DCFCE7",
+            "on-error-container": "#93000a",
+            "surface-container": "#eaedff",
+            "secondary": "#505f76",
+            "outline": "#737686",
+            "on-secondary": "#ffffff",
+            "surface-canvas": "#F8FAFC",
+            "primary": "#004ac6",
+            "on-secondary-fixed": "#0b1c30",
+            "primary-fixed-dim": "#b4c5ff",
+            "inverse-surface": "#283044",
+            "rating-amber": "#F59E0B",
+            "surface-bright": "#faf8ff",
+            "primary-container": "#2563eb",
+            "surface": "#faf8ff",
+            "on-error": "#ffffff",
+            "surface-variant": "#dae2fd",
+            "on-tertiary": "#ffffff",
+            "secondary-fixed": "#d3e4fe",
+            "on-primary-fixed-variant": "#003ea8",
+            "tertiary-container": "#007f36"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-2xl": "2rem",
+            "margin": "1.25rem",
+            "space-sm": "0.5rem",
+            "gutter-mobile": "0.75rem",
+            "space-xl": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-md": "0.75rem",
+            "space-lg": "1rem",
+            "gutter": "1rem",
+            "margin-mobile": "1rem"
+          },
+          "fontFamily": {
+            "body-md": ["Inter"],
+            "headline-sm": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-md": ["Inter"],
+            "display-lg-mobile": ["Inter"],
+            "title-md": ["Inter"],
+            "display-lg": ["Inter"],
+            "label-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "headline-lg": ["Inter"],
+            "body-sm": ["Inter"],
+            "body-lg": ["Inter"]
+          },
+          "fontSize": {
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "500" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "display-lg-mobile": ["30px", { "lineHeight": "38px", "fontWeight": "700" }],
+            "title-md": ["16px", { "lineHeight": "22px", "fontWeight": "600" }],
+            "display-lg": ["36px", { "lineHeight": "44px", "fontWeight": "700" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      display: inline-block;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+  </style>
+</head>
+<body class="bg-surface-canvas text-on-surface h-full flex items-center justify-center p-0 md:p-6 select-none overflow-x-hidden antialiased">
+<!-- Mobile Container Shell -->
+<main class="w-full h-full md:h-[844px] md:max-w-[390px] bg-surface-card md:rounded-[44px] md:shadow-2xl overflow-hidden relative flex flex-col justify-between border-0 md:border md:border-card-border">
+<!-- Screen Status Bar (9:41, Cellular, Wifi, Battery) -->
+<header class="w-full pt-3 px-6 pb-2 flex justify-between items-center z-20 shrink-0">
+<span class="font-label-md text-label-md font-semibold text-on-surface tracking-tight">9:41</span>
+<div class="flex items-center space-x-1.5 text-on-surface">
+<span class="material-symbols-outlined text-[15px] leading-none" data-icon="signal_cellular_4_bar">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[15px] leading-none" data-icon="wifi">wifi</span>
+<span class="material-symbols-outlined text-[17px] leading-none" data-icon="battery_full">battery_full</span>
+</div>
+</header>
+<!-- Brand Header Section -->
+<section class="pt-2 pb-1 px-6 flex flex-col items-center justify-center text-center z-20 shrink-0">
+<div class="flex items-center gap-2">
+<!-- Truway Custom Logo Glyph -->
+<div class="w-7 h-7 rounded-lg bg-primary-container flex items-center justify-center text-on-primary shadow-sm">
+<span class="material-symbols-outlined text-[19px] leading-none" data-icon="flight">flight</span>
+</div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tight">Truway</h1>
+</div>
+<p class="font-label-md text-label-md text-secondary mt-0.5 tracking-wide">Travel. Your Way.</p>
+</section>
+<!-- Scenic Hero Visual Section -->
+<section class="relative w-full flex-1 flex items-center justify-center px-4 overflow-hidden min-h-[300px]">
+<div class="relative w-full h-full max-h-[390px] rounded-2xl overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700 ease-out" data-alt="A modern commercial airplane gracefully banking in mid-flight over lush emerald green tropical mountain islands surrounded by serene crystal turquoise ocean waters. Bright sunlit sky with soft scattered cumulus clouds, high-key natural illumination reflecting brilliant blue hues. Clean minimalist mobile photography aesthetic with clear vibrant royal blue ocean tones and pristine white airplane details." src="https://lh3.googleusercontent.com/aida-public/AB6AXuChv405asjEnmLobylJhBa8HKcnA6aryBFjMu5ghhW_WwuTcIeTUzBaVnftT0nhx9thXwduGANjkW-U71VzGCB8qwf1ZM3BY4R8KsU8tSBWgx9vCt0m2NDJFuLCo977h0swYhYuPPRXVdzdZBSLUF1PVTD9SkYkoznKRIWmXJjWamRru1VgpzTB9J7Ujxm2Kx8l8h81IbwQZVuIzS-tgpCttX6hr81Ka-FeMpTF25x7zhOrPycdw9Y3ZA">
+<!-- Subtle linear gradient mask at bottom for card blending -->
+<div class="absolute inset-0 bg-gradient-to-t from-surface-card/60 via-transparent to-transparent pointer-events-none"></div>
+</div>
+</section>
+<!-- Bottom Action Card / Onboarding CTA -->
+<footer class="w-full px-6 pt-3 pb-8 z-20 bg-surface-card flex flex-col shrink-0">
+<!-- Copy Headings -->
+<div class="mb-5 text-left">
+<h2 class="font-display-lg-mobile text-display-lg-mobile text-on-surface tracking-tight">
+          Discover<br>the world
+        </h2>
+<p class="font-body-md text-body-md text-secondary mt-1.5">
+          Your journey begins here.
+        </p>
+</div>
+<!-- Primary Action CTA Button -->
+<button class="w-full h-12 bg-primary-container hover:bg-royal-blue-hover text-on-primary rounded-full font-label-lg text-label-lg flex items-center justify-center gap-2 shadow-lg hover:shadow-xl active:scale-95 transition-all duration-150 cursor-pointer" onclick="this.classList.add('scale-95'); setTimeout(() =&gt; this.classList.remove('scale-95'), 150);" type="button">
+<span>Get Started</span>
+<span class="material-symbols-outlined text-[18px] leading-none" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<!-- Carousel Pagination Dots -->
+<nav aria-label="Onboarding Progress" class="flex items-center justify-center gap-2 mt-5">
+<!-- Active Dot -->
+<span class="w-6 h-2 rounded-full bg-primary-container transition-all duration-300"></span>
+<!-- Inactive Dots -->
+<span class="w-2 h-2 rounded-full bg-input-border transition-all duration-300"></span>
+<span class="w-2 h-2 rounded-full bg-input-border transition-all duration-300"></span>
+</nav>
+<!-- iOS Home Indicator bar -->
+<div class="w-32 h-1 bg-on-surface/15 rounded-full mx-auto mt-5"></div>
+</footer>
+</main>
+</body></html>
