@@ -1,23 +1,22 @@
 import { Tabs } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
-import { ULOS_COLORS } from '@/constants/theme';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 
 export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: ULOS_COLORS.red,
-        tabBarInactiveTintColor: ULOS_COLORS.grayMuted,
+        tabBarActiveTintColor: '#2563eb', // primary-container
+        tabBarInactiveTintColor: '#505f76', // secondary
         tabBarStyle: {
           backgroundColor: '#FFFFFF',
-          borderTopColor: '#E7E5E4',
-          height: 60,
+          borderTopColor: '#E2E8F0',
+          height: 62,
           paddingBottom: 8,
-          paddingTop: 8,
+          paddingTop: 6,
         },
         tabBarLabelStyle: {
-          fontSize: 12,
+          fontSize: 11,
           fontWeight: '600',
         },
       }}
@@ -25,28 +24,51 @@ export default function TabLayout() {
       <Tabs.Screen
         name="home"
         options={{
-          title: 'Beranda',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home-outline" size={size} color={color} />
+          title: 'Home',
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons name={focused ? 'home' : 'home-outline'} size={22} color={color} />
           ),
         }}
       />
       <Tabs.Screen
+        name="trips"
+        options={{
+          title: 'My Trips',
+          tabBarIcon: ({ color }) => (
+            <MaterialIcons name="luggage" size={23} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="offers"
+        options={{
+          title: 'Offers',
+          tabBarIcon: ({ color }) => (
+            <MaterialIcons name="local-offer" size={22} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons name={focused ? 'person' : 'person-outline'} size={22} color={color} />
+          ),
+        }}
+      />
+
+      {/* Hidden legacy tab routes */}
+      <Tabs.Screen
         name="explore"
         options={{
-          title: 'Jelajah',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="compass-outline" size={size} color={color} />
-          ),
+          href: null,
         }}
       />
       <Tabs.Screen
         name="orders"
         options={{
-          title: 'Pesanan',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="receipt-outline" size={size} color={color} />
-          ),
+          href: null,
         }}
       />
     </Tabs>
