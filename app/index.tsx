@@ -1,6 +1,6 @@
 import { Redirect } from 'expo-router';
 
-// Auth dilewati sementara sesuai instruksi pengguna sampai ada callback
+// Navigasi langsung ke Onboarding Screen Truway Travel
 export default function Index() {
-  return <Redirect href="/(tabs)/home" />;
+  return <Redirect href="/onboarding" />;
 }

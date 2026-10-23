@@ -8,16 +8,51 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // Truway Travel Design System Colors
+        primary: {
+          DEFAULT: "#004ac6",
+          container: "#2563eb",
+          hover: "#1D4ED8",
+          light: "#EFF6FF",
+          fixed: "#dbe1ff",
+        },
+        surface: {
+          DEFAULT: "#faf8ff",
+          canvas: "#F8FAFC",
+          card: "#FFFFFF",
+          container: "#eaedff",
+          dim: "#d2d9f4",
+        },
+        'on-surface': {
+          DEFAULT: "#131b2e",
+          variant: "#434655",
+        },
+        secondary: {
+          DEFAULT: "#505f76",
+          container: "#d0e1fb",
+        },
+        'card-border': "#E2E8F0",
+        'input-border': "#CBD5E1",
+        rating: {
+          amber: "#F59E0B",
+        },
+        badge: {
+          discount: {
+            bg: "#DCFCE7",
+            text: "#15803D",
+          },
+        },
+        // Ulos Colors (Existing)
         ulos: {
-          red: "#991B1B",       // Merah Ulos (Keberanian, Semangat)
+          red: "#991B1B",
           redDark: "#7F1D1D",
           redLight: "#DC2626",
-          black: "#1C1917",     // Hitam (Keteguhan)
+          black: "#1C1917",
           dark: "#0F0E0D",
           charcoal: "#292524",
-          cream: "#FAF7F2",     // Putih/Krem (Kesucian)
+          cream: "#FAF7F2",
           white: "#FFFFFF",
-          gold: "#D97706",      // Emas/Kuning aksen adat
+          gold: "#D97706",
           goldLight: "#FBBF24",
         },
       },
