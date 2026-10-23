@@ -42,19 +42,7 @@ export default function NewBookingScreen() {
 
   const handleProceedPayment = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
-    Alert.alert(
-      'Ringkasan Pesanan',
-      `Layanan: ${bookingType === 'ticket' ? 'Tiket Acara Budaya' : 'Paket Pemandu Lokal'}\nJumlah: ${participantCount} Peserta\nTotal: ${formatRupiah(totalPrice)}\n\nLanjut ke alur pembayaran digital?`,
-      [
-        { text: 'Batal', style: 'cancel' },
-        {
-          text: 'Konfirmasi',
-          onPress: () => {
-            router.push('/(tabs)/orders');
-          },
-        },
-      ]
-    );
+    router.push('/payment');
   };
 
   return (
