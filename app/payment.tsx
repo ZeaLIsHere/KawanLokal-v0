@@ -26,7 +26,7 @@ export default function PaymentScreen() {
   const handlePayNow = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
     Alert.alert(
-      'Pembayaran Berhasil (Sandbox)',
+      'Pembayaran Berhasil',
       'Transaksi sebesar Rp 100.000 berhasil diverifikasi. Tiket digital QR Anda kini telah aktif dan dapat dibuka secara offline.',
       [
         {
@@ -201,7 +201,7 @@ export default function PaymentScreen() {
               Jaminan Transaksi Terlindungi
             </Text>
             <Text className="text-[11px] text-emerald-800/90 mt-0.5 leading-relaxed">
-              Pembayaran diproses melalui payment gateway resmi berlisensi Bank Indonesia (Sandbox Mode). Tiket digital dibuat secara instan dan kuota terjamin atomik.
+              Pembayaran diproses melalui payment gateway resmi berlisensi Bank Indonesia. Tiket digital dibuat secara instan dan kuota terjamin atomik.
             </Text>
           </View>
         </View>

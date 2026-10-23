@@ -234,7 +234,7 @@ export default function NewBookingScreen() {
           </View>
           <View className="flex-row justify-between items-center py-2 border-b border-card-border/60">
             <Text className="text-xs text-secondary">Biaya Layanan & Konservasi</Text>
-            <Text className="text-xs font-bold text-emerald-700">GRATIS (MVP)</Text>
+            <Text className="text-xs font-bold text-emerald-700">Bebas Biaya</Text>
           </View>
           <View className="flex-row justify-between items-center pt-2">
             <Text className="text-sm font-bold text-on-surface">Total Biaya</Text>

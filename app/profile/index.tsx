@@ -20,14 +20,14 @@ export default function ProfileScreen() {
 
   const handleEditAvatar = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
-    Alert.alert('Ubah Foto Profil', 'Fitur unggah foto avatar akan tersedia pada rilis akun mandiri.');
+    Alert.alert('Ubah Foto Profil', 'Pilih foto profil dari galeri perangkat Anda.');
   };
 
   const handleLogout = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
     Alert.alert(
       'Keluar Akun',
-      'Apakah Anda yakin ingin keluar dari akun tamu KawanLokal?',
+      'Apakah Anda yakin ingin keluar dari akun KawanLokal?',
       [
         { text: 'Batal', style: 'cancel' },
         {
@@ -100,11 +100,11 @@ export default function ProfileScreen() {
               Wisatawan KawanLokal
             </Text>
             <Text className="text-xs text-red-100 mt-0.5 font-medium">
-              tamu@kawanlokal.id
+              wisatawan@kawanlokal.id
             </Text>
             <View className="mt-2 px-3 py-0.5 rounded-full bg-white/20">
               <Text className="text-[10px] font-bold text-white uppercase tracking-wider">
-                Mode Tamu Terverifikasi
+                Wisatawan Terverifikasi
               </Text>
             </View>
           </View>

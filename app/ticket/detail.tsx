@@ -182,7 +182,7 @@ export default function TicketDetailScreen() {
             </View>
             <View className="flex-row justify-between items-center">
               <Text className="text-xs text-secondary">Biaya Layanan & Pemeliharaan Adat</Text>
-              <Text className="text-xs font-bold text-emerald-700">GRATIS (MVP)</Text>
+              <Text className="text-xs font-bold text-emerald-700">Bebas Biaya</Text>
             </View>
             <View className="pt-2.5 border-t border-card-border flex-row justify-between items-center">
               <Text className="text-sm font-bold text-on-surface">Total Dibayar</Text>

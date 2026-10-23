@@ -1,6 +1,6 @@
 import { Redirect } from 'expo-router';
 
-// Navigasi langsung ke Onboarding Screen Truway Travel
+// Rute utama aplikasi KawanLokal
 export default function Index() {
   return <Redirect href="/onboarding" />;
 }

@@ -36,7 +36,7 @@ export default function SettingsScreen() {
             </View>
             <View className="flex-1">
               <Text className="text-base font-bold text-stone-900">Wisatawan KawanLokal</Text>
-              <Text className="text-xs text-stone-500">Mode Tamu (Auth Dilewati)</Text>
+              <Text className="text-xs text-stone-500">Akun Wisatawan Aktif</Text>
             </View>
             <Badge label="Traveler" variant="ulos" />
           </View>
@@ -104,7 +104,7 @@ export default function SettingsScreen() {
 
         {/* Info Aplikasi */}
         <View className="items-center py-4">
-          <Text className="text-xs font-semibold text-stone-500">KawanLokal v1.0.0 (Fase 1)</Text>
+          <Text className="text-xs font-semibold text-stone-500">KawanLokal v1.0.0</Text>
           <Text className="text-[10px] text-stone-400 mt-1">Kawasan Pariwisata Budaya Danau Toba</Text>
         </View>
       </ScrollView>
