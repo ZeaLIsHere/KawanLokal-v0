@@ -89,7 +89,7 @@ export default function RegisterScreen() {
         <View className="gap-3">
           <Pressable
             onPress={handleRegister}
-            className="w-full h-12 bg-ulos-red active:bg-ulos-redDark rounded-full items-center justify-center shadow-md active:scale-[0.98] transition-all"
+            className="w-full h-12 bg-ulos-red active:bg-ulos-redDark rounded-full items-center justify-center shadow-md active:opacity-90"
           >
             <Text className="text-white font-bold text-base">Daftar</Text>
           </Pressable>
@@ -99,7 +99,7 @@ export default function RegisterScreen() {
               Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
               router.replace('/(tabs)/home');
             }}
-            className="w-full h-12 bg-surface-canvas active:bg-stone-100 rounded-full items-center justify-center border border-card-border active:scale-[0.98] transition-all"
+            className="w-full h-12 bg-surface-canvas active:bg-stone-100 rounded-full items-center justify-center border border-card-border active:opacity-90"
           >
             <Text className="text-on-surface font-semibold text-sm">
               Lanjut ke Beranda

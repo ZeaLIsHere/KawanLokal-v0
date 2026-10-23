@@ -68,7 +68,7 @@ export default function OnboardingScreen() {
         {/* Primary Action CTA Button */}
         <Pressable
           onPress={handleGetStarted}
-          className="w-full h-12 bg-ulos-red active:bg-ulos-redDark rounded-full flex-row items-center justify-center gap-2 shadow-lg active:scale-95 transition-all"
+          className="w-full h-12 bg-ulos-red active:bg-ulos-redDark rounded-full flex-row items-center justify-center gap-2 shadow-lg active:opacity-90"
         >
           <Text className="text-white font-semibold text-base">Mulai Eksplorasi</Text>
           <Ionicons name="arrow-forward" size={18} color="#FFFFFF" />

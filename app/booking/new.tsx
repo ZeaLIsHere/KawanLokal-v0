@@ -52,7 +52,7 @@ export default function NewBookingScreen() {
         <Pressable
           accessibilityLabel="Kembali"
           onPress={() => router.back()}
-          className="w-10 h-10 rounded-full items-center justify-center active:bg-stone-100 active:scale-95 transition-all"
+          className="w-10 h-10 rounded-full items-center justify-center active:bg-stone-100 active:opacity-80"
         >
           <Ionicons name="arrow-back" size={24} color="#131b2e" />
         </Pressable>
@@ -70,7 +70,7 @@ export default function NewBookingScreen() {
               'Setiap pesanan dijamin kuotanya secara atomik. Tiket QR akan dibuat setelah status pembayaran lunas.'
             );
           }}
-          className="w-10 h-10 rounded-full items-center justify-center active:bg-stone-100 active:scale-95 transition-all"
+          className="w-10 h-10 rounded-full items-center justify-center active:bg-stone-100 active:opacity-80"
         >
           <Ionicons name="information-circle-outline" size={22} color="#131b2e" />
         </Pressable>
@@ -85,7 +85,7 @@ export default function NewBookingScreen() {
         <View className="w-full p-1 bg-surface-card rounded-full border border-card-border flex-row items-center justify-between mb-4 shadow-sm">
           <Pressable
             onPress={() => handleTypeSwitch('ticket')}
-            className={`flex-1 py-2.5 rounded-full items-center justify-center active:scale-95 transition-all ${
+            className={`flex-1 py-2.5 rounded-full items-center justify-center active:opacity-80 ${
               bookingType === 'ticket'
                 ? 'bg-ulos-red shadow-sm'
                 : 'bg-transparent'
@@ -102,7 +102,7 @@ export default function NewBookingScreen() {
 
           <Pressable
             onPress={() => handleTypeSwitch('guide')}
-            className={`flex-1 py-2.5 rounded-full items-center justify-center active:scale-95 transition-all ${
+            className={`flex-1 py-2.5 rounded-full items-center justify-center active:opacity-80 ${
               bookingType === 'guide'
                 ? 'bg-ulos-red shadow-sm'
                 : 'bg-transparent'
@@ -247,7 +247,7 @@ export default function NewBookingScreen() {
         {/* Primary Action CTA Button: Lanjut ke Pembayaran */}
         <Pressable
           onPress={handleProceedPayment}
-          className="w-full py-3.5 px-6 rounded-2xl bg-ulos-red active:bg-ulos-redDark text-white flex-row items-center justify-center gap-2 shadow-md active:scale-[0.98] transition-all mb-4"
+          className="w-full py-3.5 px-6 rounded-2xl bg-ulos-red active:bg-ulos-redDark text-white flex-row items-center justify-center gap-2 shadow-md active:opacity-90 mb-4"
         >
           <Ionicons name="card-outline" size={20} color="#FFFFFF" />
           <Text className="text-white font-bold text-base">

@@ -128,7 +128,7 @@ export default function DestinationsScreen() {
         <Pressable
           accessibilityLabel="Kembali"
           onPress={() => router.back()}
-          className="w-10 h-10 rounded-full items-center justify-center text-on-surface active:bg-stone-100 active:scale-95 transition-all"
+          className="w-10 h-10 rounded-full items-center justify-center text-on-surface active:bg-stone-100 active:opacity-80"
         >
           <Ionicons name="arrow-back" size={22} color="#131b2e" />
         </Pressable>
@@ -178,7 +178,7 @@ export default function DestinationsScreen() {
                 <Pressable
                   key={chip}
                   onPress={() => handleChipSelect(chip)}
-                  className={`mr-2 px-4 py-2 rounded-full border shadow-sm active:scale-95 transition-all ${
+                  className={`mr-2 px-4 py-2 rounded-full border shadow-sm active:opacity-80 ${
                     isSelected
                       ? 'bg-ulos-red border-ulos-red'
                       : 'bg-surface-card border-card-border'
@@ -203,7 +203,7 @@ export default function DestinationsScreen() {
             <Pressable
               key={dest.id}
               onPress={() => router.push('/calendar')}
-              className="w-[48.5%] bg-surface-card rounded-2xl p-2 border border-card-border shadow-sm active:scale-[0.98] transition-all"
+              className="w-[48.5%] bg-surface-card rounded-2xl p-2 border border-card-border shadow-sm active:opacity-90"
             >
               {/* Image with 4:3 aspect ratio */}
               <View className="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-stone-100 mb-2">

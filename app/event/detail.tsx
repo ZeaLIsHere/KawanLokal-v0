@@ -57,7 +57,7 @@ export default function EventDetailScreen() {
         <Pressable
           accessibilityLabel="Kembali"
           onPress={() => router.back()}
-          className="w-10 h-10 rounded-full items-center justify-center active:bg-stone-100 active:scale-95 transition-all"
+          className="w-10 h-10 rounded-full items-center justify-center active:bg-stone-100 active:opacity-80"
         >
           <Ionicons name="arrow-back" size={24} color="#131b2e" />
         </Pressable>
@@ -73,7 +73,7 @@ export default function EventDetailScreen() {
           <Pressable
             accessibilityLabel="Simpan acara"
             onPress={handleToggleSave}
-            className="w-9 h-9 rounded-full items-center justify-center active:bg-stone-100 active:scale-95"
+            className="w-9 h-9 rounded-full items-center justify-center active:bg-stone-100 active:opacity-80"
           >
             <Ionicons
               name={isSaved ? 'bookmark' : 'bookmark-outline'}
@@ -85,7 +85,7 @@ export default function EventDetailScreen() {
           <Pressable
             accessibilityLabel="Bagikan acara"
             onPress={handleShare}
-            className="w-9 h-9 rounded-full items-center justify-center active:bg-stone-100 active:scale-95"
+            className="w-9 h-9 rounded-full items-center justify-center active:bg-stone-100 active:opacity-80"
           >
             <Ionicons name="share-social-outline" size={20} color="#131b2e" />
           </Pressable>
@@ -281,7 +281,7 @@ export default function EventDetailScreen() {
 
           <Pressable
             onPress={() => router.push('/booking/new')}
-            className="flex-1 py-3 px-4 rounded-xl bg-ulos-red active:bg-ulos-redDark items-center justify-center flex-row gap-1.5 shadow-md active:scale-95"
+            className="flex-1 py-3 px-4 rounded-xl bg-ulos-red active:bg-ulos-redDark items-center justify-center flex-row gap-1.5 shadow-md active:opacity-90"
           >
             <Ionicons name="ticket-outline" size={16} color="#FFFFFF" />
             <Text className="text-xs font-bold text-white">Pesan Tiket</Text>

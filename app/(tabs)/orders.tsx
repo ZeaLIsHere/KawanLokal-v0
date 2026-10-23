@@ -100,7 +100,7 @@ export default function OrdersScreen() {
         <View className="flex-row items-center justify-between p-1 bg-surface-card rounded-full border border-card-border shadow-xs">
           <Pressable
             onPress={() => handleTabChange('upcoming')}
-            className={`flex-1 py-2 px-3 rounded-full items-center justify-center active:scale-95 transition-all ${
+            className={`flex-1 py-2 px-3 rounded-full items-center justify-center active:opacity-80 ${
               activeTab === 'upcoming'
                 ? 'bg-ulos-red shadow-sm'
                 : 'bg-transparent'
@@ -117,7 +117,7 @@ export default function OrdersScreen() {
 
           <Pressable
             onPress={() => handleTabChange('completed')}
-            className={`flex-1 py-2 px-3 rounded-full items-center justify-center active:scale-95 transition-all ${
+            className={`flex-1 py-2 px-3 rounded-full items-center justify-center active:opacity-80 ${
               activeTab === 'completed'
                 ? 'bg-ulos-red shadow-sm'
                 : 'bg-transparent'
@@ -134,7 +134,7 @@ export default function OrdersScreen() {
 
           <Pressable
             onPress={() => handleTabChange('cancelled')}
-            className={`flex-1 py-2 px-3 rounded-full items-center justify-center active:scale-95 transition-all ${
+            className={`flex-1 py-2 px-3 rounded-full items-center justify-center active:opacity-80 ${
               activeTab === 'cancelled'
                 ? 'bg-ulos-red shadow-sm'
                 : 'bg-transparent'
@@ -169,7 +169,7 @@ export default function OrdersScreen() {
             <Pressable
               key={order.id}
               onPress={() => handleCardPress(order)}
-              className="bg-surface-card rounded-2xl p-3 border border-card-border shadow-sm active:scale-[0.99] transition-all mb-3.5 flex-row items-center gap-3.5"
+              className="bg-surface-card rounded-2xl p-3 border border-card-border shadow-sm active:opacity-90 mb-3.5 flex-row items-center gap-3.5"
             >
               {/* 96x96 Photo Thumbnail */}
               <View className="w-24 h-24 rounded-xl overflow-hidden bg-stone-100 shrink-0">

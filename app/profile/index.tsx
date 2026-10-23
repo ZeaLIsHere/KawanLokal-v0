@@ -59,7 +59,7 @@ export default function ProfileScreen() {
             <Pressable
               accessibilityLabel="Kembali"
               onPress={() => router.back()}
-              className="w-10 h-10 rounded-full items-center justify-center bg-white/15 active:bg-white/25 active:scale-95"
+              className="w-10 h-10 rounded-full items-center justify-center bg-white/15 active:bg-white/25 active:opacity-80"
             >
               <Ionicons name="arrow-back" size={22} color="#FFFFFF" />
             </Pressable>
@@ -71,7 +71,7 @@ export default function ProfileScreen() {
             <Pressable
               accessibilityLabel="Pengaturan"
               onPress={() => router.push('/settings')}
-              className="w-10 h-10 rounded-full items-center justify-center bg-white/15 active:bg-white/25 active:scale-95"
+              className="w-10 h-10 rounded-full items-center justify-center bg-white/15 active:bg-white/25 active:opacity-80"
             >
               <Ionicons name="settings-outline" size={20} color="#FFFFFF" />
             </Pressable>
@@ -90,7 +90,7 @@ export default function ProfileScreen() {
               <Pressable
                 accessibilityLabel="Ubah Foto"
                 onPress={handleEditAvatar}
-                className="absolute bottom-0 right-0 w-7 h-7 bg-surface-card rounded-full shadow-md items-center justify-center active:scale-90"
+                className="absolute bottom-0 right-0 w-7 h-7 bg-surface-card rounded-full shadow-md items-center justify-center active:opacity-80"
               >
                 <Ionicons name="camera" size={14} color="#991B1B" />
               </Pressable>
@@ -272,7 +272,7 @@ export default function ProfileScreen() {
           <View className="items-center pt-2">
             <Pressable
               onPress={handleLogout}
-              className="flex-row items-center gap-2 py-2 px-5 rounded-xl active:bg-red-50 transition-all"
+              className="flex-row items-center gap-2 py-2 px-5 rounded-xl active:bg-red-50 active:opacity-90"
             >
               <Ionicons name="log-out-outline" size={18} color="#991B1B" />
               <Text className="text-sm font-bold text-ulos-red">

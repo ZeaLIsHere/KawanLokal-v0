@@ -46,7 +46,7 @@ export default function PaymentScreen() {
         <Pressable
           accessibilityLabel="Kembali"
           onPress={() => router.back()}
-          className="w-10 h-10 items-center justify-center rounded-full active:bg-stone-100 active:scale-95 transition-all"
+          className="w-10 h-10 items-center justify-center rounded-full active:bg-stone-100 active:opacity-80"
         >
           <Ionicons name="arrow-back" size={24} color="#131b2e" />
         </Pressable>
@@ -212,7 +212,7 @@ export default function PaymentScreen() {
         {/* Primary Action CTA Button */}
         <Pressable
           onPress={handlePayNow}
-          className="w-full h-12 bg-ulos-red active:bg-ulos-redDark text-white rounded-xl font-bold flex-row items-center justify-center gap-2 shadow-sm active:scale-[0.99] transition-all"
+          className="w-full h-12 bg-ulos-red active:bg-ulos-redDark text-white rounded-xl font-bold flex-row items-center justify-center gap-2 shadow-sm active:opacity-90"
         >
           <Ionicons name="lock-closed" size={18} color="#FFFFFF" />
           <Text className="text-white font-bold text-base">

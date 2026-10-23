@@ -102,7 +102,7 @@ export default function HomestaysScreen() {
         <Pressable
           accessibilityLabel="Kembali"
           onPress={() => router.back()}
-          className="w-10 h-10 rounded-full items-center justify-center active:bg-stone-100 active:scale-95 transition-all"
+          className="w-10 h-10 rounded-full items-center justify-center active:bg-stone-100 active:opacity-80"
         >
           <Ionicons name="arrow-back" size={24} color="#131b2e" />
         </Pressable>
@@ -116,7 +116,7 @@ export default function HomestaysScreen() {
           onPress={() => {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
           }}
-          className="w-10 h-10 rounded-full items-center justify-center active:bg-stone-100 active:scale-95 transition-all"
+          className="w-10 h-10 rounded-full items-center justify-center active:bg-stone-100 active:opacity-80"
         >
           <Ionicons name="options-outline" size={22} color="#131b2e" />
         </Pressable>
@@ -159,7 +159,7 @@ export default function HomestaysScreen() {
                 <Pressable
                   key={chip}
                   onPress={() => handleChipSelect(chip)}
-                  className={`mr-2 px-5 py-2 rounded-full border shadow-sm active:scale-95 transition-all ${
+                  className={`mr-2 px-5 py-2 rounded-full border shadow-sm active:opacity-80 ${
                     isSelected
                       ? 'bg-ulos-red border-ulos-red'
                       : 'bg-surface-card border-card-border'
@@ -182,7 +182,7 @@ export default function HomestaysScreen() {
         <View className="mb-5">
           <Pressable
             onPress={() => router.push('/(tabs)/explore')}
-            className="relative w-full h-56 rounded-2xl overflow-hidden shadow-sm border border-card-border active:scale-[0.99] transition-transform"
+            className="relative w-full h-56 rounded-2xl overflow-hidden shadow-sm border border-card-border active:opacity-90"
           >
             <Image
               source={{ uri: FEATURED_HOMESTAY.image }}
@@ -200,7 +200,7 @@ export default function HomestaysScreen() {
                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
                 setIsFeaturedFavorite(!isFeaturedFavorite);
               }}
-              className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/25 backdrop-blur-md items-center justify-center active:scale-90"
+              className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/25 backdrop-blur-md items-center justify-center active:opacity-80"
             >
               <Ionicons
                 name={isFeaturedFavorite ? 'heart' : 'heart-outline'}
@@ -254,7 +254,7 @@ export default function HomestaysScreen() {
               <Pressable
                 key={item.id}
                 onPress={() => router.push('/(tabs)/explore')}
-                className="flex-row items-center p-2.5 bg-surface-card rounded-2xl border border-card-border shadow-sm active:scale-[0.99] transition-all"
+                className="flex-row items-center p-2.5 bg-surface-card rounded-2xl border border-card-border shadow-sm active:opacity-90"
               >
                 {/* Thumbnail Image 80x80 */}
                 <View className="w-20 h-20 rounded-xl overflow-hidden bg-stone-100 shrink-0">

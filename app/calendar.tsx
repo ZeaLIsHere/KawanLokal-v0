@@ -131,7 +131,7 @@ export default function CalendarScreen() {
         <Pressable
           accessibilityLabel="Kembali"
           onPress={() => router.back()}
-          className="w-10 h-10 rounded-full items-center justify-center active:bg-stone-100 active:scale-95 transition-all"
+          className="w-10 h-10 rounded-full items-center justify-center active:bg-stone-100 active:opacity-80"
         >
           <Ionicons name="arrow-back" size={24} color="#131b2e" />
         </Pressable>
@@ -257,7 +257,7 @@ export default function CalendarScreen() {
                   <Pressable
                     key={day}
                     onPress={() => handleSelectDay(day)}
-                    className={`w-[13%] aspect-square rounded-xl items-center justify-center relative active:scale-90 transition-all ${
+                    className={`w-[13%] aspect-square rounded-xl items-center justify-center relative active:opacity-80 ${
                       isSelected
                         ? 'bg-ulos-red shadow-xs'
                         : hasEvent
@@ -310,7 +310,7 @@ export default function CalendarScreen() {
             <Pressable
               key={ev.id}
               onPress={() => router.push('/event/detail')}
-              className="bg-surface-card rounded-2xl p-4 border border-card-border shadow-sm active:scale-[0.99] transition-all"
+              className="bg-surface-card rounded-2xl p-4 border border-card-border shadow-sm active:opacity-90"
             >
               <View className="flex-row items-center justify-between pb-2 border-b border-card-border/60">
                 <View className="px-2.5 py-0.5 rounded-full bg-red-50">

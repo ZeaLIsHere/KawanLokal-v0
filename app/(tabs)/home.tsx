@@ -58,7 +58,7 @@ export default function HomeScreen() {
         <Pressable
           accessibilityLabel="Buka pengaturan"
           onPress={() => router.push('/settings')}
-          className="w-10 h-10 items-center justify-center rounded-xl active:bg-stone-100 active:scale-95 transition-all"
+          className="w-10 h-10 items-center justify-center rounded-xl active:bg-stone-100 active:opacity-80"
         >
           <Ionicons name="menu" size={24} color="#505f76" />
         </Pressable>
@@ -77,7 +77,7 @@ export default function HomeScreen() {
         <Pressable
           accessibilityLabel="Profil Pengguna"
           onPress={() => router.push('/profile')}
-          className="relative w-10 h-10 rounded-full border border-card-border p-0.5 active:scale-95"
+          className="relative w-10 h-10 rounded-full border border-card-border p-0.5 active:opacity-80"
         >
           <Image
             source={{ uri: USER_AVATAR }}
@@ -131,7 +131,7 @@ export default function HomeScreen() {
               <Pressable
                 key={cat.id}
                 onPress={() => handleCategoryPress(cat.id)}
-                className="items-center active:scale-95 transition-all"
+                className="items-center active:opacity-80"
               >
                 <View
                   className={`w-14 h-14 rounded-2xl items-center justify-center shadow-sm border ${
@@ -190,7 +190,7 @@ export default function HomeScreen() {
             {/* Card 1: Pesta Danau Toba */}
             <Pressable
               onPress={() => router.push('/calendar')}
-              className="flex-1 bg-surface-card rounded-2xl border border-card-border overflow-hidden shadow-sm active:scale-[0.98]"
+              className="flex-1 bg-surface-card rounded-2xl border border-card-border overflow-hidden shadow-sm active:opacity-90"
             >
               <View className="relative w-full aspect-[4/3] bg-stone-100 overflow-hidden">
                 <Image
@@ -204,7 +204,7 @@ export default function HomeScreen() {
                 <Pressable
                   accessibilityLabel="Simpan acara"
                   onPress={() => toggleFavorite('pesta-toba')}
-                  className="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 items-center justify-center shadow-sm active:scale-90"
+                  className="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 items-center justify-center shadow-sm active:opacity-80"
                 >
                   <Ionicons
                     name={favorites['pesta-toba'] ? 'heart' : 'heart-outline'}
@@ -235,7 +235,7 @@ export default function HomeScreen() {
             {/* Card 2: Upacara Mangongkal Holi */}
             <Pressable
               onPress={() => router.push('/calendar')}
-              className="flex-1 bg-surface-card rounded-2xl border border-card-border overflow-hidden shadow-sm active:scale-[0.98]"
+              className="flex-1 bg-surface-card rounded-2xl border border-card-border overflow-hidden shadow-sm active:opacity-90"
             >
               <View className="relative w-full aspect-[4/3] bg-stone-100 overflow-hidden">
                 <Image
@@ -249,7 +249,7 @@ export default function HomeScreen() {
                 <Pressable
                   accessibilityLabel="Simpan acara"
                   onPress={() => toggleFavorite('mangongkal-holi')}
-                  className="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 items-center justify-center shadow-sm active:scale-90"
+                  className="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 items-center justify-center shadow-sm active:opacity-80"
                 >
                   <Ionicons
                     name={favorites['mangongkal-holi'] ? 'heart' : 'heart-outline'}
