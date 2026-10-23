@@ -294,7 +294,7 @@ export default function HomeScreen() {
               </Text>
             </Text>
             <Pressable
-              onPress={() => router.push('/(tabs)/explore')}
+              onPress={() => router.push('/booking/new')}
               className="mt-2 flex-row items-center gap-1 active:opacity-70"
             >
               <Text className="text-xs font-bold text-ulos-red">Pesan Layanan</Text>

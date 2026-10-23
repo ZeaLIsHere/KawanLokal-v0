@@ -138,7 +138,7 @@ export default function ExploreScreen() {
                   </Text>
                 </View>
                 <Pressable
-                  onPress={() => router.push('/calendar')}
+                  onPress={() => router.push('/booking/new')}
                   className="px-4 py-2 bg-ulos-red active:bg-ulos-redDark rounded-xl"
                 >
                   <Text className="text-xs font-semibold text-white">Pesan</Text>
