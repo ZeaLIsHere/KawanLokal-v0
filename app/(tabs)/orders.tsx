@@ -53,7 +53,7 @@ export default function OrdersScreen() {
               <Text className="text-sm font-bold text-on-surface">Rp 100.000</Text>
             </View>
             <Pressable
-              onPress={() => router.push('/calendar')}
+              onPress={() => router.push('/ticket/detail')}
               className="px-4 py-2 bg-stone-900 active:bg-stone-800 rounded-xl flex-row items-center gap-1.5"
             >
               <Ionicons name="qr-code-outline" size={16} color="#FFFFFF" />

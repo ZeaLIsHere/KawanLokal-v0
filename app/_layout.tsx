@@ -24,6 +24,8 @@ export default function RootLayout() {
           <Stack.Screen name="destinations" options={{ presentation: 'card' }} />
           <Stack.Screen name="homestays" options={{ presentation: 'card' }} />
           <Stack.Screen name="booking/new" options={{ presentation: 'card' }} />
+          <Stack.Screen name="ticket/[id]" options={{ presentation: 'card' }} />
+          <Stack.Screen name="ticket/detail" options={{ presentation: 'card' }} />
           <Stack.Screen name="(tabs)" />
           <Stack.Screen name="calendar" options={{ presentation: 'card' }} />
           <Stack.Screen name="settings" options={{ presentation: 'card' }} />
