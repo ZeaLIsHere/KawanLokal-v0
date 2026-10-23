@@ -71,39 +71,49 @@ export default function CalendarScreen() {
 
       {/* Daftar Acara Terverifikasi */}
       <ScrollView className="flex-1 p-5">
-        <Card className="mb-4">
-          <View className="flex-row items-center justify-between">
-            <Badge label="Adat Terbuka" variant="ulos" />
-            <Text className="text-xs font-semibold text-stone-500">Samosir</Text>
-          </View>
-          <Text className="text-base font-bold text-stone-900 mt-2">
-            Upacara Mangongkal Holi
-          </Text>
-          <Text className="text-xs text-stone-600 mt-1">
-            Tradisi sakral pemindahan tulang leluhur ke tugu keluarga. Wisatawan diperbolehkan menyaksikan dengan busana adat sopan.
-          </Text>
-          <View className="flex-row items-center justify-between mt-3 pt-3 border-t border-stone-100">
-            <Text className="text-xs text-stone-500">Zona Waktu: 09:00 WIB</Text>
-            <Text className="text-xs font-bold text-emerald-700">Terverifikasi Kurator</Text>
-          </View>
-        </Card>
+        <Pressable
+          onPress={() => router.push('/event/detail')}
+          className="active:scale-[0.99] transition-all"
+        >
+          <Card className="mb-4">
+            <View className="flex-row items-center justify-between">
+              <Badge label="Adat Terbuka" variant="ulos" />
+              <Text className="text-xs font-semibold text-stone-500">Samosir</Text>
+            </View>
+            <Text className="text-base font-bold text-stone-900 mt-2">
+              Upacara Mangongkal Holi
+            </Text>
+            <Text className="text-xs text-stone-600 mt-1">
+              Tradisi sakral pemindahan tulang leluhur ke tugu keluarga. Wisatawan diperbolehkan menyaksikan dengan busana adat sopan.
+            </Text>
+            <View className="flex-row items-center justify-between mt-3 pt-3 border-t border-stone-100">
+              <Text className="text-xs text-stone-500">Zona Waktu: 09:00 WIB</Text>
+              <Text className="text-xs font-bold text-emerald-700">Terverifikasi Kurator</Text>
+            </View>
+          </Card>
+        </Pressable>
 
-        <Card className="mb-4">
-          <View className="flex-row items-center justify-between">
-            <Badge label="Festival Seni" variant="success" />
-            <Text className="text-xs font-semibold text-stone-500">Toba</Text>
-          </View>
-          <Text className="text-base font-bold text-stone-900 mt-2">
-            Festival Gondang Naposo
-          </Text>
-          <Text className="text-xs text-stone-600 mt-1">
-            Ajang tari tradisional Tortor untuk pemuda-pemudi Batak dalam mencari pasangan hidup dan silaturahmi budaya.
-          </Text>
-          <View className="flex-row items-center justify-between mt-3 pt-3 border-t border-stone-100">
-            <Text className="text-xs text-stone-500">Zona Waktu: 14:00 WIB</Text>
-            <Text className="text-xs font-bold text-emerald-700">Terverifikasi Kurator</Text>
-          </View>
-        </Card>
+        <Pressable
+          onPress={() => router.push('/event/detail')}
+          className="active:scale-[0.99] transition-all"
+        >
+          <Card className="mb-4">
+            <View className="flex-row items-center justify-between">
+              <Badge label="Festival Seni" variant="success" />
+              <Text className="text-xs font-semibold text-stone-500">Toba</Text>
+            </View>
+            <Text className="text-base font-bold text-stone-900 mt-2">
+              Festival Gondang Naposo
+            </Text>
+            <Text className="text-xs text-stone-600 mt-1">
+              Ajang tari tradisional Tortor untuk pemuda-pemudi Batak dalam mencari pasangan hidup dan silaturahmi budaya.
+            </Text>
+            <View className="flex-row items-center justify-between mt-3 pt-3 border-t border-stone-100">
+              <Text className="text-xs text-stone-500">Zona Waktu: 14:00 WIB</Text>
+              <Text className="text-xs font-bold text-emerald-700">Terverifikasi Kurator</Text>
+            </View>
+          </Card>
+        </Pressable>
       </ScrollView>
     </SafeAreaView>
   );
