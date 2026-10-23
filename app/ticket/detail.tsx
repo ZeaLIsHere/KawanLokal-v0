@@ -12,6 +12,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
+import { AppIcon } from '@/components/AppIcon';
 
 const HERO_IMAGE =
   'https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?auto=format&fit=crop&w=800&q=80';
@@ -48,7 +49,7 @@ export default function TicketDetailScreen() {
           onPress={() => router.back()}
           className="w-10 h-10 rounded-full items-center justify-center active:bg-stone-100 active:opacity-80"
         >
-          <Ionicons name="arrow-back" size={24} color="#131b2e" />
+          <AppIcon name="arrow-left" size={22} />
         </Pressable>
 
         <Text className="text-lg font-bold text-on-surface tracking-tight">

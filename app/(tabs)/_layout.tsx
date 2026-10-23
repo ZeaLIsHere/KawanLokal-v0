@@ -1,6 +1,6 @@
 import { Tabs } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
 import { ULOS_COLORS } from '@/constants/theme';
+import { AppIcon } from '@/components/AppIcon';
 
 export default function TabLayout() {
   return (
@@ -26,8 +26,8 @@ export default function TabLayout() {
         name="home"
         options={{
           title: 'Beranda',
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? 'home' : 'home-outline'} size={22} color={color} />
+          tabBarIcon: ({ color }) => (
+            <AppIcon name="home" size={24} color={color} />
           ),
         }}
       />
@@ -35,8 +35,8 @@ export default function TabLayout() {
         name="explore"
         options={{
           title: 'Jelajah',
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? 'compass' : 'compass-outline'} size={22} color={color} />
+          tabBarIcon: ({ color }) => (
+            <AppIcon name="map" size={24} color={color} />
           ),
         }}
       />
@@ -44,8 +44,8 @@ export default function TabLayout() {
         name="orders"
         options={{
           title: 'Pesanan',
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? 'receipt' : 'receipt-outline'} size={22} color={color} />
+          tabBarIcon: ({ color }) => (
+            <AppIcon name="ticket" size={24} color={color} />
           ),
         }}
       />

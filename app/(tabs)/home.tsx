@@ -9,8 +9,10 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
-import { Ionicons, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
+import { AppIcon } from '@/components/AppIcon';
+import { SvgIconName } from '@/constants/svgIcons';
 
 // Foto budaya & lanskap Danau Toba
 const PARAPAT_FESTIVAL_IMG =
@@ -23,12 +25,12 @@ const USER_AVATAR =
   'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80';
 
 // 4 Layanan Lokal sesuai PRD: event_ticket, guide, workshop, homestay
-const LOCAL_CATEGORIES = [
-  { id: 'event_ticket', label: 'Tiket Acara', icon: 'ticket-confirmation-outline', isMCI: true },
-  { id: 'guide', label: 'Pemandu', icon: 'badge-account-horizontal-outline', isMCI: true },
-  { id: 'workshop', label: 'Workshop', icon: 'palette-outline', isMCI: true },
-  { id: 'homestay', label: 'Homestay', icon: 'home-outline', isMCI: false },
-] as const;
+const LOCAL_CATEGORIES: { id: string; label: string; iconName: SvgIconName }[] = [
+  { id: 'event_ticket', label: 'Tiket Acara', iconName: 'ticket' },
+  { id: 'guide', label: 'Pemandu', iconName: 'profile' },
+  { id: 'workshop', label: 'Workshop', iconName: 'suitcase' },
+  { id: 'homestay', label: 'Homestay', iconName: 'hotel' },
+];
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -60,7 +62,7 @@ export default function HomeScreen() {
           onPress={() => router.push('/settings')}
           className="w-10 h-10 items-center justify-center rounded-xl active:bg-stone-100 active:opacity-80"
         >
-          <Ionicons name="menu" size={24} color="#505f76" />
+          <AppIcon name="menu" size={22} />
         </Pressable>
 
         {/* Brand Logo KawanLokal */}
@@ -110,7 +112,7 @@ export default function HomeScreen() {
             onPress={() => router.push('/calendar')}
             className="relative flex-row items-center w-full bg-surface-card rounded-2xl border border-input-border shadow-sm px-3.5 h-12"
           >
-            <Ionicons name="search" size={20} color="#737686" />
+            <AppIcon name="search" size={20} />
             <TextInput
               placeholder="Cari upacara adat, pemandu, ulos..."
               placeholderTextColor="#737686"
@@ -136,23 +138,14 @@ export default function HomeScreen() {
                 <View
                   className={`w-14 h-14 rounded-2xl items-center justify-center shadow-sm border ${
                     isSelected
-                      ? 'bg-ulos-red border-ulos-red'
+                      ? 'bg-red-50 border-ulos-red'
                       : 'bg-surface-card border-card-border'
                   }`}
                 >
-                  {cat.isMCI ? (
-                    <MaterialCommunityIcons
-                      name={cat.icon as any}
-                      size={24}
-                      color={isSelected ? '#FFFFFF' : '#505f76'}
-                    />
-                  ) : (
-                    <Ionicons
-                      name={cat.icon as any}
-                      size={24}
-                      color={isSelected ? '#FFFFFF' : '#505f76'}
-                    />
-                  )}
+                  <AppIcon
+                    name={cat.iconName}
+                    size={28}
+                  />
                 </View>
                 <Text
                   className={`mt-2 text-xs font-semibold ${
@@ -304,11 +297,7 @@ export default function HomeScreen() {
 
           {/* Banner Graphic Toba */}
           <View className="w-16 h-16 bg-red-100/80 rounded-2xl items-center justify-center">
-            <MaterialIcons
-              name="explore"
-              size={34}
-              color="#991B1B"
-            />
+            <AppIcon name="map" size={34} />
           </View>
         </View>
       </ScrollView>

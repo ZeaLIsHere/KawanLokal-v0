@@ -11,6 +11,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
+import { AppIcon } from '@/components/AppIcon';
 
 interface DestinationItem {
   id: string;
@@ -130,7 +131,7 @@ export default function DestinationsScreen() {
           onPress={() => router.back()}
           className="w-10 h-10 rounded-full items-center justify-center text-on-surface active:bg-stone-100 active:opacity-80"
         >
-          <Ionicons name="arrow-back" size={22} color="#131b2e" />
+          <AppIcon name="arrow-left" size={22} />
         </Pressable>
 
         <Text className="text-lg font-bold text-on-surface tracking-tight text-center">

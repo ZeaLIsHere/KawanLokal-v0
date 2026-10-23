@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { TOBA_DISTRICTS } from '@/constants/theme';
+import { AppIcon } from '@/components/AppIcon';
 
 const SERVICES_DATA = [
   {
@@ -117,7 +118,7 @@ export default function ExploreScreen() {
                 <Text className="text-[10px] font-bold text-white">{service.typeLabel}</Text>
               </View>
               <View className="absolute top-3 right-3 bg-white/90 backdrop-blur-md px-2 py-0.5 rounded-full flex-row items-center gap-1">
-                <Ionicons name="star" size={13} color="#F59E0B" />
+                <AppIcon name="star" size={13} />
                 <Text className="text-xs font-bold text-on-surface">{service.rating}</Text>
               </View>
             </View>

@@ -11,6 +11,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
+import { AppIcon } from '@/components/AppIcon';
 
 const USER_AVATAR =
   'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80';
@@ -61,7 +62,7 @@ export default function ProfileScreen() {
               onPress={() => router.back()}
               className="w-10 h-10 rounded-full items-center justify-center bg-white/15 active:bg-white/25 active:opacity-80"
             >
-              <Ionicons name="arrow-back" size={22} color="#FFFFFF" />
+              <AppIcon name="arrow-left" size={20} color="#FFFFFF" />
             </Pressable>
 
             <Text className="text-base font-bold text-white tracking-wide">
@@ -174,7 +175,7 @@ export default function ProfileScreen() {
             >
               <View className="flex-row items-center gap-3">
                 <View className="w-8 h-8 rounded-xl bg-red-50 items-center justify-center">
-                  <Ionicons name="receipt-outline" size={18} color="#991B1B" />
+                  <AppIcon name="ticket" size={18} />
                 </View>
                 <Text className="text-sm font-semibold text-on-surface">
                   Pesanan & Tiket Digital
@@ -190,7 +191,7 @@ export default function ProfileScreen() {
             >
               <View className="flex-row items-center gap-3">
                 <View className="w-8 h-8 rounded-xl bg-red-50 items-center justify-center">
-                  <Ionicons name="calendar-outline" size={18} color="#991B1B" />
+                  <AppIcon name="calendar" size={18} />
                 </View>
                 <Text className="text-sm font-semibold text-on-surface">
                   Kalender Budaya Toba
@@ -206,7 +207,7 @@ export default function ProfileScreen() {
             >
               <View className="flex-row items-center gap-3">
                 <View className="w-8 h-8 rounded-xl bg-stone-100 items-center justify-center">
-                  <Ionicons name="compass-outline" size={18} color="#505f76" />
+                  <AppIcon name="map" size={18} />
                 </View>
                 <Text className="text-sm font-semibold text-on-surface">
                   Destinasi Budaya Sekitar Toba
@@ -222,7 +223,7 @@ export default function ProfileScreen() {
             >
               <View className="flex-row items-center gap-3">
                 <View className="w-8 h-8 rounded-xl bg-stone-100 items-center justify-center">
-                  <Ionicons name="home-outline" size={18} color="#505f76" />
+                  <AppIcon name="hotel" size={18} />
                 </View>
                 <Text className="text-sm font-semibold text-on-surface">
                   Homestay & Sopo Bolon

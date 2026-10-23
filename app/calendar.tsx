@@ -10,6 +10,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { TOBA_DISTRICTS } from '@/constants/theme';
+import { AppIcon } from '@/components/AppIcon';
 
 interface CalendarEvent {
   id: string;
@@ -133,7 +134,7 @@ export default function CalendarScreen() {
           onPress={() => router.back()}
           className="w-10 h-10 rounded-full items-center justify-center active:bg-stone-100 active:opacity-80"
         >
-          <Ionicons name="arrow-back" size={24} color="#131b2e" />
+          <AppIcon name="arrow-left" size={22} />
         </Pressable>
 
         <View className="items-center">

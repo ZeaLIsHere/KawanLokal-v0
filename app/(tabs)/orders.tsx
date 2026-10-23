@@ -10,6 +10,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
+import { AppIcon } from '@/components/AppIcon';
 
 interface TripOrder {
   id: string;
@@ -190,13 +191,13 @@ export default function OrdersScreen() {
                     {order.title}
                   </Text>
                   <View className="flex-row items-center gap-1.5 mt-1">
-                    <Ionicons name="calendar-outline" size={13} color="#78716C" />
+                    <AppIcon name="calendar" size={13} />
                     <Text numberOfLines={1} className="text-[11px] text-secondary">
                       {order.dateWIB}
                     </Text>
                   </View>
                   <View className="flex-row items-center gap-1.5 mt-0.5">
-                    <Ionicons name="person-outline" size={13} color="#78716C" />
+                    <AppIcon name="profile" size={13} />
                     <Text className="text-[11px] text-secondary">
                       {order.travelers}
                     </Text>
@@ -227,7 +228,7 @@ export default function OrdersScreen() {
         {filteredOrders.length === 0 && (
           <View className="items-center justify-center py-16 px-6">
             <View className="w-16 h-16 rounded-2xl bg-stone-100 items-center justify-center mb-3">
-              <Ionicons name="receipt-outline" size={32} color="#78716C" />
+              <AppIcon name="ticket" size={32} />
             </View>
             <Text className="text-base font-bold text-on-surface text-center">
               Belum Ada Kegiatan {activeTab === 'cancelled' ? 'Dibatalkan' : 'Selesai'}

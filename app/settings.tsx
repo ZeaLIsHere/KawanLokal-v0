@@ -5,6 +5,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Card } from '@/components/Card';
 import { Badge } from '@/components/Badge';
+import { AppIcon } from '@/components/AppIcon';
 
 export default function SettingsScreen() {
   const router = useRouter();
@@ -21,7 +22,7 @@ export default function SettingsScreen() {
           onPress={() => router.back()}
           className="w-10 h-10 rounded-full bg-stone-100 items-center justify-center"
         >
-          <Ionicons name="arrow-back" size={20} color="#1C1917" />
+          <AppIcon name="arrow-left" size={20} />
         </Pressable>
         <Text className="text-base font-bold text-stone-900">Pengaturan</Text>
         <View className="w-10" />
@@ -88,7 +89,7 @@ export default function SettingsScreen() {
         <Card className="mb-6 p-0 overflow-hidden divide-y divide-stone-100">
           <View className="flex-row items-center justify-between p-4">
             <View className="flex-row items-center gap-3">
-              <Ionicons name="language-outline" size={20} color="#1C1917" />
+              <AppIcon name="globe" size={20} />
               <Text className="text-sm font-semibold text-stone-800">Bahasa</Text>
             </View>
             <Text className="text-xs font-bold text-stone-600">Bahasa Indonesia</Text>
