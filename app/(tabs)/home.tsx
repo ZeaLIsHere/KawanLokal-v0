@@ -43,7 +43,11 @@ export default function HomeScreen() {
   const handleCategoryPress = (id: string) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
     setActiveCategory(id);
-    router.push('/(tabs)/explore');
+    if (id === 'homestay') {
+      router.push('/homestays');
+    } else {
+      router.push('/(tabs)/explore');
+    }
   };
 
   return (
