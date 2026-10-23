@@ -21,6 +21,7 @@ export default function RootLayout() {
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="index" />
           <Stack.Screen name="onboarding" />
+          <Stack.Screen name="destinations" options={{ presentation: 'card' }} />
           <Stack.Screen name="(tabs)" />
           <Stack.Screen name="calendar" options={{ presentation: 'card' }} />
           <Stack.Screen name="settings" options={{ presentation: 'card' }} />

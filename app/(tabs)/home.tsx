@@ -174,10 +174,10 @@ export default function HomeScreen() {
               </Text>
             </View>
             <Pressable
-              onPress={() => router.push('/calendar')}
+              onPress={() => router.push('/destinations')}
               className="active:opacity-70"
             >
-              <Text className="text-xs font-bold text-ulos-red">Lihat Kalender</Text>
+              <Text className="text-xs font-bold text-ulos-red">Lihat Semua</Text>
             </Pressable>
           </View>
 
