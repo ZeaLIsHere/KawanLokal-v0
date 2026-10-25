@@ -1,11 +1,18 @@
 import '../global.css';
 import { useEffect } from 'react';
+import { LogBox } from 'react-native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { QueryClientProvider } from '@tanstack/react-query';
 import * as SplashScreen from 'expo-splash-screen';
 import { queryClient } from '@/lib/queryClient';
+
+// Bisukan peringatan internal library NativeWind & Reanimated pada runtime React Native 0.88
+LogBox.ignoreLogs([
+  'ImageBackground is deprecated',
+  '[Reanimated] Dependencies should only be used on the web',
+]);
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
