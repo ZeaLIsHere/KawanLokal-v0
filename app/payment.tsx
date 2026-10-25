@@ -115,7 +115,7 @@ export default function PaymentScreen() {
             {/* Option 1: QRIS */}
             <Pressable
               onPress={() => handleSelectMethod('qris')}
-              className="flex-row items-center justify-between p-3.5 active:bg-stone-50 transition-colors"
+              className="flex-row items-center justify-between p-3.5 active:bg-stone-50"
             >
               <View className="flex-row items-center gap-3 flex-1 pr-2">
                 <View className="w-10 h-10 rounded-xl bg-red-50 items-center justify-center shrink-0">
@@ -141,7 +141,7 @@ export default function PaymentScreen() {
             {/* Option 2: Virtual Account Bank */}
             <Pressable
               onPress={() => handleSelectMethod('va')}
-              className="flex-row items-center justify-between p-3.5 active:bg-stone-50 transition-colors"
+              className="flex-row items-center justify-between p-3.5 active:bg-stone-50"
             >
               <View className="flex-row items-center gap-3 flex-1 pr-2">
                 <View className="w-10 h-10 rounded-xl bg-stone-100 items-center justify-center shrink-0">
@@ -167,7 +167,7 @@ export default function PaymentScreen() {
             {/* Option 3: Kartu Debit / Kredit */}
             <Pressable
               onPress={() => handleSelectMethod('card')}
-              className="flex-row items-center justify-between p-3.5 active:bg-stone-50 transition-colors"
+              className="flex-row items-center justify-between p-3.5 active:bg-stone-50"
             >
               <View className="flex-row items-center gap-3 flex-1 pr-2">
                 <View className="w-10 h-10 rounded-xl bg-stone-100 items-center justify-center shrink-0">
