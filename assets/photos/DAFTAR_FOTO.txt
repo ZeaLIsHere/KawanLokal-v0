@@ -1,0 +1,75 @@
+DAFTAR KEBUTUHAN FOTO ASLI KAWANLOKAL
+Lokasi penyimpanan: assets/photos/
+Format yang disarankan: .jpg atau .png
+
+==================================================
+1. ONBOARDING & BERANDA HERO
+==================================================
+1. lake-toba-hero.jpg
+   Deskripsi: Pemandangan luas panorama Danau Toba dan perbukitan hijau Samosir.
+
+2. parapat-festival.jpg
+   Deskripsi: Suasana Pantai Bebas Parapat, Danau Toba, atau perayaan festival.
+
+3. tortor-dance.jpg
+   Deskripsi: Tari Tortor Batak dengan busana adat dan ulos.
+
+4. rumah-bolon.jpg
+   Deskripsi: Rumah adat Batak Toba (Rumah Bolon) atau deretan rumah tradisional.
+
+
+==================================================
+2. DESTINASI WISATA 7 KABUPATEN
+==================================================
+5. pusuk-buhit.jpg
+   Deskripsi: Lanskap bukit sakral Pusuk Buhit di Pulau Samosir.
+
+6. desa-tomok.jpg
+   Deskripsi: Desa Adat Tomok, patung Sigale-gale, atau kompleks Makam Raja Sidabutar.
+
+7. sipisopiso.jpg
+   Deskripsi: Air Terjun Sipiso-piso dengan latar belakang Danau Toba dari Kabupaten Karo.
+
+8. huta-ginjang.jpg
+   Deskripsi: Teras pandang Huta Ginjang di Muara, Tapanuli Utara.
+
+9. lembah-bakkara.jpg
+   Deskripsi: Lembah Bakkara dan persawahan di Humbang Hasundutan.
+
+10. tao-silalahi.jpg
+    Deskripsi: Pantai dan tepian danau Tao Silalahi di Kabupaten Dairi.
+
+11. kampung-suhisuhi.jpg
+    Deskripsi: Desa pengrajin ulos Lumban Suhi-Suhi di Samosir.
+
+
+==================================================
+3. LAYANAN, TIKET, & WORKSHOP BUDAYA
+==================================================
+12. ulos-weaving.jpg
+    Deskripsi: Pengrajin sedang menenun kain Ulos Batak menggunakan alat tenun tradisional gedongan.
+
+13. gondang-sabangunan.jpg
+    Deskripsi: Musisi tradisional memainkan alat musik gondang sabangunan, taganing, dan sarune bolon.
+
+14. gorga-carving.jpg
+    Deskripsi: Seni ukir kayu motif Gorga Batak dengan warna khas merah, putih, dan hitam.
+
+15. toba-culinary.jpg
+    Deskripsi: Kuliner tradisional khas Batak Toba (seperti Ikan Mas Arsik atau Naniura).
+
+
+==================================================
+4. PEMANDU & PENGINAPAN
+==================================================
+16. homestay-sopo.jpg
+    Deskripsi: Penginapan atau homestay berarsitektur Sopo Bolon / Rumah Adat Batak tepi danau.
+
+17. guide-male.jpg
+    Deskripsi: Foto potret wajah/setengah badan pemandu lokal pria ramah.
+
+18. guide-female.jpg
+    Deskripsi: Foto potret wajah/setengah badan pemandu lokal wanita ramah.
+
+19. default-avatar.jpg
+    Deskripsi: Foto profil default pengguna/wisatawan (pria/wanita/ilustrasi profil netral).
