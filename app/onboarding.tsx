@@ -14,6 +14,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
+import { TOBA_IMAGES } from '@/constants/images';
 
 interface OnboardingSlide {
   id: string;
@@ -30,8 +31,7 @@ const ONBOARDING_SLIDES: OnboardingSlide[] = [
     title: 'Jelajahi\nKeagungan Toba',
     description:
       'Nikmati lanskap magis kaldera vulkanik terbesar di dunia, perbukitan hijau Samosir, dan danau biru yang menenangkan.',
-    image:
-      'https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?auto=format&fit=crop&w=800&q=80',
+    image: TOBA_IMAGES.lakeTobaLandscape,
   },
   {
     id: 'slide-2',
@@ -39,8 +39,7 @@ const ONBOARDING_SLIDES: OnboardingSlide[] = [
     title: 'Kalender\nBudaya Autentik',
     description:
       'Akses jadwal resmi upacara adat Batak terverifikasi, pagelaran gondang sabangunan, serta pesta tahunan di 7 kabupaten.',
-    image:
-      'https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=800&q=80',
+    image: TOBA_IMAGES.tortorDance,
   },
   {
     id: 'slide-3',
@@ -48,8 +47,7 @@ const ONBOARDING_SLIDES: OnboardingSlide[] = [
     title: 'Pemandu &\nPenginapan Adat',
     description:
       'Dapatkan cerita sejarah dari pemandu lokal terpercaya, ikuti workshop tenun ulos, dan rasakan kenyamanan Sopo Bolon tradisional.',
-    image:
-      'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80',
+    image: TOBA_IMAGES.rumahBolonTraditional,
   },
 ];
 

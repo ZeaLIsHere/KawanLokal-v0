@@ -12,6 +12,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { AppIcon } from '@/components/AppIcon';
+import { TOBA_IMAGES } from '@/constants/images';
 
 interface WorkshopItem {
   id: string;
@@ -37,7 +38,7 @@ const SEED_WORKSHOPS: WorkshopItem[] = [
     pricePerPerson: 'Rp 150.000',
     rating: 4.92,
     level: 'Pemula',
-    image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80',
+    image: TOBA_IMAGES.ulosWeaving,
   },
   {
     id: 'w-2',
@@ -49,7 +50,7 @@ const SEED_WORKSHOPS: WorkshopItem[] = [
     pricePerPerson: 'Rp 175.000',
     rating: 4.88,
     level: 'Semua Tingkat',
-    image: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80',
+    image: TOBA_IMAGES.batakWoodCarving,
   },
   {
     id: 'w-3',
@@ -61,7 +62,7 @@ const SEED_WORKSHOPS: WorkshopItem[] = [
     pricePerPerson: 'Rp 125.000',
     rating: 4.85,
     level: 'Pecinta Kuliner',
-    image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80',
+    image: TOBA_IMAGES.tobaCulinary,
   },
   {
     id: 'w-4',
@@ -73,7 +74,7 @@ const SEED_WORKSHOPS: WorkshopItem[] = [
     pricePerPerson: 'Rp 135.000',
     rating: 4.95,
     level: 'Pemula',
-    image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80',
+    image: TOBA_IMAGES.gondangMusic,
   },
 ];
 

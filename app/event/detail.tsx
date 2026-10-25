@@ -12,9 +12,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
+import { TOBA_IMAGES } from '@/constants/images';
 
-const HERO_IMAGE =
-  'https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=800&q=80';
+const HERO_IMAGE = TOBA_IMAGES.mangongkalHoliRitual;
 
 export default function EventDetailScreen() {
   const router = useRouter();

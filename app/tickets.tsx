@@ -12,6 +12,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { AppIcon } from '@/components/AppIcon';
+import { TOBA_IMAGES } from '@/constants/images';
 
 interface EventTicketItem {
   id: string;
@@ -36,7 +37,7 @@ const SEED_TICKETS: EventTicketItem[] = [
     dateWIB: '2 Nov 2026 • 10.00 WIB',
     price: 'Rp 50.000',
     quotaLeft: 120,
-    image: 'https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?auto=format&fit=crop&w=600&q=80',
+    image: TOBA_IMAGES.lakeTobaParapat,
     rating: 4.9,
   },
   {
@@ -48,7 +49,7 @@ const SEED_TICKETS: EventTicketItem[] = [
     dateWIB: '8 Nov 2026 • 19.30 WIB',
     price: 'Rp 75.000',
     quotaLeft: 45,
-    image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80',
+    image: TOBA_IMAGES.gondangMusic,
     rating: 4.8,
   },
   {
@@ -60,7 +61,7 @@ const SEED_TICKETS: EventTicketItem[] = [
     dateWIB: '15 Nov 2026 • 09.00 WIB',
     price: 'Rp 100.000',
     quotaLeft: 20,
-    image: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80',
+    image: TOBA_IMAGES.mangongkalHoliRitual,
     rating: 4.95,
   },
   {
@@ -72,7 +73,7 @@ const SEED_TICKETS: EventTicketItem[] = [
     dateWIB: '22 Nov 2026 • 11.00 WIB',
     price: 'Rp 40.000',
     quotaLeft: 85,
-    image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80',
+    image: TOBA_IMAGES.tobaCulinary,
     rating: 4.7,
   },
 ];

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -11,17 +11,56 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
+import * as ImagePicker from 'expo-image-picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AppIcon } from '@/components/AppIcon';
+import { TOBA_IMAGES } from '@/constants/images';
 
-const USER_AVATAR =
-  'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80';
+const STORAGE_AVATAR_KEY = '@user_profile_avatar';
 
 export default function ProfileScreen() {
   const router = useRouter();
+  const [avatarUri, setAvatarUri] = useState<string>(TOBA_IMAGES.defaultAvatar);
 
-  const handleEditAvatar = () => {
+  useEffect(() => {
+    // Memuat foto profil tersimpan
+    AsyncStorage.getItem(STORAGE_AVATAR_KEY)
+      .then((stored) => {
+        if (stored) {
+          setAvatarUri(stored);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const handleEditAvatar = async () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
-    Alert.alert('Ubah Foto Profil', 'Pilih foto profil dari galeri perangkat Anda.');
+    try {
+      const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (!permissionResult.granted) {
+        Alert.alert(
+          'Izin Galeri Diperlukan',
+          'Mohon izinkan akses galeri foto perangkat untuk memilih foto profil Anda.'
+        );
+        return;
+      }
+
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ['images'],
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 0.85,
+      });
+
+      if (!result.canceled && result.assets && result.assets.length > 0) {
+        const selectedUri = result.assets[0].uri;
+        setAvatarUri(selectedUri);
+        await AsyncStorage.setItem(STORAGE_AVATAR_KEY, selectedUri);
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {});
+      }
+    } catch (error) {
+      Alert.alert('Gagal Membuka Galeri', 'Terjadi kendala saat mengakses galeri foto.');
+    }
   };
 
   const handleLogout = () => {
@@ -83,7 +122,7 @@ export default function ProfileScreen() {
             <View className="relative mb-2.5">
               <View className="w-24 h-24 rounded-full p-1 bg-surface-card shadow-lg ring-4 ring-white/30">
                 <Image
-                  source={{ uri: USER_AVATAR }}
+                  source={{ uri: avatarUri }}
                   className="w-full h-full rounded-full"
                   resizeMode="cover"
                 />
@@ -93,7 +132,7 @@ export default function ProfileScreen() {
                 onPress={handleEditAvatar}
                 className="absolute bottom-0 right-0 w-7 h-7 bg-surface-card rounded-full shadow-md items-center justify-center active:opacity-80"
               >
-                <Ionicons name="camera" size={14} color="#991B1B" />
+                <Ionicons name="camera" size={14} color="#1D4ED8" />
               </Pressable>
             </View>
 

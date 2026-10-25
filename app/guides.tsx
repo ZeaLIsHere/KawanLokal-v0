@@ -12,6 +12,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { AppIcon } from '@/components/AppIcon';
+import { TOBA_IMAGES } from '@/constants/images';
 
 interface GuideItem {
   id: string;
@@ -38,7 +39,7 @@ const SEED_GUIDES: GuideItem[] = [
     pricePerTrip: 'Rp 250.000',
     rating: 4.95,
     totalTrips: 184,
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
+    avatar: TOBA_IMAGES.guideAvatar1,
     verified: true,
   },
   {
@@ -51,7 +52,7 @@ const SEED_GUIDES: GuideItem[] = [
     pricePerTrip: 'Rp 200.000',
     rating: 4.88,
     totalTrips: 92,
-    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80',
+    avatar: TOBA_IMAGES.guideAvatar2,
     verified: true,
   },
   {
@@ -64,7 +65,7 @@ const SEED_GUIDES: GuideItem[] = [
     pricePerTrip: 'Rp 350.000',
     rating: 5.0,
     totalTrips: 310,
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80',
+    avatar: TOBA_IMAGES.guideAvatar3,
     verified: true,
   },
   {
@@ -77,7 +78,7 @@ const SEED_GUIDES: GuideItem[] = [
     pricePerTrip: 'Rp 275.000',
     rating: 4.82,
     totalTrips: 118,
-    avatar: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=400&q=80',
+    avatar: TOBA_IMAGES.guideAvatar4,
     verified: true,
   },
 ];

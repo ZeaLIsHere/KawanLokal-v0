@@ -5,6 +5,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { TOBA_DISTRICTS } from '@/constants/theme';
 import { AppIcon } from '@/components/AppIcon';
+import { TOBA_IMAGES } from '@/constants/images';
 
 const SERVICES_DATA = [
   {
@@ -15,7 +16,7 @@ const SERVICES_DATA = [
     district: 'Samosir',
     price: 'Rp 150.000',
     unit: '/ orang',
-    image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80',
+    image: TOBA_IMAGES.ulosWeaving,
     rating: 4.9,
     provider: 'Sanggar Tenun Lumban Suhi-Suhi',
   },
@@ -27,7 +28,7 @@ const SERVICES_DATA = [
     district: 'Samosir',
     price: 'Rp 250.000',
     unit: '/ grup',
-    image: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80',
+    image: TOBA_IMAGES.kingSidabutarTomb,
     rating: 4.8,
     provider: 'Komunitas Pemandu Tomok',
   },
@@ -39,7 +40,7 @@ const SERVICES_DATA = [
     district: 'Toba',
     price: 'Rp 350.000',
     unit: '/ malam',
-    image: 'https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?auto=format&fit=crop&w=600&q=80',
+    image: TOBA_IMAGES.rumahBolonTraditional,
     rating: 4.7,
     provider: 'Homestay Raja Lumban',
   },
@@ -51,7 +52,7 @@ const SERVICES_DATA = [
     district: 'Simalungun',
     price: 'Rp 75.000',
     unit: '/ tiket',
-    image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80',
+    image: TOBA_IMAGES.gondangMusic,
     rating: 4.9,
     provider: 'Panitia Pesta Danau Toba',
   },

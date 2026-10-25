@@ -13,6 +13,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { formatRupiah } from '@/lib/format';
 import { AppIcon } from '@/components/AppIcon';
+import { TOBA_IMAGES } from '@/constants/images';
 
 export default function NewBookingScreen() {
   const router = useRouter();
@@ -261,7 +262,7 @@ export default function NewBookingScreen() {
           {/* Photo */}
           <View className="w-20 h-16 rounded-xl overflow-hidden bg-stone-100 shadow-sm shrink-0">
             <Image
-              source={{ uri: 'https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?auto=format&fit=crop&w=300&q=80' }}
+              source={{ uri: TOBA_IMAGES.lakeTobaParapat }}
               className="w-full h-full"
               resizeMode="cover"
             />

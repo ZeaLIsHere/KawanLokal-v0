@@ -11,6 +11,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { AppIcon } from '@/components/AppIcon';
+import { TOBA_IMAGES } from '@/constants/images';
 
 interface TripOrder {
   id: string;
@@ -37,7 +38,7 @@ const TRIP_ORDERS: TripOrder[] = [
     status: 'upcoming',
     statusLabel: 'Lunas / Tiket Siap',
     statusBadgeVariant: 'emerald',
-    image: 'https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?auto=format&fit=crop&w=400&q=80',
+    image: TOBA_IMAGES.lakeTobaParapat,
     price: 'Rp 100.000',
   },
   {
@@ -50,7 +51,7 @@ const TRIP_ORDERS: TripOrder[] = [
     status: 'upcoming',
     statusLabel: 'Menunggu Verifikasi',
     statusBadgeVariant: 'amber',
-    image: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=400&q=80',
+    image: TOBA_IMAGES.kingSidabutarTomb,
     price: 'Rp 150.000',
   },
   {
@@ -63,7 +64,7 @@ const TRIP_ORDERS: TripOrder[] = [
     status: 'completed',
     statusLabel: 'Kegiatan Selesai',
     statusBadgeVariant: 'slate',
-    image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=400&q=80',
+    image: TOBA_IMAGES.ulosWeaving,
     price: 'Rp 300.000',
   },
 ];

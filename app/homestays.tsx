@@ -11,6 +11,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
+import { TOBA_IMAGES } from '@/constants/images';
 
 interface HomestayItem {
   id: string;
@@ -29,7 +30,7 @@ const FEATURED_HOMESTAY: HomestayItem = {
   district: 'Tuktuk',
   rating: 4.9,
   priceFormatted: 'Rp 350.000',
-  image: 'https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?auto=format&fit=crop&w=800&q=80',
+  image: TOBA_IMAGES.rumahBolonTraditional,
 };
 
 const RECOMMENDED_HOMESTAYS: HomestayItem[] = [
@@ -40,7 +41,7 @@ const RECOMMENDED_HOMESTAYS: HomestayItem[] = [
     district: 'Balige',
     rating: 4.8,
     priceFormatted: 'Rp 275.000',
-    image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=400&q=80',
+    image: TOBA_IMAGES.sopoBolonToba,
   },
   {
     id: 'h2',
@@ -49,7 +50,7 @@ const RECOMMENDED_HOMESTAYS: HomestayItem[] = [
     district: 'Parapat',
     rating: 4.7,
     priceFormatted: 'Rp 420.000',
-    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=400&q=80',
+    image: TOBA_IMAGES.lakeTobaParapat,
   },
   {
     id: 'h3',
@@ -58,7 +59,7 @@ const RECOMMENDED_HOMESTAYS: HomestayItem[] = [
     district: 'Silalahi',
     rating: 4.6,
     priceFormatted: 'Rp 220.000',
-    image: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=400&q=80',
+    image: TOBA_IMAGES.taoSilalahi,
   },
   {
     id: 'h4',
@@ -67,7 +68,7 @@ const RECOMMENDED_HOMESTAYS: HomestayItem[] = [
     district: 'Samosir',
     rating: 4.9,
     priceFormatted: 'Rp 310.000',
-    image: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=400&q=80',
+    image: TOBA_IMAGES.tomokVillage,
   },
 ];
 

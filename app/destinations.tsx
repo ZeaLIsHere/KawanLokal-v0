@@ -12,6 +12,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { AppIcon } from '@/components/AppIcon';
+import { TOBA_IMAGES } from '@/constants/images';
 
 interface DestinationItem {
   id: string;
@@ -29,7 +30,7 @@ const DESTINATIONS: DestinationItem[] = [
     district: 'Samosir',
     category: 'Situs Sakral',
     rating: 4.9,
-    image: 'https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?auto=format&fit=crop&w=600&q=80',
+    image: TOBA_IMAGES.pusukBuhit,
   },
   {
     id: 'd2',
@@ -37,7 +38,7 @@ const DESTINATIONS: DestinationItem[] = [
     district: 'Samosir',
     category: 'Sejarah & Seni',
     rating: 4.8,
-    image: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80',
+    image: TOBA_IMAGES.tomokVillage,
   },
   {
     id: 'd3',
@@ -45,7 +46,7 @@ const DESTINATIONS: DestinationItem[] = [
     district: 'Simalungun',
     category: 'Festival & Wisata',
     rating: 4.7,
-    image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80',
+    image: TOBA_IMAGES.lakeTobaParapat,
   },
   {
     id: 'd4',
@@ -53,7 +54,7 @@ const DESTINATIONS: DestinationItem[] = [
     district: 'Karo',
     category: 'Panorama Alam',
     rating: 4.9,
-    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80',
+    image: TOBA_IMAGES.sipisopisoWaterfall,
   },
   {
     id: 'd5',
@@ -61,7 +62,7 @@ const DESTINATIONS: DestinationItem[] = [
     district: 'Tapanuli Utara',
     category: 'Teras Pandang',
     rating: 4.8,
-    image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=600&q=80',
+    image: TOBA_IMAGES.hutaGinjangMuara,
   },
   {
     id: 'd6',
@@ -69,7 +70,7 @@ const DESTINATIONS: DestinationItem[] = [
     district: 'Humbang Hasundutan',
     category: 'Kerajaan Adat',
     rating: 4.8,
-    image: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80',
+    image: TOBA_IMAGES.bakkaraValley,
   },
   {
     id: 'd7',
@@ -77,7 +78,7 @@ const DESTINATIONS: DestinationItem[] = [
     district: 'Dairi',
     category: 'Tepian & Konservasi',
     rating: 4.7,
-    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80',
+    image: TOBA_IMAGES.taoSilalahi,
   },
   {
     id: 'd8',
@@ -85,7 +86,7 @@ const DESTINATIONS: DestinationItem[] = [
     district: 'Samosir',
     category: 'Pusat Ulos',
     rating: 4.9,
-    image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80',
+    image: TOBA_IMAGES.ulosWeaving,
   },
 ];
 

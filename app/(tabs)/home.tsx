@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -11,18 +11,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AppIcon } from '@/components/AppIcon';
 import { SvgIconName } from '@/constants/svgIcons';
+import { TOBA_IMAGES } from '@/constants/images';
 
-// Foto budaya & lanskap Danau Toba
-const PARAPAT_FESTIVAL_IMG =
-  'https://images.unsplash.com/photo-1596401057633-54a8fe8ef647?auto=format&fit=crop&w=600&q=80';
-
-const SAMOSIR_CULTURE_IMG =
-  'https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80';
-
-const USER_AVATAR =
-  'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80';
+const STORAGE_AVATAR_KEY = '@user_profile_avatar';
 
 // 4 Layanan Lokal sesuai PRD: event_ticket, guide, workshop, homestay
 const LOCAL_CATEGORIES: { id: string; label: string; iconName: SvgIconName }[] = [
@@ -36,6 +30,15 @@ export default function HomeScreen() {
   const router = useRouter();
   const [activeCategory, setActiveCategory] = useState<string>('event_ticket');
   const [favorites, setFavorites] = useState<Record<string, boolean>>({});
+  const [avatarUri, setAvatarUri] = useState<string>(TOBA_IMAGES.defaultAvatar);
+
+  useEffect(() => {
+    AsyncStorage.getItem(STORAGE_AVATAR_KEY)
+      .then((stored) => {
+        if (stored) setAvatarUri(stored);
+      })
+      .catch(() => {});
+  }, []);
 
   const toggleFavorite = (id: string) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
@@ -94,7 +97,7 @@ export default function HomeScreen() {
           className="relative w-10 h-10 rounded-full border border-card-border p-0.5 active:opacity-80"
         >
           <Image
-            source={{ uri: USER_AVATAR }}
+            source={{ uri: avatarUri }}
             className="w-full h-full rounded-full"
             resizeMode="cover"
           />
@@ -199,7 +202,7 @@ export default function HomeScreen() {
             >
               <View className="relative w-full aspect-[4/3] bg-stone-100 overflow-hidden">
                 <Image
-                  source={{ uri: PARAPAT_FESTIVAL_IMG }}
+                  source={{ uri: TOBA_IMAGES.lakeTobaParapat }}
                   className="w-full h-full"
                   resizeMode="cover"
                 />
@@ -244,7 +247,7 @@ export default function HomeScreen() {
             >
               <View className="relative w-full aspect-[4/3] bg-stone-100 overflow-hidden">
                 <Image
-                  source={{ uri: SAMOSIR_CULTURE_IMG }}
+                  source={{ uri: TOBA_IMAGES.mangongkalHoliRitual }}
                   className="w-full h-full"
                   resizeMode="cover"
                 />
