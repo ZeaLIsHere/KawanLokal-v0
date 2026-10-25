@@ -137,8 +137,8 @@ export default function ProfileScreen() {
                 onPress={() => router.push('/calendar')}
                 className="flex-1 items-center justify-center py-1 active:opacity-70"
               >
-                <View className="w-9 h-9 rounded-full bg-red-50 items-center justify-center mb-1">
-                  <Ionicons name="bookmark" size={18} color="#991B1B" />
+                <View className="w-9 h-9 rounded-full bg-blue-50 items-center justify-center mb-1">
+                  <Ionicons name="bookmark" size={18} color="#1D4ED8" />
                 </View>
                 <Text className="text-base font-extrabold text-on-surface leading-none">
                   8
@@ -153,8 +153,8 @@ export default function ProfileScreen() {
                 onPress={() => router.push('/destinations')}
                 className="flex-1 items-center justify-center py-1 active:opacity-70"
               >
-                <View className="w-9 h-9 rounded-full bg-red-50 items-center justify-center mb-1">
-                  <Ionicons name="location" size={18} color="#991B1B" />
+                <View className="w-9 h-9 rounded-full bg-blue-50 items-center justify-center mb-1">
+                  <Ionicons name="location" size={18} color="#1D4ED8" />
                 </View>
                 <Text className="text-base font-extrabold text-on-surface leading-none">
                   7
@@ -174,7 +174,7 @@ export default function ProfileScreen() {
               className="flex-row items-center justify-between p-3.5 active:bg-stone-50"
             >
               <View className="flex-row items-center gap-3">
-                <View className="w-8 h-8 rounded-xl bg-red-50 items-center justify-center">
+                <View className="w-8 h-8 rounded-xl bg-blue-50 items-center justify-center">
                   <AppIcon name="ticket" size={18} />
                 </View>
                 <Text className="text-sm font-semibold text-on-surface">
@@ -190,7 +190,7 @@ export default function ProfileScreen() {
               className="flex-row items-center justify-between p-3.5 active:bg-stone-50"
             >
               <View className="flex-row items-center gap-3">
-                <View className="w-8 h-8 rounded-xl bg-red-50 items-center justify-center">
+                <View className="w-8 h-8 rounded-xl bg-blue-50 items-center justify-center">
                   <AppIcon name="calendar" size={18} />
                 </View>
                 <Text className="text-sm font-semibold text-on-surface">

@@ -138,7 +138,7 @@ export default function HomeScreen() {
                 <View
                   className={`w-14 h-14 rounded-2xl items-center justify-center shadow-sm border ${
                     isSelected
-                      ? 'bg-red-50 border-ulos-red'
+                      ? 'bg-blue-50 border-ulos-red'
                       : 'bg-surface-card border-card-border'
                   }`}
                 >
@@ -275,7 +275,7 @@ export default function HomeScreen() {
         {/* Promo / Sorotan Budaya Lokal */}
         <View className="bg-gradient-to-r from-red-50 via-stone-50 to-white border border-red-100 rounded-2xl p-4 shadow-sm flex-row items-center justify-between overflow-hidden relative">
           <View className="space-y-1 flex-1 pr-2 z-10">
-            <View className="self-start px-2.5 py-0.5 rounded-full bg-red-100">
+            <View className="self-start px-2.5 py-0.5 rounded-full bg-blue-100">
               <Text className="text-ulos-red text-[10px] font-bold tracking-wide">
                 PENGALAMAN OTENTIK
               </Text>
@@ -291,12 +291,12 @@ export default function HomeScreen() {
               className="mt-2 flex-row items-center gap-1 active:opacity-70"
             >
               <Text className="text-xs font-bold text-ulos-red">Pesan Layanan</Text>
-              <Ionicons name="arrow-forward" size={14} color="#991B1B" />
+              <Ionicons name="arrow-forward" size={14} color="#1D4ED8" />
             </Pressable>
           </View>
 
           {/* Banner Graphic Toba */}
-          <View className="w-16 h-16 bg-red-100/80 rounded-2xl items-center justify-center">
+          <View className="w-16 h-16 bg-blue-100/80 rounded-2xl items-center justify-center">
             <AppIcon name="map" size={34} />
           </View>
         </View>

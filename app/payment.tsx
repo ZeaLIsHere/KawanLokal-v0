@@ -118,8 +118,8 @@ export default function PaymentScreen() {
               className="flex-row items-center justify-between p-3.5 active:bg-stone-50"
             >
               <View className="flex-row items-center gap-3 flex-1 pr-2">
-                <View className="w-10 h-10 rounded-xl bg-red-50 items-center justify-center shrink-0">
-                  <Ionicons name="qr-code-outline" size={20} color="#991B1B" />
+                <View className="w-10 h-10 rounded-xl bg-blue-50 items-center justify-center shrink-0">
+                  <Ionicons name="qr-code-outline" size={20} color="#1D4ED8" />
                 </View>
                 <View className="flex-1">
                   <Text className="text-sm font-bold text-on-surface">

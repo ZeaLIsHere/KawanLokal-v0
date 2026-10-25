@@ -10,9 +10,9 @@ module.exports = {
       colors: {
         // Truway Travel Design System Colors
         primary: {
-          DEFAULT: "#004ac6",
-          container: "#2563eb",
-          hover: "#1D4ED8",
+          DEFAULT: "#1D4ED8",
+          container: "#2563EB",
+          hover: "#1E40AF",
           light: "#EFF6FF",
           fixed: "#dbe1ff",
         },
@@ -42,11 +42,11 @@ module.exports = {
             text: "#15803D",
           },
         },
-        // Ulos Colors (Existing)
+        // Warna tema utama aplikasi (Biru Danau Toba)
         ulos: {
-          red: "#991B1B",
-          redDark: "#7F1D1D",
-          redLight: "#DC2626",
+          red: "#1D4ED8",
+          redDark: "#1E40AF",
+          redLight: "#3B82F6",
           black: "#1C1917",
           dark: "#0F0E0D",
           charcoal: "#292524",

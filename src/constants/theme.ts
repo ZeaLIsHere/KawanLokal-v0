@@ -1,7 +1,7 @@
 export const ULOS_COLORS = {
-  red: '#991B1B',
-  redDark: '#7F1D1D',
-  redLight: '#DC2626',
+  red: '#1D4ED8', // Warna utama aplikasi (Royal Blue Toba)
+  redDark: '#1E40AF',
+  redLight: '#3B82F6',
   black: '#1C1917',
   dark: '#0F0E0D',
   charcoal: '#292524',
