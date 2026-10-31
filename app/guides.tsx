@@ -184,20 +184,10 @@ export default function GuidesScreen() {
         </View>
 
         {/* Section Title */}
-        <View className="flex-row justify-between items-baseline mb-3.5 px-1">
-          <View>
-            <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant mb-0.5">
-              KOMUNITAS PEMANDU
-            </Text>
-            <Text className="font-raleway text-xl font-medium text-on-surface tracking-wide">
-              Pemandu Berlisensi
-            </Text>
-          </View>
-          <View className="px-2.5 py-1 rounded-full bg-surface-tonal">
-            <Text className="text-[11px] font-dmsans-bold text-on-surface-strong">
-              {filteredGuides.length} Pemandu
-            </Text>
-          </View>
+        <View className="mb-3.5 px-1">
+          <Text className="font-raleway text-xl font-medium text-on-surface tracking-wide">
+            Pemandu Berlisensi
+          </Text>
         </View>
 
         {/* List Kartu Pemandu (DESIGN.md: card glassmorphic) */}
