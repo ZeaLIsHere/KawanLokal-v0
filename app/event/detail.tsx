@@ -134,19 +134,9 @@ export default function EventDetailScreen() {
 
         {/* Makna Sakral & Filosofi Budaya (DESIGN.md: card glassmorphic) */}
         <View className="bg-white/85 rounded-3xl border border-white/90 shadow-sm overflow-hidden mb-5 p-5">
-          <View className="flex-row items-center gap-3 mb-3 pb-3 border-b border-border/50">
-            <View className="w-10 h-10 rounded-2xl bg-blue-50 border border-primary/20 items-center justify-center">
-              <Ionicons name="sparkles" size={18} color="#1D4ED8" />
-            </View>
-            <View>
-              <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-primary">
-                FILOSOFI ADAT
-              </Text>
-              <Text className="font-raleway text-base font-medium text-on-surface tracking-wide mt-0.5">
-                Makna Budaya & Nilai Leluhur
-              </Text>
-            </View>
-          </View>
+          <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide mb-3 pb-2.5 border-b border-border/50">
+            Makna Budaya & Nilai Leluhur
+          </Text>
 
           <Text className="font-dmsans text-xs text-on-surface-variant leading-relaxed">
             {currentEvent.philosophy}
@@ -262,14 +252,14 @@ export default function EventDetailScreen() {
       </ScrollView>
 
       {/* Floating Bottom Action Bar (DESIGN.md: sticky footer bar) */}
-      <View className="absolute bottom-0 left-0 right-0 bg-white/92 px-5 pt-3 pb-6 border-t border-border/50 shadow-lg z-30">
+      <View className="absolute bottom-0 left-0 right-0 bg-white/95 px-5 pt-3 pb-6 border-t border-border/50 shadow-lg z-30">
         <View className="flex-row gap-3">
           <Pressable
             onPress={handleAddToCalendar}
-            className="flex-1 h-13 rounded-full border border-border bg-white items-center justify-center flex-row gap-2 shadow-xs"
+            className="flex-1 h-14 rounded-full border border-border bg-white items-center justify-center flex-row gap-2 shadow-xs"
           >
-            <Ionicons name="calendar-outline" size={17} color="#23201E" />
-            <Text className="text-xs font-dmsans-medium text-on-surface">Ingatkan di HP</Text>
+            <Ionicons name="calendar-outline" size={18} color="#23201E" />
+            <Text className="text-sm font-dmsans-medium text-on-surface">Ingatkan di HP</Text>
           </Pressable>
 
           <Pressable
@@ -286,10 +276,10 @@ export default function EventDetailScreen() {
                 },
               });
             }}
-            className="flex-1 h-13 rounded-full bg-primary items-center justify-center flex-row gap-2 shadow-md"
+            className="flex-1 h-14 rounded-full bg-primary items-center justify-center flex-row gap-2 shadow-md"
           >
-            <Ionicons name="ticket-outline" size={17} color="#FFFFFF" />
-            <Text className="text-xs font-dmsans-bold text-white">
+            <Ionicons name="ticket-outline" size={18} color="#FFFFFF" />
+            <Text className="text-sm font-dmsans-bold text-white">
               {currentEvent.price === 'Gratis' ? 'Daftar Tiket Gratis' : `Pesan • ${currentEvent.price}`}
             </Text>
           </Pressable>
