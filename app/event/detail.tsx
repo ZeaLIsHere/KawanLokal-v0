@@ -50,7 +50,7 @@ export default function EventDetailScreen() {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
     Alert.alert(
       'Kalender HP',
-      `Jadwal ${currentEvent.title} berhasil disinkronkan ke kalender perangkat Anda (Zona WIB).`
+      `Jadwal ${currentEvent.title} berhasil disinkronkan ke kalender perangkat Anda.`
     );
   };
 
@@ -170,7 +170,7 @@ export default function EventDetailScreen() {
             RUNDOWN KEGIATAN
           </Text>
           <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide mb-4">
-            Susunan Prosesi Adat (WIB)
+            Susunan Prosesi Adat
           </Text>
 
           <View className="gap-4">

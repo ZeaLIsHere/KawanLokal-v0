@@ -42,8 +42,8 @@ export const CULTURAL_EVENTS: Record<string, CulturalEventDetail> = {
     day: 2,
     month: 11,
     year: 2026,
-    timeWIB: '10.00 WIB',
-    scheduleText: '3 Hari Festival • 2 - 4 Nov 2026 (WIB)',
+    timeWIB: '10.00',
+    scheduleText: '3 Hari Festival • 2 - 4 Nov 2026',
     summary: 'Parade perahu kayu solu bolon, tarian Tortor kolosal, dan pameran tenun pusaka.',
     philosophy:
       'Pesta Danau Toba merupakan perayaan budaya tahunan terbesar yang menyatukan masyarakat di sekeliling kaldera Toba. Menampilkan atraksi perahu kayu solu bolon, kompetisi renang danau, tarian Tortor massal, serta pameran ulos pusaka turun-temurun sebagai simbol pelestarian alam dan rasa syukur atas kemakmuran kawasan danau.',
@@ -55,19 +55,19 @@ export const CULTURAL_EVENTS: Record<string, CulturalEventDetail> = {
     itinerary: [
       {
         dayLabel: 'Hari 1',
-        time: '10.00 WIB',
+        time: '10.00',
         title: 'Pembukaan Karnaval Perahu Solu Bolon & Gondang Sabangunan',
         description: 'Parade perahu hias solu bolon melintasi perairan Parapat diiringi tabuhan gondang pemersatu 7 kabupaten.',
       },
       {
         dayLabel: 'Hari 2',
-        time: '09.00 WIB',
+        time: '09.00',
         title: 'Lomba Tari Tortor Kreasi Muda & Pameran Ulos Langka',
         description: 'Pagelaran tari budaya antar-sanggar remaja dan pameran tenun ulos ragi hotang pusaka bersejarah.',
       },
       {
         dayLabel: 'Hari 3',
-        time: '15.00 WIB',
+        time: '15.00',
         title: 'Penutupan Pesta Rakyat & Konser Musik Etnik Toba',
         description: 'Malam penganugerahan pemenang lomba perahu dan panggung kolaborasi seniman musik tradisional Batak modern.',
       },
@@ -91,8 +91,8 @@ export const CULTURAL_EVENTS: Record<string, CulturalEventDetail> = {
     day: 15,
     month: 11,
     year: 2026,
-    timeWIB: '09.00 WIB',
-    scheduleText: '3 Hari Prosesi • 15 - 17 Nov 2026 (WIB)',
+    timeWIB: '09.00',
+    scheduleText: '3 Hari Prosesi • 15 - 17 Nov 2026',
     summary: 'Pemindahan tulang belulang leluhur ke tugu keluarga marga. Wajib berbusana sopan.',
     philosophy:
       'Upacara Mangongkal Holi merupakan tradisi sakral pemindahan tulang-belulang leluhur ke tugu keluarga permanen. Bertujuan menyatukan seluruh keturunan marga dalam satu tempat peristirahatan terhormat, sebagai wujud bhakti tertinggi anak-cucu serta pengikat tali persaudaraan dalihan na tolu.',
@@ -104,19 +104,19 @@ export const CULTURAL_EVENTS: Record<string, CulturalEventDetail> = {
     itinerary: [
       {
         dayLabel: 'Hari 1',
-        time: '10.00 WIB',
+        time: '10.00',
         title: 'Penyambutan Marga & Gondang Sabangunan Pembuka',
         description: 'Tarian Tortor pembuka oleh raja huta dan tetua adat marga yang menyambut kedatangan seluruh kerabat.',
       },
       {
         dayLabel: 'Hari 2',
-        time: '09.00 WIB',
+        time: '09.00',
         title: 'Prosesi Penggalian & Pencucian Tulang Belulang Leluhur',
         description: 'Ritual sakral pembersihan tulang leluhur dengan air perasan jeruk purut wangi dan balutan kain kafan putih.',
       },
       {
         dayLabel: 'Hari 3',
-        time: '13.00 WIB',
+        time: '13.00',
         title: 'Penyemayaman ke Tugu Keluarga & Pesta Syukur',
         description: 'Penyemayaman abadi di puncak tugu tugu marga diiringi doa bersama dan jamuan makan adat khas Toba.',
       },
@@ -140,8 +140,8 @@ export const CULTURAL_EVENTS: Record<string, CulturalEventDetail> = {
     day: 20,
     month: 11,
     year: 2026,
-    timeWIB: '14.00 WIB',
-    scheduleText: '2 Hari Acara • 20 - 21 Nov 2026 (WIB)',
+    timeWIB: '14.00',
+    scheduleText: '2 Hari Acara • 20 - 21 Nov 2026',
     summary: 'Ajang tari Tortor kreasi muda-mudi Batak dalam mencari pasangan dan silaturahmi.',
     philosophy:
       'Gondang Naposo adalah media silaturahmi dan perkenalan adat bagi pemuda-pemudi Batak (naposo bulung). Diiringi ritme gondang sabangunan yang dinamis, generasi muda mengekspresikan kesantunan, tari Tortor kreasi, serta menjalin ikatan kekerabatan yang harmonis sesuai falsafah tutur Batak.',
@@ -153,13 +153,13 @@ export const CULTURAL_EVENTS: Record<string, CulturalEventDetail> = {
     itinerary: [
       {
         dayLabel: 'Hari 1',
-        time: '14.00 WIB',
+        time: '14.00',
         title: 'Parade Sanggar Seni Muda & Tabuhan Gondang Pembuka',
         description: 'Pawai kostum adat Batak kontemporer dari 12 sanggar pemuda se-kawasan Danau Toba.',
       },
       {
         dayLabel: 'Hari 2',
-        time: '16.00 WIB',
+        time: '16.00',
         title: 'Malam Puncak Manortor Bersama & Pemilihan Duta Budaya',
         description: 'Atraksi tari Tortor kreasi massal di tepi pantai pasir putih dan penganugerahan Duta Muda Toba.',
       },
@@ -183,8 +183,8 @@ export const CULTURAL_EVENTS: Record<string, CulturalEventDetail> = {
     day: 25,
     month: 11,
     year: 2026,
-    timeWIB: '08.30 WIB',
-    scheduleText: '2 Hari Upacara • 25 - 26 Nov 2026 (WIB)',
+    timeWIB: '08.30',
+    scheduleText: '2 Hari Upacara • 25 - 26 Nov 2026',
     summary: 'Ucapan syukur tahunan penganut Ugamo Malim atas limpahan berkah panen dan kehidupan.',
     philosophy:
       'Ritual Sipaha Lima merupakan upacara syukuran akbar penganut Ugamo Malim (Parmalim) kepada Tuhan Yang Maha Esa (Debata Mulajadi Nabolon). Dilakukan di bulan kelima kalender Batak kuno, upacara ini memanjatkan rasa terima kasih atas panen bumi, kesehatan keluarga, dan ketenteraman semesta.',
@@ -196,13 +196,13 @@ export const CULTURAL_EVENTS: Record<string, CulturalEventDetail> = {
     itinerary: [
       {
         dayLabel: 'Hari 1',
-        time: '08.30 WIB',
+        time: '08.30',
         title: 'Ibadah Pangurason (Penyucian Batin) & Doa Bersama',
         description: 'Ritual penyucian diri dengan air jeruk purut dan doa pembuka keselamatan para penganut.',
       },
       {
         dayLabel: 'Hari 2',
-        time: '09.00 WIB',
+        time: '09.00',
         title: 'Persembahan Syukur & Tarian Tortor Sipitu Cawan',
         description: 'Prosesi persembahan syukur hasil bumi diiringi tarian sakral cawan yang penuh khidmat.',
       },
@@ -226,8 +226,8 @@ export const CULTURAL_EVENTS: Record<string, CulturalEventDetail> = {
     day: 28,
     month: 11,
     year: 2026,
-    timeWIB: '16.00 WIB',
-    scheduleText: '2 Hari Perayaan • 28 - 29 Nov 2026 (WIB)',
+    timeWIB: '16.00',
+    scheduleText: '2 Hari Perayaan • 28 - 29 Nov 2026',
     summary: 'Perayaan panen raya suku Simalungun di bawah sinar bulan purnama yang megah.',
     philosophy:
       'Pesta Rondang Bittang (Terangnya Bintang dan Bulan) adalah tradisi pesta panen raya adat Simalungun. Diselenggarakan saat bulan purnama penuh, pesta ini memadukan rasa syukur keberhasilan panen padi dengan tarian Tortor Sombah, alunan gonrang sipitu-pitu, dan jamuan panganan khas Nitak Simalungun.',
@@ -239,13 +239,13 @@ export const CULTURAL_EVENTS: Record<string, CulturalEventDetail> = {
     itinerary: [
       {
         dayLabel: 'Hari 1',
-        time: '16.00 WIB',
+        time: '16.00',
         title: 'Pembukaan Upacara Gonrang & Jamuan Nitak Simalungun',
         description: 'Pemukulan gong gonrang sipitu-pitu tanda panen dan pembagian kue adat nitak kepada pengunjung.',
       },
       {
         dayLabel: 'Hari 2',
-        time: '19.00 WIB',
+        time: '19.00',
         title: 'Malam Puncak Bulan Purnama & Tortor Kolosal Sombah',
         description: 'Tarian massal di bawah sinar bulan purnama penuh disusul pagelaran seni musik etnik Simalungun.',
       },
