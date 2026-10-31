@@ -17,7 +17,6 @@ export const LOCAL_PHOTOS = {
     require('../../assets/photos/gondang/IMG_2957.JPG'),
     require('../../assets/photos/gondang/IMG_2958.JPG'),
     require('../../assets/photos/gondang/IMG_2959.JPG'),
-    require('../../assets/photos/gondang/IMG_2960(1).JPG'),
     require('../../assets/photos/gondang/IMG_2960.JPG'),
     require('../../assets/photos/gondang/IMG_2961.JPG'),
     require('../../assets/photos/gondang/IMG_2962.JPG'),
