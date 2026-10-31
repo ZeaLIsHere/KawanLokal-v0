@@ -12,6 +12,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
+import { AppIcon } from '@/components/AppIcon';
 import { LOCAL_PHOTOS, PHOTO_COVERS } from '@/constants/localPhotos';
 
 const HERO_IMAGE = PHOTO_COVERS.torTor;
@@ -52,123 +53,129 @@ export default function EventDetailScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-surface-canvas" edges={['top', 'bottom']}>
-      {/* Top Navigation Bar */}
-      <View className="w-full px-4 py-2 flex-row items-center justify-between bg-surface-card border-b border-card-border/60 z-20">
+    <SafeAreaView className="flex-1 bg-surface" edges={['top', 'bottom']}>
+      {/* Top App Bar Glassmorphic (DESIGN.md: top-app-bar + button-icon-glass) */}
+      <View className="w-full px-5 py-3 flex-row items-center justify-between bg-white/75 border-b border-border/50 z-20">
         <Pressable
           accessibilityLabel="Kembali"
           onPress={() => router.back()}
-          className="w-10 h-10 rounded-full items-center justify-center bg-white/80 border border-white/90 shadow-xs"
+          className="w-11 h-11 rounded-full items-center justify-center bg-white/80 border border-white/90 shadow-sm"
         >
-          <Ionicons name="arrow-back" size={24} color="#131b2e" />
+          <AppIcon name="arrow-left" size={20} color="#23201E" />
         </Pressable>
 
         <View className="items-center">
-          <Text className="text-base font-bold text-on-surface tracking-tight">
-            Detail Acara Budaya
+          <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-primary">
+            ACARA BUDAYA
           </Text>
-          <Text className="text-[11px] text-secondary">Kawasan Danau Toba</Text>
+          <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
+            Detail Acara
+          </Text>
         </View>
 
-        <View className="flex-row items-center gap-1">
+        <View className="flex-row items-center gap-2">
           <Pressable
             accessibilityLabel="Simpan acara"
             onPress={handleToggleSave}
-            className="w-9 h-9 rounded-full items-center justify-center bg-white/80 border border-white/90 shadow-xs"
+            className="w-11 h-11 rounded-full items-center justify-center bg-white/80 border border-white/90 shadow-sm"
           >
             <Ionicons
               name={isSaved ? 'bookmark' : 'bookmark-outline'}
-              size={20}
-              color={isSaved ? '#991B1B' : '#131b2e'}
+              size={18}
+              color={isSaved ? '#1D4ED8' : '#23201E'}
             />
           </Pressable>
 
           <Pressable
             accessibilityLabel="Bagikan acara"
             onPress={handleShare}
-            className="w-9 h-9 rounded-full items-center justify-center bg-white/80 border border-white/90 shadow-xs"
+            className="w-11 h-11 rounded-full items-center justify-center bg-white/80 border border-white/90 shadow-sm"
           >
-            <Ionicons name="share-social-outline" size={20} color="#131b2e" />
+            <Ionicons name="share-social-outline" size={18} color="#23201E" />
           </Pressable>
         </View>
       </View>
 
       <ScrollView
-        className="flex-1 px-4 pt-3"
-        contentContainerStyle={{ paddingBottom: 100 }}
+        className="flex-1 px-5 pt-4"
+        contentContainerStyle={{ paddingBottom: 120 }}
         showsVerticalScrollIndicator={false}
       >
-        {/* Hero Destination / Event Card */}
-        <View className="relative w-full h-52 rounded-2xl overflow-hidden shadow-sm border border-card-border mb-4">
+        {/* Hero Destination / Event Card (DESIGN.md: card glassmorphic) */}
+        <View className="relative w-full h-56 rounded-3xl overflow-hidden shadow-sm border border-white/80 mb-5 bg-surface-tonal">
           <Image
             source={HERO_IMAGE}
             className="w-full h-full"
             resizeMode="cover"
           />
-          <View className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/40 to-transparent pointer-events-none" />
+          <View className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent pointer-events-none" />
 
           {/* Bottom Card Content */}
-          <View className="absolute bottom-3 left-4 right-4 z-10">
-            <View className="flex-row items-center gap-1 mb-0.5">
-              <Ionicons name="location-outline" size={14} color="#FECACA" />
-              <Text className="text-xs font-semibold text-red-100">
+          <View className="absolute bottom-4 left-5 right-5 z-10">
+            <View className="flex-row items-center gap-1.5 mb-1">
+              <Ionicons name="location-outline" size={14} color="#FFFFFF" />
+              <Text className="text-xs font-dmsans-medium text-white/90">
                 Desa Adat Tomok, Samosir
               </Text>
             </View>
-            <Text className="text-xl font-bold text-white tracking-tight leading-snug mb-1">
+            <Text className="font-raleway text-2xl font-normal text-white tracking-wide leading-tight mb-1.5">
               Upacara Mangongkal Holi
             </Text>
-            <View className="flex-row items-center gap-1.5">
+            <View className="flex-row items-center gap-2">
               <Ionicons name="calendar-outline" size={14} color="#FFFFFF" />
-              <Text className="text-xs font-medium text-white/90">
-                3 Hari Acara • 15 - 17 Nov 2026 (WIB)
+              <Text className="text-xs font-dmsans text-white/85">
+                3 Hari Prosesi • 15 - 17 Nov 2026 (WIB)
               </Text>
             </View>
           </View>
         </View>
 
-        {/* Makna Sakral & Filosofi Budaya (PRD F2) */}
-        <View className="bg-surface-card rounded-2xl border border-card-border shadow-sm overflow-hidden mb-4 p-4">
-          <View className="flex-row items-center gap-2 mb-2 pb-2 border-b border-card-border">
-            <View className="w-8 h-8 rounded-lg bg-red-50 items-center justify-center">
-              <Ionicons name="sparkles" size={16} color="#991B1B" />
+        {/* Makna Sakral & Filosofi Budaya (DESIGN.md: card glassmorphic) */}
+        <View className="bg-white/85 rounded-3xl border border-white/90 shadow-sm overflow-hidden mb-5 p-5">
+          <View className="flex-row items-center gap-3 mb-3 pb-3 border-b border-border/50">
+            <View className="w-10 h-10 rounded-2xl bg-blue-50 border border-primary/20 items-center justify-center">
+              <Ionicons name="sparkles" size={18} color="#1D4ED8" />
             </View>
             <View>
-              <Text className="text-sm font-bold text-on-surface">Makna Budaya & Filosofi</Text>
-              <Text className="text-[11px] text-secondary">Nilai Leluhur Batak Toba</Text>
+              <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-primary">
+                FILOSOFI ADAT
+              </Text>
+              <Text className="font-raleway text-base font-medium text-on-surface tracking-wide mt-0.5">
+                Makna Budaya & Nilai Leluhur
+              </Text>
             </View>
           </View>
 
-          <Text className="text-xs text-stone-700 leading-relaxed">
-            Upacara Mangongkal Holi merupakan tradisi sakral pemindahan tulang-belulang leluhur ke tugu tugu keluarga permanen. Bertujuan menyatukan seluruh keturunan marga dalam satu tempat peristirahatan terhormat, sebagai wujud bhakti tertinggi anak-cucu serta pengikat tali persaudaraan dalihan na tolu.
+          <Text className="font-dmsans text-xs text-on-surface-variant leading-relaxed">
+            Upacara Mangongkal Holi merupakan tradisi sakral pemindahan tulang-belulang leluhur ke tugu keluarga permanen. Bertujuan menyatukan seluruh keturunan marga dalam satu tempat peristirahatan terhormat, sebagai wujud bhakti tertinggi anak-cucu serta pengikat tali persaudaraan dalihan na tolu.
           </Text>
         </View>
 
-        {/* Etiket & Kesantunan Pengunjung (PRD F2 Non-Negotiable) */}
-        <View className="bg-amber-50/70 border border-amber-200/80 rounded-2xl p-4 shadow-sm mb-4">
-          <View className="flex-row items-center gap-2 mb-2.5">
-            <Ionicons name="shield-checkmark" size={18} color="#B45309" />
-            <Text className="text-xs font-bold text-amber-950 uppercase tracking-wide">
-              Etiket Pengunjung yang Wajib Dipatuhi
+        {/* Etiket & Kesantunan Pengunjung (DESIGN.md: card-tonal) */}
+        <View className="bg-surface-tonal border border-border/70 rounded-3xl p-5 shadow-sm mb-5">
+          <View className="flex-row items-center gap-2.5 mb-3">
+            <Ionicons name="shield-checkmark" size={18} color="#D97706" />
+            <Text className="text-[11px] font-dmsans-bold text-amber-950 uppercase tracking-wider">
+              ETIKET PENGUNJUNG YANG WAJIB DIPATUHI
             </Text>
           </View>
 
-          <View className="gap-2">
-            <View className="flex-row items-start gap-2">
-              <Text className="text-xs font-bold text-amber-800">•</Text>
-              <Text className="text-xs text-amber-900 flex-1 leading-snug">
+          <View className="gap-2.5">
+            <View className="flex-row items-start gap-2.5">
+              <Text className="text-xs font-dmsans-bold text-amber-800">•</Text>
+              <Text className="text-xs font-dmsans text-on-surface-strong flex-1 leading-relaxed">
                 Wajib mengenakan Ulos ragi hotang atau busana sopan menutup bahu dan lutut.
               </Text>
             </View>
-            <View className="flex-row items-start gap-2">
-              <Text className="text-xs font-bold text-amber-800">•</Text>
-              <Text className="text-xs text-amber-900 flex-1 leading-snug">
+            <View className="flex-row items-start gap-2.5">
+              <Text className="text-xs font-dmsans-bold text-amber-800">•</Text>
+              <Text className="text-xs font-dmsans text-on-surface-strong flex-1 leading-relaxed">
                 Dilarang melintas sembarangan di depan tetua adat saat lantunan doa tonggo-tonggo.
               </Text>
             </View>
-            <View className="flex-row items-start gap-2">
-              <Text className="text-xs font-bold text-amber-800">•</Text>
-              <Text className="text-xs text-amber-900 flex-1 leading-snug">
+            <View className="flex-row items-start gap-2.5">
+              <Text className="text-xs font-dmsans-bold text-amber-800">•</Text>
+              <Text className="text-xs font-dmsans text-on-surface-strong flex-1 leading-relaxed">
                 Mintalah izin panitia sebelum mendokumentasikan prosesi pembukaan peti tulang leluhur.
               </Text>
             </View>
@@ -176,56 +183,62 @@ export default function EventDetailScreen() {
         </View>
 
         {/* Urutan Program Acara (Timeline Itinerary) */}
-        <View className="bg-surface-card rounded-2xl border border-card-border p-4 shadow-sm mb-4">
-          <Text className="text-sm font-bold text-on-surface mb-3">
-            Susunan Prosesi Acara (WIB)
+        <View className="bg-white/85 rounded-3xl border border-white/90 p-5 shadow-sm mb-5">
+          <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant mb-1">
+            RUNDOWN KEGIATAN
+          </Text>
+          <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide mb-4">
+            Susunan Prosesi Adat (WIB)
           </Text>
 
-          <View className="gap-3.5">
-            <View className="flex-row items-start gap-3">
+          <View className="gap-4">
+            {/* Hari 1 */}
+            <View className="flex-row items-start gap-3.5">
               <View className="w-16 pt-0.5">
-                <Text className="text-xs font-bold text-ulos-red">Hari 1</Text>
-                <Text className="text-[10px] text-secondary">10.00 WIB</Text>
+                <Text className="text-xs font-dmsans-bold text-primary">Hari 1</Text>
+                <Text className="text-[10px] font-dmsans text-on-surface-variant">10.00 WIB</Text>
               </View>
-              <View className="w-2.5 h-2.5 rounded-full bg-ulos-red mt-1.5" />
-              <View className="flex-1 pb-2 border-b border-stone-100">
-                <Text className="text-xs font-bold text-on-surface">
+              <View className="w-2.5 h-2.5 rounded-full bg-primary mt-1.5" />
+              <View className="flex-1 pb-3 border-b border-border/50">
+                <Text className="font-raleway text-sm font-medium text-on-surface tracking-wide leading-snug">
                   Penyambutan Marga & Gondang Sabangunan
                 </Text>
-                <Text className="text-[11px] text-secondary mt-0.5">
-                  Tarian Tortor pembuka oleh raja huta dan tetua adat.
+                <Text className="text-xs font-dmsans text-on-surface-variant mt-1 leading-relaxed">
+                  Tarian Tortor pembuka oleh raja huta dan tetua adat marga bersangkutan.
                 </Text>
               </View>
             </View>
 
-            <View className="flex-row items-start gap-3">
+            {/* Hari 2 */}
+            <View className="flex-row items-start gap-3.5">
               <View className="w-16 pt-0.5">
-                <Text className="text-xs font-bold text-ulos-red">Hari 2</Text>
-                <Text className="text-[10px] text-secondary">09.00 WIB</Text>
+                <Text className="text-xs font-dmsans-bold text-primary">Hari 2</Text>
+                <Text className="text-[10px] font-dmsans text-on-surface-variant">09.00 WIB</Text>
               </View>
-              <View className="w-2.5 h-2.5 rounded-full bg-ulos-red mt-1.5" />
-              <View className="flex-1 pb-2 border-b border-stone-100">
-                <Text className="text-xs font-bold text-on-surface">
-                  Prosesi Penggalian & Pencucian Tulang Belulang
+              <View className="w-2.5 h-2.5 rounded-full bg-primary mt-1.5" />
+              <View className="flex-1 pb-3 border-b border-border/50">
+                <Text className="font-raleway text-sm font-medium text-on-surface tracking-wide leading-snug">
+                  Penggalian & Pencucian Tulang Leluhur
                 </Text>
-                <Text className="text-[11px] text-secondary mt-0.5">
-                  Ritual sakral pembersihan tulang leluhur dengan air perasan jeruk purut.
+                <Text className="text-xs font-dmsans text-on-surface-variant mt-1 leading-relaxed">
+                  Ritual sakral pembersihan tulang leluhur dengan air perasan jeruk purut wangi.
                 </Text>
               </View>
             </View>
 
-            <View className="flex-row items-start gap-3">
+            {/* Hari 3 */}
+            <View className="flex-row items-start gap-3.5">
               <View className="w-16 pt-0.5">
-                <Text className="text-xs font-bold text-ulos-red">Hari 3</Text>
-                <Text className="text-[10px] text-secondary">13.00 WIB</Text>
+                <Text className="text-xs font-dmsans-bold text-primary">Hari 3</Text>
+                <Text className="text-[10px] font-dmsans text-on-surface-variant">13.00 WIB</Text>
               </View>
-              <View className="w-2.5 h-2.5 rounded-full bg-ulos-red mt-1.5" />
+              <View className="w-2.5 h-2.5 rounded-full bg-primary mt-1.5" />
               <View className="flex-1">
-                <Text className="text-xs font-bold text-on-surface">
+                <Text className="font-raleway text-sm font-medium text-on-surface tracking-wide leading-snug">
                   Penyemayaman ke Tugu & Pesta Syukur
                 </Text>
-                <Text className="text-[11px] text-secondary mt-0.5">
-                  Penyemayaman di tugu keluarga diiringi jamuan makan bersama khas Toba.
+                <Text className="text-xs font-dmsans text-on-surface-variant mt-1 leading-relaxed">
+                  Penyemayaman abadi di tugu keluarga diiringi jamuan makan bersama khas Danau Toba.
                 </Text>
               </View>
             </View>
@@ -233,15 +246,23 @@ export default function EventDetailScreen() {
         </View>
 
         {/* Galeri Dokumentasi Foto Asli */}
-        <View className="mb-4">
-          <Text className="text-base font-bold text-on-surface mb-2.5 px-1">
-            Galeri Dokumentasi Upacara ({EVENT_GALLERY.length} Foto)
-          </Text>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-row">
+        <View className="mb-5">
+          <View className="flex-row justify-between items-baseline mb-3 px-1">
+            <View>
+              <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant mb-0.5">
+                DOKUMENTASI
+              </Text>
+              <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
+                Galeri Lapangan ({EVENT_GALLERY.length} Foto)
+              </Text>
+            </View>
+          </View>
+
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-row -mx-1 px-1">
             {EVENT_GALLERY.map((photo, idx) => (
               <View
                 key={idx}
-                className="w-48 h-32 rounded-2xl overflow-hidden mr-3 bg-stone-100 border border-card-border shadow-sm"
+                className="w-52 h-36 rounded-3xl overflow-hidden mr-3 bg-surface-tonal border border-white/80 shadow-sm"
               >
                 <Image
                   source={photo}
@@ -253,51 +274,50 @@ export default function EventDetailScreen() {
           </ScrollView>
         </View>
 
-        {/* Pemandu Budaya Terkait (PRD F3) */}
-        <View className="bg-surface-card rounded-2xl border border-card-border p-4 shadow-sm mb-4">
+        {/* Pemandu Budaya Terkait (DESIGN.md: card glassmorphic) */}
+        <View className="bg-white/85 rounded-3xl border border-white/90 p-5 shadow-sm mb-4">
           <View className="flex-row items-center justify-between">
-            <View className="flex-row items-center gap-3">
-              <View className="w-11 h-11 rounded-xl bg-blue-50 items-center justify-center">
-                <Ionicons name="people-outline" size={22} color="#004ac6" />
+            <View className="flex-row items-center gap-3.5">
+              <View className="w-12 h-12 rounded-2xl bg-blue-50 border border-primary/20 items-center justify-center">
+                <Ionicons name="people-outline" size={22} color="#1D4ED8" />
               </View>
               <View>
                 <View className="flex-row items-center gap-1">
-                  <Ionicons name="star" size={13} color="#F59E0B" />
-                  <Text className="text-xs font-bold text-on-surface">4.9</Text>
-                  <Text className="text-[10px] text-secondary">(120+ ulasan)</Text>
+                  <Ionicons name="star" size={12} color="#D97706" />
+                  <Text className="text-xs font-dmsans-bold text-amber-700">4.95</Text>
+                  <Text className="text-[10px] font-dmsans text-on-surface-variant">(120+ ulasan)</Text>
                 </View>
-                <Text className="text-sm font-bold text-on-surface mt-0.5">
+                <Text className="font-raleway text-base font-medium text-on-surface leading-tight mt-0.5">
                   Komunitas Pemandu Adat Tomok
                 </Text>
-                <Text className="text-[11px] text-secondary">Pemandu Lokal Berlisensi</Text>
+                <Text className="text-xs font-dmsans text-on-surface-variant mt-0.5">
+                  Pemandu Resmi Berlisensi Samosir
+                </Text>
               </View>
             </View>
           </View>
         </View>
       </ScrollView>
 
-      {/* Fixed Floating Bottom Action Bar */}
-      <View className="absolute bottom-0 left-0 right-0 bg-surface-card/95 backdrop-blur-md px-4 pt-3 pb-6 border-t border-card-border shadow-lg z-30">
-        <View className="flex-row gap-2.5">
+      {/* Floating Bottom Action Bar (DESIGN.md: sticky footer bar) */}
+      <View className="absolute bottom-0 left-0 right-0 bg-white/92 px-5 pt-3 pb-6 border-t border-border/50 shadow-lg z-30">
+        <View className="flex-row gap-3">
           <Pressable
             onPress={handleAddToCalendar}
-            className="flex-1 h-12 rounded-full border border-border bg-white items-center justify-center flex-row gap-1.5 shadow-xs"
+            className="flex-1 h-13 rounded-full border border-border bg-white items-center justify-center flex-row gap-2 shadow-xs"
           >
-            <Ionicons name="calendar-outline" size={16} color="#23201E" />
+            <Ionicons name="calendar-outline" size={17} color="#23201E" />
             <Text className="text-xs font-dmsans-medium text-on-surface">Ingatkan di HP</Text>
           </Pressable>
 
           <Pressable
             onPress={() => router.push('/booking/new')}
-            className="flex-1 h-12 rounded-full bg-primary items-center justify-center flex-row gap-1.5 shadow-md"
+            className="flex-1 h-13 rounded-full bg-primary items-center justify-center flex-row gap-2 shadow-md"
           >
-            <Ionicons name="ticket-outline" size={16} color="#FFFFFF" />
+            <Ionicons name="ticket-outline" size={17} color="#FFFFFF" />
             <Text className="text-xs font-dmsans-bold text-white">Pesan Tiket</Text>
           </Pressable>
         </View>
-
-        {/* iOS Home Indicator */}
-        <View className="w-32 h-1 bg-stone-300 rounded-full mx-auto mt-3" />
       </View>
     </SafeAreaView>
   );
