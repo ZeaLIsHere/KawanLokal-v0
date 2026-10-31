@@ -379,16 +379,6 @@ export default function CalendarScreen() {
                   </Defs>
                   <Rect x="0" y="0" width="100" height="100" fill={`url(#evGrad-${ev.id})`} />
                 </Svg>
-
-                {/* Floating Badge Terverifikasi di atas Foto */}
-                {ev.verified && (
-                  <View className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-white/90 border border-white shadow-xs flex-row items-center gap-1">
-                    <Ionicons name="checkmark-circle" size={13} color="#15803D" />
-                    <Text className="text-[10px] font-dmsans-bold text-emerald-700 tracking-wide">
-                      Terverifikasi
-                    </Text>
-                  </View>
-                )}
               </View>
 
               {/* Konten Detail Acara */}
@@ -572,25 +562,14 @@ export default function CalendarScreen() {
                 {selectedEventModal.summary}
               </Text>
 
-              {/* Info HTM & Status */}
-              <View className="mt-4 pt-3 border-t border-border/50 flex-row items-center justify-between">
-                <View>
-                  <Text className="text-[10px] uppercase tracking-wider font-dmsans-medium text-on-surface-variant">
-                    HTM / Tiket
-                  </Text>
-                  <Text className="text-sm font-dmsans-bold text-primary mt-0.5">
-                    {selectedEventModal.price || 'Gratis'}
-                  </Text>
-                </View>
-
-                {selectedEventModal.verified && (
-                  <View className="px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/60 flex-row items-center gap-1">
-                    <Ionicons name="checkmark-circle" size={13} color="#15803D" />
-                    <Text className="text-[11px] font-dmsans-bold text-emerald-700">
-                      Terverifikasi
-                    </Text>
-                  </View>
-                )}
+              {/* Info HTM */}
+              <View className="mt-4 pt-3 border-t border-border/50">
+                <Text className="text-[10px] uppercase tracking-wider font-dmsans-medium text-on-surface-variant">
+                  HTM / Tiket
+                </Text>
+                <Text className="text-sm font-dmsans-bold text-primary mt-0.5">
+                  {selectedEventModal.price || 'Gratis'}
+                </Text>
               </View>
 
               {/* Tombol Lanjut (button-primary) */}
