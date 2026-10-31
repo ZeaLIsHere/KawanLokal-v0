@@ -6,13 +6,14 @@ import {
   TextInput,
   Pressable,
   Image,
+  ImageSourcePropType,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { AppIcon } from '@/components/AppIcon';
-import { TOBA_IMAGES } from '@/constants/images';
+import { PHOTO_COVERS } from '@/constants/localPhotos';
 
 interface GuideItem {
   id: string;
@@ -24,7 +25,7 @@ interface GuideItem {
   pricePerTrip: string;
   rating: number;
   totalTrips: number;
-  avatar: string;
+  avatar: ImageSourcePropType;
   verified: boolean;
 }
 
@@ -39,7 +40,7 @@ const SEED_GUIDES: GuideItem[] = [
     pricePerTrip: 'Rp 250.000',
     rating: 4.95,
     totalTrips: 184,
-    avatar: TOBA_IMAGES.guideAvatar1,
+    avatar: PHOTO_COVERS.desaTomok,
     verified: true,
   },
   {
@@ -52,7 +53,7 @@ const SEED_GUIDES: GuideItem[] = [
     pricePerTrip: 'Rp 200.000',
     rating: 4.88,
     totalTrips: 92,
-    avatar: TOBA_IMAGES.guideAvatar2,
+    avatar: PHOTO_COVERS.ulos,
     verified: true,
   },
   {
@@ -65,7 +66,7 @@ const SEED_GUIDES: GuideItem[] = [
     pricePerTrip: 'Rp 350.000',
     rating: 5.0,
     totalTrips: 310,
-    avatar: TOBA_IMAGES.guideAvatar3,
+    avatar: PHOTO_COVERS.pusukBuhit,
     verified: true,
   },
   {
@@ -78,7 +79,7 @@ const SEED_GUIDES: GuideItem[] = [
     pricePerTrip: 'Rp 275.000',
     rating: 4.82,
     totalTrips: 118,
-    avatar: TOBA_IMAGES.guideAvatar4,
+    avatar: PHOTO_COVERS.gondang,
     verified: true,
   },
 ];
@@ -186,7 +187,7 @@ export default function GuidesScreen() {
               <View className="flex-row items-start gap-3.5">
                 <View className="relative">
                   <Image
-                    source={{ uri: guide.avatar }}
+                    source={guide.avatar}
                     className="w-16 h-16 rounded-2xl bg-stone-100"
                     resizeMode="cover"
                   />

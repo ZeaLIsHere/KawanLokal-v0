@@ -6,13 +6,14 @@ import {
   TextInput,
   Pressable,
   Image,
+  ImageSourcePropType,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { AppIcon } from '@/components/AppIcon';
-import { TOBA_IMAGES } from '@/constants/images';
+import { PHOTO_COVERS } from '@/constants/localPhotos';
 
 interface WorkshopItem {
   id: string;
@@ -24,7 +25,7 @@ interface WorkshopItem {
   pricePerPerson: string;
   rating: number;
   level: string;
-  image: string;
+  image: ImageSourcePropType;
 }
 
 const SEED_WORKSHOPS: WorkshopItem[] = [
@@ -38,7 +39,7 @@ const SEED_WORKSHOPS: WorkshopItem[] = [
     pricePerPerson: 'Rp 150.000',
     rating: 4.92,
     level: 'Pemula',
-    image: TOBA_IMAGES.ulosWeaving,
+    image: PHOTO_COVERS.ulos,
   },
   {
     id: 'w-2',
@@ -50,7 +51,7 @@ const SEED_WORKSHOPS: WorkshopItem[] = [
     pricePerPerson: 'Rp 175.000',
     rating: 4.88,
     level: 'Semua Tingkat',
-    image: TOBA_IMAGES.batakWoodCarving,
+    image: PHOTO_COVERS.gorga,
   },
   {
     id: 'w-3',
@@ -62,7 +63,7 @@ const SEED_WORKSHOPS: WorkshopItem[] = [
     pricePerPerson: 'Rp 125.000',
     rating: 4.85,
     level: 'Pecinta Kuliner',
-    image: TOBA_IMAGES.tobaCulinary,
+    image: PHOTO_COVERS.tobaCulinary,
   },
   {
     id: 'w-4',
@@ -74,7 +75,7 @@ const SEED_WORKSHOPS: WorkshopItem[] = [
     pricePerPerson: 'Rp 135.000',
     rating: 4.95,
     level: 'Pemula',
-    image: TOBA_IMAGES.gondangMusic,
+    image: PHOTO_COVERS.gondang,
   },
 ];
 
@@ -180,7 +181,7 @@ export default function WorkshopsScreen() {
             >
               <View className="relative w-full h-40 bg-stone-100">
                 <Image
-                  source={{ uri: ws.image }}
+                  source={ws.image}
                   className="w-full h-full"
                   resizeMode="cover"
                 />

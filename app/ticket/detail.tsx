@@ -13,9 +13,9 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { AppIcon } from '@/components/AppIcon';
-import { TOBA_IMAGES } from '@/constants/images';
+import { PHOTO_COVERS } from '@/constants/localPhotos';
 
-const HERO_IMAGE = TOBA_IMAGES.lakeTobaParapat;
+const HERO_IMAGE = PHOTO_COVERS.parapat;
 
 export default function TicketDetailScreen() {
   const router = useRouter();
@@ -73,7 +73,7 @@ export default function TicketDetailScreen() {
         {/* Hero Image Banner */}
         <View className="relative w-full h-[142px] rounded-2xl overflow-hidden shadow-sm border border-card-border mb-4">
           <Image
-            source={{ uri: HERO_IMAGE }}
+            source={HERO_IMAGE}
             className="w-full h-full"
             resizeMode="cover"
           />

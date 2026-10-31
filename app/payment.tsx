@@ -12,7 +12,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { AppIcon } from '@/components/AppIcon';
-import { TOBA_IMAGES } from '@/constants/images';
+import { PHOTO_COVERS } from '@/constants/localPhotos';
 
 type PaymentMethod = 'qris' | 'va' | 'card';
 
@@ -76,9 +76,7 @@ export default function PaymentScreen() {
             <View className="flex-row items-center gap-3.5 flex-1 pr-2">
               <View className="w-14 h-14 rounded-xl overflow-hidden shrink-0 bg-stone-100 border border-card-border">
                 <Image
-                  source={{
-                    uri: TOBA_IMAGES.lakeTobaParapat,
-                  }}
+                  source={PHOTO_COVERS.parapat}
                   className="w-full h-full"
                   resizeMode="cover"
                 />

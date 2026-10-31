@@ -5,13 +5,14 @@ import {
   ScrollView,
   Pressable,
   Image,
+  ImageSourcePropType,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { AppIcon } from '@/components/AppIcon';
-import { TOBA_IMAGES } from '@/constants/images';
+import { PHOTO_COVERS } from '@/constants/localPhotos';
 
 interface TripOrder {
   id: string;
@@ -23,7 +24,7 @@ interface TripOrder {
   status: 'upcoming' | 'completed' | 'cancelled';
   statusLabel: string;
   statusBadgeVariant: 'emerald' | 'amber' | 'slate' | 'rose';
-  image: string;
+  image: ImageSourcePropType;
   price: string;
 }
 
@@ -38,7 +39,7 @@ const TRIP_ORDERS: TripOrder[] = [
     status: 'upcoming',
     statusLabel: 'Lunas / Tiket Siap',
     statusBadgeVariant: 'emerald',
-    image: TOBA_IMAGES.lakeTobaParapat,
+    image: PHOTO_COVERS.parapat,
     price: 'Rp 100.000',
   },
   {
@@ -51,7 +52,7 @@ const TRIP_ORDERS: TripOrder[] = [
     status: 'upcoming',
     statusLabel: 'Menunggu Verifikasi',
     statusBadgeVariant: 'amber',
-    image: TOBA_IMAGES.kingSidabutarTomb,
+    image: PHOTO_COVERS.desaTomok,
     price: 'Rp 150.000',
   },
   {
@@ -64,7 +65,7 @@ const TRIP_ORDERS: TripOrder[] = [
     status: 'completed',
     statusLabel: 'Kegiatan Selesai',
     statusBadgeVariant: 'slate',
-    image: TOBA_IMAGES.ulosWeaving,
+    image: PHOTO_COVERS.ulos,
     price: 'Rp 300.000',
   },
 ];
@@ -176,7 +177,7 @@ export default function OrdersScreen() {
               {/* 96x96 Photo Thumbnail */}
               <View className="w-24 h-24 rounded-xl overflow-hidden bg-stone-100 shrink-0">
                 <Image
-                  source={{ uri: order.image }}
+                  source={order.image}
                   className="w-full h-full"
                   resizeMode="cover"
                 />

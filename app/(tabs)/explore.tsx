@@ -1,13 +1,24 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, Pressable, Image } from 'react-native';
+import { View, Text, ScrollView, Pressable, Image, ImageSourcePropType } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { TOBA_DISTRICTS } from '@/constants/theme';
 import { AppIcon } from '@/components/AppIcon';
-import { TOBA_IMAGES } from '@/constants/images';
+import { PHOTO_COVERS } from '@/constants/localPhotos';
 
-const SERVICES_DATA = [
+const SERVICES_DATA: {
+  id: string;
+  type: string;
+  typeLabel: string;
+  title: string;
+  district: string;
+  price: string;
+  unit: string;
+  image: ImageSourcePropType;
+  rating: number;
+  provider: string;
+}[] = [
   {
     id: 's1',
     type: 'workshop',
@@ -16,7 +27,7 @@ const SERVICES_DATA = [
     district: 'Samosir',
     price: 'Rp 150.000',
     unit: '/ orang',
-    image: TOBA_IMAGES.ulosWeaving,
+    image: PHOTO_COVERS.ulos,
     rating: 4.9,
     provider: 'Sanggar Tenun Lumban Suhi-Suhi',
   },
@@ -28,7 +39,7 @@ const SERVICES_DATA = [
     district: 'Samosir',
     price: 'Rp 250.000',
     unit: '/ grup',
-    image: TOBA_IMAGES.kingSidabutarTomb,
+    image: PHOTO_COVERS.desaTomok,
     rating: 4.8,
     provider: 'Komunitas Pemandu Tomok',
   },
@@ -40,7 +51,7 @@ const SERVICES_DATA = [
     district: 'Toba',
     price: 'Rp 350.000',
     unit: '/ malam',
-    image: TOBA_IMAGES.rumahBolonTraditional,
+    image: PHOTO_COVERS.homestaySopo,
     rating: 4.7,
     provider: 'Homestay Raja Lumban',
   },
@@ -52,7 +63,7 @@ const SERVICES_DATA = [
     district: 'Simalungun',
     price: 'Rp 75.000',
     unit: '/ tiket',
-    image: TOBA_IMAGES.gondangMusic,
+    image: PHOTO_COVERS.gondang,
     rating: 4.9,
     provider: 'Panitia Pesta Danau Toba',
   },
@@ -111,7 +122,7 @@ export default function ExploreScreen() {
           >
             <View className="relative w-full h-44 bg-stone-100">
               <Image
-                source={{ uri: service.image }}
+                source={service.image}
                 className="w-full h-full"
                 resizeMode="cover"
               />

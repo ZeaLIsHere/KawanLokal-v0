@@ -6,12 +6,13 @@ import {
   TextInput,
   Pressable,
   Image,
+  ImageSourcePropType,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
-import { TOBA_IMAGES } from '@/constants/images';
+import { LOCAL_PHOTOS, PHOTO_COVERS } from '@/constants/localPhotos';
 
 interface HomestayItem {
   id: string;
@@ -20,7 +21,7 @@ interface HomestayItem {
   district: string;
   rating: number;
   priceFormatted: string;
-  image: string;
+  image: ImageSourcePropType;
 }
 
 const FEATURED_HOMESTAY: HomestayItem = {
@@ -30,7 +31,7 @@ const FEATURED_HOMESTAY: HomestayItem = {
   district: 'Tuktuk',
   rating: 4.9,
   priceFormatted: 'Rp 350.000',
-  image: TOBA_IMAGES.rumahBolonTraditional,
+  image: PHOTO_COVERS.homestaySopo,
 };
 
 const RECOMMENDED_HOMESTAYS: HomestayItem[] = [
@@ -41,7 +42,7 @@ const RECOMMENDED_HOMESTAYS: HomestayItem[] = [
     district: 'Balige',
     rating: 4.8,
     priceFormatted: 'Rp 275.000',
-    image: TOBA_IMAGES.sopoBolonToba,
+    image: LOCAL_PHOTOS.homestaySopo[1] || PHOTO_COVERS.homestaySopo,
   },
   {
     id: 'h2',
@@ -50,7 +51,7 @@ const RECOMMENDED_HOMESTAYS: HomestayItem[] = [
     district: 'Parapat',
     rating: 4.7,
     priceFormatted: 'Rp 420.000',
-    image: TOBA_IMAGES.lakeTobaParapat,
+    image: PHOTO_COVERS.parapat,
   },
   {
     id: 'h3',
@@ -59,7 +60,7 @@ const RECOMMENDED_HOMESTAYS: HomestayItem[] = [
     district: 'Silalahi',
     rating: 4.6,
     priceFormatted: 'Rp 220.000',
-    image: TOBA_IMAGES.taoSilalahi,
+    image: PHOTO_COVERS.taoSilalahi,
   },
   {
     id: 'h4',
@@ -68,7 +69,7 @@ const RECOMMENDED_HOMESTAYS: HomestayItem[] = [
     district: 'Samosir',
     rating: 4.9,
     priceFormatted: 'Rp 310.000',
-    image: TOBA_IMAGES.tomokVillage,
+    image: PHOTO_COVERS.kampungSuhisuhi,
   },
 ];
 
@@ -186,7 +187,7 @@ export default function HomestaysScreen() {
             className="relative w-full h-56 rounded-2xl overflow-hidden shadow-sm border border-card-border active:opacity-90"
           >
             <Image
-              source={{ uri: FEATURED_HOMESTAY.image }}
+              source={FEATURED_HOMESTAY.image}
               className="w-full h-full"
               resizeMode="cover"
             />
@@ -260,7 +261,7 @@ export default function HomestaysScreen() {
                 {/* Thumbnail Image 80x80 */}
                 <View className="w-20 h-20 rounded-xl overflow-hidden bg-stone-100 shrink-0">
                   <Image
-                    source={{ uri: item.image }}
+                    source={item.image}
                     className="w-full h-full"
                     resizeMode="cover"
                   />

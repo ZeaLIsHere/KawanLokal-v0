@@ -12,9 +12,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
-import { TOBA_IMAGES } from '@/constants/images';
+import { LOCAL_PHOTOS, PHOTO_COVERS } from '@/constants/localPhotos';
 
-const HERO_IMAGE = TOBA_IMAGES.mangongkalHoliRitual;
+const HERO_IMAGE = PHOTO_COVERS.torTor;
+const EVENT_GALLERY = [...LOCAL_PHOTOS.torTor, ...LOCAL_PHOTOS.desaTomok.slice(0, 4)];
 
 export default function EventDetailScreen() {
   const router = useRouter();
@@ -100,7 +101,7 @@ export default function EventDetailScreen() {
         {/* Hero Destination / Event Card */}
         <View className="relative w-full h-52 rounded-2xl overflow-hidden shadow-sm border border-card-border mb-4">
           <Image
-            source={{ uri: HERO_IMAGE }}
+            source={HERO_IMAGE}
             className="w-full h-full"
             resizeMode="cover"
           />
@@ -243,6 +244,27 @@ export default function EventDetailScreen() {
               </View>
             </View>
           </View>
+        </View>
+
+        {/* Galeri Dokumentasi Foto Asli */}
+        <View className="mb-4">
+          <Text className="text-base font-bold text-on-surface mb-2.5 px-1">
+            Galeri Dokumentasi Upacara ({EVENT_GALLERY.length} Foto)
+          </Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-row">
+            {EVENT_GALLERY.map((photo, idx) => (
+              <View
+                key={idx}
+                className="w-48 h-32 rounded-2xl overflow-hidden mr-3 bg-stone-100 border border-card-border shadow-sm"
+              >
+                <Image
+                  source={photo}
+                  className="w-full h-full"
+                  resizeMode="cover"
+                />
+              </View>
+            ))}
+          </ScrollView>
         </View>
 
         {/* Pemandu Budaya Terkait (PRD F3) */}

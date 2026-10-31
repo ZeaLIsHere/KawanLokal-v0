@@ -14,13 +14,13 @@ import * as Haptics from 'expo-haptics';
 import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AppIcon } from '@/components/AppIcon';
-import { TOBA_IMAGES } from '@/constants/images';
+import { PHOTO_COVERS } from '@/constants/localPhotos';
 
 const STORAGE_AVATAR_KEY = '@user_profile_avatar';
 
 export default function ProfileScreen() {
   const router = useRouter();
-  const [avatarUri, setAvatarUri] = useState<string>(TOBA_IMAGES.defaultAvatar);
+  const [avatarUri, setAvatarUri] = useState<string>('');
 
   useEffect(() => {
     // Memuat foto profil tersimpan
@@ -122,7 +122,7 @@ export default function ProfileScreen() {
             <View className="relative mb-2.5">
               <View className="w-24 h-24 rounded-full p-1 bg-surface-card shadow-lg ring-4 ring-white/30">
                 <Image
-                  source={{ uri: avatarUri }}
+                  source={avatarUri ? { uri: avatarUri } : PHOTO_COVERS.desaTomok}
                   className="w-full h-full rounded-full"
                   resizeMode="cover"
                 />

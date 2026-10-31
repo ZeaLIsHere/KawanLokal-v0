@@ -14,7 +14,7 @@ import * as Haptics from 'expo-haptics';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AppIcon } from '@/components/AppIcon';
 import { SvgIconName } from '@/constants/svgIcons';
-import { TOBA_IMAGES } from '@/constants/images';
+import { PHOTO_COVERS } from '@/constants/localPhotos';
 
 const STORAGE_AVATAR_KEY = '@user_profile_avatar';
 
@@ -30,7 +30,7 @@ export default function HomeScreen() {
   const router = useRouter();
   const [activeCategory, setActiveCategory] = useState<string>('event_ticket');
   const [favorites, setFavorites] = useState<Record<string, boolean>>({});
-  const [avatarUri, setAvatarUri] = useState<string>(TOBA_IMAGES.defaultAvatar);
+  const [avatarUri, setAvatarUri] = useState<string>('');
 
   useEffect(() => {
     AsyncStorage.getItem(STORAGE_AVATAR_KEY)
@@ -97,7 +97,7 @@ export default function HomeScreen() {
           className="relative w-10 h-10 rounded-full border border-card-border p-0.5 active:opacity-80"
         >
           <Image
-            source={{ uri: avatarUri }}
+            source={avatarUri ? { uri: avatarUri } : PHOTO_COVERS.desaTomok}
             className="w-full h-full rounded-full"
             resizeMode="cover"
           />
@@ -202,7 +202,7 @@ export default function HomeScreen() {
             >
               <View className="relative w-full aspect-[4/3] bg-stone-100 overflow-hidden">
                 <Image
-                  source={{ uri: TOBA_IMAGES.lakeTobaParapat }}
+                  source={PHOTO_COVERS.parapat}
                   className="w-full h-full"
                   resizeMode="cover"
                 />
@@ -247,7 +247,7 @@ export default function HomeScreen() {
             >
               <View className="relative w-full aspect-[4/3] bg-stone-100 overflow-hidden">
                 <Image
-                  source={{ uri: TOBA_IMAGES.mangongkalHoliRitual }}
+                  source={PHOTO_COVERS.desaTomok}
                   className="w-full h-full"
                   resizeMode="cover"
                 />

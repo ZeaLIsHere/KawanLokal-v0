@@ -6,13 +6,14 @@ import {
   TextInput,
   Pressable,
   Image,
+  ImageSourcePropType,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { AppIcon } from '@/components/AppIcon';
-import { TOBA_IMAGES } from '@/constants/images';
+import { PHOTO_COVERS } from '@/constants/localPhotos';
 
 interface EventTicketItem {
   id: string;
@@ -23,7 +24,7 @@ interface EventTicketItem {
   dateWIB: string;
   price: string;
   quotaLeft: number;
-  image: string;
+  image: ImageSourcePropType;
   rating: number;
 }
 
@@ -37,7 +38,7 @@ const SEED_TICKETS: EventTicketItem[] = [
     dateWIB: '2 Nov 2026 • 10.00 WIB',
     price: 'Rp 50.000',
     quotaLeft: 120,
-    image: TOBA_IMAGES.lakeTobaParapat,
+    image: PHOTO_COVERS.parapat,
     rating: 4.9,
   },
   {
@@ -49,7 +50,7 @@ const SEED_TICKETS: EventTicketItem[] = [
     dateWIB: '8 Nov 2026 • 19.30 WIB',
     price: 'Rp 75.000',
     quotaLeft: 45,
-    image: TOBA_IMAGES.gondangMusic,
+    image: PHOTO_COVERS.gondang,
     rating: 4.8,
   },
   {
@@ -61,7 +62,7 @@ const SEED_TICKETS: EventTicketItem[] = [
     dateWIB: '15 Nov 2026 • 09.00 WIB',
     price: 'Rp 100.000',
     quotaLeft: 20,
-    image: TOBA_IMAGES.mangongkalHoliRitual,
+    image: PHOTO_COVERS.desaTomok,
     rating: 4.95,
   },
   {
@@ -73,7 +74,7 @@ const SEED_TICKETS: EventTicketItem[] = [
     dateWIB: '22 Nov 2026 • 11.00 WIB',
     price: 'Rp 40.000',
     quotaLeft: 85,
-    image: TOBA_IMAGES.tobaCulinary,
+    image: PHOTO_COVERS.tobaCulinary,
     rating: 4.7,
   },
 ];
@@ -186,7 +187,7 @@ export default function TicketsScreen() {
             >
               <View className="relative w-full h-40 bg-stone-100">
                 <Image
-                  source={{ uri: ticket.image }}
+                  source={ticket.image}
                   className="w-full h-full"
                   resizeMode="cover"
                 />

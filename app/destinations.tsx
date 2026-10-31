@@ -6,13 +6,14 @@ import {
   TextInput,
   Pressable,
   Image,
+  ImageSourcePropType,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { AppIcon } from '@/components/AppIcon';
-import { TOBA_IMAGES } from '@/constants/images';
+import { PHOTO_COVERS } from '@/constants/localPhotos';
 
 interface DestinationItem {
   id: string;
@@ -20,7 +21,7 @@ interface DestinationItem {
   district: string;
   category: string;
   rating: number;
-  image: string;
+  image: ImageSourcePropType;
 }
 
 const DESTINATIONS: DestinationItem[] = [
@@ -30,7 +31,7 @@ const DESTINATIONS: DestinationItem[] = [
     district: 'Samosir',
     category: 'Situs Sakral',
     rating: 4.9,
-    image: TOBA_IMAGES.pusukBuhit,
+    image: PHOTO_COVERS.pusukBuhit,
   },
   {
     id: 'd2',
@@ -38,7 +39,7 @@ const DESTINATIONS: DestinationItem[] = [
     district: 'Samosir',
     category: 'Sejarah & Seni',
     rating: 4.8,
-    image: TOBA_IMAGES.tomokVillage,
+    image: PHOTO_COVERS.desaTomok,
   },
   {
     id: 'd3',
@@ -46,7 +47,7 @@ const DESTINATIONS: DestinationItem[] = [
     district: 'Simalungun',
     category: 'Festival & Wisata',
     rating: 4.7,
-    image: TOBA_IMAGES.lakeTobaParapat,
+    image: PHOTO_COVERS.parapat,
   },
   {
     id: 'd4',
@@ -54,7 +55,7 @@ const DESTINATIONS: DestinationItem[] = [
     district: 'Karo',
     category: 'Panorama Alam',
     rating: 4.9,
-    image: TOBA_IMAGES.sipisopisoWaterfall,
+    image: PHOTO_COVERS.sipisoPiso,
   },
   {
     id: 'd5',
@@ -62,7 +63,7 @@ const DESTINATIONS: DestinationItem[] = [
     district: 'Tapanuli Utara',
     category: 'Teras Pandang',
     rating: 4.8,
-    image: TOBA_IMAGES.hutaGinjangMuara,
+    image: PHOTO_COVERS.hutaGinjang,
   },
   {
     id: 'd6',
@@ -70,7 +71,7 @@ const DESTINATIONS: DestinationItem[] = [
     district: 'Humbang Hasundutan',
     category: 'Kerajaan Adat',
     rating: 4.8,
-    image: TOBA_IMAGES.bakkaraValley,
+    image: PHOTO_COVERS.lembahBakkara,
   },
   {
     id: 'd7',
@@ -78,7 +79,7 @@ const DESTINATIONS: DestinationItem[] = [
     district: 'Dairi',
     category: 'Tepian & Konservasi',
     rating: 4.7,
-    image: TOBA_IMAGES.taoSilalahi,
+    image: PHOTO_COVERS.taoSilalahi,
   },
   {
     id: 'd8',
@@ -86,7 +87,7 @@ const DESTINATIONS: DestinationItem[] = [
     district: 'Samosir',
     category: 'Pusat Ulos',
     rating: 4.9,
-    image: TOBA_IMAGES.ulosWeaving,
+    image: PHOTO_COVERS.kampungSuhisuhi,
   },
 ];
 
@@ -210,7 +211,7 @@ export default function DestinationsScreen() {
               {/* Image with 4:3 aspect ratio */}
               <View className="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-stone-100 mb-2">
                 <Image
-                  source={{ uri: dest.image }}
+                  source={dest.image}
                   className="w-full h-full"
                   resizeMode="cover"
                 />
