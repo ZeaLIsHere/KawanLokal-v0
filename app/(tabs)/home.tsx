@@ -16,6 +16,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AppIcon } from '@/components/AppIcon';
 import { SvgIconName } from '@/constants/svgIcons';
 import { PHOTO_COVERS } from '@/constants/localPhotos';
+import { useTranslation } from '@/i18n';
 
 const STORAGE_AVATAR_KEY = '@user_profile_avatar';
 
@@ -32,6 +33,7 @@ const LOCAL_CATEGORIES: { id: string; label: string; iconName: SvgIconName }[] =
 
 export default function HomeScreen() {
   const router = useRouter();
+  const { t } = useTranslation();
   const [activeCategory, setActiveCategory] = useState<string>('event_ticket');
   const [favorites, setFavorites] = useState<Record<string, boolean>>({});
   const [avatarUri, setAvatarUri] = useState<string>('');
@@ -148,10 +150,10 @@ export default function HomeScreen() {
           {/* Greeting & Header Prompt Toba */}
           <View className="mb-6">
             <Text className="text-[11px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant mb-1">
-              HORAS, KAWAN LOKAL
+              {t('home.greeting')}
             </Text>
             <Text className="font-raleway text-3xl font-normal text-on-surface tracking-wide leading-tight">
-              Jelajahi keagungan{'\n'}budaya Danau Toba
+              {t('home.hero_title')}
             </Text>
           </View>
 
@@ -164,10 +166,10 @@ export default function HomeScreen() {
                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                 router.push('/calendar');
               }}
-              className="h-14 px-7 bg-primary active:bg-blue-800 rounded-full flex-row items-center justify-center gap-2 shadow-md active:opacity-90"
+              className="h-14 px-7 bg-primary rounded-full flex-row items-center justify-center gap-2 shadow-md"
             >
               <Text className="text-white font-dmsans-medium text-sm tracking-wide">
-                Mulai Eksplorasi
+                {t('home.explore_cta')}
               </Text>
               <AppIcon name="arrow-right" size={18} color="#FFFFFF" />
             </Pressable>
@@ -219,15 +221,15 @@ export default function HomeScreen() {
           <View className="flex-row items-end justify-between mb-3.5">
             <View>
               <Text className="font-raleway text-xl font-medium text-on-surface tracking-wide">
-                Acara Budaya Terdekat
+                {t('home.upcoming_title')}
               </Text>
             </View>
             <Pressable
               onPress={() => router.push('/destinations')}
-              className="active:opacity-70 pb-0.5"
+              className="pb-0.5"
             >
               <Text className="text-[11px] uppercase tracking-[0.15em] font-dmsans-bold text-primary">
-                LIHAT SEMUA
+                {t('common.see_all')}
               </Text>
             </Pressable>
           </View>
@@ -407,7 +409,7 @@ export default function HomeScreen() {
           <View className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full bg-white/90 border border-white shadow-xs flex-row items-center gap-1.5">
             <View className="w-2 h-2 rounded-full bg-primary" />
             <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-primary">
-              ACARA TERDEKAT • 2 NOV
+              {t('home.closest_event_tag')}
             </Text>
           </View>
 
@@ -439,7 +441,7 @@ export default function HomeScreen() {
                 className="h-9 px-4 rounded-full bg-white flex-row items-center justify-center gap-1.5 shadow-sm"
               >
                 <Text className="text-xs font-dmsans-bold text-primary tracking-wide">
-                  Lihat Detail
+                  {t('home.closest_event_cta')}
                 </Text>
                 <Ionicons name="arrow-forward" size={13} color="#1D4ED8" />
               </Pressable>

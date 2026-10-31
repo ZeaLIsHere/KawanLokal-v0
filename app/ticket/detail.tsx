@@ -16,9 +16,11 @@ import * as Haptics from 'expo-haptics';
 import { formatRupiah } from '@/lib/format';
 import { AppIcon } from '@/components/AppIcon';
 import { PHOTO_COVERS } from '@/constants/localPhotos';
+import { useTranslation } from '@/i18n';
 
 export default function TicketDetailScreen() {
   const router = useRouter();
+  const { t } = useTranslation();
   const params = useLocalSearchParams<{
     service_type?: string;
     title?: string;
@@ -130,21 +132,21 @@ export default function TicketDetailScreen() {
         <View className="items-center">
           <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-primary">
             {isGuide
-              ? 'BUKTI RESERVASI'
+              ? t('ticket.tag_reservation')
               : isWorkshop
-              ? 'BUKTI KELAS'
+              ? t('ticket.tag_class')
               : isHomestay
-              ? 'BUKTI RESERVASI'
-              : 'BUKTI TIKET'}
+              ? t('ticket.tag_reservation')
+              : t('ticket.tag_ticket')}
           </Text>
           <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
             {isGuide
-              ? 'Voucher Pemandu'
+              ? t('ticket.title_guide')
               : isWorkshop
-              ? 'Voucher Workshop'
+              ? t('ticket.title_workshop')
               : isHomestay
-              ? 'Voucher Homestay'
-              : 'Detail Tiket Acara'}
+              ? t('ticket.title_homestay')
+              : t('ticket.title_ticket')}
           </Text>
         </View>
 
@@ -218,12 +220,12 @@ export default function TicketDetailScreen() {
               </View>
               <Text className="text-[10px] uppercase tracking-wider font-dmsans-bold text-primary mt-1">
                 {isGuide
-                  ? 'Tur Budaya Adat'
+                  ? t('ticket.route_tour')
                   : isWorkshop
-                  ? 'Seni & Kerajinan'
+                  ? t('ticket.route_workshop')
                   : isHomestay
-                  ? 'Sopo Tradisional'
-                  : 'Lintas Danau Toba'}
+                  ? t('ticket.route_homestay')
+                  : t('ticket.route_crossing')}
               </Text>
             </View>
 
@@ -295,12 +297,12 @@ export default function TicketDetailScreen() {
           <View className="w-full pb-3 border-b border-dashed border-border/80 mb-4">
             <Text className="text-[10px] uppercase tracking-wider font-dmsans-medium text-on-surface-variant">
               {isGuide
-                ? 'KODE RESERVASI PEMANDU'
+                ? t('ticket.code_guide')
                 : isWorkshop
-                ? 'KODE PESERTA WORKSHOP'
+                ? t('ticket.code_workshop')
                 : isHomestay
-                ? 'KODE RESERVASI HOMESTAY'
-                : 'KODE TIKET DIGITAL'}
+                ? t('ticket.code_homestay')
+                : t('ticket.code_ticket')}
             </Text>
             <Text className="font-raleway text-base font-semibold text-on-surface mt-0.5">
               {bookingCode}
@@ -314,12 +316,12 @@ export default function TicketDetailScreen() {
 
           <Text className="font-dmsans-medium text-xs text-on-surface text-center">
             {isGuide
-              ? 'Tunjukkan QR atau sebutkan PIN temu kepada pemandu Anda di lokasi kumpul'
+              ? t('ticket.qr_guide')
               : isWorkshop
-              ? 'Tunjukkan kode QR kepada instruktur sanggar saat sesi kelas dimulai'
+              ? t('ticket.qr_workshop')
               : isHomestay
-              ? 'Tunjukkan kode QR kepada pengelola homestay saat proses check-in'
-              : 'Tunjukkan kode QR ini ke panitia di pintu masuk acara'}
+              ? t('ticket.qr_homestay')
+              : t('ticket.qr_ticket')}
           </Text>
           <Text className="text-[11px] font-dmsans text-on-surface-variant text-center mt-1">
             {isHomestay
@@ -337,10 +339,10 @@ export default function TicketDetailScreen() {
                 <Ionicons name="logo-whatsapp" size={17} color="#FFFFFF" />
                 <Text className="text-white font-dmsans-medium text-xs tracking-wide">
                   {isGuide
-                    ? 'Hubungi Pemandu via WhatsApp'
+                    ? t('ticket.contact_wa_guide')
                     : isWorkshop
-                    ? 'Hubungi Pengelola Sanggar via WhatsApp'
-                    : 'Hubungi Pemilik Homestay via WhatsApp'}
+                    ? t('ticket.contact_wa_workshop')
+                    : t('ticket.contact_wa_homestay')}
                 </Text>
               </Pressable>
 
@@ -350,7 +352,7 @@ export default function TicketDetailScreen() {
               >
                 <Ionicons name="call-outline" size={17} color="#23201E" />
                 <Text className="text-on-surface font-dmsans-medium text-xs tracking-wide">
-                  Telepon (+62 812-6421-9901)
+                  {t('ticket.call')} (+62 812-6421-9901)
                 </Text>
               </Pressable>
             </View>
@@ -360,7 +362,7 @@ export default function TicketDetailScreen() {
         {/* Price Breakdown Card */}
         <View className="bg-white/85 rounded-3xl p-5 border border-white/90 shadow-sm mb-4">
           <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant mb-3">
-            RINCIAN PEMBAYARAN
+            {t('ticket.billing_summary')}
           </Text>
           <View className="gap-2.5">
             <View className="flex-row justify-between items-center">
@@ -378,11 +380,11 @@ export default function TicketDetailScreen() {
               </Text>
             </View>
             <View className="flex-row justify-between items-center">
-              <Text className="text-xs font-dmsans text-on-surface-variant">Biaya Layanan & Konservasi</Text>
-              <Text className="text-xs font-dmsans-bold text-emerald-700">Bebas Biaya</Text>
+              <Text className="text-xs font-dmsans text-on-surface-variant">{t('booking.service_fee')}</Text>
+              <Text className="text-xs font-dmsans-bold text-emerald-700">{t('common.free_cost')}</Text>
             </View>
             <View className="pt-2.5 border-t border-border/50 flex-row justify-between items-center">
-              <Text className="font-raleway text-sm font-medium text-on-surface">Total Dibayar</Text>
+              <Text className="font-raleway text-sm font-medium text-on-surface">{t('ticket.total_paid')}</Text>
               <Text className="text-base font-dmsans-bold text-primary">
                 {formatRupiah(totalAmount)}
               </Text>
@@ -399,7 +401,7 @@ export default function TicketDetailScreen() {
         >
           <Ionicons name="download-outline" size={20} color="#FFFFFF" />
           <Text className="text-white font-dmsans-medium text-sm tracking-wide">
-            {isGuide ? 'Simpan Voucher ke Galeri' : 'Simpan Tiket ke Galeri'}
+            {t('ticket.save_to_gallery')}
           </Text>
         </Pressable>
       </View>

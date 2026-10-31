@@ -12,6 +12,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { PHOTO_COVERS } from '@/constants/localPhotos';
+import { useTranslation } from '@/i18n';
 
 interface CatalogServiceItem {
   id: string;
@@ -123,20 +124,29 @@ const FILTER_TABS = ['Semua', 'Tiket Acara', 'Pemandu', 'Workshop', 'Homestay'];
 
 export default function ExploreScreen() {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState<string>('Semua');
+  const { t } = useTranslation();
+  const [activeTab, setActiveTab] = useState<string>('all');
 
-  const handleTabChange = (tab: string) => {
+  const filterTabs = [
+    { key: 'all', label: t('common.all') },
+    { key: 'ticket', label: t('home.cat_tickets') },
+    { key: 'guide', label: t('home.cat_guides') },
+    { key: 'workshop', label: t('home.cat_workshops') },
+    { key: 'homestay', label: t('home.cat_homestays') },
+  ];
+
+  const handleTabChange = (key: string) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
-    setActiveTab(tab);
+    setActiveTab(key);
   };
 
   // Filter layanan interaktif sesuai tab kategori yang dipilih
   const filteredServices = useMemo(() => {
-    if (activeTab === 'Semua') return SERVICES_DATA;
-    if (activeTab === 'Tiket Acara') return SERVICES_DATA.filter((s) => s.type === 'event_ticket');
-    if (activeTab === 'Pemandu') return SERVICES_DATA.filter((s) => s.type === 'guide');
-    if (activeTab === 'Workshop') return SERVICES_DATA.filter((s) => s.type === 'workshop');
-    if (activeTab === 'Homestay') return SERVICES_DATA.filter((s) => s.type === 'homestay');
+    if (activeTab === 'all') return SERVICES_DATA;
+    if (activeTab === 'ticket') return SERVICES_DATA.filter((s) => s.type === 'event_ticket');
+    if (activeTab === 'guide') return SERVICES_DATA.filter((s) => s.type === 'guide');
+    if (activeTab === 'workshop') return SERVICES_DATA.filter((s) => s.type === 'workshop');
+    if (activeTab === 'homestay') return SERVICES_DATA.filter((s) => s.type === 'homestay');
     return SERVICES_DATA;
   }, [activeTab]);
 
@@ -214,25 +224,25 @@ export default function ExploreScreen() {
       {/* Top Header Glassmorphic (DESIGN.md) */}
       <View className="px-5 py-3.5 bg-white/75 border-b border-border/50">
         <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-primary mb-0.5">
-          KATALOG
+          {t('catalog.header_tag')}
         </Text>
         <Text className="font-raleway text-2xl font-medium text-on-surface tracking-wide">
-          Jelajah Pengalaman Lokal
+          {t('catalog.header_title')}
         </Text>
         <Text className="text-xs font-dmsans text-on-surface-variant mt-1 leading-relaxed">
-          Pemandu, workshop ulos, homestay, dan tiket acara Danau Toba
+          {t('catalog.header_desc')}
         </Text>
       </View>
 
       {/* Filter Chips Kategori (DESIGN.md: chip & chip-active) */}
       <View className="bg-surface border-b border-border/40 py-3">
         <ScrollView horizontal showsHorizontalScrollIndicator={false} className="px-5 flex-row">
-          {FILTER_TABS.map((tab) => {
-            const isSelected = activeTab === tab;
+          {filterTabs.map((tab) => {
+            const isSelected = activeTab === tab.key;
             return (
               <Pressable
-                key={tab}
-                onPress={() => handleTabChange(tab)}
+                key={tab.key}
+                onPress={() => handleTabChange(tab.key)}
                 className={`mr-2.5 px-4 h-8 rounded-full items-center justify-center ${
                   isSelected
                     ? 'bg-primary shadow-xs'
@@ -244,7 +254,7 @@ export default function ExploreScreen() {
                     isSelected ? 'text-white' : 'text-on-surface-strong'
                   }`}
                 >
-                  {tab}
+                  {tab.label}
                 </Text>
               </Pressable>
             );
@@ -296,7 +306,7 @@ export default function ExploreScreen() {
                 <View className="mt-4 pt-3 border-t border-border/50 flex-row items-center justify-between">
                   <View>
                     <Text className="text-[10px] uppercase tracking-wider font-dmsans-medium text-on-surface-variant">
-                      Mulai Dari
+                      {t('catalog.from_price')}
                     </Text>
                     <Text className="font-dmsans-bold text-base text-primary mt-0.5">
                       {service.price}{' '}
@@ -310,7 +320,9 @@ export default function ExploreScreen() {
                     onPress={() => handleServicePress(service)}
                     className="h-10 px-5 bg-primary rounded-full flex-row items-center justify-center gap-1.5 shadow-xs"
                   >
-                    <Text className="text-white font-dmsans-medium text-xs tracking-wide">Pesan</Text>
+                    <Text className="text-white font-dmsans-medium text-xs tracking-wide">
+                      {t('common.book')}
+                    </Text>
                     <Ionicons name="arrow-forward" size={13} color="#FFFFFF" />
                   </Pressable>
                 </View>
@@ -324,17 +336,17 @@ export default function ExploreScreen() {
                 <Ionicons name="search-outline" size={26} color="#8A827A" />
               </View>
               <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
-                Tidak Ada Layanan
+                {t('catalog.empty_title')}
               </Text>
               <Text className="font-dmsans text-xs text-on-surface-variant text-center mt-1 max-w-[260px] leading-relaxed">
-                Tidak ada layanan budaya yang cocok dengan kategori yang Anda pilih.
+                {t('catalog.empty_desc')}
               </Text>
               <Pressable
-                onPress={() => setActiveTab('Semua')}
+                onPress={() => setActiveTab('all')}
                 className="mt-4 h-10 px-5 rounded-full bg-white border border-border items-center justify-center shadow-xs"
               >
                 <Text className="text-[11px] uppercase tracking-[0.15em] font-dmsans-bold text-primary">
-                  SEMUA KATEGORI
+                  {t('catalog.all_categories')}
                 </Text>
               </Pressable>
             </View>

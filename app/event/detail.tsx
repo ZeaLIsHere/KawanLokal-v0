@@ -14,9 +14,11 @@ import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { AppIcon } from '@/components/AppIcon';
 import { CULTURAL_EVENTS, DEFAULT_EVENT } from '@/constants/culturalEvents';
+import { useTranslation } from '@/i18n';
 
 export default function EventDetailScreen() {
   const router = useRouter();
+  const { t } = useTranslation();
   const params = useLocalSearchParams<{ id?: string }>();
 
   // Ambil data acara spesifik sesuai ID yang dipilih pengguna
@@ -49,8 +51,8 @@ export default function EventDetailScreen() {
   const handleAddToCalendar = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
     Alert.alert(
-      'Kalender HP',
-      `Jadwal ${currentEvent.title} berhasil disinkronkan ke kalender perangkat Anda.`
+      t('event.remind_phone'),
+      t('event.sync_success')
     );
   };
 
@@ -68,10 +70,10 @@ export default function EventDetailScreen() {
 
         <View className="items-center">
           <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-primary">
-            ACARA BUDAYA
+            {t('event.header_tag')}
           </Text>
           <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
-            Detail Acara
+            {t('event.header_title')}
           </Text>
         </View>
 
@@ -135,7 +137,7 @@ export default function EventDetailScreen() {
         {/* Makna Sakral & Filosofi Budaya (DESIGN.md: card glassmorphic) */}
         <View className="bg-white/85 rounded-3xl border border-white/90 shadow-sm overflow-hidden mb-5 p-5">
           <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide mb-3 pb-2.5 border-b border-border/50">
-            Makna Budaya & Nilai Leluhur
+            {t('event.philosophy_title')}
           </Text>
 
           <Text className="font-dmsans text-xs text-on-surface-variant leading-relaxed">
@@ -148,7 +150,7 @@ export default function EventDetailScreen() {
           <View className="flex-row items-center gap-2.5 mb-3">
             <Ionicons name="shield-checkmark" size={18} color="#D97706" />
             <Text className="text-[11px] font-dmsans-bold text-amber-950 uppercase tracking-wider">
-              ETIKET PENGUNJUNG YANG WAJIB DIPATUHI
+              {t('event.etiquette_title')}
             </Text>
           </View>
 
@@ -167,7 +169,7 @@ export default function EventDetailScreen() {
         {/* Urutan Program Acara (Timeline Itinerary) */}
         <View className="bg-white/85 rounded-3xl border border-white/90 p-5 shadow-sm mb-5">
           <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide mb-4">
-            Susunan Prosesi Adat
+            {t('event.itinerary_title')}
           </Text>
 
           <View className="gap-4">
@@ -201,7 +203,7 @@ export default function EventDetailScreen() {
                 DOKUMENTASI
               </Text>
               <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
-                Galeri Lapangan ({currentEvent.gallery.length} Foto)
+                {t('event.gallery_title')} ({currentEvent.gallery.length} Foto)
               </Text>
             </View>
           </View>
@@ -255,7 +257,7 @@ export default function EventDetailScreen() {
             className="flex-1 h-14 rounded-full border border-border bg-white items-center justify-center flex-row gap-2 shadow-xs"
           >
             <Ionicons name="calendar-outline" size={18} color="#23201E" />
-            <Text className="text-sm font-dmsans-medium text-on-surface">Ingatkan di HP</Text>
+            <Text className="text-sm font-dmsans-medium text-on-surface">{t('event.remind_phone')}</Text>
           </Pressable>
 
           <Pressable
@@ -279,7 +281,9 @@ export default function EventDetailScreen() {
           >
             <Ionicons name="ticket-outline" size={18} color="#FFFFFF" />
             <Text className="text-sm font-dmsans-bold text-white">
-              {currentEvent.price === 'Gratis' ? 'Daftar Tiket Gratis' : `Pesan • ${currentEvent.price}`}
+              {currentEvent.price === 'Gratis'
+                ? t('event.register_free')
+                : `${t('common.book')} • ${currentEvent.price}`}
             </Text>
           </Pressable>
         </View>

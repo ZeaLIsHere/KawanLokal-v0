@@ -15,11 +15,13 @@ import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AppIcon } from '@/components/AppIcon';
 import { PHOTO_COVERS } from '@/constants/localPhotos';
+import { useTranslation } from '@/i18n';
 
 const STORAGE_AVATAR_KEY = '@user_profile_avatar';
 
 export default function ProfileScreen() {
   const router = useRouter();
+  const { t } = useTranslation();
   const [avatarUri, setAvatarUri] = useState<string>('');
 
   useEffect(() => {
@@ -66,12 +68,12 @@ export default function ProfileScreen() {
   const handleLogout = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
     Alert.alert(
-      'Keluar Akun',
-      'Apakah Anda yakin ingin keluar dari akun KawanLokal?',
+      t('profile.logout_title'),
+      t('profile.logout_desc'),
       [
-        { text: 'Batal', style: 'cancel' },
+        { text: t('common.cancel'), style: 'cancel' },
         {
-          text: 'Keluar',
+          text: t('common.logout'),
           style: 'destructive',
           onPress: () => {
             router.replace('/onboarding');
@@ -105,7 +107,7 @@ export default function ProfileScreen() {
             </Pressable>
 
             <Text className="font-raleway text-lg font-medium text-white tracking-wide">
-              Profil Wisatawan
+              {t('profile.header_title')}
             </Text>
 
             <Pressable
@@ -137,14 +139,14 @@ export default function ProfileScreen() {
             </View>
 
             <Text className="font-raleway text-2xl font-medium text-white tracking-wide">
-              Wisatawan KawanLokal
+              {t('profile.user_title')}
             </Text>
             <Text className="text-xs text-blue-100 mt-0.5 font-dmsans">
               wisatawan@kawanlokal.id
             </Text>
             <View className="mt-2.5 px-3.5 py-1 rounded-full bg-white/20 border border-white/25">
               <Text className="text-[10px] font-dmsans-bold text-white uppercase tracking-wider">
-                Wisatawan Terverifikasi
+                {t('profile.verified_tourist')}
               </Text>
             </View>
           </View>
@@ -167,7 +169,7 @@ export default function ProfileScreen() {
                   4
                 </Text>
                 <Text className="text-[11px] font-dmsans text-on-surface-variant mt-1.5 font-medium">
-                  Acara Diikuti
+                  {t('profile.events_joined')}
                 </Text>
               </Pressable>
 
@@ -183,7 +185,7 @@ export default function ProfileScreen() {
                   8
                 </Text>
                 <Text className="text-[11px] font-dmsans text-on-surface-variant mt-1.5 font-medium">
-                  Tersimpan
+                  {t('profile.saved_items')}
                 </Text>
               </Pressable>
 
@@ -199,7 +201,7 @@ export default function ProfileScreen() {
                   7
                 </Text>
                 <Text className="text-[11px] font-dmsans text-on-surface-variant mt-1.5 font-medium">
-                  Kabupaten
+                  {t('profile.districts_count')}
                 </Text>
               </Pressable>
             </View>
@@ -217,7 +219,7 @@ export default function ProfileScreen() {
                   <AppIcon name="ticket" size={18} color="#1D4ED8" />
                 </View>
                 <Text className="text-sm font-dmsans-medium text-on-surface">
-                  Pesanan & Tiket Digital
+                  {t('profile.menu_orders')}
                 </Text>
               </View>
               <Ionicons name="chevron-forward" size={18} color="#8A827A" />
@@ -233,7 +235,7 @@ export default function ProfileScreen() {
                   <AppIcon name="calendar" size={18} color="#1D4ED8" />
                 </View>
                 <Text className="text-sm font-dmsans-medium text-on-surface">
-                  Kalender Budaya Toba
+                  {t('profile.menu_calendar')}
                 </Text>
               </View>
               <Ionicons name="chevron-forward" size={18} color="#8A827A" />
@@ -249,7 +251,7 @@ export default function ProfileScreen() {
                   <AppIcon name="map" size={18} color="#23201E" />
                 </View>
                 <Text className="text-sm font-dmsans-medium text-on-surface">
-                  Destinasi Budaya Sekitar Toba
+                  {t('profile.menu_destinations')}
                 </Text>
               </View>
               <Ionicons name="chevron-forward" size={18} color="#8A827A" />
@@ -265,7 +267,7 @@ export default function ProfileScreen() {
                   <AppIcon name="hotel" size={18} color="#23201E" />
                 </View>
                 <Text className="text-sm font-dmsans-medium text-on-surface">
-                  Homestay & Sopo Bolon
+                  {t('profile.menu_homestays')}
                 </Text>
               </View>
               <Ionicons name="chevron-forward" size={18} color="#8A827A" />
@@ -281,7 +283,7 @@ export default function ProfileScreen() {
                   <Ionicons name="settings-outline" size={18} color="#23201E" />
                 </View>
                 <Text className="text-sm font-dmsans-medium text-on-surface">
-                  Pengaturan, Peran & Bahasa
+                  {t('profile.menu_settings')}
                 </Text>
               </View>
               <Ionicons name="chevron-forward" size={18} color="#8A827A" />
@@ -296,7 +298,7 @@ export default function ProfileScreen() {
             >
               <Ionicons name="log-out-outline" size={18} color="#8C4A4A" />
               <Text className="text-xs font-dmsans-bold text-destructive uppercase tracking-wider">
-                Keluar Akun
+                {t('common.logout')}
               </Text>
             </Pressable>
           </View>

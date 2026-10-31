@@ -14,6 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { AppIcon } from '@/components/AppIcon';
 import { PHOTO_COVERS } from '@/constants/localPhotos';
+import { useTranslation } from '@/i18n';
 
 interface GuideItem {
   id: string;
@@ -113,6 +114,7 @@ const FILTER_DISTRICTS = ['Semua', 'Samosir', 'Simalungun', 'Toba', 'Humbang'];
 
 export default function GuidesScreen() {
   const router = useRouter();
+  const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedDistrict, setSelectedDistrict] = useState('Semua');
 
@@ -142,7 +144,7 @@ export default function GuidesScreen() {
 
         <View className="items-center">
           <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
-            Pemandu Budaya
+            {t('guides.header_title')}
           </Text>
         </View>
 
@@ -162,7 +164,7 @@ export default function GuidesScreen() {
             <TextInput
               value={searchQuery}
               onChangeText={setSearchQuery}
-              placeholder="Cari nama, keahlian adat, lokasi..."
+              placeholder={t('guides.search_placeholder')}
               placeholderTextColor="#8A827A"
               className="flex-1 ml-2.5 text-xs font-dmsans text-on-surface h-full"
             />
@@ -208,7 +210,7 @@ export default function GuidesScreen() {
         {/* Section Title */}
         <View className="mb-3.5 px-1">
           <Text className="font-raleway text-xl font-medium text-on-surface tracking-wide">
-            Pemandu Berlisensi
+            {t('guides.section_title')}
           </Text>
         </View>
 
@@ -268,7 +270,7 @@ export default function GuidesScreen() {
               <View className="mt-4 pt-3 border-t border-border/50 flex-row items-center justify-between">
                 <View>
                   <Text className="text-[10px] uppercase tracking-wider font-dmsans-medium text-on-surface-variant">
-                    Tarif / Tur Rombongan
+                    {t('guides.fare_label')}
                   </Text>
                   <Text className="text-sm font-dmsans-bold text-primary mt-0.5">
                     {guide.pricePerTrip}
@@ -295,7 +297,9 @@ export default function GuidesScreen() {
                   className="h-9 px-5 bg-primary rounded-full flex-row items-center justify-center gap-1.5 shadow-xs"
                 >
                   <Ionicons name="person-outline" size={13} color="#FFFFFF" />
-                  <Text className="text-white font-dmsans-medium text-xs tracking-wide">Pesan</Text>
+                  <Text className="text-white font-dmsans-medium text-xs tracking-wide">
+                    {t('guides.book_button')}
+                  </Text>
                 </Pressable>
               </View>
             </View>
@@ -308,10 +312,10 @@ export default function GuidesScreen() {
                 <Ionicons name="search-outline" size={26} color="#8A827A" />
               </View>
               <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
-                Tidak Ada Pemandu
+                {t('guides.empty_title')}
               </Text>
               <Text className="font-dmsans text-xs text-on-surface-variant text-center mt-1 max-w-[260px] leading-relaxed">
-                Tidak ada pemandu yang cocok dengan kata kunci atau wilayah yang Anda pilih.
+                {t('guides.empty_desc')}
               </Text>
               <Pressable
                 onPress={() => {
@@ -321,7 +325,7 @@ export default function GuidesScreen() {
                 className="mt-4 h-10 px-5 rounded-full bg-white border border-border items-center justify-center shadow-xs"
               >
                 <Text className="text-[11px] uppercase tracking-[0.15em] font-dmsans-bold text-primary">
-                  RESET PENCARIAN
+                  {t('common.reset_search')}
                 </Text>
               </Pressable>
             </View>

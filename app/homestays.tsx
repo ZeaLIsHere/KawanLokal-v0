@@ -14,6 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { AppIcon } from '@/components/AppIcon';
 import { LOCAL_PHOTOS, PHOTO_COVERS } from '@/constants/localPhotos';
+import { useTranslation } from '@/i18n';
 
 interface HomestayItem {
   id: string;
@@ -78,6 +79,7 @@ const LOCATION_CHIPS = ['Semua', 'Tuktuk', 'Samosir', 'Parapat', 'Balige', 'Sila
 
 export default function HomestaysScreen() {
   const router = useRouter();
+  const { t } = useTranslation();
   const [selectedLocation, setSelectedLocation] = useState('Semua');
   const [searchQuery, setSearchQuery] = useState('');
   const [isFeaturedFavorite, setIsFeaturedFavorite] = useState(false);
@@ -112,7 +114,7 @@ export default function HomestaysScreen() {
 
         <View className="items-center">
           <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
-            Homestay & Penginapan
+            {t('homestays.header_title')}
           </Text>
         </View>
 
@@ -139,7 +141,7 @@ export default function HomestaysScreen() {
             <TextInput
               value={searchQuery}
               onChangeText={setSearchQuery}
-              placeholder="Cari homestay, sopo bolon, desa..."
+              placeholder={t('homestays.search_placeholder')}
               placeholderTextColor="#8A827A"
               className="flex-1 ml-2.5 text-xs font-dmsans text-on-surface h-full"
             />
@@ -212,7 +214,7 @@ export default function HomestaysScreen() {
             <View className="absolute top-3.5 inset-x-3.5 flex-row items-center justify-between z-10">
               <View className="px-3 py-1 rounded-full bg-white/90 border border-white shadow-xs">
                 <Text className="text-[10px] uppercase tracking-wider font-dmsans-bold text-primary">
-                  PROPERTI PILIHAN
+                  {t('homestays.featured_badge')}
                 </Text>
               </View>
 
@@ -257,7 +259,7 @@ export default function HomestaysScreen() {
           {/* Section Header */}
           <View className="mb-3.5 px-1">
             <Text className="font-raleway text-xl font-medium text-on-surface tracking-wide">
-              Penginapan Rekomendasi
+              {t('homestays.recommended_title')}
             </Text>
           </View>
 
@@ -333,10 +335,10 @@ export default function HomestaysScreen() {
                   <Ionicons name="bed-outline" size={26} color="#8A827A" />
                 </View>
                 <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
-                  Tidak Ada Penginapan
+                  {t('homestays.empty_title')}
                 </Text>
                 <Text className="text-xs font-dmsans text-on-surface-variant text-center mt-1 max-w-[260px] leading-relaxed">
-                  Tidak ada homestay atau sopo bolon yang cocok dengan lokasi atau kata kunci ini.
+                  {t('homestays.empty_desc')}
                 </Text>
                 <Pressable
                   onPress={() => {
@@ -346,7 +348,7 @@ export default function HomestaysScreen() {
                   className="mt-4 h-10 px-5 rounded-full bg-white border border-border items-center justify-center shadow-xs"
                 >
                   <Text className="text-[11px] uppercase tracking-[0.15em] font-dmsans-bold text-primary">
-                    RESET PENCARIAN
+                    {t('common.reset_search')}
                   </Text>
                 </Pressable>
               </View>

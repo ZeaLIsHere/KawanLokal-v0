@@ -14,9 +14,11 @@ import * as Haptics from 'expo-haptics';
 import { formatRupiah } from '@/lib/format';
 import { AppIcon } from '@/components/AppIcon';
 import { PHOTO_COVERS } from '@/constants/localPhotos';
+import { useTranslation } from '@/i18n';
 
 export default function GuideBookingScreen() {
   const router = useRouter();
+  const { t } = useTranslation();
   const params = useLocalSearchParams<{
     guide_id?: string;
     guide_name?: string;
@@ -105,7 +107,7 @@ export default function GuideBookingScreen() {
 
         <View className="items-center">
           <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
-            Reservasi Pemandu
+            {t('booking.guide_title')}
           </Text>
         </View>
 
@@ -138,7 +140,7 @@ export default function GuideBookingScreen() {
             </View>
             <View className="flex-1">
               <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-on-surface-variant">
-                Pemandu Terpilih
+                {t('booking.field_guide')}
               </Text>
               <Text
                 numberOfLines={1}
@@ -156,7 +158,7 @@ export default function GuideBookingScreen() {
             </View>
             <View className="flex-1">
               <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-on-surface-variant">
-                Titik Kumpul Temu
+                {t('booking.field_meeting_point')}
               </Text>
               <Text
                 numberOfLines={1}
@@ -174,7 +176,7 @@ export default function GuideBookingScreen() {
             </View>
             <View className="flex-1">
               <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-on-surface-variant">
-                Jadwal Pertemuan
+                {t('booking.field_schedule')}
               </Text>
               <Text
                 numberOfLines={1}
@@ -193,7 +195,7 @@ export default function GuideBookingScreen() {
               </View>
               <View>
                 <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-on-surface-variant">
-                  Kapasitas Rombongan
+                  {t('booking.field_capacity_guide')}
                 </Text>
                 <Text className="font-raleway text-base font-medium text-on-surface tracking-wide mt-0.5">
                   {groupSize} Orang (Maks. 10 org/trip)
@@ -279,11 +281,11 @@ export default function GuideBookingScreen() {
         {/* Ringkasan Estimasi Biaya Glassmorphic */}
         <View className="bg-white/80 rounded-3xl border border-white/80 p-5 mb-5 shadow-sm">
           <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant mb-3">
-            RINCIAN ESTIMASI BIAYA
+            {t('booking.billing_title')}
           </Text>
           <View className="flex-row justify-between items-center pb-2.5 border-b border-border/50">
             <Text className="text-xs font-dmsans text-on-surface-variant">
-              Tarif Tur Rombongan ({groupSize} org)
+              {t('booking.base_guide')}
             </Text>
             <Text className="text-xs font-dmsans-medium text-on-surface">
               {formatRupiah(tripPrice)}
@@ -305,12 +307,12 @@ export default function GuideBookingScreen() {
           )}
 
           <View className="flex-row justify-between items-center py-2.5 border-b border-border/50">
-            <Text className="text-xs font-dmsans text-on-surface-variant">Biaya Layanan Konservasi</Text>
-            <Text className="text-xs font-dmsans-bold text-emerald-700">Bebas Biaya</Text>
+            <Text className="text-xs font-dmsans text-on-surface-variant">{t('booking.service_fee')}</Text>
+            <Text className="text-xs font-dmsans-bold text-emerald-700">{t('common.free_cost')}</Text>
           </View>
 
           <View className="flex-row justify-between items-center pt-3">
-            <Text className="font-raleway text-base font-medium text-on-surface">Total Biaya</Text>
+            <Text className="font-raleway text-base font-medium text-on-surface">{t('booking.total_cost')}</Text>
             <View className="flex-row items-baseline gap-2">
               {isPromoActive && (
                 <Text className="text-xs line-through text-on-surface-variant">
@@ -331,7 +333,7 @@ export default function GuideBookingScreen() {
         >
           <Ionicons name="card-outline" size={18} color="#FFFFFF" />
           <Text className="text-white font-dmsans-medium text-base tracking-wide">
-            Lanjut ke Pembayaran • {formatRupiah(finalPrice)}
+            {t('booking.proceed_payment')} • {formatRupiah(finalPrice)}
           </Text>
         </Pressable>
 
@@ -347,13 +349,13 @@ export default function GuideBookingScreen() {
 
           <View className="flex-1 pl-3.5 justify-center">
             <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-primary">
-              GARANSI LOKAL
+              {t('booking.guarantee_guide')}
             </Text>
             <Text className="font-raleway text-base font-medium text-on-surface leading-tight mt-0.5">
               Pemandu Resmi Berlisensi
             </Text>
             <Text className="text-[11px] font-dmsans text-on-surface-variant mt-0.5">
-              Didampingi langsung oleh warga asli pelaku adat Danau Toba.
+              {t('booking.guarantee_guide_desc')}
             </Text>
           </View>
         </View>

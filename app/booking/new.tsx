@@ -14,9 +14,11 @@ import * as Haptics from 'expo-haptics';
 import { formatRupiah } from '@/lib/format';
 import { AppIcon } from '@/components/AppIcon';
 import { PHOTO_COVERS } from '@/constants/localPhotos';
+import { useTranslation } from '@/i18n';
 
 export default function NewBookingScreen() {
   const router = useRouter();
+  const { t } = useTranslation();
   const params = useLocalSearchParams<{
     service_type?: string;
     event_id?: string;
@@ -122,7 +124,7 @@ export default function NewBookingScreen() {
 
         <View className="items-center">
           <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
-            {isWorkshop ? 'Pesan Workshop Seni' : isHomestay ? 'Reservasi Homestay' : 'Pesan Tiket Acara'}
+            {isWorkshop ? t('booking.workshop_title') : isHomestay ? t('booking.homestay_title') : t('booking.ticket_title')}
           </Text>
         </View>
 
@@ -159,7 +161,7 @@ export default function NewBookingScreen() {
             </View>
             <View className="flex-1">
               <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-on-surface-variant">
-                {isWorkshop ? 'Workshop Terpilih' : isHomestay ? 'Penginapan Terpilih' : 'Acara Terpilih'}
+                {isWorkshop ? t('booking.field_workshop') : isHomestay ? t('booking.field_homestay') : t('booking.field_event')}
               </Text>
               <Text
                 numberOfLines={1}
@@ -177,7 +179,7 @@ export default function NewBookingScreen() {
             </View>
             <View className="flex-1">
               <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-on-surface-variant">
-                {isWorkshop ? 'Lokasi Studio / Sanggar' : isHomestay ? 'Lokasi Penginapan' : 'Lokasi Acara'}
+                {isWorkshop ? t('booking.field_studio') : isHomestay ? t('booking.field_stay_loc') : t('booking.field_location')}
               </Text>
               <Text
                 numberOfLines={1}
@@ -195,7 +197,7 @@ export default function NewBookingScreen() {
             </View>
             <View className="flex-1">
               <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-on-surface-variant">
-                {isWorkshop ? 'Jadwal Sesi Praktik' : isHomestay ? 'Jadwal Menginap' : 'Jadwal Kegiatan'}
+                {isWorkshop ? t('booking.field_schedule') : isHomestay ? t('booking.field_stay_schedule') : t('booking.field_schedule')}
               </Text>
               <Text
                 numberOfLines={1}
@@ -214,12 +216,12 @@ export default function NewBookingScreen() {
               </View>
               <View>
                 <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-on-surface-variant">
-                  {isWorkshop ? 'Jumlah Peserta Kelas' : isHomestay ? 'Durasi Menginap' : 'Jumlah Tiket'}
+                  {isWorkshop ? t('booking.field_capacity_workshop') : isHomestay ? t('booking.field_capacity_homestay') : t('booking.field_capacity_ticket')}
                 </Text>
                 <Text className="font-raleway text-base font-medium text-on-surface tracking-wide mt-0.5">
                   {isHomestay
                     ? `${participantCount} Malam (${formatRupiah(ticketPrice)}/malam)`
-                    : `${participantCount} Peserta (${ticketPrice === 0 ? 'Gratis' : `${formatRupiah(ticketPrice)}/org`})`}
+                    : `${participantCount} Peserta (${ticketPrice === 0 ? t('common.free') : `${formatRupiah(ticketPrice)}/org`})`}
                 </Text>
               </View>
             </View>
@@ -302,18 +304,18 @@ export default function NewBookingScreen() {
         {/* Ringkasan Estimasi Biaya Glassmorphic */}
         <View className="bg-white/80 rounded-3xl border border-white/80 p-5 mb-5 shadow-sm">
           <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant mb-3">
-            RINCIAN ESTIMASI BIAYA
+            {t('booking.billing_title')}
           </Text>
           <View className="flex-row justify-between items-center pb-2.5 border-b border-border/50">
             <Text className="text-xs font-dmsans text-on-surface-variant">
               {isWorkshop
-                ? `Biaya Kelas Workshop (${participantCount}x)`
+                ? `${t('booking.base_workshop')} (${participantCount}x)`
                 : isHomestay
-                ? `Tarif Menginap (${participantCount} Malam)`
-                : `Tiket Masuk Acara (${participantCount}x)`}
+                ? `${t('booking.base_homestay')} (${participantCount} Malam)`
+                : `${t('booking.base_ticket')} (${participantCount}x)`}
             </Text>
             <Text className="text-xs font-dmsans-medium text-on-surface">
-              {ticketPrice === 0 ? 'Gratis' : formatRupiah(baseTotal)}
+              {ticketPrice === 0 ? t('common.free') : formatRupiah(baseTotal)}
             </Text>
           </View>
 
@@ -332,12 +334,12 @@ export default function NewBookingScreen() {
           )}
 
           <View className="flex-row justify-between items-center py-2.5 border-b border-border/50">
-            <Text className="text-xs font-dmsans text-on-surface-variant">Biaya Layanan & Konservasi</Text>
-            <Text className="text-xs font-dmsans-bold text-emerald-700">Bebas Biaya</Text>
+            <Text className="text-xs font-dmsans text-on-surface-variant">{t('booking.service_fee')}</Text>
+            <Text className="text-xs font-dmsans-bold text-emerald-700">{t('common.free_cost')}</Text>
           </View>
 
           <View className="flex-row justify-between items-center pt-3">
-            <Text className="font-raleway text-base font-medium text-on-surface">Total Biaya</Text>
+            <Text className="font-raleway text-base font-medium text-on-surface">{t('booking.total_cost')}</Text>
             <View className="flex-row items-baseline gap-2">
               {isPromoActive && (
                 <Text className="text-xs line-through text-on-surface-variant">
@@ -345,7 +347,7 @@ export default function NewBookingScreen() {
                 </Text>
               )}
               <Text className={`font-dmsans-bold text-lg ${isPromoActive ? 'text-emerald-700' : 'text-primary'}`}>
-                {ticketPrice === 0 ? 'Gratis' : formatRupiah(totalPrice)}
+                {ticketPrice === 0 ? t('common.free') : formatRupiah(totalPrice)}
               </Text>
             </View>
           </View>
@@ -358,7 +360,7 @@ export default function NewBookingScreen() {
         >
           <Ionicons name="card-outline" size={18} color="#FFFFFF" />
           <Text className="text-white font-dmsans-medium text-base tracking-wide">
-            Lanjut ke Pembayaran • {ticketPrice === 0 ? 'Gratis' : formatRupiah(totalPrice)}
+            {t('booking.proceed_payment')} • {ticketPrice === 0 ? t('common.free') : formatRupiah(totalPrice)}
           </Text>
         </Pressable>
 
@@ -375,10 +377,10 @@ export default function NewBookingScreen() {
           <View className="flex-1 pl-3.5 justify-center">
             <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-primary">
               {isWorkshop
-                ? 'WORKSHOP RESMI TERVERIFIKASI'
+                ? t('booking.guarantee_workshop')
                 : isHomestay
-                ? 'HOMESTAY RESMI TERVERIFIKASI'
-                : 'TIKET RESMI TERVERIFIKASI'}
+                ? t('booking.guarantee_homestay')
+                : t('booking.guarantee_ticket')}
             </Text>
             <Text className="font-raleway text-base font-medium text-on-surface leading-tight mt-0.5">
               {isWorkshop
@@ -389,10 +391,10 @@ export default function NewBookingScreen() {
             </Text>
             <Text className="text-[11px] font-dmsans text-on-surface-variant mt-0.5">
               {isWorkshop
-                ? 'Kelas dipandu langsung oleh maestro tenun/gorga berlisensi.'
+                ? t('booking.guarantee_workshop_desc')
                 : isHomestay
-                ? 'Sopo Bolon adat dan homestay terverifikasi siap huni.'
-                : 'Tiket digital resmi KawanLokal dijamin kuotanya langsung oleh panitia acara.'}
+                ? t('booking.guarantee_homestay_desc')
+                : t('booking.guarantee_ticket_desc')}
             </Text>
           </View>
         </View>

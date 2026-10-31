@@ -16,6 +16,7 @@ import Svg, { Defs, LinearGradient, Stop, Rect } from 'react-native-svg';
 import { TOBA_DISTRICTS } from '@/constants/theme';
 import { AppIcon } from '@/components/AppIcon';
 import { PHOTO_COVERS } from '@/constants/localPhotos';
+import { useTranslation } from '@/i18n';
 
 interface CalendarEvent {
   id: string;
@@ -105,6 +106,7 @@ const CALENDAR_DAYS = Array.from({ length: 30 }, (_, i) => i + 1);
 
 export default function CalendarScreen() {
   const router = useRouter();
+  const { t } = useTranslation();
   const [viewMode, setViewMode] = useState<'month' | 'list'>('month');
   const [selectedDistrict, setSelectedDistrict] = useState<string>('Semua');
   const [selectedEventModal, setSelectedEventModal] = useState<CalendarEvent | null>(null);
@@ -153,10 +155,10 @@ export default function CalendarScreen() {
 
         <View className="items-center">
           <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-primary">
-            KALENDER BUDAYA
+            {t('calendar.header_tag')}
           </Text>
           <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
-            Danau Toba
+            {t('calendar.header_title')}
           </Text>
         </View>
 
@@ -211,7 +213,7 @@ export default function CalendarScreen() {
                 selectedDistrict === 'Semua' ? 'text-white' : 'text-on-surface-strong'
               }`}
             >
-              Semua Wilayah
+              {t('common.all_districts')}
             </Text>
           </Pressable>
 
@@ -304,15 +306,15 @@ export default function CalendarScreen() {
         <View className="flex-row justify-between items-baseline mb-4 px-1">
           <View>
             <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant mb-0.5">
-              JADWAL RESMI
+              {t('calendar.schedule_tag')}
             </Text>
             <Text className="font-raleway text-xl font-medium text-on-surface tracking-wide">
-              Daftar Acara Terverifikasi
+              {t('calendar.events_title')}
             </Text>
           </View>
           <View className="px-2.5 py-1 rounded-full bg-surface-tonal">
             <Text className="text-[11px] font-dmsans-bold text-on-surface-strong">
-              {filteredEvents.length} Acara
+              {filteredEvents.length} {t('calendar.events_count')}
             </Text>
           </View>
         </View>
@@ -399,10 +401,10 @@ export default function CalendarScreen() {
                 <View className="mt-3.5 pt-3 border-t border-border/50 flex-row items-center justify-between">
                   <View>
                     <Text className="text-[10px] uppercase tracking-wider font-dmsans-medium text-on-surface-variant">
-                      HTM / Tiket
+                      {t('calendar.htm_label')}
                     </Text>
                     <Text className="text-xs font-dmsans-bold text-primary mt-0.5">
-                      {ev.price || 'Gratis'}
+                      {ev.price || t('common.free')}
                     </Text>
                   </View>
 
@@ -411,7 +413,7 @@ export default function CalendarScreen() {
                     className="h-9 px-4 bg-primary rounded-full flex-row items-center justify-center gap-1.5 shadow-xs"
                   >
                     <Text className="text-white font-dmsans-medium text-xs tracking-wide">
-                      Lanjut
+                      {t('calendar.action_continue')}
                     </Text>
                     <Ionicons name="arrow-forward" size={13} color="#FFFFFF" />
                   </Pressable>
@@ -427,10 +429,10 @@ export default function CalendarScreen() {
                 <Ionicons name="calendar-outline" size={26} color="#8A827A" />
               </View>
               <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
-                Tidak Ada Acara Ditemukan
+                {t('calendar.empty_title')}
               </Text>
               <Text className="font-dmsans text-xs text-on-surface-variant text-center mt-1 max-w-[260px] leading-relaxed">
-                Belum ada jadwal acara adat atau festival pada filter tanggal dan wilayah yang Anda pilih.
+                {t('calendar.empty_desc')}
               </Text>
               <Pressable
                 onPress={() => {
@@ -439,7 +441,7 @@ export default function CalendarScreen() {
                 className="mt-4 h-10 px-5 rounded-full bg-white border border-border items-center justify-center shadow-xs"
               >
                 <Text className="text-[11px] uppercase tracking-[0.15em] font-dmsans-bold text-primary">
-                  RESET FILTER
+                  {t('common.reset_filter')}
                 </Text>
               </Pressable>
             </View>
@@ -543,10 +545,10 @@ export default function CalendarScreen() {
               <View className="mt-4 pt-3 border-t border-border/50 flex-row items-center justify-between">
                 <View>
                   <Text className="text-[10px] uppercase tracking-wider font-dmsans-medium text-on-surface-variant">
-                    HTM / Tiket
+                    {t('calendar.htm_label')}
                   </Text>
                   <Text className="text-sm font-dmsans-bold text-primary mt-0.5">
-                    {selectedEventModal.price || 'Gratis'}
+                    {selectedEventModal.price || t('common.free')}
                   </Text>
                 </View>
 
@@ -560,7 +562,7 @@ export default function CalendarScreen() {
                   className="h-10 px-5 bg-primary rounded-full flex-row items-center justify-center gap-1.5 shadow-md"
                 >
                   <Text className="text-white font-dmsans-medium text-xs tracking-wide">
-                    Lanjut
+                    {t('calendar.action_continue')}
                   </Text>
                   <Ionicons name="arrow-forward" size={14} color="#FFFFFF" />
                 </Pressable>

@@ -15,11 +15,13 @@ import { formatRupiah } from '@/lib/format';
 import { createOrder } from '@/lib/ordersStorage';
 import { AppIcon } from '@/components/AppIcon';
 import { PHOTO_COVERS } from '@/constants/localPhotos';
+import { useTranslation } from '@/i18n';
 
 type PaymentMethod = 'qris' | 'va' | 'card';
 
 export default function PaymentScreen() {
   const router = useRouter();
+  const { t } = useTranslation();
   const params = useLocalSearchParams<{
     service_type?: string;
     title?: string;
@@ -97,7 +99,7 @@ export default function PaymentScreen() {
       : 'Buka Tiket Saya';
 
     Alert.alert(
-      'Pembayaran Berhasil',
+      t('payment.success_title'),
       successMessage,
       [
         {
@@ -133,10 +135,10 @@ export default function PaymentScreen() {
 
         <View className="items-center">
           <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant">
-            CHECKOUT
+            {t('payment.header_tag')}
           </Text>
           <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
-            Pembayaran Digital
+            {t('payment.header_title')}
           </Text>
         </View>
 
@@ -151,7 +153,7 @@ export default function PaymentScreen() {
         {/* Booking Summary Section */}
         <View className="mb-5">
           <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant mb-2">
-            RINGKASAN PESANAN
+            {t('payment.summary_tag')}
           </Text>
 
           {/* Summary Card Glassmorphic */}
@@ -197,7 +199,7 @@ export default function PaymentScreen() {
         {/* Payment Method Section (PRD F5) */}
         <View className="mb-5">
           <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant mb-2">
-            METODE PEMBAYARAN
+            {t('payment.method_title')}
           </Text>
 
           {/* Options Card List */}
@@ -293,10 +295,10 @@ export default function PaymentScreen() {
           </View>
           <View className="flex-1">
             <Text className="text-[11px] font-dmsans-bold uppercase tracking-wider text-emerald-950">
-              JAMINAN TRANSAKSI TERLINDUNGI
+              {t('payment.security_title')}
             </Text>
             <Text className="text-[11px] font-dmsans text-on-surface-variant mt-1 leading-relaxed">
-              Pembayaran diproses melalui payment gateway resmi berlisensi Bank Indonesia. Tiket digital dibuat secara instan dan kuota terjamin atomik.
+              {t('payment.security_desc')}
             </Text>
           </View>
         </View>
@@ -311,7 +313,7 @@ export default function PaymentScreen() {
         >
           <AppIcon name="wallet" size={20} color="#FFFFFF" />
           <Text className="text-white font-dmsans-medium text-base tracking-wide">
-            Bayar {formatRupiah(totalAmount)}
+            {t('payment.pay_button')} {formatRupiah(totalAmount)}
           </Text>
         </Pressable>
 
@@ -319,7 +321,7 @@ export default function PaymentScreen() {
         <View className="flex-row items-center justify-center gap-1.5 pt-1">
           <Ionicons name="shield-outline" size={13} color="#8A827A" />
           <Text className="text-[11px] font-dmsans text-on-surface-variant text-center">
-            Pembayaran dienkripsi aman 256-bit SSL.
+            {t('payment.ssl_notice')}
           </Text>
         </View>
 

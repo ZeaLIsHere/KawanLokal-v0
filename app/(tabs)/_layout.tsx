@@ -1,8 +1,10 @@
 import { View, Platform, Pressable } from 'react-native';
 import { Tabs } from 'expo-router';
 import { AppIcon } from '@/components/AppIcon';
+import { useTranslation } from '@/i18n';
 
 export default function TabLayout() {
+  const { t } = useTranslation();
   return (
     <Tabs
       screenOptions={{
@@ -54,7 +56,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="home"
         options={{
-          title: 'Beranda',
+          title: t('nav.home'),
           tabBarIcon: ({ focused, color }) => (
             <View className="items-center justify-center relative">
               <AppIcon name="home" size={24} color={color} />
@@ -68,7 +70,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="explore"
         options={{
-          title: 'Jelajah',
+          title: t('nav.explore'),
           tabBarIcon: ({ focused, color }) => (
             <View className="items-center justify-center relative">
               <AppIcon name="map" size={24} color={color} />
@@ -82,7 +84,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="orders"
         options={{
-          title: 'Pesanan',
+          title: t('nav.orders'),
           tabBarIcon: ({ focused, color }) => (
             <View className="items-center justify-center relative">
               <AppIcon name="ticket" size={24} color={color} />

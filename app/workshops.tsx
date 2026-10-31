@@ -14,6 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { AppIcon } from '@/components/AppIcon';
 import { PHOTO_COVERS } from '@/constants/localPhotos';
+import { useTranslation } from '@/i18n';
 
 interface WorkshopItem {
   id: string;
@@ -83,6 +84,7 @@ const FILTER_LEVELS = ['Semua', 'Pemula', 'Semua Tingkat', 'Pecinta Kuliner'];
 
 export default function WorkshopsScreen() {
   const router = useRouter();
+  const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedLevel, setSelectedLevel] = useState('Semua');
 
@@ -112,7 +114,7 @@ export default function WorkshopsScreen() {
 
         <View className="items-center">
           <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
-            Workshop Seni & Budaya
+            {t('workshops.header_title')}
           </Text>
         </View>
 
@@ -131,7 +133,7 @@ export default function WorkshopsScreen() {
             <TextInput
               value={searchQuery}
               onChangeText={setSearchQuery}
-              placeholder="Cari workshop tenun, ukir gorga, kuliner..."
+              placeholder={t('workshops.search_placeholder')}
               placeholderTextColor="#8A827A"
               className="flex-1 ml-2.5 text-xs font-dmsans text-on-surface h-full"
             />
@@ -177,7 +179,7 @@ export default function WorkshopsScreen() {
         {/* Section Title */}
         <View className="mb-3.5 px-1">
           <Text className="font-raleway text-xl font-medium text-on-surface tracking-wide">
-            Kelas & Pengalaman
+            {t('workshops.section_title')}
           </Text>
         </View>
 
@@ -218,18 +220,18 @@ export default function WorkshopsScreen() {
                 <View className="flex-row items-center gap-2 mt-3 bg-surface-tonal p-2.5 rounded-2xl border border-border/50">
                   <Ionicons name="time-outline" size={14} color="#1D4ED8" />
                   <Text className="text-xs font-dmsans-medium text-on-surface-strong">
-                    Durasi: {ws.duration}
+                    {t('workshops.duration')}: {ws.duration}
                   </Text>
                 </View>
 
                 <Text className="text-xs font-dmsans text-on-surface-variant mt-2.5 leading-relaxed">
-                  Termasuk: <Text className="text-on-surface-strong font-dmsans-medium">{ws.included}</Text>
+                  {t('workshops.included')}: <Text className="text-on-surface-strong font-dmsans-medium">{ws.included}</Text>
                 </Text>
 
                 <View className="mt-4 pt-3 border-t border-border/50 flex-row items-center justify-between">
                   <View>
                     <Text className="text-[10px] uppercase tracking-wider font-dmsans-medium text-on-surface-variant">
-                      Biaya / Peserta
+                      {t('workshops.fee_per_person')}
                     </Text>
                     <Text className="text-base font-dmsans-bold text-primary mt-0.5">
                       {ws.pricePerPerson}
@@ -252,7 +254,9 @@ export default function WorkshopsScreen() {
                     className="h-10 px-5 bg-primary rounded-full flex-row items-center justify-center gap-1.5 shadow-xs"
                   >
                     <Ionicons name="school-outline" size={14} color="#FFFFFF" />
-                    <Text className="text-white font-dmsans-medium text-xs tracking-wide">Ikuti Kelas</Text>
+                    <Text className="text-white font-dmsans-medium text-xs tracking-wide">
+                      {t('workshops.join_button')}
+                    </Text>
                   </Pressable>
                 </View>
               </View>
@@ -265,10 +269,10 @@ export default function WorkshopsScreen() {
                 <Ionicons name="brush-outline" size={26} color="#8A827A" />
               </View>
               <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
-                Tidak Ada Workshop
+                {t('workshops.empty_title')}
               </Text>
               <Text className="font-dmsans text-xs text-on-surface-variant text-center mt-1 max-w-[260px] leading-relaxed">
-                Tidak ada kelas workshop yang cocok dengan kata kunci atau tingkat yang Anda pilih.
+                {t('workshops.empty_desc')}
               </Text>
               <Pressable
                 onPress={() => {
@@ -278,7 +282,7 @@ export default function WorkshopsScreen() {
                 className="mt-4 h-10 px-5 rounded-full bg-white border border-border items-center justify-center shadow-xs"
               >
                 <Text className="text-[11px] uppercase tracking-[0.15em] font-dmsans-bold text-primary">
-                  RESET PENCARIAN
+                  {t('common.reset_search')}
                 </Text>
               </Pressable>
             </View>

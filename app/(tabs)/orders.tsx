@@ -14,11 +14,13 @@ import * as Haptics from 'expo-haptics';
 import { AppIcon } from '@/components/AppIcon';
 import { PHOTO_COVERS } from '@/constants/localPhotos';
 import { getOrders, cancelOrder, StoredOrder, OrderStatus } from '@/lib/ordersStorage';
+import { useTranslation } from '@/i18n';
 
 type TabFilter = 'upcoming' | 'completed' | 'cancelled';
 
 export default function OrdersScreen() {
   const router = useRouter();
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<TabFilter>('upcoming');
   const [orders, setOrders] = useState<StoredOrder[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -59,12 +61,12 @@ export default function OrdersScreen() {
   const handleCancel = (order: StoredOrder) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
     Alert.alert(
-      'Batalkan Pesanan',
-      `Apakah Anda yakin ingin membatalkan pesanan "${order.title}"? Status pesanan akan dipindahkan ke tab Dibatalkan.`,
+      t('orders.cancel_alert_title'),
+      `${t('orders.cancel_alert_desc')} (${order.title})`,
       [
-        { text: 'Tidak', style: 'cancel' },
+        { text: t('orders.cancel_confirm_no'), style: 'cancel' },
         {
-          text: 'Ya, Batalkan',
+          text: t('orders.cancel_confirm_yes'),
           style: 'destructive',
           onPress: async () => {
             Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning).catch(() => {});
@@ -97,13 +99,13 @@ export default function OrdersScreen() {
       {/* Top Header Glassmorphic (DESIGN.md) */}
       <View className="px-5 py-3.5 bg-white/75 border-b border-border/50">
         <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant mb-0.5">
-          RIWAYAT KEGIATAN
+          {t('orders.header_tag')}
         </Text>
         <Text className="font-raleway text-2xl font-medium text-on-surface tracking-wide">
-          Pesanan & Tiket Saya
+          {t('orders.header_title')}
         </Text>
         <Text className="text-xs font-dmsans text-on-surface-variant mt-1 leading-relaxed">
-          Tiket QR digital dan reservasi budaya Danau Toba
+          {t('orders.header_subtitle')}
         </Text>
       </View>
 
@@ -121,7 +123,7 @@ export default function OrdersScreen() {
                 activeTab === 'upcoming' ? 'text-white' : 'text-on-surface-variant'
               }`}
             >
-              Mendatang
+              {t('orders.tab_upcoming')}
             </Text>
           </Pressable>
 
@@ -136,7 +138,7 @@ export default function OrdersScreen() {
                 activeTab === 'completed' ? 'text-white' : 'text-on-surface-variant'
               }`}
             >
-              Selesai
+              {t('orders.tab_completed')}
             </Text>
           </Pressable>
 
@@ -151,7 +153,7 @@ export default function OrdersScreen() {
                 activeTab === 'cancelled' ? 'text-white' : 'text-on-surface-variant'
               }`}
             >
-              Dibatalkan
+              {t('orders.tab_cancelled')}
             </Text>
           </Pressable>
         </View>
@@ -240,7 +242,7 @@ export default function OrdersScreen() {
                   >
                     <Ionicons name="close-circle-outline" size={13} color="#8C4A4A" />
                     <Text className="text-[11px] font-dmsans-bold text-destructive uppercase tracking-wider">
-                      Batalkan Pesanan
+                      {t('orders.cancel_button')}
                     </Text>
                   </Pressable>
                 </View>
@@ -256,15 +258,15 @@ export default function OrdersScreen() {
             </View>
             <Text className="font-raleway text-lg font-medium text-on-surface text-center">
               {activeTab === 'upcoming'
-                ? 'Belum Ada Pesanan Mendatang'
+                ? t('orders.empty_upcoming')
                 : activeTab === 'completed'
-                ? 'Belum Ada Kegiatan Selesai'
-                : 'Tidak Ada Pesanan Dibatalkan'}
+                ? t('orders.empty_completed')
+                : t('orders.empty_cancelled')}
             </Text>
             <Text className="text-xs font-dmsans text-on-surface-variant text-center mt-1 mb-5 max-w-[260px] leading-relaxed">
               {activeTab === 'upcoming'
-                ? 'Tiket acara adat, kelas workshop, atau reservasi pemandu yang Anda pesan akan muncul di sini.'
-                : 'Riwayat kegiatan yang telah selesai atau dibatalkan akan tersimpan di sini.'}
+                ? t('orders.empty_upcoming_desc')
+                : t('orders.empty_other_desc')}
             </Text>
             {activeTab === 'upcoming' && (
               <Pressable
@@ -272,7 +274,7 @@ export default function OrdersScreen() {
                 className="h-10 px-6 rounded-full bg-primary items-center justify-center shadow-sm"
               >
                 <Text className="text-[11px] uppercase tracking-[0.15em] font-dmsans-bold text-white">
-                  Mulai Eksplorasi
+                  {t('orders.explore_button')}
                 </Text>
               </Pressable>
             )}
@@ -286,10 +288,10 @@ export default function OrdersScreen() {
           </View>
           <View className="flex-1">
             <Text className="text-xs font-dmsans-bold uppercase tracking-wider text-on-surface">
-              GARANSI TIKET SIAP OFFLINE
+              {t('orders.offline_title')}
             </Text>
             <Text className="text-[11px] font-dmsans text-on-surface-variant mt-0.5 leading-relaxed">
-              Semua tiket yang tercantum dapat dibuka tanpa koneksi internet. Cukup klik kartu pesanan untuk memunculkan kode QR di gerbang acara.
+              {t('orders.offline_desc')}
             </Text>
           </View>
         </View>
