@@ -35,7 +35,6 @@ export default function HomeScreen() {
   const router = useRouter();
   const { t } = useTranslation();
   const [activeCategory, setActiveCategory] = useState<string>('event_ticket');
-  const [favorites, setFavorites] = useState<Record<string, boolean>>({});
   const [avatarUri, setAvatarUri] = useState<string>('');
 
   useFocusEffect(
@@ -47,11 +46,6 @@ export default function HomeScreen() {
         .catch(() => {});
     }, [])
   );
-
-  const toggleFavorite = (id: string) => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
-    setFavorites((prev) => ({ ...prev, [id]: !prev[id] }));
-  };
 
   const handleCategoryPress = (id: string) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
@@ -272,17 +266,6 @@ export default function HomeScreen() {
                   </Defs>
                   <Rect x="0" y="0" width="100" height="100" fill="url(#cardGrad1)" />
                 </Svg>
-                <Pressable
-                  accessibilityLabel="Simpan acara"
-                  onPress={() => toggleFavorite('pesta-toba')}
-                  className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/70 border border-white/60 items-center justify-center shadow-sm"
-                >
-                  <Ionicons
-                    name={favorites['pesta-toba'] ? 'heart' : 'heart-outline'}
-                    size={16}
-                    color={favorites['pesta-toba'] ? '#8C4A4A' : '#4A4542'}
-                  />
-                </Pressable>
               </View>
 
               <View className="p-3.5">
@@ -293,7 +276,7 @@ export default function HomeScreen() {
 
                 <View className="flex-row items-center mt-2 gap-1.5">
                   <Ionicons name="time-outline" size={12} color="#8A827A" />
-                  <Text className="text-[11px] font-dmsans-medium text-on-surface-strong">10.00 WIB</Text>
+                  <Text className="text-[11px] font-dmsans-medium text-on-surface-strong">10.00</Text>
                 </View>
 
                 <View className="mt-3 pt-2.5 border-t border-border/60 flex-row items-center justify-between">
@@ -337,17 +320,6 @@ export default function HomeScreen() {
                   </Defs>
                   <Rect x="0" y="0" width="100" height="100" fill="url(#cardGrad2)" />
                 </Svg>
-                <Pressable
-                  accessibilityLabel="Simpan acara"
-                  onPress={() => toggleFavorite('mangongkal-holi')}
-                  className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/70 border border-white/60 items-center justify-center shadow-sm"
-                >
-                  <Ionicons
-                    name={favorites['mangongkal-holi'] ? 'heart' : 'heart-outline'}
-                    size={16}
-                    color={favorites['mangongkal-holi'] ? '#8C4A4A' : '#4A4542'}
-                  />
-                </Pressable>
               </View>
 
               <View className="p-3.5">
@@ -358,7 +330,7 @@ export default function HomeScreen() {
 
                 <View className="flex-row items-center mt-2 gap-1.5">
                   <Ionicons name="time-outline" size={12} color="#8A827A" />
-                  <Text className="text-[11px] font-dmsans-medium text-on-surface-strong">09.00 WIB</Text>
+                  <Text className="text-[11px] font-dmsans-medium text-on-surface-strong">09.00</Text>
                 </View>
 
                 <View className="mt-3 pt-2.5 border-t border-border/60 flex-row items-center justify-between">
