@@ -269,6 +269,9 @@ export default function EventDetailScreen() {
                   event_title: currentEvent.title,
                   event_location: currentEvent.location,
                   event_price: currentEvent.price,
+                  promo_min: '4',
+                  promo_discount: '15',
+                  promo_label: 'Diskon 15% min. 4 tiket',
                 },
               });
             }}

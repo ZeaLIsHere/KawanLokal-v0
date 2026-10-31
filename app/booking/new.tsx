@@ -22,6 +22,9 @@ export default function NewBookingScreen() {
     event_title?: string;
     event_location?: string;
     event_price?: string;
+    promo_min?: string;
+    promo_discount?: string;
+    promo_label?: string;
   }>();
 
   const [participantCount, setParticipantCount] = useState<number>(2);
@@ -38,12 +41,32 @@ export default function NewBookingScreen() {
 
   const eventTitle = params.event_title || 'Pesta Danau Toba & Pagelaran Gondang';
   const eventLocation = params.event_location || 'Pantai Bebas Parapat, Simalungun';
-  const totalPrice = participantCount * ticketPrice;
+
+  // Promo rombongan untuk tiket acara berbayar (default min. 4 tiket diskon 15%)
+  const promoMin = (params.promo_min && parseInt(params.promo_min, 10) > 0)
+    ? parseInt(params.promo_min, 10)
+    : 4;
+  const promoDiscount = (params.promo_discount && parseInt(params.promo_discount, 10) > 0)
+    ? parseInt(params.promo_discount, 10)
+    : 15;
+  const promoLabel = params.promo_label || `Diskon ${promoDiscount}% min. ${promoMin} tiket`;
+
+  const hasPromo = ticketPrice > 0 && promoMin > 0 && promoDiscount > 0;
+  const isPromoActive = hasPromo && participantCount >= promoMin;
+
+  const baseTotal = participantCount * ticketPrice;
+  const discountAmount = isPromoActive ? Math.round((baseTotal * promoDiscount) / 100) : 0;
+  const totalPrice = baseTotal - discountAmount;
 
   const handleIncrement = () => {
     if (participantCount < 10) {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
-      setParticipantCount((prev) => prev + 1);
+      const nextCount = participantCount + 1;
+      if (hasPromo && nextCount === promoMin) {
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {});
+      } else {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
+      }
+      setParticipantCount(nextCount);
     }
   };
 
@@ -199,6 +222,60 @@ export default function NewBookingScreen() {
           </View>
         </View>
 
+        {/* Banner Status Promo Rombongan Otomatis */}
+        {hasPromo && (
+          <View
+            className={`rounded-3xl p-4 mb-5 border flex-row items-center gap-3.5 shadow-sm ${
+              isPromoActive
+                ? 'bg-emerald-50 border-emerald-300'
+                : 'bg-surface-tonal border-border/80'
+            }`}
+          >
+            <View
+              className={`w-10 h-10 rounded-2xl items-center justify-center shrink-0 ${
+                isPromoActive ? 'bg-emerald-600' : 'bg-white'
+              }`}
+            >
+              <Ionicons
+                name={isPromoActive ? 'checkmark-circle' : 'gift-outline'}
+                size={20}
+                color={isPromoActive ? '#FFFFFF' : '#8A827A'}
+              />
+            </View>
+
+            <View className="flex-1">
+              <View className="flex-row items-center justify-between">
+                <Text
+                  className={`text-[10px] uppercase tracking-[0.18em] font-dmsans-bold ${
+                    isPromoActive ? 'text-emerald-800' : 'text-on-surface-variant'
+                  }`}
+                >
+                  {isPromoActive ? 'PROMO AKTIF TERPASANG' : 'PROMO ROMBONGAN TERSEDIA'}
+                </Text>
+                {isPromoActive && (
+                  <View className="px-2 py-0.5 rounded-full bg-emerald-600">
+                    <Text className="text-[10px] font-dmsans-bold text-white">Hemat {promoDiscount}%</Text>
+                  </View>
+                )}
+              </View>
+
+              <Text
+                className={`font-raleway text-sm font-medium leading-snug mt-0.5 ${
+                  isPromoActive ? 'text-emerald-950 font-semibold' : 'text-on-surface'
+                }`}
+              >
+                {isPromoActive
+                  ? `Diskon ${promoDiscount}% otomatis memotong harga total tiket!`
+                  : `Tambah ${promoMin - participantCount} tiket lagi untuk mengaktifkan diskon ${promoDiscount}%.`}
+              </Text>
+
+              <Text className="text-[11px] font-dmsans text-on-surface-variant mt-0.5">
+                {promoLabel} (Jumlah tiket Anda: {participantCount} tiket)
+              </Text>
+            </View>
+          </View>
+        )}
+
         {/* Ringkasan Estimasi Biaya Glassmorphic */}
         <View className="bg-white/80 rounded-3xl border border-white/80 p-5 mb-5 shadow-sm">
           <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant mb-3">
@@ -209,18 +286,41 @@ export default function NewBookingScreen() {
               Tiket Masuk Acara ({participantCount}x)
             </Text>
             <Text className="text-xs font-dmsans-medium text-on-surface">
-              {formatRupiah(totalPrice)}
+              {ticketPrice === 0 ? 'Gratis' : formatRupiah(baseTotal)}
             </Text>
           </View>
+
+          {isPromoActive && (
+            <View className="flex-row justify-between items-center py-2.5 border-b border-border/50">
+              <View className="flex-row items-center gap-1.5">
+                <Ionicons name="pricetag" size={13} color="#15803D" />
+                <Text className="text-xs font-dmsans-bold text-emerald-800">
+                  Potongan Promo Rombongan ({promoDiscount}%)
+                </Text>
+              </View>
+              <Text className="text-xs font-dmsans-bold text-emerald-700">
+                - {formatRupiah(discountAmount)}
+              </Text>
+            </View>
+          )}
+
           <View className="flex-row justify-between items-center py-2.5 border-b border-border/50">
             <Text className="text-xs font-dmsans text-on-surface-variant">Biaya Layanan & Konservasi</Text>
             <Text className="text-xs font-dmsans-bold text-emerald-700">Bebas Biaya</Text>
           </View>
+
           <View className="flex-row justify-between items-center pt-3">
             <Text className="font-raleway text-base font-medium text-on-surface">Total Biaya</Text>
-            <Text className="font-dmsans-bold text-lg text-primary">
-              {formatRupiah(totalPrice)}
-            </Text>
+            <View className="flex-row items-baseline gap-2">
+              {isPromoActive && (
+                <Text className="text-xs line-through text-on-surface-variant">
+                  {formatRupiah(baseTotal)}
+                </Text>
+              )}
+              <Text className={`font-dmsans-bold text-lg ${isPromoActive ? 'text-emerald-700' : 'text-primary'}`}>
+                {ticketPrice === 0 ? 'Gratis' : formatRupiah(totalPrice)}
+              </Text>
+            </View>
           </View>
         </View>
 
@@ -231,14 +331,13 @@ export default function NewBookingScreen() {
         >
           <Ionicons name="card-outline" size={18} color="#FFFFFF" />
           <Text className="text-white font-dmsans-medium text-base tracking-wide">
-            Lanjut ke Pembayaran • {formatRupiah(totalPrice)}
+            Lanjut ke Pembayaran • {ticketPrice === 0 ? 'Gratis' : formatRupiah(totalPrice)}
           </Text>
         </Pressable>
 
-        {/* Promotional Offer Card */}
+        {/* Info Card Jaminan KawanLokal */}
         <View className="w-full bg-surface-tonal border border-border/80 rounded-3xl p-4 flex-row items-center justify-between overflow-hidden relative shadow-sm">
-          {/* Photo */}
-          <View className="w-20 h-16 rounded-2xl overflow-hidden bg-white/70 shadow-sm shrink-0">
+          <View className="w-16 h-16 rounded-2xl overflow-hidden bg-white/70 shadow-sm shrink-0">
             <Image
               source={PHOTO_COVERS.parapat}
               className="w-full h-full"
@@ -246,29 +345,16 @@ export default function NewBookingScreen() {
             />
           </View>
 
-          {/* Offer Details */}
           <View className="flex-1 pl-3.5 justify-center">
             <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-primary">
-              PROMO BUDAYA
+              TIKET RESMI TERVERIFIKASI
             </Text>
             <Text className="font-raleway text-base font-medium text-on-surface leading-tight mt-0.5">
-              Diskon Rombongan 15%
+              Garansi Akses Langsung
             </Text>
             <Text className="text-[11px] font-dmsans text-on-surface-variant mt-0.5">
-              Khusus pemesanan minimal 4 peserta
+              Tiket digital resmi KawanLokal dijamin kuotanya langsung oleh panitia acara.
             </Text>
-            <Pressable
-              onPress={() => {
-                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
-                Alert.alert('Promo Rombongan', 'Gunakan kode KAWANLOKAL15 saat checkout untuk diskon 15% pemesanan 4 peserta atau lebih.');
-              }}
-              className="mt-1 flex-row items-center gap-1"
-            >
-              <Text className="text-[11px] uppercase tracking-[0.15em] font-dmsans-bold text-primary">
-                PELAJARI PROMO
-              </Text>
-              <Ionicons name="chevron-forward" size={12} color="#1D4ED8" />
-            </Pressable>
           </View>
         </View>
 
