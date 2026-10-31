@@ -12,6 +12,7 @@ import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { formatRupiah } from '@/lib/format';
+import { createOrder } from '@/lib/ordersStorage';
 import { AppIcon } from '@/components/AppIcon';
 import { PHOTO_COVERS } from '@/constants/localPhotos';
 
@@ -27,7 +28,14 @@ export default function PaymentScreen() {
     participants?: string;
   }>();
 
-  const serviceType = params.service_type || 'ticket';
+  const serviceType: 'ticket' | 'guide' | 'workshop' | 'homestay' =
+    params.service_type === 'guide'
+      ? 'guide'
+      : params.service_type === 'workshop'
+      ? 'workshop'
+      : params.service_type === 'homestay'
+      ? 'homestay'
+      : 'ticket';
   const isGuide = serviceType === 'guide';
   const isWorkshop = serviceType === 'workshop';
   const isHomestay = serviceType === 'homestay';
@@ -60,8 +68,17 @@ export default function PaymentScreen() {
     setSelectedMethod(method);
   };
 
-  const handlePayNow = () => {
+  const handlePayNow = async () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
+
+    // Simpan otomatis ke storage agar langsung masuk ke bagian "Mendatang"
+    await createOrder({
+      service_type: serviceType,
+      title: displayTitle,
+      location: displayLocation,
+      amount: totalAmount,
+      participants: participantCount,
+    });
 
     const successMessage = isGuide
       ? `Transaksi sebesar ${formatRupiah(totalAmount)} berhasil diverifikasi. Voucher reservasi pemandu Anda kini telah aktif dengan rincian titik temu & kontak.`
