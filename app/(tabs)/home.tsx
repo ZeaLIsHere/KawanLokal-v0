@@ -136,9 +136,6 @@ export default function HomeScreen() {
 
         {/* Kategori Cepat Layanan Lokal (PRD F3) */}
         <View className="mb-7">
-          <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant mb-3">
-            LAYANAN UTAMA
-          </Text>
           <View className="flex-row justify-between">
             {LOCAL_CATEGORIES.map((cat) => {
               const isSelected = activeCategory === cat.id;
@@ -178,9 +175,6 @@ export default function HomeScreen() {
         <View className="mb-7">
           <View className="flex-row items-end justify-between mb-3.5">
             <View>
-              <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant mb-0.5">
-                AGENDA RESMI
-              </Text>
               <Text className="font-raleway text-xl font-medium text-on-surface tracking-wide">
                 Acara Budaya Terdekat
               </Text>
@@ -286,9 +280,6 @@ export default function HomeScreen() {
         {/* Promo / Sorotan Budaya Lokal */}
         <View className="bg-surface-tonal border border-border/80 rounded-3xl p-5 shadow-sm flex-row items-center justify-between overflow-hidden relative">
           <View className="space-y-1.5 flex-1 pr-3 z-10">
-            <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant">
-              PENGALAMAN TERPILIH
-            </Text>
             <Text className="font-raleway text-lg font-medium text-on-surface leading-snug">
               Tur Budaya Desa Tomok{'\n'}
               <Text className="text-xs font-dmsans font-normal text-on-surface-variant">
