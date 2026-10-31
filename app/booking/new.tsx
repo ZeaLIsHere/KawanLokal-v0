@@ -18,6 +18,7 @@ import { PHOTO_COVERS } from '@/constants/localPhotos';
 export default function NewBookingScreen() {
   const router = useRouter();
   const params = useLocalSearchParams<{
+    service_type?: string;
     event_id?: string;
     event_title?: string;
     event_location?: string;
@@ -26,6 +27,22 @@ export default function NewBookingScreen() {
     promo_discount?: string;
     promo_label?: string;
   }>();
+
+  const serviceType = params.service_type || 'ticket';
+  const isWorkshop = serviceType === 'workshop';
+  const isHomestay = serviceType === 'homestay';
+
+  const defaultTitle = isWorkshop
+    ? 'Belajar Menenun Ulos Tradisional (Gedongan)'
+    : isHomestay
+    ? 'Sopo Bolon Tradisional Tepi Danau'
+    : 'Pesta Danau Toba & Pagelaran Gondang';
+
+  const defaultLocation = isWorkshop
+    ? 'Sanggar Tenun Lumban Suhi-Suhi, Samosir'
+    : isHomestay
+    ? 'Tuktuk Siadong, Samosir'
+    : 'Pantai Bebas Parapat, Simalungun';
 
   const [participantCount, setParticipantCount] = useState<number>(2);
 
@@ -36,20 +53,20 @@ export default function NewBookingScreen() {
       const num = parseInt(params.event_price.replace(/[^0-9]/g, ''), 10);
       if (!isNaN(num)) return num;
     }
-    return 50000;
-  }, [params.event_price]);
+    return isWorkshop ? 150000 : isHomestay ? 350000 : 50000;
+  }, [params.event_price, isWorkshop, isHomestay]);
 
-  const eventTitle = params.event_title || 'Pesta Danau Toba & Pagelaran Gondang';
-  const eventLocation = params.event_location || 'Pantai Bebas Parapat, Simalungun';
+  const eventTitle = params.event_title || defaultTitle;
+  const eventLocation = params.event_location || defaultLocation;
 
-  // Promo rombongan untuk tiket acara berbayar (default min. 4 tiket diskon 15%)
+  // Promo rombongan untuk tiket acara / workshop berbayar (default min. 4 peserta diskon 15%)
   const promoMin = (params.promo_min && parseInt(params.promo_min, 10) > 0)
     ? parseInt(params.promo_min, 10)
     : 4;
   const promoDiscount = (params.promo_discount && parseInt(params.promo_discount, 10) > 0)
     ? parseInt(params.promo_discount, 10)
     : 15;
-  const promoLabel = params.promo_label || `Diskon ${promoDiscount}% min. ${promoMin} tiket`;
+  const promoLabel = params.promo_label || `Diskon ${promoDiscount}% min. ${promoMin} ${isHomestay ? 'malam' : 'peserta'}`;
 
   const hasPromo = ticketPrice > 0 && promoMin > 0 && promoDiscount > 0;
   const isPromoActive = hasPromo && participantCount >= promoMin;
@@ -82,7 +99,7 @@ export default function NewBookingScreen() {
     router.push({
       pathname: '/payment',
       params: {
-        service_type: 'ticket',
+        service_type: serviceType,
         title: eventTitle,
         location: eventLocation,
         amount: String(totalPrice),
@@ -105,7 +122,7 @@ export default function NewBookingScreen() {
 
         <View className="items-center">
           <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
-            Pesan Tiket Acara
+            {isWorkshop ? 'Pesan Workshop Seni' : isHomestay ? 'Reservasi Homestay' : 'Pesan Tiket Acara'}
           </Text>
         </View>
 
@@ -131,14 +148,18 @@ export default function NewBookingScreen() {
       >
         {/* Booking Parameters Form Module */}
         <View className="gap-3.5 mb-5">
-          {/* Field 1: Acara Terpilih */}
+          {/* Field 1: Layanan Terpilih */}
           <View className="border border-white/80 rounded-3xl bg-white/80 p-4 flex-row items-center shadow-sm">
             <View className="w-10 h-10 rounded-full bg-primary/10 items-center justify-center mr-3.5">
-              <Ionicons name="map-outline" size={18} color="#1D4ED8" />
+              <Ionicons
+                name={isWorkshop ? 'brush-outline' : isHomestay ? 'home-outline' : 'map-outline'}
+                size={18}
+                color="#1D4ED8"
+              />
             </View>
             <View className="flex-1">
               <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-on-surface-variant">
-                Acara Terpilih
+                {isWorkshop ? 'Workshop Terpilih' : isHomestay ? 'Penginapan Terpilih' : 'Acara Terpilih'}
               </Text>
               <Text
                 numberOfLines={1}
@@ -149,14 +170,14 @@ export default function NewBookingScreen() {
             </View>
           </View>
 
-          {/* Field 2: Lokasi Acara */}
+          {/* Field 2: Lokasi */}
           <View className="border border-white/80 rounded-3xl bg-white/80 p-4 flex-row items-center shadow-sm">
             <View className="w-10 h-10 rounded-full bg-primary/10 items-center justify-center mr-3.5">
               <Ionicons name="location-outline" size={18} color="#1D4ED8" />
             </View>
             <View className="flex-1">
               <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-on-surface-variant">
-                Lokasi Acara
+                {isWorkshop ? 'Lokasi Studio / Sanggar' : isHomestay ? 'Lokasi Penginapan' : 'Lokasi Acara'}
               </Text>
               <Text
                 numberOfLines={1}
@@ -167,14 +188,14 @@ export default function NewBookingScreen() {
             </View>
           </View>
 
-          {/* Field 3: Jadwal & Waktu */}
+          {/* Field 3: Jadwal */}
           <View className="border border-white/80 rounded-3xl bg-white/80 p-4 flex-row items-center shadow-sm">
             <View className="w-10 h-10 rounded-full bg-primary/10 items-center justify-center mr-3.5">
               <Ionicons name="calendar-outline" size={18} color="#1D4ED8" />
             </View>
             <View className="flex-1">
               <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-on-surface-variant">
-                Jadwal Kegiatan
+                {isWorkshop ? 'Jadwal Sesi Praktik' : isHomestay ? 'Jadwal Menginap' : 'Jadwal Kegiatan'}
               </Text>
               <Text
                 numberOfLines={1}
@@ -185,18 +206,20 @@ export default function NewBookingScreen() {
             </View>
           </View>
 
-          {/* Field 4: Jumlah Tiket Peserta */}
+          {/* Field 4: Jumlah Tiket / Malam Peserta */}
           <View className="border border-white/80 rounded-3xl bg-white/80 p-4 flex-row items-center justify-between shadow-sm">
             <View className="flex-row items-center gap-3.5">
               <View className="w-10 h-10 rounded-full bg-primary/10 items-center justify-center">
-                <Ionicons name="people-outline" size={18} color="#1D4ED8" />
+                <Ionicons name={isHomestay ? 'bed-outline' : 'people-outline'} size={18} color="#1D4ED8" />
               </View>
               <View>
                 <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-on-surface-variant">
-                  Jumlah Tiket
+                  {isWorkshop ? 'Jumlah Peserta Kelas' : isHomestay ? 'Durasi Menginap' : 'Jumlah Tiket'}
                 </Text>
                 <Text className="font-raleway text-base font-medium text-on-surface tracking-wide mt-0.5">
-                  {participantCount} Peserta ({ticketPrice === 0 ? 'Gratis' : `${formatRupiah(ticketPrice)}/tiket`})
+                  {isHomestay
+                    ? `${participantCount} Malam (${formatRupiah(ticketPrice)}/malam)`
+                    : `${participantCount} Peserta (${ticketPrice === 0 ? 'Gratis' : `${formatRupiah(ticketPrice)}/org`})`}
                 </Text>
               </View>
             </View>
@@ -283,7 +306,11 @@ export default function NewBookingScreen() {
           </Text>
           <View className="flex-row justify-between items-center pb-2.5 border-b border-border/50">
             <Text className="text-xs font-dmsans text-on-surface-variant">
-              Tiket Masuk Acara ({participantCount}x)
+              {isWorkshop
+                ? `Biaya Kelas Workshop (${participantCount}x)`
+                : isHomestay
+                ? `Tarif Menginap (${participantCount} Malam)`
+                : `Tiket Masuk Acara (${participantCount}x)`}
             </Text>
             <Text className="text-xs font-dmsans-medium text-on-surface">
               {ticketPrice === 0 ? 'Gratis' : formatRupiah(baseTotal)}
@@ -339,7 +366,7 @@ export default function NewBookingScreen() {
         <View className="w-full bg-surface-tonal border border-border/80 rounded-3xl p-4 flex-row items-center justify-between overflow-hidden relative shadow-sm">
           <View className="w-16 h-16 rounded-2xl overflow-hidden bg-white/70 shadow-sm shrink-0">
             <Image
-              source={PHOTO_COVERS.parapat}
+              source={isWorkshop ? PHOTO_COVERS.ulos : isHomestay ? PHOTO_COVERS.homestaySopo : PHOTO_COVERS.parapat}
               className="w-full h-full"
               resizeMode="cover"
             />
@@ -347,13 +374,25 @@ export default function NewBookingScreen() {
 
           <View className="flex-1 pl-3.5 justify-center">
             <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-primary">
-              TIKET RESMI TERVERIFIKASI
+              {isWorkshop
+                ? 'WORKSHOP RESMI TERVERIFIKASI'
+                : isHomestay
+                ? 'HOMESTAY RESMI TERVERIFIKASI'
+                : 'TIKET RESMI TERVERIFIKASI'}
             </Text>
             <Text className="font-raleway text-base font-medium text-on-surface leading-tight mt-0.5">
-              Garansi Akses Langsung
+              {isWorkshop
+                ? 'Garansi Kelas Budaya'
+                : isHomestay
+                ? 'Garansi Penginapan Siap Huni'
+                : 'Garansi Akses Langsung'}
             </Text>
             <Text className="text-[11px] font-dmsans text-on-surface-variant mt-0.5">
-              Tiket digital resmi KawanLokal dijamin kuotanya langsung oleh panitia acara.
+              {isWorkshop
+                ? 'Kelas dipandu langsung oleh maestro tenun/gorga berlisensi.'
+                : isHomestay
+                ? 'Sopo Bolon adat dan homestay terverifikasi siap huni.'
+                : 'Tiket digital resmi KawanLokal dijamin kuotanya langsung oleh panitia acara.'}
             </Text>
           </View>
         </View>

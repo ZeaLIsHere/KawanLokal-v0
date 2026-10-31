@@ -191,6 +191,7 @@ export default function HomestaysScreen() {
               router.push({
                 pathname: '/booking/new',
                 params: {
+                  service_type: 'homestay',
                   event_title: FEATURED_HOMESTAY.title,
                   event_location: FEATURED_HOMESTAY.location,
                   event_price: FEATURED_HOMESTAY.priceFormatted,
@@ -270,6 +271,7 @@ export default function HomestaysScreen() {
                   router.push({
                     pathname: '/booking/new',
                     params: {
+                      service_type: 'homestay',
                       event_title: item.title,
                       event_location: item.location,
                       event_price: item.priceFormatted,

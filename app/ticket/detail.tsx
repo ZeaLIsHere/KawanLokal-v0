@@ -27,31 +27,76 @@ export default function TicketDetailScreen() {
     participants?: string;
   }>();
 
-  const isGuide = params.service_type === 'guide';
-  const displayTitle = params.title || (isGuide ? 'Bona Simanjuntak' : 'Pesta Danau Toba & Pagelaran Gondang');
-  const displayLocation = params.location || (isGuide ? 'Dermaga Tomok, Pulau Samosir' : 'Pantai Bebas Parapat, Danau Toba');
-  const totalAmount = params.amount ? parseInt(params.amount, 10) : (isGuide ? 250000 : 100000);
+  const serviceType = params.service_type || 'ticket';
+  const isGuide = serviceType === 'guide';
+  const isWorkshop = serviceType === 'workshop';
+  const isHomestay = serviceType === 'homestay';
+
+  const defaultTitle = isGuide
+    ? 'Bona Simanjuntak'
+    : isWorkshop
+    ? 'Belajar Menenun Ulos Tradisional (Gedongan)'
+    : isHomestay
+    ? 'Sopo Bolon Tradisional Tepi Danau'
+    : 'Pesta Danau Toba & Pagelaran Gondang';
+
+  const defaultLocation = isGuide
+    ? 'Dermaga Tomok, Pulau Samosir'
+    : isWorkshop
+    ? 'Sanggar Tenun Lumban Suhi-Suhi, Samosir'
+    : isHomestay
+    ? 'Tuktuk Siadong, Samosir'
+    : 'Pantai Bebas Parapat, Danau Toba';
+
+  const displayTitle = params.title || defaultTitle;
+  const displayLocation = params.location || defaultLocation;
+  const totalAmount = params.amount
+    ? parseInt(params.amount, 10)
+    : isGuide
+    ? 250000
+    : isWorkshop
+    ? 150000
+    : isHomestay
+    ? 350000
+    : 100000;
   const participantCount = params.participants || '2';
-  const bookingCode = isGuide ? '#KL-GD-2026-442' : '#KL-TB-2026-891';
+  const bookingCode = isGuide
+    ? '#KL-GD-2026-442'
+    : isWorkshop
+    ? '#KL-WS-2026-319'
+    : isHomestay
+    ? '#KL-HS-2026-812'
+    : '#KL-TB-2026-891';
 
   const [isSavedOffline, setIsSavedOffline] = useState(true);
 
   const handleShare = async () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
+    const shareTitle = isGuide
+      ? `Voucher Pemandu: ${displayTitle}`
+      : isWorkshop
+      ? `Voucher Workshop: ${displayTitle}`
+      : isHomestay
+      ? `Voucher Homestay: ${displayTitle}`
+      : `Tiket KawanLokal: ${displayTitle}`;
+
+    const shareMessage = isGuide
+      ? `Voucher Reservasi Pemandu KawanLokal\nPemandu: ${displayTitle}\nKode Booking: ${bookingCode}\nTitik Temu: ${displayLocation}\nKontak: +62 812-6421-9901`
+      : isWorkshop
+      ? `Voucher Workshop Seni KawanLokal\nKelas: ${displayTitle}\nKode Booking: ${bookingCode}\nLokasi Sanggar: ${displayLocation}\nJadwal: Jumat, 2 Nov 2026 • 10.00`
+      : isHomestay
+      ? `Voucher Reservasi Homestay KawanLokal\nPenginapan: ${displayTitle}\nKode Booking: ${bookingCode}\nLokasi: ${displayLocation}\nCheck-in: 14.00 WIB`
+      : `Tiket Resmi KawanLokal\nAcara: ${displayTitle}\nKode: ${bookingCode}\nJadwal: Jumat, 2 Nov 2026 • 10.00\nLokasi: ${displayLocation}`;
+
     try {
-      await Share.share({
-        title: isGuide ? `Voucher Pemandu: ${displayTitle}` : `Tiket KawanLokal: ${displayTitle}`,
-        message: isGuide
-          ? `Voucher Reservasi Pemandu KawanLokal\nPemandu: ${displayTitle}\nKode Booking: ${bookingCode}\nTitik Temu: ${displayLocation}\nKontak: +62 812-6421-9901`
-          : `Tiket Resmi KawanLokal\nAcara: ${displayTitle}\nKode: ${bookingCode}\nJadwal: Jumat, 2 Nov 2026 • 10.00\nLokasi: ${displayLocation}`,
-      });
+      await Share.share({ title: shareTitle, message: shareMessage });
     } catch {}
   };
 
   const handleSaveOffline = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
     Alert.alert(
-      isGuide ? 'Voucher Offline Tersimpan' : 'Tiket Offline Tersimpan',
+      isGuide || isWorkshop || isHomestay ? 'Voucher Offline Tersimpan' : 'Tiket Offline Tersimpan',
       'Dokumen ini telah tersimpan dalam cache perangkat Anda. Dapat dibuka dan dipindai di lokasi tanpa koneksi internet.'
     );
   };
@@ -84,10 +129,22 @@ export default function TicketDetailScreen() {
 
         <View className="items-center">
           <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-primary">
-            {isGuide ? 'BUKTI RESERVASI' : 'BUKTI TIKET'}
+            {isGuide
+              ? 'BUKTI RESERVASI'
+              : isWorkshop
+              ? 'BUKTI KELAS'
+              : isHomestay
+              ? 'BUKTI RESERVASI'
+              : 'BUKTI TIKET'}
           </Text>
           <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
-            {isGuide ? 'Voucher Pemandu' : 'Detail Tiket Acara'}
+            {isGuide
+              ? 'Voucher Pemandu'
+              : isWorkshop
+              ? 'Voucher Workshop'
+              : isHomestay
+              ? 'Voucher Homestay'
+              : 'Detail Tiket Acara'}
           </Text>
         </View>
 
@@ -108,7 +165,15 @@ export default function TicketDetailScreen() {
         {/* Hero Image Banner */}
         <View className="relative w-full h-[150px] rounded-3xl overflow-hidden shadow-sm border border-white/80 mb-4 bg-surface-tonal">
           <Image
-            source={isGuide ? PHOTO_COVERS.desaTomok : PHOTO_COVERS.parapat}
+            source={
+              isGuide
+                ? PHOTO_COVERS.desaTomok
+                : isWorkshop
+                ? PHOTO_COVERS.ulos
+                : isHomestay
+                ? PHOTO_COVERS.homestaySopo
+                : PHOTO_COVERS.parapat
+            }
             className="w-full h-full"
             resizeMode="cover"
           />
@@ -120,30 +185,60 @@ export default function TicketDetailScreen() {
           <View className="flex-row justify-between items-center px-1">
             <View>
               <Text className="text-2xl font-raleway font-semibold text-on-surface tracking-wide">
-                {isGuide ? 'MDN' : 'AJB'}
+                {isGuide ? 'MDN' : isWorkshop ? 'SMR' : isHomestay ? 'CHK' : 'AJB'}
               </Text>
               <Text className="text-xs font-dmsans text-on-surface-variant mt-0.5">
-                {isGuide ? 'Titik Penjemputan' : 'Dermaga Ajibata'}
+                {isGuide
+                  ? 'Titik Penjemputan'
+                  : isWorkshop
+                  ? 'Studio Pengrajin'
+                  : isHomestay
+                  ? 'Check-in 14.00'
+                  : 'Dermaga Ajibata'}
               </Text>
             </View>
 
             <View className="items-center px-2">
               <View className="flex-row items-center gap-1">
                 <View className="w-8 h-0.5 bg-border" />
-                <Ionicons name={isGuide ? 'walk-outline' : 'boat-outline'} size={18} color="#1D4ED8" />
+                <Ionicons
+                  name={
+                    isGuide
+                      ? 'walk-outline'
+                      : isWorkshop
+                      ? 'brush-outline'
+                      : isHomestay
+                      ? 'bed-outline'
+                      : 'boat-outline'
+                  }
+                  size={18}
+                  color="#1D4ED8"
+                />
                 <View className="w-8 h-0.5 bg-border" />
               </View>
               <Text className="text-[10px] uppercase tracking-wider font-dmsans-bold text-primary mt-1">
-                {isGuide ? 'Tur Budaya Adat' : 'Lintas Danau Toba'}
+                {isGuide
+                  ? 'Tur Budaya Adat'
+                  : isWorkshop
+                  ? 'Seni & Kerajinan'
+                  : isHomestay
+                  ? 'Sopo Tradisional'
+                  : 'Lintas Danau Toba'}
               </Text>
             </View>
 
             <View className="items-end">
               <Text className="text-2xl font-raleway font-semibold text-on-surface tracking-wide">
-                TMK
+                {isGuide ? 'TMK' : isWorkshop ? 'TBA' : isHomestay ? 'OUT' : 'TMK'}
               </Text>
               <Text className="text-xs font-dmsans text-on-surface-variant mt-0.5">
-                Tomok, Samosir
+                {isGuide
+                  ? 'Tomok, Samosir'
+                  : isWorkshop
+                  ? 'Lumban Suhi'
+                  : isHomestay
+                  ? 'Check-out 12.00'
+                  : 'Tomok, Samosir'}
               </Text>
             </View>
           </View>
@@ -153,7 +248,19 @@ export default function TicketDetailScreen() {
           {/* Penyelenggara / Profil Pemandu */}
           <View className="flex-row items-center gap-3">
             <View className="w-11 h-11 rounded-2xl bg-blue-50 border border-primary/20 items-center justify-center shrink-0">
-              <Ionicons name={isGuide ? 'person' : 'sparkles'} size={20} color="#1D4ED8" />
+              <Ionicons
+                name={
+                  isGuide
+                    ? 'person'
+                    : isWorkshop
+                    ? 'brush'
+                    : isHomestay
+                    ? 'home'
+                    : 'sparkles'
+                }
+                size={20}
+                color="#1D4ED8"
+              />
             </View>
             <View className="flex-1">
               <Text className="font-raleway text-base font-medium text-on-surface leading-tight">
@@ -162,6 +269,10 @@ export default function TicketDetailScreen() {
               <Text className="text-xs font-dmsans text-on-surface-variant mt-0.5">
                 {isGuide
                   ? 'Pemandu Budaya Berlisensi • Terverifikasi KawanLokal'
+                  : isWorkshop
+                  ? 'Sanggar Seni Budaya Toba • Instruktur Terverifikasi'
+                  : isHomestay
+                  ? 'Pengelola Sopo Bolon Adat • Terverifikasi KawanLokal'
                   : 'Panitia Adat Toba • Tiket Terverifikasi Kurator'}
               </Text>
             </View>
@@ -183,7 +294,13 @@ export default function TicketDetailScreen() {
         <View className="bg-white/85 rounded-3xl p-5 border border-white/90 shadow-sm mb-4 items-center">
           <View className="w-full pb-3 border-b border-dashed border-border/80 mb-4">
             <Text className="text-[10px] uppercase tracking-wider font-dmsans-medium text-on-surface-variant">
-              {isGuide ? 'KODE RESERVASI PEMANDU' : 'KODE TIKET DIGITAL'}
+              {isGuide
+                ? 'KODE RESERVASI PEMANDU'
+                : isWorkshop
+                ? 'KODE PESERTA WORKSHOP'
+                : isHomestay
+                ? 'KODE RESERVASI HOMESTAY'
+                : 'KODE TIKET DIGITAL'}
             </Text>
             <Text className="font-raleway text-base font-semibold text-on-surface mt-0.5">
               {bookingCode}
@@ -198,14 +315,20 @@ export default function TicketDetailScreen() {
           <Text className="font-dmsans-medium text-xs text-on-surface text-center">
             {isGuide
               ? 'Tunjukkan QR atau sebutkan PIN temu kepada pemandu Anda di lokasi kumpul'
+              : isWorkshop
+              ? 'Tunjukkan kode QR kepada instruktur sanggar saat sesi kelas dimulai'
+              : isHomestay
+              ? 'Tunjukkan kode QR kepada pengelola homestay saat proses check-in'
               : 'Tunjukkan kode QR ini ke panitia di pintu masuk acara'}
           </Text>
           <Text className="text-[11px] font-dmsans text-on-surface-variant text-center mt-1">
-            Peserta: {participantCount} Orang • {displayLocation}
+            {isHomestay
+              ? `Durasi: ${participantCount} Malam • ${displayLocation}`
+              : `Peserta: ${participantCount} Orang • ${displayLocation}`}
           </Text>
 
-          {/* Action Hubungi Pemandu Khusus Guide Service */}
-          {isGuide && (
+          {/* Action Hubungi Kontak Khusus Guide, Workshop & Homestay */}
+          {(isGuide || isWorkshop || isHomestay) && (
             <View className="w-full mt-4 pt-3 border-t border-border/50 gap-2.5">
               <Pressable
                 onPress={handleContactWhatsApp}
@@ -213,7 +336,11 @@ export default function TicketDetailScreen() {
               >
                 <Ionicons name="logo-whatsapp" size={17} color="#FFFFFF" />
                 <Text className="text-white font-dmsans-medium text-xs tracking-wide">
-                  Hubungi Pemandu via WhatsApp
+                  {isGuide
+                    ? 'Hubungi Pemandu via WhatsApp'
+                    : isWorkshop
+                    ? 'Hubungi Pengelola Sanggar via WhatsApp'
+                    : 'Hubungi Pemilik Homestay via WhatsApp'}
                 </Text>
               </Pressable>
 
@@ -238,7 +365,13 @@ export default function TicketDetailScreen() {
           <View className="gap-2.5">
             <View className="flex-row justify-between items-center">
               <Text className="text-xs font-dmsans text-on-surface-variant">
-                {isGuide ? `Jasa Pemandu Budaya (${participantCount} org)` : `Tiket Masuk (${participantCount}x)`}
+                {isGuide
+                  ? `Jasa Pemandu Budaya (${participantCount} org)`
+                  : isWorkshop
+                  ? `Biaya Workshop (${participantCount} Peserta)`
+                  : isHomestay
+                  ? `Tarif Menginap (${participantCount} Malam)`
+                  : `Tiket Masuk (${participantCount}x)`}
               </Text>
               <Text className="text-xs font-dmsans-medium text-on-surface">
                 {formatRupiah(totalAmount)}

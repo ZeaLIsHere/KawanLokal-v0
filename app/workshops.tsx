@@ -242,6 +242,7 @@ export default function WorkshopsScreen() {
                       router.push({
                         pathname: '/booking/new',
                         params: {
+                          service_type: 'workshop',
                           event_title: ws.title,
                           event_location: `${ws.studioName}, ${ws.district}`,
                           event_price: ws.pricePerPerson,

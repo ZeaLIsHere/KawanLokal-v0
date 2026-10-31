@@ -27,9 +27,29 @@ export default function PaymentScreen() {
     participants?: string;
   }>();
 
-  const isGuide = params.service_type === 'guide';
-  const displayTitle = params.title || (isGuide ? 'Bona Simanjuntak' : 'Pesta Danau Toba');
-  const displayLocation = params.location || (isGuide ? 'Dermaga Tomok, Samosir' : 'Pantai Bebas Parapat');
+  const serviceType = params.service_type || 'ticket';
+  const isGuide = serviceType === 'guide';
+  const isWorkshop = serviceType === 'workshop';
+  const isHomestay = serviceType === 'homestay';
+
+  const defaultTitle = isGuide
+    ? 'Bona Simanjuntak'
+    : isWorkshop
+    ? 'Belajar Menenun Ulos Tradisional (Gedongan)'
+    : isHomestay
+    ? 'Sopo Bolon Tradisional Tepi Danau'
+    : 'Pesta Danau Toba';
+
+  const defaultLocation = isGuide
+    ? 'Dermaga Tomok, Samosir'
+    : isWorkshop
+    ? 'Sanggar Tenun Lumban Suhi-Suhi, Samosir'
+    : isHomestay
+    ? 'Tuktuk Siadong, Samosir'
+    : 'Pantai Bebas Parapat';
+
+  const displayTitle = params.title || defaultTitle;
+  const displayLocation = params.location || defaultLocation;
   const totalAmount = params.amount ? parseInt(params.amount, 10) : 100000;
   const participantCount = params.participants || '2';
 
@@ -42,19 +62,34 @@ export default function PaymentScreen() {
 
   const handlePayNow = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
+
+    const successMessage = isGuide
+      ? `Transaksi sebesar ${formatRupiah(totalAmount)} berhasil diverifikasi. Voucher reservasi pemandu Anda kini telah aktif dengan rincian titik temu & kontak.`
+      : isWorkshop
+      ? `Transaksi sebesar ${formatRupiah(totalAmount)} berhasil diverifikasi. Voucher kelas workshop Anda kini telah aktif dengan rincian jadwal studio.`
+      : isHomestay
+      ? `Transaksi sebesar ${formatRupiah(totalAmount)} berhasil diverifikasi. Voucher reservasi homestay Anda kini telah aktif dengan rincian check-in.`
+      : `Transaksi sebesar ${formatRupiah(totalAmount)} berhasil diverifikasi. Tiket digital QR Anda kini telah aktif dan dapat dibuka secara offline.`;
+
+    const buttonLabel = isGuide
+      ? 'Buka Voucher Pemandu'
+      : isWorkshop
+      ? 'Buka Voucher Workshop'
+      : isHomestay
+      ? 'Buka Voucher Homestay'
+      : 'Buka Tiket Saya';
+
     Alert.alert(
       'Pembayaran Berhasil',
-      isGuide
-        ? `Transaksi sebesar ${formatRupiah(totalAmount)} berhasil diverifikasi. Voucher reservasi pemandu Anda kini telah aktif dengan rincian titik temu & kontak.`
-        : `Transaksi sebesar ${formatRupiah(totalAmount)} berhasil diverifikasi. Tiket digital QR Anda kini telah aktif dan dapat dibuka secara offline.`,
+      successMessage,
       [
         {
-          text: isGuide ? 'Buka Voucher Pemandu' : 'Buka Tiket Saya',
+          text: buttonLabel,
           onPress: () => {
             router.replace({
               pathname: '/ticket/detail',
               params: {
-                service_type: isGuide ? 'guide' : 'ticket',
+                service_type: serviceType,
                 title: displayTitle,
                 location: displayLocation,
                 amount: String(totalAmount),
@@ -107,7 +142,15 @@ export default function PaymentScreen() {
             <View className="flex-row items-center gap-3.5 flex-1 pr-2">
               <View className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 bg-surface-tonal">
                 <Image
-                  source={isGuide ? PHOTO_COVERS.desaTomok : PHOTO_COVERS.parapat}
+                  source={
+                    isGuide
+                      ? PHOTO_COVERS.desaTomok
+                      : isWorkshop
+                      ? PHOTO_COVERS.ulos
+                      : isHomestay
+                      ? PHOTO_COVERS.homestaySopo
+                      : PHOTO_COVERS.parapat
+                  }
                   className="w-full h-full"
                   resizeMode="cover"
                 />
@@ -121,7 +164,7 @@ export default function PaymentScreen() {
                   {displayTitle}
                 </Text>
                 <Text className="text-xs font-dmsans text-on-surface-variant mt-0.5">
-                  {displayLocation} • {participantCount} Peserta
+                  {displayLocation} • {participantCount} {isHomestay ? 'Malam' : 'Peserta'}
                 </Text>
               </View>
             </View>
