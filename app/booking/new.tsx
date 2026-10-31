@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   View,
   Text,
@@ -8,7 +8,7 @@ import {
   Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useRouter } from 'expo-router';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { formatRupiah } from '@/lib/format';
@@ -17,11 +17,31 @@ import { PHOTO_COVERS } from '@/constants/localPhotos';
 
 export default function NewBookingScreen() {
   const router = useRouter();
-  const [bookingType, setBookingType] = useState<'ticket' | 'guide'>('ticket');
+  const params = useLocalSearchParams<{
+    service_type?: string;
+    guide_id?: string;
+    guide_name?: string;
+    guide_specialty?: string;
+    guide_district?: string;
+    guide_price?: string;
+  }>();
+
+  const isGuideParam = params.service_type === 'guide';
+  const [bookingType, setBookingType] = useState<'ticket' | 'guide'>(isGuideParam ? 'guide' : 'ticket');
   const [participantCount, setParticipantCount] = useState<number>(2);
 
-  const pricePerItem = bookingType === 'ticket' ? 50000 : 150000;
-  const totalPrice = participantCount * pricePerItem;
+  // Parsing tarif pemandu dari format string (misal "Rp 250.000" -> 250000)
+  const parsedGuidePrice = useMemo(() => {
+    if (params.guide_price) {
+      const num = parseInt(params.guide_price.replace(/[^0-9]/g, ''), 10);
+      if (!isNaN(num) && num > 0) return num;
+    }
+    return 250000;
+  }, [params.guide_price]);
+
+  // Tiket: per peserta. Pemandu: tarif flat per rombongan trip
+  const pricePerItem = bookingType === 'ticket' ? 50000 : parsedGuidePrice;
+  const totalPrice = bookingType === 'ticket' ? participantCount * pricePerItem : pricePerItem;
 
   const handleTypeSwitch = (type: 'ticket' | 'guide') => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
@@ -44,7 +64,20 @@ export default function NewBookingScreen() {
 
   const handleProceedPayment = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
-    router.push('/payment');
+    router.push({
+      pathname: '/payment',
+      params: {
+        service_type: bookingType,
+        title: bookingType === 'guide'
+          ? (params.guide_name || 'Bona Simanjuntak')
+          : 'Pesta Danau Toba & Pagelaran Gondang',
+        location: bookingType === 'guide'
+          ? (params.guide_district || 'Dermaga Tomok, Pulau Samosir')
+          : 'Pantai Bebas Parapat, Simalungun',
+        amount: String(totalPrice),
+        participants: String(participantCount),
+      },
+    });
   };
 
   return (
@@ -127,19 +160,19 @@ export default function NewBookingScreen() {
           <View className="border border-white/80 rounded-3xl bg-white/80 p-4 flex-row items-center justify-between shadow-sm">
             <View className="flex-row items-center gap-3.5 flex-1 pr-2">
               <View className="w-10 h-10 rounded-full bg-primary/10 items-center justify-center">
-                <Ionicons name="sparkles" size={18} color="#1D4ED8" />
+                <Ionicons name={bookingType === 'guide' ? 'person' : 'sparkles'} size={18} color="#1D4ED8" />
               </View>
               <View className="flex-1">
                 <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-on-surface-variant">
-                  Layanan Terpilih
+                  {bookingType === 'guide' ? 'Pemandu Terpilih' : 'Layanan Terpilih'}
                 </Text>
                 <Text
                   numberOfLines={1}
                   className="font-raleway text-base font-medium text-on-surface tracking-wide mt-0.5"
                 >
-                  {bookingType === 'ticket'
-                    ? 'Pesta Danau Toba & Pagelaran Gondang'
-                    : 'Pemandu Budaya Desa Adat Tomok'}
+                  {bookingType === 'guide'
+                    ? (params.guide_name || 'Bona Simanjuntak')
+                    : 'Pesta Danau Toba & Pagelaran Gondang'}
                 </Text>
               </View>
             </View>
@@ -154,15 +187,15 @@ export default function NewBookingScreen() {
               </View>
               <View className="flex-1">
                 <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-on-surface-variant">
-                  Titik Lokasi
+                  {bookingType === 'guide' ? 'Titik Kumpul Temu' : 'Titik Lokasi'}
                 </Text>
                 <Text
                   numberOfLines={1}
                   className="font-raleway text-base font-medium text-on-surface tracking-wide mt-0.5"
                 >
-                  {bookingType === 'ticket'
-                    ? 'Pantai Bebas Parapat, Simalungun'
-                    : 'Dermaga Tomok, Pulau Samosir'}
+                  {bookingType === 'guide'
+                    ? (params.guide_district || 'Dermaga Tomok, Pulau Samosir')
+                    : 'Pantai Bebas Parapat, Simalungun'}
                 </Text>
               </View>
             </View>
@@ -198,10 +231,10 @@ export default function NewBookingScreen() {
               </View>
               <View>
                 <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-on-surface-variant">
-                  Jumlah Peserta
+                  {bookingType === 'guide' ? 'Kapasitas Rombongan' : 'Jumlah Peserta'}
                 </Text>
                 <Text className="font-raleway text-base font-medium text-on-surface tracking-wide mt-0.5">
-                  {participantCount} Peserta ({formatRupiah(pricePerItem)}/org)
+                  {participantCount} Orang {bookingType === 'guide' ? '(Maks. 10 org/trip)' : `(${formatRupiah(pricePerItem)}/org)`}
                 </Text>
               </View>
             </View>
@@ -233,7 +266,9 @@ export default function NewBookingScreen() {
             RINCIAN ESTIMASI BIAYA
           </Text>
           <View className="flex-row justify-between items-center pb-2.5 border-b border-border/50">
-            <Text className="text-xs font-dmsans text-on-surface-variant">Tarif Dasar ({participantCount}x)</Text>
+            <Text className="text-xs font-dmsans text-on-surface-variant">
+              {bookingType === 'guide' ? 'Jasa Pemandu (Tarif Tur Rombongan)' : `Tiket Masuk (${participantCount}x)`}
+            </Text>
             <Text className="text-xs font-dmsans-medium text-on-surface">
               {formatRupiah(totalPrice)}
             </Text>

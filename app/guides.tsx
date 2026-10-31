@@ -262,7 +262,17 @@ export default function GuidesScreen() {
                 <Pressable
                   onPress={() => {
                     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
-                    router.push('/booking/new');
+                    router.push({
+                      pathname: '/booking/new',
+                      params: {
+                        service_type: 'guide',
+                        guide_id: guide.id,
+                        guide_name: guide.name,
+                        guide_specialty: guide.specialty,
+                        guide_district: guide.district,
+                        guide_price: guide.pricePerTrip,
+                      },
+                    });
                   }}
                   className="h-9 px-5 bg-primary rounded-full flex-row items-center justify-center gap-1.5 shadow-xs"
                 >

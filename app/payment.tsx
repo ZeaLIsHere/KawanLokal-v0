@@ -8,9 +8,10 @@ import {
   Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useRouter } from 'expo-router';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
+import { formatRupiah } from '@/lib/format';
 import { AppIcon } from '@/components/AppIcon';
 import { PHOTO_COVERS } from '@/constants/localPhotos';
 
@@ -18,6 +19,20 @@ type PaymentMethod = 'qris' | 'va' | 'card';
 
 export default function PaymentScreen() {
   const router = useRouter();
+  const params = useLocalSearchParams<{
+    service_type?: string;
+    title?: string;
+    location?: string;
+    amount?: string;
+    participants?: string;
+  }>();
+
+  const isGuide = params.service_type === 'guide';
+  const displayTitle = params.title || (isGuide ? 'Bona Simanjuntak' : 'Pesta Danau Toba');
+  const displayLocation = params.location || (isGuide ? 'Dermaga Tomok, Samosir' : 'Pantai Bebas Parapat');
+  const totalAmount = params.amount ? parseInt(params.amount, 10) : 100000;
+  const participantCount = params.participants || '2';
+
   const [selectedMethod, setSelectedMethod] = useState<PaymentMethod>('qris');
 
   const handleSelectMethod = (method: PaymentMethod) => {
@@ -29,12 +44,23 @@ export default function PaymentScreen() {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
     Alert.alert(
       'Pembayaran Berhasil',
-      'Transaksi sebesar Rp 100.000 berhasil diverifikasi. Tiket digital QR Anda kini telah aktif dan dapat dibuka secara offline.',
+      isGuide
+        ? `Transaksi sebesar ${formatRupiah(totalAmount)} berhasil diverifikasi. Voucher reservasi pemandu Anda kini telah aktif dengan rincian titik temu & kontak.`
+        : `Transaksi sebesar ${formatRupiah(totalAmount)} berhasil diverifikasi. Tiket digital QR Anda kini telah aktif dan dapat dibuka secara offline.`,
       [
         {
-          text: 'Buka Tiket Saya',
+          text: isGuide ? 'Buka Voucher Pemandu' : 'Buka Tiket Saya',
           onPress: () => {
-            router.replace('/ticket/detail');
+            router.replace({
+              pathname: '/ticket/detail',
+              params: {
+                service_type: isGuide ? 'guide' : 'ticket',
+                title: displayTitle,
+                location: displayLocation,
+                amount: String(totalAmount),
+                participants: participantCount,
+              },
+            });
           },
         },
       ]
@@ -81,7 +107,7 @@ export default function PaymentScreen() {
             <View className="flex-row items-center gap-3.5 flex-1 pr-2">
               <View className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 bg-surface-tonal">
                 <Image
-                  source={PHOTO_COVERS.parapat}
+                  source={isGuide ? PHOTO_COVERS.desaTomok : PHOTO_COVERS.parapat}
                   className="w-full h-full"
                   resizeMode="cover"
                 />
@@ -92,17 +118,17 @@ export default function PaymentScreen() {
                   numberOfLines={1}
                   className="font-raleway text-base font-medium text-on-surface tracking-wide leading-tight"
                 >
-                  Pesta Danau Toba
+                  {displayTitle}
                 </Text>
                 <Text className="text-xs font-dmsans text-on-surface-variant mt-0.5">
-                  Pantai Bebas Parapat • 2 Peserta
+                  {displayLocation} • {participantCount} Peserta
                 </Text>
               </View>
             </View>
 
             <View className="items-end pl-2 shrink-0">
               <Text className="font-dmsans-bold text-base text-primary">
-                Rp 100.000
+                {formatRupiah(totalAmount)}
               </Text>
             </View>
           </View>
@@ -225,7 +251,7 @@ export default function PaymentScreen() {
         >
           <AppIcon name="wallet" size={20} color="#FFFFFF" />
           <Text className="text-white font-dmsans-medium text-base tracking-wide">
-            Bayar Rp 100.000
+            Bayar {formatRupiah(totalAmount)}
           </Text>
         </Pressable>
 
