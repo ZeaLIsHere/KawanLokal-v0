@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Truway Travel Design System Colors
+        // Primary Brand: Biru Danau Toba
         primary: {
           DEFAULT: "#1D4ED8",
           container: "#2563EB",
@@ -16,25 +16,37 @@ module.exports = {
           light: "#EFF6FF",
           fixed: "#dbe1ff",
         },
+        // Warm Sand Glassmorphic Surfaces
         surface: {
-          DEFAULT: "#faf8ff",
-          canvas: "#F8FAFC",
+          DEFAULT: "#FAF7F2",
+          canvas: "#FAF7F2",
           card: "#FFFFFF",
+          alt: "#FFFFFF",
+          muted: "#F2EFEA",
+          tonal: "#F0EAE1",
+          glass: "rgba(255,255,255,0.7)",
+          glassSoft: "rgba(255,255,255,0.45)",
           container: "#eaedff",
           dim: "#d2d9f4",
         },
         'on-surface': {
-          DEFAULT: "#131b2e",
-          variant: "#434655",
+          DEFAULT: "#23201E",
+          variant: "#8A827A",
+          strong: "#4A4542",
         },
+        border: {
+          DEFAULT: "#EBE3D5",
+          glass: "rgba(255,255,255,0.6)",
+        },
+        destructive: "#8C4A4A",
         secondary: {
-          DEFAULT: "#505f76",
-          container: "#d0e1fb",
+          DEFAULT: "#8A827A",
+          container: "#F0EAE1",
         },
-        'card-border': "#E2E8F0",
-        'input-border': "#CBD5E1",
+        'card-border': "#EBE3D5",
+        'input-border': "#EBE3D5",
         rating: {
-          amber: "#F59E0B",
+          amber: "#D97706",
         },
         badge: {
           discount: {
@@ -42,22 +54,28 @@ module.exports = {
             text: "#15803D",
           },
         },
-        // Warna tema utama aplikasi (Biru Danau Toba)
+        // Tema Budaya Toba & Ulos
         ulos: {
           red: "#1D4ED8",
           redDark: "#1E40AF",
           redLight: "#3B82F6",
-          black: "#1C1917",
+          black: "#23201E",
           dark: "#0F0E0D",
-          charcoal: "#292524",
+          charcoal: "#4A4542",
           cream: "#FAF7F2",
           white: "#FFFFFF",
-          gold: "#D97706",
-          goldLight: "#FBBF24",
+          gold: "#C1A673",
+          goldLight: "#F0EAE1",
         },
       },
       fontFamily: {
-        sans: ["System"],
+        raleway: ["Raleway_400Regular"],
+        "raleway-medium": ["Raleway_500Medium"],
+        "raleway-bold": ["Raleway_700Bold"],
+        dmsans: ["DMSans_400Regular"],
+        "dmsans-medium": ["DMSans_500Medium"],
+        "dmsans-bold": ["DMSans_700Bold"],
+        sans: ["DMSans_400Regular", "System"],
       },
     },
   },

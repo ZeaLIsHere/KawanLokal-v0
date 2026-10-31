@@ -26,7 +26,9 @@ Dokumen catatan kemajuan pengembangan aplikasi mobile **KawanLokal** (Platform B
 - [x] Penyesuaian konfigurasi `app.config.ts` untuk plugin `expo-splash-screen`, ikon adaptif, dan konfigurasi skema rute.
 
 ### B. Desain Sistem & Aset Visual Lokal
-- [x] Transformasi warna tema utama dari merah ulos ke **Royal Blue Danau Toba (`#1D4ED8`)** yang harmonis dengan aksen air kaldera Toba.
+- [x] Transformasi warna tema utama ke **Royal Blue Danau Toba (`#1D4ED8`)** dipadukan dengan palet **Warm Sand Glassmorphic (`@DESIGN.md`)** (`#FAF7F2` canvas, `#23201E` dark charcoal, `#8A827A` subdued neutral, `#EBE3D5` hairline divider).
+- [x] Integrasi Google Fonts resmi: **Raleway** (Headings 400, 500, 700) dan **DM Sans** (Body & tracked uppercase micro-labels 400, 500, 700).
+- [x] Implementasi **Floating Pill Tab Bar** (`rounded-full`, melayang di atas batas bawah, transparan kaca `bg-white/92`, border hairline, dan indikator dot aktif biru).
 - [x] Pembersihan dan integrasi 20 ikon antarmuka SVG bertema minimalis di `assets/icons/` menggunakan komponen `src/components/AppIcon.tsx`.
 - [x] Integrasi **111 foto dokumentasi asli Danau Toba & budaya Batak** dari 16 kategori folder lokal (`lake toba`, `desa tomok`, `gondang`, `gorga`, `homestay sopo`, `huta ginjang`, `kampung suhisuhi`, `lembah bakkara`, `parapat`, `pusuk buhit`, `rumah bolon`, `sipiso piso`, `tao silalahi`, `toba culinary`, `tor tor`, `ulos`) via modul `src/constants/localPhotos.ts`.
 - [x] Dukungan registrasi ekstensi aset kapital (`JPG`, `PNG`, `WEBP`) pada Metro bundler agar pembundelan foto lokal berjalan 100% tanpa error.

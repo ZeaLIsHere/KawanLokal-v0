@@ -91,16 +91,16 @@ export default function OnboardingScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-surface-card" edges={['top', 'bottom']}>
+    <SafeAreaView className="flex-1 bg-surface" edges={['top', 'bottom']}>
       {/* Brand Header & Skip Button */}
-      <View className="pt-2 pb-1 px-5 flex-row items-center justify-between">
+      <View className="pt-2 pb-1 px-6 flex-row items-center justify-between">
         <View className="flex-row items-center gap-2">
           {/* Logo Glyph KawanLokal Biru Toba */}
-          <View className="w-8 h-8 rounded-xl bg-ulos-red items-center justify-center shadow-sm">
-            <Ionicons name="sparkles" size={17} color="#FFFFFF" />
+          <View className="w-8 h-8 rounded-full bg-primary items-center justify-center shadow-sm">
+            <Ionicons name="sparkles" size={16} color="#FFFFFF" />
           </View>
-          <Text className="text-xl font-bold text-on-surface tracking-tight">
-            Kawan<Text className="text-ulos-red">Lokal</Text>
+          <Text className="font-raleway text-xl font-medium text-on-surface tracking-wide">
+            Kawan<Text className="text-primary font-semibold">Lokal</Text>
           </Text>
         </View>
 
@@ -108,9 +108,11 @@ export default function OnboardingScreen() {
           <Pressable
             accessibilityLabel="Lewati intro"
             onPress={handleSkip}
-            className="px-3 py-1.5 rounded-full active:bg-stone-100"
+            className="px-3.5 py-1.5 rounded-full active:bg-surface-tonal"
           >
-            <Text className="text-xs font-semibold text-secondary">Lewati</Text>
+            <Text className="text-[11px] uppercase tracking-[0.15em] font-dmsans-bold text-on-surface-variant">
+              LEWATI
+            </Text>
           </Pressable>
         ) : (
           <View className="w-12" />
@@ -132,9 +134,9 @@ export default function OnboardingScreen() {
             <View
               key={slide.id}
               style={{ width }}
-              className="px-5 py-2 justify-center items-center"
+              className="px-6 py-2 justify-center items-center"
             >
-              <View className="w-full h-full max-h-[360px] rounded-3xl overflow-hidden bg-stone-100 shadow-sm relative">
+              <View className="w-full h-full max-h-[360px] rounded-[36px] overflow-hidden bg-surface-tonal border border-white/80 shadow-sm relative">
                 <Image
                   source={slide.image}
                   className="w-full h-full"
@@ -142,7 +144,7 @@ export default function OnboardingScreen() {
                 />
 
                 {/* Subtle bottom gradient */}
-                <View className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white/70 via-white/10 to-transparent pointer-events-none" />
+                <View className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white/60 via-white/10 to-transparent pointer-events-none" />
               </View>
             </View>
           ))}
@@ -150,23 +152,26 @@ export default function OnboardingScreen() {
       </View>
 
       {/* Bottom Content Area */}
-      <View className="w-full px-6 pt-2 pb-4 bg-surface-card">
+      <View className="w-full px-6 pt-2 pb-4 bg-surface">
         {/* Dynamic Text for Active Card */}
-        <View className="min-h-[115px] justify-start mb-4">
-          <Text className="text-3xl font-bold text-on-surface tracking-tight leading-tight">
+        <View className="min-h-[125px] justify-start mb-3">
+          <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-primary mb-1">
+            {ONBOARDING_SLIDES[activeIndex].tag}
+          </Text>
+          <Text className="font-raleway text-3xl font-normal text-on-surface tracking-wide leading-tight">
             {ONBOARDING_SLIDES[activeIndex].title}
           </Text>
-          <Text className="text-sm text-secondary mt-2 font-normal leading-relaxed">
+          <Text className="font-dmsans text-sm text-on-surface-variant mt-2 font-normal leading-relaxed">
             {ONBOARDING_SLIDES[activeIndex].description}
           </Text>
         </View>
 
-        {/* Action Button */}
+        {/* Action Button (Primary Pill) */}
         <Pressable
           onPress={handleNext}
-          className="w-full h-12 bg-ulos-red active:bg-ulos-redDark rounded-full flex-row items-center justify-center gap-2 shadow-md active:opacity-90"
+          className="w-full h-14 bg-primary active:bg-blue-800 rounded-full flex-row items-center justify-center gap-2 shadow-md active:opacity-90"
         >
-          <Text className="text-white font-semibold text-base">
+          <Text className="text-white font-dmsans-medium text-base tracking-wide">
             {isLastSlide ? 'Mulai Eksplorasi' : 'Lanjut'}
           </Text>
           <Ionicons
@@ -186,7 +191,7 @@ export default function OnboardingScreen() {
                 accessibilityLabel={`Slide ke-${index + 1}`}
                 onPress={() => handleDotPress(index)}
                 className={`h-2 rounded-full transition-none ${
-                  isActive ? 'w-6 bg-ulos-red' : 'w-2 bg-input-border'
+                  isActive ? 'w-6 bg-primary' : 'w-2 bg-border'
                 }`}
               />
             );

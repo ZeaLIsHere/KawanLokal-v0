@@ -89,29 +89,34 @@ export default function OrdersScreen() {
   const filteredOrders = TRIP_ORDERS.filter((order) => order.status === activeTab);
 
   return (
-    <SafeAreaView className="flex-1 bg-surface-canvas" edges={['top']}>
-      {/* Top Header */}
-      <View className="px-4 py-3 bg-surface-card border-b border-card-border shadow-xs">
-        <Text className="text-xl font-bold text-on-surface">Pesanan & Riwayat Saya</Text>
-        <Text className="text-xs text-secondary mt-0.5">
+    <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
+      {/* Top Header Glassmorphic */}
+      <View className="px-5 py-3.5 bg-white/75 border-b border-border/50">
+        <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant mb-0.5">
+          RIWAYAT KEGIATAN
+        </Text>
+        <Text className="font-raleway text-2xl font-medium text-on-surface tracking-wide">
+          Pesanan & Tiket Saya
+        </Text>
+        <Text className="text-xs font-dmsans text-on-surface-variant mt-1 leading-relaxed">
           Tiket QR digital dan riwayat kegiatan budaya Danau Toba
         </Text>
       </View>
 
       {/* Trip Category Segmented Filter Tabs */}
-      <View className="px-4 pt-3.5 pb-2">
-        <View className="flex-row items-center justify-between p-1 bg-surface-card rounded-full border border-card-border shadow-xs">
+      <View className="px-5 pt-3.5 pb-2">
+        <View className="flex-row items-center justify-between p-1 bg-white/70 rounded-full border border-white/80 shadow-sm">
           <Pressable
             onPress={() => handleTabChange('upcoming')}
             className={`flex-1 py-2 px-3 rounded-full items-center justify-center active:opacity-80 ${
               activeTab === 'upcoming'
-                ? 'bg-ulos-red shadow-sm'
+                ? 'bg-primary shadow-sm'
                 : 'bg-transparent'
             }`}
           >
             <Text
-              className={`text-xs font-bold ${
-                activeTab === 'upcoming' ? 'text-white' : 'text-secondary'
+              className={`text-[10px] uppercase tracking-[0.15em] font-dmsans-bold ${
+                activeTab === 'upcoming' ? 'text-white' : 'text-on-surface-variant'
               }`}
             >
               Mendatang
@@ -122,13 +127,13 @@ export default function OrdersScreen() {
             onPress={() => handleTabChange('completed')}
             className={`flex-1 py-2 px-3 rounded-full items-center justify-center active:opacity-80 ${
               activeTab === 'completed'
-                ? 'bg-ulos-red shadow-sm'
+                ? 'bg-primary shadow-sm'
                 : 'bg-transparent'
             }`}
           >
             <Text
-              className={`text-xs font-bold ${
-                activeTab === 'completed' ? 'text-white' : 'text-secondary'
+              className={`text-[10px] uppercase tracking-[0.15em] font-dmsans-bold ${
+                activeTab === 'completed' ? 'text-white' : 'text-on-surface-variant'
               }`}
             >
               Selesai
@@ -139,13 +144,13 @@ export default function OrdersScreen() {
             onPress={() => handleTabChange('cancelled')}
             className={`flex-1 py-2 px-3 rounded-full items-center justify-center active:opacity-80 ${
               activeTab === 'cancelled'
-                ? 'bg-ulos-red shadow-sm'
+                ? 'bg-primary shadow-sm'
                 : 'bg-transparent'
             }`}
           >
             <Text
-              className={`text-xs font-bold ${
-                activeTab === 'cancelled' ? 'text-white' : 'text-secondary'
+              className={`text-[10px] uppercase tracking-[0.15em] font-dmsans-bold ${
+                activeTab === 'cancelled' ? 'text-white' : 'text-on-surface-variant'
               }`}
             >
               Dibatalkan
@@ -156,8 +161,8 @@ export default function OrdersScreen() {
 
       {/* Trips List Cards */}
       <ScrollView
-        className="flex-1 px-4 pt-2"
-        contentContainerStyle={{ paddingBottom: 40 }}
+        className="flex-1 px-5 pt-2"
+        contentContainerStyle={{ paddingBottom: 110 }}
         showsVerticalScrollIndicator={false}
       >
         {filteredOrders.map((order) => {
@@ -172,10 +177,10 @@ export default function OrdersScreen() {
             <Pressable
               key={order.id}
               onPress={() => handleCardPress(order)}
-              className="bg-surface-card rounded-2xl p-3 border border-card-border shadow-sm active:opacity-90 mb-3.5 flex-row items-center gap-3.5"
+              className="bg-white/80 rounded-3xl p-3.5 border border-white/80 shadow-sm active:opacity-90 mb-3.5 flex-row items-center gap-3.5"
             >
               {/* 96x96 Photo Thumbnail */}
-              <View className="w-24 h-24 rounded-xl overflow-hidden bg-stone-100 shrink-0">
+              <View className="w-24 h-24 rounded-2xl overflow-hidden bg-surface-tonal shrink-0">
                 <Image
                   source={order.image}
                   className="w-full h-full"
@@ -188,19 +193,19 @@ export default function OrdersScreen() {
                 <View>
                   <Text
                     numberOfLines={1}
-                    className="text-sm font-bold text-on-surface leading-snug"
+                    className="font-raleway text-base font-medium text-on-surface tracking-wide leading-tight"
                   >
                     {order.title}
                   </Text>
                   <View className="flex-row items-center gap-1.5 mt-1">
-                    <AppIcon name="calendar" size={13} />
-                    <Text numberOfLines={1} className="text-[11px] text-secondary">
+                    <AppIcon name="calendar" size={13} color="#8A827A" />
+                    <Text numberOfLines={1} className="text-[11px] font-dmsans text-on-surface-variant">
                       {order.dateWIB}
                     </Text>
                   </View>
                   <View className="flex-row items-center gap-1.5 mt-0.5">
-                    <AppIcon name="profile" size={13} />
-                    <Text className="text-[11px] text-secondary">
+                    <AppIcon name="profile" size={13} color="#8A827A" />
+                    <Text className="text-[11px] font-dmsans text-on-surface-variant">
                       {order.travelers}
                     </Text>
                   </View>
@@ -208,12 +213,12 @@ export default function OrdersScreen() {
 
                 {/* Status Badge & Price */}
                 <View className="flex-row items-center justify-between mt-1">
-                  <View className={`self-start px-2 py-0.5 rounded-full border ${badgeStyles}`}>
-                    <Text className="text-[10px] font-bold">
+                  <View className={`self-start px-2.5 py-0.5 rounded-full border ${badgeStyles}`}>
+                    <Text className="text-[10px] uppercase tracking-wider font-dmsans-bold">
                       {order.statusLabel}
                     </Text>
                   </View>
-                  <Text className="text-xs font-bold text-on-surface">
+                  <Text className="font-dmsans-bold text-xs text-primary">
                     {order.price}
                   </Text>
                 </View>
@@ -221,7 +226,7 @@ export default function OrdersScreen() {
 
               {/* Trailing Chevron */}
               <View className="shrink-0 pl-1">
-                <Ionicons name="chevron-forward" size={18} color="#CBD5E1" />
+                <Ionicons name="chevron-forward" size={18} color="#8A827A" />
               </View>
             </Pressable>
           );
@@ -229,21 +234,15 @@ export default function OrdersScreen() {
 
         {filteredOrders.length === 0 && (
           <View className="items-center justify-center py-16 px-6">
-            <View className="w-16 h-16 rounded-2xl bg-stone-100 items-center justify-center mb-3">
-              <AppIcon name="ticket" size={32} />
+            <View className="w-16 h-16 rounded-full bg-surface-tonal items-center justify-center mb-3 border border-border">
+              <AppIcon name="ticket" size={30} color="#8A827A" />
             </View>
-            <Text className="text-base font-bold text-on-surface text-center">
+            <Text className="font-raleway text-lg font-medium text-on-surface text-center">
               Belum Ada Kegiatan {activeTab === 'cancelled' ? 'Dibatalkan' : 'Selesai'}
             </Text>
-            <Text className="text-xs text-secondary text-center mt-1 mb-5">
+            <Text className="text-xs font-dmsans text-on-surface-variant text-center mt-1 mb-5 leading-relaxed">
               Jelajahi kalender upacara adat atau pesan pengalaman pemandu lokal Danau Toba.
             </Text>
-            <Pressable
-              onPress={() => router.push('/(tabs)/home')}
-              className="px-5 py-2.5 rounded-xl bg-ulos-red active:bg-ulos-redDark shadow-sm"
-            >
-              <Text className="text-xs font-bold text-white">Mulai Eksplorasi</Text>
-            </Pressable>
           </View>
         )}
 
