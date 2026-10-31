@@ -166,9 +166,6 @@ export default function EventDetailScreen() {
 
         {/* Urutan Program Acara (Timeline Itinerary) */}
         <View className="bg-white/85 rounded-3xl border border-white/90 p-5 shadow-sm mb-5">
-          <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant mb-1">
-            RUNDOWN KEGIATAN
-          </Text>
           <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide mb-4">
             Susunan Prosesi Adat
           </Text>
@@ -177,12 +174,11 @@ export default function EventDetailScreen() {
             {currentEvent.itinerary.map((item, idx) => {
               const isLast = idx === currentEvent.itinerary.length - 1;
               return (
-                <View key={idx} className="flex-row items-start gap-3.5">
+                <View key={idx} className="flex-row items-start gap-3">
                   <View className="w-16 pt-0.5">
                     <Text className="text-xs font-dmsans-bold text-primary">{item.dayLabel}</Text>
                     <Text className="text-[10px] font-dmsans text-on-surface-variant">{item.time}</Text>
                   </View>
-                  <View className="w-2.5 h-2.5 rounded-full bg-primary mt-1.5" />
                   <View className={`flex-1 ${!isLast ? 'pb-3 border-b border-border/50' : ''}`}>
                     <Text className="font-raleway text-sm font-medium text-on-surface tracking-wide leading-snug">
                       {item.title}
