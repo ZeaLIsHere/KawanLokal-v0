@@ -37,7 +37,7 @@ Dokumen catatan kemajuan pengembangan aplikasi mobile **KawanLokal** (Platform B
 1. **Onboarding (`app/onboarding.tsx`):**
    - 3 kartu interaktif dengan geser horizontal (carousel), dot pagination dinamis, tombol Lewati, dan foto asli Danau Toba.
 2. **Beranda (`app/(tabs)/home.tsx`):**
-   - TopAppBar dengan sapaan "Horas", input pencarian WIB, 4 tombol cepat layanan, kartu acara budaya dengan status kuota, dan avatar pengguna dinamis.
+   - TopAppBar dengan sapaan "Horas", banner CTA interaktif kalender budaya ("Eksplorasi Ritus & Festival Adat" jadwal WIB) berumpan balik haptik, 4 tombol cepat layanan, kartu acara budaya dengan status kuota, dan avatar pengguna dinamis.
 3. **Katalog Mandiri 4 Layanan Lokal:**
    - **Tiket Acara (`app/tickets.tsx`):** Tiket pesta danau, pagelaran gondang, dan upacara adat lengkap dengan sisa kuota.
    - **Pemandu Budaya (`app/guides.tsx`):** Daftar pemandu lokal berlisensi, spesialisasi adat/sejarah, bahasa yang dikuasai, dan tarif per trip.

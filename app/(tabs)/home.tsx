@@ -3,7 +3,6 @@ import {
   View,
   Text,
   ScrollView,
-  TextInput,
   Pressable,
   Image,
 } from 'react-native';
@@ -117,28 +116,33 @@ export default function HomeScreen() {
           </Text>
         </View>
 
-        {/* Search Input Module (Glass Field Recipe) */}
+        {/* CTA Kalender Budaya Toba */}
         <View className="mb-6">
           <Pressable
-            onPress={() => router.push('/calendar')}
-            className="flex-row items-center w-full bg-white/80 rounded-2xl border border-white/80 shadow-sm px-4 h-14"
+            accessibilityLabel="Eksplorasi Ritus dan Festival Adat"
+            accessibilityRole="button"
+            onPress={() => {
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+              router.push('/calendar');
+            }}
+            className="flex-row items-center justify-between w-full bg-white/85 rounded-2xl border border-white/90 shadow-sm p-4 active:opacity-90"
           >
-            <View className="w-8 h-8 rounded-full bg-primary/10 items-center justify-center mr-3">
-              <AppIcon name="search" size={17} color="#1D4ED8" />
+            <View className="flex-row items-center flex-1 mr-3">
+              <View className="w-10 h-10 rounded-full bg-primary/10 items-center justify-center mr-3.5">
+                <AppIcon name="calendar" size={20} color="#1D4ED8" />
+              </View>
+              <View className="flex-1">
+                <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-primary">
+                  AGENDA BUDAYA TERDEKAT
+                </Text>
+                <Text className="text-sm font-raleway font-semibold text-on-surface tracking-wide mt-0.5">
+                  Eksplorasi Ritus & Festival Adat
+                </Text>
+              </View>
             </View>
-            <View className="flex-1">
-              <Text className="text-[10px] uppercase tracking-[0.15em] font-dmsans-medium text-on-surface-variant">
-                PENCARIAN WISATA
-              </Text>
-              <TextInput
-                placeholder="Upacara adat, pemandu, ulos..."
-                placeholderTextColor="#8A827A"
-                editable={false}
-                className="w-full p-0 text-sm font-dmsans text-on-surface mt-0.5"
-              />
-            </View>
-            <View className="px-2.5 py-1 bg-surface-tonal rounded-full">
-              <Text className="text-[10px] font-dmsans-bold tracking-wider text-on-surface-strong">WIB</Text>
+            <View className="flex-row items-center bg-primary px-3.5 py-2 rounded-full shadow-sm">
+              <Text className="text-[11px] font-dmsans-bold text-white mr-1.5">Jadwal WIB</Text>
+              <AppIcon name="arrow-right" size={12} color="#FFFFFF" />
             </View>
           </Pressable>
         </View>
