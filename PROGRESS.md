@@ -80,6 +80,9 @@ Dokumen catatan kemajuan pengembangan aplikasi mobile **KawanLokal** (Platform B
 5. **Netralitas State Tombol Cepat Layanan Beranda:**
    - Permasalahan: Tombol kategori cepat (tiket, pemandu, workshop, homestay) berubah biru permanen saat diklik seolah filter aktif, padahal fungsinya adalah navigasi ke halaman katalog mandiri.
    - Solusi: Menghapus state `activeCategory`, mempertahankan gaya normal konsisten (`bg-white/80 border-white/90`), dan mengandalkan feedback sentuh instan (`active:opacity-70` + `Haptics.Light`).
+6. **Animasi Transisi Layar Native (Native-Stack):**
+   - Konfigurasi `app/_layout.tsx`: Memasang `animation: 'slide_from_right'`, `animationDuration: 220`, dan `gestureEnabled: true` untuk transisi halaman katalog/detail mulus berbasis thread native tanpa beban JS thread.
+   - Alur modal checkout (`booking/new`, `payment`) menggunakan `animation: 'slide_from_bottom'`, sementara rute gerbang (`index`, `onboarding`, `(tabs)`) menggunakan transisi `fade`.
 
 ---
 

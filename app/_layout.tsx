@@ -53,22 +53,36 @@ export default function RootLayout() {
       <I18nProvider>
         <SafeAreaProvider>
           <StatusBar style="dark" />
-          <Stack screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="index" />
-            <Stack.Screen name="onboarding" />
+          {/* ponytail: native-stack transition tanpa overhead JS gesture handler */}
+          <Stack
+            screenOptions={{
+              headerShown: false,
+              animation: 'slide_from_right',
+              animationDuration: 220,
+              gestureEnabled: true,
+            }}
+          >
+            <Stack.Screen name="index" options={{ animation: 'fade' }} />
+            <Stack.Screen name="onboarding" options={{ animation: 'fade' }} />
+            <Stack.Screen name="(tabs)" options={{ animation: 'fade' }} />
             <Stack.Screen name="destinations" options={{ presentation: 'card' }} />
             <Stack.Screen name="homestays" options={{ presentation: 'card' }} />
             <Stack.Screen name="tickets" options={{ presentation: 'card' }} />
             <Stack.Screen name="guides" options={{ presentation: 'card' }} />
             <Stack.Screen name="workshops" options={{ presentation: 'card' }} />
-            <Stack.Screen name="booking/new" options={{ presentation: 'card' }} />
+            <Stack.Screen
+              name="booking/new"
+              options={{ presentation: 'card', animation: 'slide_from_bottom' }}
+            />
             <Stack.Screen name="booking/[id]" options={{ presentation: 'card' }} />
-            <Stack.Screen name="payment" options={{ presentation: 'card' }} />
+            <Stack.Screen
+              name="payment"
+              options={{ presentation: 'card', animation: 'slide_from_bottom' }}
+            />
             <Stack.Screen name="ticket/[id]" options={{ presentation: 'card' }} />
             <Stack.Screen name="ticket/detail" options={{ presentation: 'card' }} />
             <Stack.Screen name="event/[id]" options={{ presentation: 'card' }} />
             <Stack.Screen name="event/detail" options={{ presentation: 'card' }} />
-            <Stack.Screen name="(tabs)" />
             <Stack.Screen name="calendar" options={{ presentation: 'card' }} />
             <Stack.Screen name="settings" options={{ presentation: 'card' }} />
             <Stack.Screen name="profile/index" options={{ presentation: 'card' }} />
