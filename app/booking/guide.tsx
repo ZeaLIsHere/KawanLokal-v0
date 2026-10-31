@@ -23,6 +23,9 @@ export default function GuideBookingScreen() {
     guide_specialty?: string;
     guide_district?: string;
     guide_price?: string;
+    promo_min?: string;
+    promo_discount?: string;
+    promo_label?: string;
   }>();
 
   const [groupSize, setGroupSize] = useState<number>(2);
@@ -36,13 +39,29 @@ export default function GuideBookingScreen() {
     return 250000;
   }, [params.guide_price]);
 
+  const promoMin = params.promo_min ? parseInt(params.promo_min, 10) : 0;
+  const promoDiscount = params.promo_discount ? parseInt(params.promo_discount, 10) : 0;
+  const promoLabel = params.promo_label || '';
+
+  // Logika promo otomatis aktif saat kapasitas rombongan memenuhi syarat
+  const hasPromo = promoMin > 0 && promoDiscount > 0;
+  const isPromoActive = hasPromo && groupSize >= promoMin;
+
+  const discountAmount = isPromoActive ? Math.round((tripPrice * promoDiscount) / 100) : 0;
+  const finalPrice = tripPrice - discountAmount;
+
   const guideName = params.guide_name || 'Bona Simanjuntak';
   const guideDistrict = params.guide_district || 'Dermaga Tomok, Pulau Samosir';
 
   const handleIncrement = () => {
     if (groupSize < 10) {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
-      setGroupSize((prev) => prev + 1);
+      const nextSize = groupSize + 1;
+      if (hasPromo && nextSize === promoMin) {
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {});
+      } else {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
+      }
+      setGroupSize(nextSize);
     }
   };
 
@@ -61,7 +80,7 @@ export default function GuideBookingScreen() {
         service_type: 'guide',
         title: guideName,
         location: guideDistrict,
-        amount: String(tripPrice),
+        amount: String(finalPrice),
         participants: String(groupSize),
       },
     });
@@ -198,6 +217,60 @@ export default function GuideBookingScreen() {
           </View>
         </View>
 
+        {/* Banner Status Promo Rombongan Otomatis */}
+        {hasPromo && (
+          <View
+            className={`rounded-3xl p-4 mb-5 border flex-row items-center gap-3.5 shadow-sm ${
+              isPromoActive
+                ? 'bg-emerald-50 border-emerald-300'
+                : 'bg-surface-tonal border-border/80'
+            }`}
+          >
+            <View
+              className={`w-10 h-10 rounded-2xl items-center justify-center shrink-0 ${
+                isPromoActive ? 'bg-emerald-600' : 'bg-white'
+              }`}
+            >
+              <Ionicons
+                name={isPromoActive ? 'checkmark-circle' : 'gift-outline'}
+                size={20}
+                color={isPromoActive ? '#FFFFFF' : '#8A827A'}
+              />
+            </View>
+
+            <View className="flex-1">
+              <View className="flex-row items-center justify-between">
+                <Text
+                  className={`text-[10px] uppercase tracking-[0.18em] font-dmsans-bold ${
+                    isPromoActive ? 'text-emerald-800' : 'text-on-surface-variant'
+                  }`}
+                >
+                  {isPromoActive ? 'PROMO AKTIF TERPASANG' : 'PROMO ROMBONGAN TERSEDIA'}
+                </Text>
+                {isPromoActive && (
+                  <View className="px-2 py-0.5 rounded-full bg-emerald-600">
+                    <Text className="text-[10px] font-dmsans-bold text-white">Hemat {promoDiscount}%</Text>
+                  </View>
+                )}
+              </View>
+
+              <Text
+                className={`font-raleway text-sm font-medium leading-snug mt-0.5 ${
+                  isPromoActive ? 'text-emerald-950 font-semibold' : 'text-on-surface'
+                }`}
+              >
+                {isPromoActive
+                  ? `Diskon ${promoDiscount}% otomatis memotong harga total tur!`
+                  : `Tambah ${promoMin - groupSize} orang lagi untuk mengaktifkan diskon ${promoDiscount}%.`}
+              </Text>
+
+              <Text className="text-[11px] font-dmsans text-on-surface-variant mt-0.5">
+                {promoLabel} (Rombongan Anda: {groupSize} orang)
+              </Text>
+            </View>
+          </View>
+        )}
+
         {/* Ringkasan Estimasi Biaya Glassmorphic */}
         <View className="bg-white/80 rounded-3xl border border-white/80 p-5 mb-5 shadow-sm">
           <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant mb-3">
@@ -205,21 +278,44 @@ export default function GuideBookingScreen() {
           </Text>
           <View className="flex-row justify-between items-center pb-2.5 border-b border-border/50">
             <Text className="text-xs font-dmsans text-on-surface-variant">
-              Jasa Pemandu Budaya (Tarif Tur Rombongan)
+              Tarif Tur Rombongan ({groupSize} org)
             </Text>
             <Text className="text-xs font-dmsans-medium text-on-surface">
               {formatRupiah(tripPrice)}
             </Text>
           </View>
+
+          {isPromoActive && (
+            <View className="flex-row justify-between items-center py-2.5 border-b border-border/50">
+              <View className="flex-row items-center gap-1.5">
+                <Ionicons name="pricetag" size={13} color="#15803D" />
+                <Text className="text-xs font-dmsans-bold text-emerald-800">
+                  Potongan Promo Rombongan ({promoDiscount}%)
+                </Text>
+              </View>
+              <Text className="text-xs font-dmsans-bold text-emerald-700">
+                - {formatRupiah(discountAmount)}
+              </Text>
+            </View>
+          )}
+
           <View className="flex-row justify-between items-center py-2.5 border-b border-border/50">
             <Text className="text-xs font-dmsans text-on-surface-variant">Biaya Layanan Konservasi</Text>
             <Text className="text-xs font-dmsans-bold text-emerald-700">Bebas Biaya</Text>
           </View>
+
           <View className="flex-row justify-between items-center pt-3">
             <Text className="font-raleway text-base font-medium text-on-surface">Total Biaya</Text>
-            <Text className="font-dmsans-bold text-lg text-primary">
-              {formatRupiah(tripPrice)}
-            </Text>
+            <View className="flex-row items-baseline gap-2">
+              {isPromoActive && (
+                <Text className="text-xs line-through text-on-surface-variant">
+                  {formatRupiah(tripPrice)}
+                </Text>
+              )}
+              <Text className={`font-dmsans-bold text-lg ${isPromoActive ? 'text-emerald-700' : 'text-primary'}`}>
+                {formatRupiah(finalPrice)}
+              </Text>
+            </View>
           </View>
         </View>
 
@@ -230,7 +326,7 @@ export default function GuideBookingScreen() {
         >
           <Ionicons name="card-outline" size={18} color="#FFFFFF" />
           <Text className="text-white font-dmsans-medium text-base tracking-wide">
-            Lanjut ke Pembayaran • {formatRupiah(tripPrice)}
+            Lanjut ke Pembayaran • {formatRupiah(finalPrice)}
           </Text>
         </Pressable>
 
