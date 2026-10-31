@@ -32,7 +32,7 @@ const ONBOARDING_SLIDES: OnboardingSlide[] = [
     title: 'Jelajahi\nKeagungan Toba',
     description:
       'Nikmati lanskap magis kaldera vulkanik terbesar di dunia, perbukitan hijau Samosir, dan danau biru yang menenangkan.',
-    image: PHOTO_COVERS.lakeToba,
+    image: require('../assets/photos/lake toba/IMG_2944.JPG'),
   },
   {
     id: 'slide-2',
