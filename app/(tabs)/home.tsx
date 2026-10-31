@@ -34,7 +34,6 @@ const LOCAL_CATEGORIES: { id: string; label: string; iconName: SvgIconName }[] =
 export default function HomeScreen() {
   const router = useRouter();
   const { t } = useTranslation();
-  const [activeCategory, setActiveCategory] = useState<string>('event_ticket');
   const [avatarUri, setAvatarUri] = useState<string>('');
 
   useFocusEffect(
@@ -49,7 +48,6 @@ export default function HomeScreen() {
 
   const handleCategoryPress = (id: string) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
-    setActiveCategory(id);
     switch (id) {
       case 'event_ticket':
         router.push('/tickets');
@@ -176,39 +174,27 @@ export default function HomeScreen() {
         <View className="px-5">
 
         {/* Kategori Cepat Layanan Lokal (PRD F3) */}
+        {/* ponytail: tombol navigasi cepat statis tanpa state filter aktif */}
         <View className="mb-7">
           <View className="flex-row justify-between">
-            {LOCAL_CATEGORIES.map((cat) => {
-              const isSelected = activeCategory === cat.id;
-              return (
-                <Pressable
-                  key={cat.id}
-                  onPress={() => handleCategoryPress(cat.id)}
-                  className="items-center active:opacity-75"
-                >
-                  <View
-                    className={`w-16 h-16 rounded-2xl items-center justify-center shadow-sm border ${
-                      isSelected
-                        ? 'bg-blue-50/80 border-primary'
-                        : 'bg-white/80 border-white/90'
-                    }`}
-                  >
-                    <AppIcon
-                      name={cat.iconName}
-                      size={26}
-                      color={isSelected ? '#1D4ED8' : '#23201E'}
-                    />
-                  </View>
-                  <Text
-                    className={`mt-2 text-[11px] font-dmsans-medium ${
-                      isSelected ? 'text-primary font-semibold' : 'text-on-surface'
-                    }`}
-                  >
-                    {cat.label}
-                  </Text>
-                </Pressable>
-              );
-            })}
+            {LOCAL_CATEGORIES.map((cat) => (
+              <Pressable
+                key={cat.id}
+                onPress={() => handleCategoryPress(cat.id)}
+                className="items-center active:opacity-70"
+              >
+                <View className="w-16 h-16 rounded-2xl items-center justify-center shadow-sm border bg-white/80 border-white/90">
+                  <AppIcon
+                    name={cat.iconName}
+                    size={26}
+                    color="#23201E"
+                  />
+                </View>
+                <Text className="mt-2 text-[11px] font-dmsans-medium text-on-surface">
+                  {cat.label}
+                </Text>
+              </Pressable>
+            ))}
           </View>
         </View>
 

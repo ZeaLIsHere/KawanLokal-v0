@@ -77,6 +77,9 @@ Dokumen catatan kemajuan pengembangan aplikasi mobile **KawanLokal** (Platform B
 4. **Presisi Penjajaran Vertikal Floating Pill Tab Bar:**
    - Permasalahan: Ikon pada Floating Pill Tab Bar tidak rata tengah vertikal akibat default `justifyContent: 'flex-start'` dan padding bawaan React Navigation tab item.
    - Solusi: Menambahkan `tabBarButton` dengan perataan tengah eksplisit (`justifyContent: 'center'`, `alignItems: 'center'`, `padding: 0`) dan indikator dot aktif berbasis `absolute` sesuai spesifikasi `DESIGN.md`.
+5. **Netralitas State Tombol Cepat Layanan Beranda:**
+   - Permasalahan: Tombol kategori cepat (tiket, pemandu, workshop, homestay) berubah biru permanen saat diklik seolah filter aktif, padahal fungsinya adalah navigasi ke halaman katalog mandiri.
+   - Solusi: Menghapus state `activeCategory`, mempertahankan gaya normal konsisten (`bg-white/80 border-white/90`), dan mengandalkan feedback sentuh instan (`active:opacity-70` + `Haptics.Light`).
 
 ---
 
