@@ -82,9 +82,6 @@ export default function HomeScreen() {
 
         {/* Brand Logo KawanLokal */}
         <View className="items-center">
-          <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant">
-            DANAU TOBA
-          </Text>
           <Text className="font-raleway text-xl font-medium text-on-surface tracking-wide">
             Kawan<Text className="text-primary font-semibold">Lokal</Text>
           </Text>
