@@ -4,25 +4,31 @@ import {
   Text,
   ScrollView,
   Pressable,
+  Image,
+  StyleSheet,
+  ImageSourcePropType,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
+import Svg, { Defs, LinearGradient, Stop, Rect } from 'react-native-svg';
 import { TOBA_DISTRICTS } from '@/constants/theme';
 import { AppIcon } from '@/components/AppIcon';
+import { PHOTO_COVERS } from '@/constants/localPhotos';
 
 interface CalendarEvent {
   id: string;
   day: number;
-  month: number; // 10 = Nov
+  month: number; // 11 = Nov
   title: string;
   category: string;
-  categoryBadge: 'ulos' | 'success' | 'amber' | 'slate';
   district: string;
   timeWIB: string;
   summary: string;
   verified: boolean;
+  coverImage: ImageSourcePropType;
+  price?: string;
 }
 
 const SEED_EVENTS: CalendarEvent[] = [
@@ -32,35 +38,38 @@ const SEED_EVENTS: CalendarEvent[] = [
     month: 11,
     title: 'Pesta Danau Toba & Pagelaran Gondang',
     category: 'Festival',
-    categoryBadge: 'ulos',
     district: 'Simalungun',
     timeWIB: '10.00 WIB',
     summary: 'Parade perahu kayu solu bolon, tarian Tortor kolosal, dan pameran tenun pusaka.',
     verified: true,
+    coverImage: PHOTO_COVERS.parapat,
+    price: 'Rp 50.000',
   },
   {
     id: 'ev-2',
     day: 15,
     month: 11,
     title: 'Upacara Mangongkal Holi',
-    category: 'Adat Terbuka',
-    categoryBadge: 'ulos',
+    category: 'Adat Sakral',
     district: 'Samosir',
     timeWIB: '09.00 WIB',
-    summary: 'Pemindahan tulang belulang leluhur ke tugu keluarga marga. Wajib busana sopan.',
+    summary: 'Pemindahan tulang belulang leluhur ke tugu keluarga marga. Wajib berbusana sopan.',
     verified: true,
+    coverImage: PHOTO_COVERS.desaTomok,
+    price: 'Gratis',
   },
   {
     id: 'ev-3',
     day: 20,
     month: 11,
     title: 'Festival Gondang Naposo',
-    category: 'Seni',
-    categoryBadge: 'success',
+    category: 'Seni Tradisi',
     district: 'Toba',
     timeWIB: '14.00 WIB',
     summary: 'Ajang tari Tortor kreasi muda-mudi Batak dalam mencari pasangan dan silaturahmi.',
     verified: true,
+    coverImage: PHOTO_COVERS.gondang,
+    price: 'Rp 25.000',
   },
   {
     id: 'ev-4',
@@ -68,11 +77,12 @@ const SEED_EVENTS: CalendarEvent[] = [
     month: 11,
     title: 'Ritual Sipaha Lima Parmalim',
     category: 'Keagamaan',
-    categoryBadge: 'amber',
     district: 'Toba',
     timeWIB: '08.30 WIB',
-    summary: 'Ucapan syukur tahunan penganut Ugamo Malim atas berkah panen dan kehidupan.',
+    summary: 'Ucapan syukur tahunan penganut Ugamo Malim atas limpahan berkah panen dan kehidupan.',
     verified: true,
+    coverImage: PHOTO_COVERS.rumahBolon,
+    price: 'Gratis',
   },
   {
     id: 'ev-5',
@@ -80,16 +90,17 @@ const SEED_EVENTS: CalendarEvent[] = [
     month: 11,
     title: 'Pesta Rondang Bittang',
     category: 'Festival',
-    categoryBadge: 'ulos',
     district: 'Simalungun',
     timeWIB: '16.00 WIB',
-    summary: 'Perayaan panen raya suku Simalungun di bawah sinar bulan purnama.',
+    summary: 'Perayaan panen raya suku Simalungun di bawah sinar bulan purnama yang megah.',
     verified: true,
+    coverImage: PHOTO_COVERS.torTor,
+    price: 'Gratis',
   },
 ];
 
 const DAYS_OF_WEEK = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
-// Dummy kalender bulan November 2026 (30 hari, mulai hari Minggu)
+// Kalender dummy November 2026 (30 hari, mulai Minggu)
 const CALENDAR_DAYS = Array.from({ length: 30 }, (_, i) => i + 1);
 
 export default function CalendarScreen() {
@@ -97,10 +108,18 @@ export default function CalendarScreen() {
   const [viewMode, setViewMode] = useState<'month' | 'list'>('month');
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
   const [selectedDistrict, setSelectedDistrict] = useState<string>('Semua');
+  const [selectedEventModal, setSelectedEventModal] = useState<CalendarEvent | null>(null);
 
   const handleSelectDay = (day: number) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
-    setSelectedDay(selectedDay === day ? null : day);
+    const isSame = selectedDay === day;
+    setSelectedDay(isSame ? null : day);
+
+    // Jika tanggal yang ditekan memiliki acara, tampilkan kartu pop-up acara
+    const event = SEED_EVENTS.find((e) => e.day === day);
+    if (event) {
+      setSelectedEventModal(event);
+    }
   };
 
   const handleSelectDistrict = (dist: string) => {
@@ -126,167 +145,175 @@ export default function CalendarScreen() {
   }, []);
 
   return (
-    <SafeAreaView className="flex-1 bg-surface-canvas" edges={['top']}>
-      {/* Top Header */}
-      <View className="px-4 py-2.5 bg-surface-card border-b border-card-border flex-row items-center justify-between z-20">
+    <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
+      {/* Top App Bar Glassmorphic (DESIGN.md: top-app-bar + button-icon-glass) */}
+      <View className="flex-row items-center justify-between px-5 py-3 bg-white/70 border-b border-border/50">
         <Pressable
           accessibilityLabel="Kembali"
           onPress={() => router.back()}
-          className="w-10 h-10 rounded-full items-center justify-center active:bg-stone-100 active:opacity-80"
+          className="w-11 h-11 items-center justify-center rounded-full bg-white/80 border border-white/90 shadow-sm"
         >
-          <AppIcon name="arrow-left" size={22} />
+          <AppIcon name="arrow-left" size={20} color="#23201E" />
         </Pressable>
 
         <View className="items-center">
-          <Text className="text-base font-bold text-on-surface">
-            Kalender Budaya Toba
+          <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-primary">
+            KALENDER BUDAYA
           </Text>
-          <Text className="text-[11px] text-secondary">November 2026 (WIB)</Text>
+          <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
+            Danau Toba
+          </Text>
         </View>
 
-        {/* View Mode Switcher (Bulan / Daftar) */}
-        <View className="flex-row bg-stone-100 p-0.5 rounded-xl">
+        {/* View Mode Switcher Pill */}
+        <View className="flex-row bg-surface-tonal p-1 rounded-full border border-border/40">
           <Pressable
+            accessibilityLabel="Tampilan Bulan"
             onPress={() => handleToggleView('month')}
-            className={`p-1.5 rounded-lg ${
+            className={`px-3 py-1.5 rounded-full flex-row items-center gap-1.5 ${
               viewMode === 'month' ? 'bg-white shadow-xs' : 'bg-transparent'
             }`}
           >
             <Ionicons
               name="calendar"
-              size={18}
-              color={viewMode === 'month' ? '#991B1B' : '#78716C'}
+              size={15}
+              color={viewMode === 'month' ? '#1D4ED8' : '#8A827A'}
             />
           </Pressable>
           <Pressable
+            accessibilityLabel="Tampilan Daftar"
             onPress={() => handleToggleView('list')}
-            className={`p-1.5 rounded-lg ${
+            className={`px-3 py-1.5 rounded-full flex-row items-center gap-1.5 ${
               viewMode === 'list' ? 'bg-white shadow-xs' : 'bg-transparent'
             }`}
           >
             <Ionicons
               name="list"
-              size={18}
-              color={viewMode === 'list' ? '#991B1B' : '#78716C'}
+              size={15}
+              color={viewMode === 'list' ? '#1D4ED8' : '#8A827A'}
             />
           </Pressable>
         </View>
       </View>
 
-      {/* Filter Kabupaten Horizontal */}
-      <View className="bg-surface-card border-b border-card-border/60 py-2">
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} className="px-4 flex-row">
+      {/* District Filter Chips (DESIGN.md: chip & chip-active) */}
+      <View className="py-3 bg-surface border-b border-border/30">
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          className="px-5 flex-row"
+        >
           <Pressable
             onPress={() => handleSelectDistrict('Semua')}
-            className={`mr-2 px-3.5 py-1.5 rounded-full border ${
+            className={`mr-2 h-8 px-4 rounded-full items-center justify-center ${
               selectedDistrict === 'Semua'
-                ? 'bg-ulos-red border-ulos-red'
-                : 'bg-surface-canvas border-card-border'
+                ? 'bg-primary shadow-xs'
+                : 'bg-white/80 border border-border/60'
             }`}
           >
             <Text
-              className={`text-xs font-semibold ${
-                selectedDistrict === 'Semua' ? 'text-white' : 'text-secondary'
+              className={`text-[11px] font-dmsans-bold tracking-wider uppercase ${
+                selectedDistrict === 'Semua' ? 'text-white' : 'text-on-surface-strong'
               }`}
             >
               Semua Wilayah
             </Text>
           </Pressable>
 
-          {TOBA_DISTRICTS.map((district) => (
-            <Pressable
-              key={district}
-              onPress={() => handleSelectDistrict(district)}
-              className={`mr-2 px-3.5 py-1.5 rounded-full border ${
-                selectedDistrict === district
-                  ? 'bg-ulos-red border-ulos-red'
-                  : 'bg-surface-canvas border-card-border'
-              }`}
-            >
-              <Text
-                className={`text-xs font-semibold ${
-                  selectedDistrict === district ? 'text-white' : 'text-secondary'
+          {TOBA_DISTRICTS.map((district) => {
+            const isSelected = selectedDistrict === district;
+            return (
+              <Pressable
+                key={district}
+                onPress={() => handleSelectDistrict(district)}
+                className={`mr-2 h-8 px-4 rounded-full items-center justify-center ${
+                  isSelected
+                    ? 'bg-primary shadow-xs'
+                    : 'bg-white/80 border border-border/60'
                 }`}
               >
-                {district}
-              </Text>
-            </Pressable>
-          ))}
+                <Text
+                  className={`text-[11px] font-dmsans-bold tracking-wider uppercase ${
+                    isSelected ? 'text-white' : 'text-on-surface-strong'
+                  }`}
+                >
+                  {district}
+                </Text>
+              </Pressable>
+            );
+          })}
         </ScrollView>
       </View>
 
       <ScrollView
-        className="flex-1 px-4 pt-3"
-        contentContainerStyle={{ paddingBottom: 40 }}
+        className="flex-1 px-5 pt-4"
+        contentContainerStyle={{ paddingBottom: 60 }}
         showsVerticalScrollIndicator={false}
       >
-        {/* Tampilan Grid Kalender Bulan (PRD F2) */}
+        {/* Tampilan Grid Kalender Bulan (DESIGN.md: card glassmorphic) */}
         {viewMode === 'month' && (
-          <View className="bg-surface-card rounded-2xl border border-card-border p-3.5 shadow-sm mb-4">
-            <View className="flex-row justify-between items-center mb-3 px-1">
-              <Text className="text-sm font-bold text-on-surface">
-                November 2026
-              </Text>
+          <View className="bg-white/85 rounded-3xl border border-white/90 p-5 shadow-sm mb-6">
+            <View className="flex-row justify-between items-center mb-4">
+              <View>
+                <Text className="font-raleway text-xl font-medium text-on-surface tracking-wide">
+                  November 2026
+                </Text>
+              </View>
               {selectedDay !== null && (
                 <Pressable
                   onPress={() => setSelectedDay(null)}
-                  className="px-2 py-0.5 rounded-md bg-stone-100"
+                  className="px-3 py-1 rounded-full bg-surface-tonal border border-border/60"
                 >
-                  <Text className="text-[10px] font-bold text-secondary">
-                    Reset Hari ({selectedDay} Nov)
+                  <Text className="text-[10px] uppercase tracking-wider font-dmsans-bold text-on-surface-variant">
+                    Reset ({selectedDay} Nov)
                   </Text>
                 </Pressable>
               )}
             </View>
 
-            {/* Header Nama Hari */}
-            <View className="flex-row justify-between mb-2">
+            {/* Header Nama Hari (7 Kolom Presisi) */}
+            <View className="flex-row mb-2 border-b border-border/40 pb-2">
               {DAYS_OF_WEEK.map((d) => (
-                <View key={d} className="w-[13%] items-center">
-                  <Text className="text-[11px] font-bold text-secondary">{d}</Text>
+                <View key={d} className="w-[14.28%] items-center justify-center">
+                  <Text className="text-[10px] font-dmsans-bold tracking-wider text-on-surface-variant uppercase">
+                    {d}
+                  </Text>
                 </View>
               ))}
             </View>
 
-            {/* Grid Tanggal */}
-            <View className="flex-row flex-wrap justify-between gap-y-1.5">
+            {/* Grid Tanggal (7 Kolom dengan Lingkaran Presisi 36x36) */}
+            <View className="flex-row flex-wrap">
               {CALENDAR_DAYS.map((day) => {
                 const isSelected = selectedDay === day;
                 const hasEvent = daysWithEvents.has(day);
 
                 return (
-                  <Pressable
-                    key={day}
-                    onPress={() => handleSelectDay(day)}
-                    className={`w-[13%] aspect-square rounded-xl items-center justify-center relative active:opacity-80 ${
-                      isSelected
-                        ? 'bg-ulos-red shadow-xs'
-                        : hasEvent
-                        ? 'bg-red-50 border border-red-200'
-                        : 'bg-transparent'
-                    }`}
-                  >
-                    <Text
-                      className={`text-xs font-bold ${
+                  <View key={day} className="w-[14.28%] items-center justify-center py-1">
+                    <Pressable
+                      onPress={() => handleSelectDay(day)}
+                      className={`w-9 h-9 rounded-full items-center justify-center ${
                         isSelected
-                          ? 'text-white'
+                          ? 'bg-primary shadow-sm'
                           : hasEvent
-                          ? 'text-ulos-red'
-                          : 'text-on-surface'
+                          ? 'bg-blue-50/80 border border-primary'
+                          : 'bg-transparent'
                       }`}
                     >
-                      {day}
-                    </Text>
-
-                    {/* Dot Penanda Acara */}
-                    {hasEvent && (
-                      <View
-                        className={`w-1.5 h-1.5 rounded-full absolute bottom-1 ${
-                          isSelected ? 'bg-white' : 'bg-ulos-red'
+                      <Text
+                        style={{ includeFontPadding: false }}
+                        className={`text-xs text-center ${
+                          isSelected
+                            ? 'font-dmsans-bold text-white'
+                            : hasEvent
+                            ? 'font-dmsans-bold text-primary'
+                            : 'font-dmsans text-on-surface'
                         }`}
-                      />
-                    )}
-                  </Pressable>
+                      >
+                        {day}
+                      </Text>
+                    </Pressable>
+                  </View>
                 );
               })}
             </View>
@@ -294,85 +321,311 @@ export default function CalendarScreen() {
         )}
 
         {/* Section Header Acara Terverifikasi */}
-        <View className="flex-row justify-between items-center mb-2.5">
-          <Text className="text-sm font-bold text-on-surface">
-            {selectedDay !== null
-              ? `Acara Tanggal ${selectedDay} Nov 2026`
-              : 'Daftar Acara Terverifikasi'}
-          </Text>
-          <Text className="text-xs font-semibold text-secondary">
-            {filteredEvents.length} Acara
-          </Text>
+        <View className="flex-row justify-between items-baseline mb-4 px-1">
+          <View>
+            <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant mb-0.5">
+              JADWAL RESMI
+            </Text>
+            <Text className="font-raleway text-xl font-medium text-on-surface tracking-wide">
+              {selectedDay !== null
+                ? `Acara ${selectedDay} November`
+                : 'Daftar Acara Terverifikasi'}
+            </Text>
+          </View>
+          <View className="px-2.5 py-1 rounded-full bg-surface-tonal">
+            <Text className="text-[11px] font-dmsans-bold text-on-surface-strong">
+              {filteredEvents.length} Acara
+            </Text>
+          </View>
         </View>
 
-        {/* List Kartu Acara */}
-        <View className="gap-3">
+        {/* List Kartu Acara dengan Banner Foto & Gradasi */}
+        <View className="gap-4">
           {filteredEvents.map((ev) => (
             <Pressable
               key={ev.id}
               onPress={() => router.push('/event/detail')}
-              className="bg-surface-card rounded-2xl p-4 border border-card-border shadow-sm active:opacity-90"
+              className="bg-white/85 rounded-3xl border border-white/90 overflow-hidden shadow-sm"
             >
-              <View className="flex-row items-center justify-between pb-2 border-b border-card-border/60">
-                <View className="px-2.5 py-0.5 rounded-full bg-red-50">
-                  <Text className="text-[10px] font-bold text-ulos-red">
-                    {ev.category}
-                  </Text>
-                </View>
-                <View className="flex-row items-center gap-1">
-                  <Ionicons name="location-outline" size={12} color="#78716C" />
-                  <Text className="text-xs font-semibold text-secondary">
-                    {ev.district}
-                  </Text>
+              {/* Foto Cover dengan Gradasi Lembut ke Body Card */}
+              <View className="relative w-full h-36 bg-surface-tonal overflow-hidden">
+                <Image
+                  source={ev.coverImage}
+                  className="w-full h-full"
+                  resizeMode="cover"
+                />
+
+                {/* Gradasi Overlay ke Putih Card */}
+                <Svg
+                  style={StyleSheet.absoluteFill}
+                  viewBox="0 0 100 100"
+                  preserveAspectRatio="none"
+                  pointerEvents="none"
+                >
+                  <Defs>
+                    <LinearGradient
+                      id={`evGrad-${ev.id}`}
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="100"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <Stop offset="0%" stopColor="#000000" stopOpacity="0.15" />
+                      <Stop offset="50%" stopColor="#FFFFFF" stopOpacity="0" />
+                      <Stop offset="80%" stopColor="#FFFFFF" stopOpacity="0.5" />
+                      <Stop offset="100%" stopColor="#FFFFFF" stopOpacity="1" />
+                    </LinearGradient>
+                  </Defs>
+                  <Rect x="0" y="0" width="100" height="100" fill={`url(#evGrad-${ev.id})`} />
+                </Svg>
+
+                {/* Floating Badges di atas Foto */}
+                <View className="absolute top-3 inset-x-3 flex-row items-center justify-between">
+                  {/* Badge Kategori Pill */}
+                  <View className="px-3 py-1 rounded-full bg-white/90 border border-white shadow-xs">
+                    <Text className="text-[10px] uppercase tracking-wider font-dmsans-bold text-primary">
+                      {ev.category}
+                    </Text>
+                  </View>
+
+                  {/* Badge Terverifikasi */}
+                  {ev.verified && (
+                    <View className="px-2.5 py-1 rounded-full bg-white/90 border border-white shadow-xs flex-row items-center gap-1">
+                      <Ionicons name="checkmark-circle" size={13} color="#15803D" />
+                      <Text className="text-[10px] font-dmsans-bold text-emerald-700 tracking-wide">
+                        Terverifikasi
+                      </Text>
+                    </View>
+                  )}
                 </View>
               </View>
 
-              <Text className="text-base font-bold text-on-surface mt-2 leading-snug">
-                {ev.title}
-              </Text>
-              <Text className="text-xs text-secondary mt-1 leading-relaxed">
-                {ev.summary}
-              </Text>
-
-              <View className="mt-3 pt-2.5 border-t border-card-border flex-row items-center justify-between">
-                <View className="flex-row items-center gap-1.5">
-                  <Ionicons name="time-outline" size={13} color="#D97706" />
-                  <Text className="text-xs font-semibold text-stone-700">
-                    {ev.day} Nov • {ev.timeWIB}
-                  </Text>
+              {/* Konten Detail Acara */}
+              <View className="p-4 pt-1">
+                {/* Meta Bar: Tanggal, Waktu & Wilayah */}
+                <View className="flex-row items-center gap-3 mb-2">
+                  <View className="flex-row items-center gap-1">
+                    <Ionicons name="calendar-outline" size={13} color="#1D4ED8" />
+                    <Text className="text-[11px] font-dmsans-bold text-primary">
+                      {ev.day} Nov 2026
+                    </Text>
+                  </View>
+                  <Text className="text-border">•</Text>
+                  <View className="flex-row items-center gap-1">
+                    <Ionicons name="time-outline" size={13} color="#8A827A" />
+                    <Text className="text-[11px] font-dmsans text-on-surface-variant">
+                      {ev.timeWIB}
+                    </Text>
+                  </View>
+                  <Text className="text-border">•</Text>
+                  <View className="flex-row items-center gap-1">
+                    <Ionicons name="location-outline" size={13} color="#8A827A" />
+                    <Text className="text-[11px] font-dmsans text-on-surface-variant">
+                      {ev.district}
+                    </Text>
+                  </View>
                 </View>
 
-                <View className="flex-row items-center gap-1">
-                  <Ionicons name="checkmark-circle" size={14} color="#15803D" />
-                  <Text className="text-[11px] font-bold text-emerald-700">
-                    Terverifikasi
-                  </Text>
+                {/* Judul Acara (Raleway) */}
+                <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide leading-snug">
+                  {ev.title}
+                </Text>
+
+                {/* Deskripsi Singkat (DM Sans) */}
+                <Text className="font-dmsans text-xs text-on-surface-variant mt-1.5 leading-relaxed">
+                  {ev.summary}
+                </Text>
+
+                {/* Footer Bar: Harga & Tombol Lanjut */}
+                <View className="mt-3.5 pt-3 border-t border-border/50 flex-row items-center justify-between">
+                  <View>
+                    <Text className="text-[10px] uppercase tracking-wider font-dmsans-medium text-on-surface-variant">
+                      HTM / Tiket
+                    </Text>
+                    <Text className="text-xs font-dmsans-bold text-primary mt-0.5">
+                      {ev.price || 'Gratis'}
+                    </Text>
+                  </View>
+
+                  <Pressable
+                    onPress={() => router.push('/event/detail')}
+                    className="h-9 px-4 bg-primary rounded-full flex-row items-center justify-center gap-1.5 shadow-xs"
+                  >
+                    <Text className="text-white font-dmsans-medium text-xs tracking-wide">
+                      Lanjut
+                    </Text>
+                    <Ionicons name="arrow-forward" size={13} color="#FFFFFF" />
+                  </Pressable>
                 </View>
               </View>
             </Pressable>
           ))}
 
+          {/* Empty State Card */}
           {filteredEvents.length === 0 && (
-            <View className="items-center justify-center py-10 bg-surface-card rounded-2xl border border-card-border p-6">
-              <Ionicons name="calendar-outline" size={36} color="#CBD5E1" />
-              <Text className="text-sm font-semibold text-on-surface mt-2">
-                Tidak ada acara pada tanggal / wilayah ini
+            <View className="items-center justify-center py-12 px-6 bg-white/70 rounded-3xl border border-white/80 text-center shadow-sm">
+              <View className="w-14 h-14 rounded-full bg-surface-tonal items-center justify-center mb-3">
+                <Ionicons name="calendar-outline" size={26} color="#8A827A" />
+              </View>
+              <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
+                Tidak Ada Acara Ditemukan
+              </Text>
+              <Text className="font-dmsans text-xs text-on-surface-variant text-center mt-1 max-w-[260px] leading-relaxed">
+                Belum ada jadwal acara adat atau festival pada filter tanggal dan wilayah yang Anda pilih.
               </Text>
               <Pressable
                 onPress={() => {
                   setSelectedDay(null);
                   setSelectedDistrict('Semua');
                 }}
-                className="mt-3 px-4 py-1.5 rounded-xl bg-stone-100 active:bg-stone-200"
+                className="mt-4 h-10 px-5 rounded-full bg-white border border-border items-center justify-center shadow-xs"
               >
-                <Text className="text-xs font-bold text-secondary">
-                  Reset Semua Filter
+                <Text className="text-[11px] uppercase tracking-[0.15em] font-dmsans-bold text-primary">
+                  RESET FILTER
                 </Text>
               </Pressable>
             </View>
           )}
         </View>
       </ScrollView>
+
+      {/* Overlay Sheet Card Keterangan Acara saat Tanggal Ditekan */}
+      {selectedEventModal && (
+        <View
+          style={StyleSheet.absoluteFill}
+          className="z-50 bg-black/40 justify-end items-center px-4 pb-6"
+        >
+          {/* Backdrop Tap to Close */}
+          <Pressable
+            accessibilityLabel="Tutup"
+            style={StyleSheet.absoluteFill}
+            onPress={() => setSelectedEventModal(null)}
+          />
+
+          {/* Card Keterangan Acara */}
+          <View className="w-full max-w-md bg-white rounded-[32px] overflow-hidden border border-white/80 shadow-2xl z-10">
+            {/* Foto Banner Acara dengan Gradasi */}
+            <View className="relative w-full h-44 bg-surface-tonal overflow-hidden">
+              <Image
+                source={selectedEventModal.coverImage}
+                className="w-full h-full"
+                resizeMode="cover"
+              />
+              <Svg
+                style={StyleSheet.absoluteFill}
+                viewBox="0 0 100 100"
+                preserveAspectRatio="none"
+                pointerEvents="none"
+              >
+                <Defs>
+                  <LinearGradient
+                    id="modalEventGrad"
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="100"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <Stop offset="0%" stopColor="#000000" stopOpacity="0.25" />
+                    <Stop offset="50%" stopColor="#FFFFFF" stopOpacity="0" />
+                    <Stop offset="80%" stopColor="#FFFFFF" stopOpacity="0.6" />
+                    <Stop offset="100%" stopColor="#FFFFFF" stopOpacity="1" />
+                  </LinearGradient>
+                </Defs>
+                <Rect x="0" y="0" width="100" height="100" fill="url(#modalEventGrad)" />
+              </Svg>
+
+              {/* Header Badges & Tombol Tutup */}
+              <View className="absolute top-3.5 inset-x-3.5 flex-row items-center justify-between">
+                <View className="px-3 py-1 rounded-full bg-white/90 border border-white shadow-xs">
+                  <Text className="text-[10px] uppercase tracking-wider font-dmsans-bold text-primary">
+                    {selectedEventModal.category}
+                  </Text>
+                </View>
+
+                <Pressable
+                  accessibilityLabel="Tutup"
+                  onPress={() => setSelectedEventModal(null)}
+                  className="w-9 h-9 rounded-full bg-white/90 border border-white items-center justify-center shadow-xs"
+                >
+                  <Ionicons name="close" size={18} color="#23201E" />
+                </Pressable>
+              </View>
+            </View>
+
+            {/* Konten Keterangan Acara & Tombol Lanjut */}
+            <View className="p-5 pt-2">
+              {/* Meta Bar */}
+              <View className="flex-row items-center gap-2 mb-2">
+                <View className="flex-row items-center gap-1">
+                  <Ionicons name="calendar-outline" size={13} color="#1D4ED8" />
+                  <Text className="text-[11px] font-dmsans-bold text-primary">
+                    {selectedEventModal.day} Nov 2026
+                  </Text>
+                </View>
+                <Text className="text-border">•</Text>
+                <View className="flex-row items-center gap-1">
+                  <Ionicons name="time-outline" size={13} color="#8A827A" />
+                  <Text className="text-[11px] font-dmsans text-on-surface-variant">
+                    {selectedEventModal.timeWIB}
+                  </Text>
+                </View>
+                <Text className="text-border">•</Text>
+                <View className="flex-row items-center gap-1">
+                  <Ionicons name="location-outline" size={13} color="#8A827A" />
+                  <Text className="text-[11px] font-dmsans text-on-surface-variant">
+                    {selectedEventModal.district}
+                  </Text>
+                </View>
+              </View>
+
+              <Text className="font-raleway text-xl font-medium text-on-surface tracking-wide leading-snug">
+                {selectedEventModal.title}
+              </Text>
+
+              <Text className="font-dmsans text-xs text-on-surface-variant mt-2 leading-relaxed">
+                {selectedEventModal.summary}
+              </Text>
+
+              {/* Info HTM & Status */}
+              <View className="mt-4 pt-3 border-t border-border/50 flex-row items-center justify-between">
+                <View>
+                  <Text className="text-[10px] uppercase tracking-wider font-dmsans-medium text-on-surface-variant">
+                    HTM / Tiket
+                  </Text>
+                  <Text className="text-sm font-dmsans-bold text-primary mt-0.5">
+                    {selectedEventModal.price || 'Gratis'}
+                  </Text>
+                </View>
+
+                {selectedEventModal.verified && (
+                  <View className="px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/60 flex-row items-center gap-1">
+                    <Ionicons name="checkmark-circle" size={13} color="#15803D" />
+                    <Text className="text-[11px] font-dmsans-bold text-emerald-700">
+                      Terverifikasi
+                    </Text>
+                  </View>
+                )}
+              </View>
+
+              {/* Tombol Lanjut (button-primary) */}
+              <Pressable
+                onPress={() => {
+                  setSelectedEventModal(null);
+                  router.push('/event/detail');
+                }}
+                className="mt-5 w-full h-12 bg-primary rounded-full flex-row items-center justify-center gap-2 shadow-md"
+              >
+                <Text className="text-white font-dmsans-medium text-sm tracking-wide">
+                  Lanjut
+                </Text>
+                <Ionicons name="arrow-forward" size={16} color="#FFFFFF" />
+              </Pressable>
+            </View>
+          </View>
+        </View>
+      )}
     </SafeAreaView>
   );
 }

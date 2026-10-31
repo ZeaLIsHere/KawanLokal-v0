@@ -48,7 +48,7 @@ export default function PaymentScreen() {
         <Pressable
           accessibilityLabel="Kembali"
           onPress={() => router.back()}
-          className="w-11 h-11 items-center justify-center rounded-full bg-white/70 border border-white/80 shadow-sm active:opacity-75"
+          className="w-11 h-11 items-center justify-center rounded-full bg-white/70 border border-white/80 shadow-sm"
         >
           <AppIcon name="arrow-left" size={20} color="#23201E" />
         </Pressable>
@@ -119,7 +119,7 @@ export default function PaymentScreen() {
             {/* Option 1: QRIS */}
             <Pressable
               onPress={() => handleSelectMethod('qris')}
-              className="flex-row items-center justify-between p-4 border-b border-border/50 active:bg-surface-tonal/50"
+              className="flex-row items-center justify-between p-4 border-b border-border/50"
             >
               <View className="flex-row items-center gap-3.5 flex-1 pr-2">
                 <View className="w-10 h-10 rounded-full bg-primary/10 items-center justify-center shrink-0">
@@ -145,7 +145,7 @@ export default function PaymentScreen() {
             {/* Option 2: Virtual Account Bank */}
             <Pressable
               onPress={() => handleSelectMethod('va')}
-              className="flex-row items-center justify-between p-4 border-b border-border/50 active:bg-surface-tonal/50"
+              className="flex-row items-center justify-between p-4 border-b border-border/50"
             >
               <View className="flex-row items-center gap-3.5 flex-1 pr-2">
                 <View className="w-10 h-10 rounded-full bg-surface-tonal items-center justify-center shrink-0">
@@ -173,7 +173,7 @@ export default function PaymentScreen() {
             {/* Option 3: Kartu Debit / Kredit */}
             <Pressable
               onPress={() => handleSelectMethod('card')}
-              className="flex-row items-center justify-between p-4 active:bg-surface-tonal/50"
+              className="flex-row items-center justify-between p-4"
             >
               <View className="flex-row items-center gap-3.5 flex-1 pr-2">
                 <View className="w-10 h-10 rounded-full bg-surface-tonal items-center justify-center shrink-0">
@@ -221,7 +221,7 @@ export default function PaymentScreen() {
         {/* Primary Action CTA Button */}
         <Pressable
           onPress={handlePayNow}
-          className="w-full h-14 bg-primary active:bg-blue-800 text-white rounded-full flex-row items-center justify-center gap-2 shadow-md mb-2"
+          className="w-full h-14 bg-primary text-white rounded-full flex-row items-center justify-center gap-2 shadow-md mb-2"
         >
           <AppIcon name="wallet" size={20} color="#FFFFFF" />
           <Text className="text-white font-dmsans-medium text-base tracking-wide">

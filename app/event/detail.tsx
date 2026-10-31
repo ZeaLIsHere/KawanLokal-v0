@@ -58,7 +58,7 @@ export default function EventDetailScreen() {
         <Pressable
           accessibilityLabel="Kembali"
           onPress={() => router.back()}
-          className="w-10 h-10 rounded-full items-center justify-center active:bg-stone-100 active:opacity-80"
+          className="w-10 h-10 rounded-full items-center justify-center bg-white/80 border border-white/90 shadow-xs"
         >
           <Ionicons name="arrow-back" size={24} color="#131b2e" />
         </Pressable>
@@ -74,7 +74,7 @@ export default function EventDetailScreen() {
           <Pressable
             accessibilityLabel="Simpan acara"
             onPress={handleToggleSave}
-            className="w-9 h-9 rounded-full items-center justify-center active:bg-stone-100 active:opacity-80"
+            className="w-9 h-9 rounded-full items-center justify-center bg-white/80 border border-white/90 shadow-xs"
           >
             <Ionicons
               name={isSaved ? 'bookmark' : 'bookmark-outline'}
@@ -86,7 +86,7 @@ export default function EventDetailScreen() {
           <Pressable
             accessibilityLabel="Bagikan acara"
             onPress={handleShare}
-            className="w-9 h-9 rounded-full items-center justify-center active:bg-stone-100 active:opacity-80"
+            className="w-9 h-9 rounded-full items-center justify-center bg-white/80 border border-white/90 shadow-xs"
           >
             <Ionicons name="share-social-outline" size={20} color="#131b2e" />
           </Pressable>
@@ -281,18 +281,18 @@ export default function EventDetailScreen() {
         <View className="flex-row gap-2.5">
           <Pressable
             onPress={handleAddToCalendar}
-            className="flex-1 py-3 px-3 rounded-xl border border-stone-300 bg-white items-center justify-center flex-row gap-1.5 active:bg-stone-50"
+            className="flex-1 h-12 rounded-full border border-border bg-white items-center justify-center flex-row gap-1.5 shadow-xs"
           >
-            <Ionicons name="calendar-outline" size={16} color="#131b2e" />
-            <Text className="text-xs font-bold text-on-surface">Ingatkan di HP</Text>
+            <Ionicons name="calendar-outline" size={16} color="#23201E" />
+            <Text className="text-xs font-dmsans-medium text-on-surface">Ingatkan di HP</Text>
           </Pressable>
 
           <Pressable
             onPress={() => router.push('/booking/new')}
-            className="flex-1 py-3 px-4 rounded-xl bg-ulos-red active:bg-ulos-redDark items-center justify-center flex-row gap-1.5 shadow-md active:opacity-90"
+            className="flex-1 h-12 rounded-full bg-primary items-center justify-center flex-row gap-1.5 shadow-md"
           >
             <Ionicons name="ticket-outline" size={16} color="#FFFFFF" />
-            <Text className="text-xs font-bold text-white">Pesan Tiket</Text>
+            <Text className="text-xs font-dmsans-bold text-white">Pesan Tiket</Text>
           </Pressable>
         </View>
 

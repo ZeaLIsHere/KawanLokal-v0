@@ -19,7 +19,6 @@ import { PHOTO_COVERS } from '@/constants/localPhotos';
 
 interface OnboardingSlide {
   id: string;
-  tag: string;
   title: string;
   description: string;
   image: ImageSourcePropType;
@@ -28,7 +27,6 @@ interface OnboardingSlide {
 const ONBOARDING_SLIDES: OnboardingSlide[] = [
   {
     id: 'slide-1',
-    tag: 'PESONA ALAM',
     title: 'Jelajahi\nKeagungan Toba',
     description:
       'Nikmati lanskap magis kaldera vulkanik terbesar di dunia, perbukitan hijau Samosir, dan danau biru yang menenangkan.',
@@ -36,7 +34,6 @@ const ONBOARDING_SLIDES: OnboardingSlide[] = [
   },
   {
     id: 'slide-2',
-    tag: 'WARISAN LELUHUR',
     title: 'Kalender\nBudaya Autentik',
     description:
       'Akses jadwal resmi upacara adat Batak terverifikasi, pagelaran gondang sabangunan, serta pesta tahunan di 7 kabupaten.',
@@ -44,7 +41,6 @@ const ONBOARDING_SLIDES: OnboardingSlide[] = [
   },
   {
     id: 'slide-3',
-    tag: 'KOMUNITAS LOKAL',
     title: 'Pemandu &\nPenginapan Adat',
     description:
       'Dapatkan cerita sejarah dari pemandu lokal terpercaya, ikuti workshop tenun ulos, dan rasakan kenyamanan Sopo Bolon tradisional.',
@@ -96,9 +92,11 @@ export default function OnboardingScreen() {
       <View className="pt-2 pb-1 px-6 flex-row items-center justify-between">
         <View className="flex-row items-center gap-2">
           {/* Logo Glyph KawanLokal Biru Toba */}
-          <View className="w-8 h-8 rounded-full bg-primary items-center justify-center shadow-sm">
-            <Ionicons name="sparkles" size={16} color="#FFFFFF" />
-          </View>
+          <Image
+            source={require('../assets/logo-aplikasi.png')}
+            className="w-8 h-8 rounded-full"
+            resizeMode="cover"
+          />
           <Text className="font-raleway text-xl font-medium text-on-surface tracking-wide">
             Kawan<Text className="text-primary font-semibold">Lokal</Text>
           </Text>
@@ -155,9 +153,6 @@ export default function OnboardingScreen() {
       <View className="w-full px-6 pt-2 pb-4 bg-surface">
         {/* Dynamic Text for Active Card */}
         <View className="min-h-[125px] justify-start mb-3">
-          <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-primary mb-1">
-            {ONBOARDING_SLIDES[activeIndex].tag}
-          </Text>
           <Text className="font-raleway text-3xl font-normal text-on-surface tracking-wide leading-tight">
             {ONBOARDING_SLIDES[activeIndex].title}
           </Text>

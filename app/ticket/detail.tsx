@@ -47,7 +47,7 @@ export default function TicketDetailScreen() {
         <Pressable
           accessibilityLabel="Kembali"
           onPress={() => router.back()}
-          className="w-10 h-10 rounded-full items-center justify-center active:bg-stone-100 active:opacity-80"
+          className="w-10 h-10 rounded-full items-center justify-center bg-white/80 border border-white/90 shadow-xs"
         >
           <AppIcon name="arrow-left" size={22} />
         </Pressable>
@@ -59,7 +59,7 @@ export default function TicketDetailScreen() {
         <Pressable
           accessibilityLabel="Bagikan Tiket"
           onPress={handleShare}
-          className="w-10 h-10 rounded-full items-center justify-center active:bg-stone-100 active:opacity-80"
+          className="w-10 h-10 rounded-full items-center justify-center bg-white/80 border border-white/90 shadow-xs"
         >
           <Ionicons name="share-social-outline" size={22} color="#131b2e" />
         </Pressable>
@@ -192,7 +192,7 @@ export default function TicketDetailScreen() {
       <View className="absolute bottom-0 left-0 right-0 bg-surface-card/95 backdrop-blur-md px-4 pt-3 pb-6 border-t border-card-border shadow-lg z-30 flex-col items-center">
         <Pressable
           onPress={handleSaveOffline}
-          className="w-full h-12 bg-stone-900 active:bg-stone-800 rounded-xl flex-row items-center justify-center gap-2 shadow-md active:opacity-90"
+          className="w-full h-12 bg-primary rounded-xl flex-row items-center justify-center gap-2 shadow-md"
         >
           <Ionicons name="download-outline" size={18} color="#FFFFFF" />
           <Text className="text-white font-bold text-sm">

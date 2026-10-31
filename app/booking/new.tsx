@@ -54,7 +54,7 @@ export default function NewBookingScreen() {
         <Pressable
           accessibilityLabel="Kembali"
           onPress={() => router.back()}
-          className="w-11 h-11 rounded-full bg-white/70 border border-white/80 shadow-sm items-center justify-center active:opacity-75"
+          className="w-11 h-11 rounded-full bg-white/70 border border-white/80 shadow-sm items-center justify-center"
         >
           <AppIcon name="arrow-left" size={20} color="#23201E" />
         </Pressable>
@@ -77,7 +77,7 @@ export default function NewBookingScreen() {
               'Setiap pesanan dijamin kuotanya secara atomik. Tiket QR akan dibuat setelah status pembayaran lunas.'
             );
           }}
-          className="w-11 h-11 rounded-full bg-white/70 border border-white/80 shadow-sm items-center justify-center active:opacity-75"
+          className="w-11 h-11 rounded-full bg-white/70 border border-white/80 shadow-sm items-center justify-center"
         >
           <Ionicons name="information-circle-outline" size={20} color="#8A827A" />
         </Pressable>
@@ -210,7 +210,7 @@ export default function NewBookingScreen() {
             <View className="flex-row items-center gap-2 bg-surface-tonal p-1 rounded-full border border-border/60">
               <Pressable
                 onPress={handleDecrement}
-                className="w-8 h-8 rounded-full bg-white items-center justify-center shadow-sm active:opacity-75"
+                className="w-8 h-8 rounded-full bg-white items-center justify-center shadow-sm"
               >
                 <Ionicons name="remove" size={16} color="#23201E" />
               </Pressable>
@@ -219,7 +219,7 @@ export default function NewBookingScreen() {
               </Text>
               <Pressable
                 onPress={handleIncrement}
-                className="w-8 h-8 rounded-full bg-white items-center justify-center shadow-sm active:opacity-75"
+                className="w-8 h-8 rounded-full bg-white items-center justify-center shadow-sm"
               >
                 <Ionicons name="add" size={16} color="#23201E" />
               </Pressable>
@@ -253,7 +253,7 @@ export default function NewBookingScreen() {
         {/* Primary Action CTA Button: Lanjut ke Pembayaran */}
         <Pressable
           onPress={handleProceedPayment}
-          className="w-full h-14 rounded-full bg-primary active:bg-blue-800 flex-row items-center justify-center gap-2 shadow-md mb-5"
+          className="w-full h-14 rounded-full bg-primary flex-row items-center justify-center gap-2 shadow-md mb-5"
         >
           <Ionicons name="card-outline" size={18} color="#FFFFFF" />
           <Text className="text-white font-dmsans-medium text-base tracking-wide">
@@ -288,7 +288,7 @@ export default function NewBookingScreen() {
                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
                 Alert.alert('Promo Rombongan', 'Gunakan kode KAWANLOKAL15 saat checkout untuk diskon 15% pemesanan 4 peserta atau lebih.');
               }}
-              className="mt-1 flex-row items-center gap-1 active:opacity-75"
+              className="mt-1 flex-row items-center gap-1"
             >
               <Text className="text-[11px] uppercase tracking-[0.15em] font-dmsans-bold text-primary">
                 PELAJARI PROMO

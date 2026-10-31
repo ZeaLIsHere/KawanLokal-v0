@@ -6,7 +6,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   slug: 'kawanlokal',
   version: '1.0.0',
   orientation: 'portrait',
-  icon: './assets/icon.png',
+  icon: './assets/logo-aplikasi.png',
   userInterfaceStyle: 'light',
   scheme: 'kawanlokal',
   ios: {
@@ -15,7 +15,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   android: {
     adaptiveIcon: {
-      foregroundImage: './assets/adaptive-icon.png',
+      foregroundImage: './assets/logo-aplikasi.png',
       backgroundColor: '#1E1B18',
     },
     package: 'com.kawanlokal.app',

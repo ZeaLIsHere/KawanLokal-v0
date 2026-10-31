@@ -5,7 +5,9 @@ import {
   ScrollView,
   Pressable,
   Image,
+  StyleSheet,
 } from 'react-native';
+import Svg, { Defs, LinearGradient, Stop, Rect } from 'react-native-svg';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -16,6 +18,9 @@ import { SvgIconName } from '@/constants/svgIcons';
 import { PHOTO_COVERS } from '@/constants/localPhotos';
 
 const STORAGE_AVATAR_KEY = '@user_profile_avatar';
+
+// Path gambar latar belakang hero (dari app/(tabs)/ naik 2 tingkat ke root: ../../)
+const HERO_BACKGROUND_IMAGE = require('../../assets/photos/lake toba/IMG_2944.JPG');
 
 // 4 Layanan Lokal sesuai PRD: event_ticket, guide, workshop, homestay
 const LOCAL_CATEGORIES: { id: string; label: string; iconName: SvgIconName }[] = [
@@ -68,71 +73,109 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
-      {/* TopAppBar Glassmorphic */}
-      <View className="flex-row justify-between items-center w-full px-5 py-3 bg-white/75 border-b border-border/50 z-20">
-        {/* Leading Settings Icon Glass */}
-        <Pressable
-          accessibilityLabel="Buka pengaturan"
-          onPress={() => router.push('/settings')}
-          className="w-11 h-11 items-center justify-center rounded-full bg-white/70 border border-white/80 shadow-sm active:opacity-75"
-        >
-          <AppIcon name="menu" size={20} color="#23201E" />
-        </Pressable>
-
-        {/* Brand Logo KawanLokal */}
-        <View className="items-center">
-          <Text className="font-raleway text-xl font-medium text-on-surface tracking-wide">
-            Kawan<Text className="text-primary font-semibold">Lokal</Text>
-          </Text>
-        </View>
-
-        {/* Trailing Avatar dengan Halo Ring */}
-        <Pressable
-          accessibilityLabel="Profil Pengguna"
-          onPress={() => router.push('/profile')}
-          className="relative w-11 h-11 rounded-full border-2 border-primary/20 p-0.5 active:opacity-80 items-center justify-center bg-surface-tonal"
-        >
-          <Image
-            source={avatarUri ? { uri: avatarUri } : PHOTO_COVERS.desaTomok}
-            className="w-full h-full rounded-full"
-            resizeMode="cover"
-          />
-          <View className="absolute top-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-surface" />
-        </Pressable>
-      </View>
-
       <ScrollView
-        className="flex-1 px-5 pt-5"
+        className="flex-1"
         contentContainerStyle={{ paddingBottom: 110 }}
         showsVerticalScrollIndicator={false}
       >
-        {/* Greeting & Header Prompt Toba */}
-        <View className="mb-5">
-          <Text className="text-[11px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant mb-1">
-            HORAS, KAWAN LOKAL
-          </Text>
-          <Text className="font-raleway text-3xl font-normal text-on-surface tracking-wide leading-tight">
-            Jelajahi keagungan{'\n'}budaya Danau Toba
-          </Text>
+        {/* Hero Section dengan Background Image Memanjang dari Top Bar & Gradasi */}
+        <View className="relative overflow-hidden pt-3 pb-8 px-5 mb-6">
+          <Image
+            source={HERO_BACKGROUND_IMAGE}
+            style={StyleSheet.absoluteFill}
+            resizeMode="cover"
+          />
+
+          {/* Gradasi Overlay ke warna background (#FAF7F2) */}
+          <Svg
+            style={StyleSheet.absoluteFill}
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            pointerEvents="none"
+          >
+            <Defs>
+              <LinearGradient
+                id="heroGradient"
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="100"
+                gradientUnits="userSpaceOnUse"
+              >
+                <Stop offset="0%" stopColor="#FAF7F2" stopOpacity="0.05" />
+                <Stop offset="25%" stopColor="#FAF7F2" stopOpacity="0.2" />
+                <Stop offset="65%" stopColor="#FAF7F2" stopOpacity="0.65" />
+                <Stop offset="85%" stopColor="#FAF7F2" stopOpacity="0.9" />
+                <Stop offset="100%" stopColor="#FAF7F2" stopOpacity="1" />
+              </LinearGradient>
+            </Defs>
+            <Rect x="0" y="0" width="100" height="100" fill="url(#heroGradient)" />
+          </Svg>
+
+          {/* TopAppBar Transparan di atas Gambar */}
+          <View className="flex-row justify-between items-center w-full mb-6">
+            {/* Leading Settings Icon Glass */}
+            <Pressable
+              accessibilityLabel="Buka pengaturan"
+              onPress={() => router.push('/settings')}
+              className="w-11 h-11 items-center justify-center rounded-full bg-white/70 border border-white/80 shadow-sm active:opacity-75"
+            >
+              <AppIcon name="menu" size={20} color="#23201E" />
+            </Pressable>
+
+            {/* Brand Logo KawanLokal */}
+            <View className="items-center">
+              <Text className="font-raleway text-xl font-medium text-on-surface tracking-wide">
+                Kawan<Text className="text-primary font-semibold">Lokal</Text>
+              </Text>
+            </View>
+
+            {/* Trailing Avatar dengan Halo Ring */}
+            <Pressable
+              accessibilityLabel="Profil Pengguna"
+              onPress={() => router.push('/profile')}
+              className="relative w-11 h-11 rounded-full border-2 border-primary/20 p-0.5 active:opacity-80 items-center justify-center bg-white/70"
+            >
+              <Image
+                source={avatarUri ? { uri: avatarUri } : PHOTO_COVERS.desaTomok}
+                className="w-full h-full rounded-full"
+                resizeMode="cover"
+              />
+              <View className="absolute top-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-surface" />
+            </Pressable>
+          </View>
+
+          {/* Greeting & Header Prompt Toba */}
+          <View className="mb-6">
+            <Text className="text-[11px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant mb-1">
+              HORAS, KAWAN LOKAL
+            </Text>
+            <Text className="font-raleway text-3xl font-normal text-on-surface tracking-wide leading-tight">
+              Jelajahi keagungan{'\n'}budaya Danau Toba
+            </Text>
+          </View>
+
+          {/* Tombol CTA Eksplorasi (Spek button-primary DESIGN.md) */}
+          <View className="items-center">
+            <Pressable
+              accessibilityLabel="Mulai Eksplorasi"
+              accessibilityRole="button"
+              onPress={() => {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                router.push('/calendar');
+              }}
+              className="h-14 px-7 bg-primary active:bg-blue-800 rounded-full flex-row items-center justify-center gap-2 shadow-md active:opacity-90"
+            >
+              <Text className="text-white font-dmsans-medium text-sm tracking-wide">
+                Mulai Eksplorasi
+              </Text>
+              <AppIcon name="arrow-right" size={18} color="#FFFFFF" />
+            </Pressable>
+          </View>
         </View>
 
-        {/* Tombol CTA Eksplorasi (Spek button-primary DESIGN.md) */}
-        <View className="mb-6 items-center">
-          <Pressable
-            accessibilityLabel="Mulai Eksplorasi"
-            accessibilityRole="button"
-            onPress={() => {
-              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-              router.push('/calendar');
-            }}
-            className="h-14 px-7 bg-primary active:bg-blue-800 rounded-full flex-row items-center justify-center gap-2 shadow-md active:opacity-90"
-          >
-            <Text className="text-white font-dmsans-medium text-sm tracking-wide">
-              Mulai Eksplorasi
-            </Text>
-            <AppIcon name="arrow-right" size={18} color="#FFFFFF" />
-          </Pressable>
-        </View>
+        {/* Konten Halaman Utama (dengan padding samping) */}
+        <View className="px-5">
 
         {/* Kategori Cepat Layanan Lokal (PRD F3) */}
         <View className="mb-7">
@@ -202,6 +245,29 @@ export default function HomeScreen() {
                   className="w-full h-full"
                   resizeMode="cover"
                 />
+                <Svg
+                  style={StyleSheet.absoluteFill}
+                  viewBox="0 0 100 100"
+                  preserveAspectRatio="none"
+                  pointerEvents="none"
+                >
+                  <Defs>
+                    <LinearGradient
+                      id="cardGrad1"
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="100"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <Stop offset="0%" stopColor="#FFFFFF" stopOpacity="0" />
+                      <Stop offset="60%" stopColor="#FFFFFF" stopOpacity="0.08" />
+                      <Stop offset="85%" stopColor="#FFFFFF" stopOpacity="0.55" />
+                      <Stop offset="100%" stopColor="#FFFFFF" stopOpacity="1" />
+                    </LinearGradient>
+                  </Defs>
+                  <Rect x="0" y="0" width="100" height="100" fill="url(#cardGrad1)" />
+                </Svg>
                 <Pressable
                   accessibilityLabel="Simpan acara"
                   onPress={() => toggleFavorite('pesta-toba')}
@@ -220,7 +286,7 @@ export default function HomeScreen() {
                   Pesta Danau Toba
                 </Text>
                 <Text className="text-[11px] font-dmsans text-on-surface-variant mt-0.5">Parapat, Simalungun</Text>
-                
+
                 <View className="flex-row items-center mt-2 gap-1.5">
                   <Ionicons name="time-outline" size={12} color="#8A827A" />
                   <Text className="text-[11px] font-dmsans-medium text-on-surface-strong">10.00 WIB</Text>
@@ -244,6 +310,29 @@ export default function HomeScreen() {
                   className="w-full h-full"
                   resizeMode="cover"
                 />
+                <Svg
+                  style={StyleSheet.absoluteFill}
+                  viewBox="0 0 100 100"
+                  preserveAspectRatio="none"
+                  pointerEvents="none"
+                >
+                  <Defs>
+                    <LinearGradient
+                      id="cardGrad2"
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="100"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <Stop offset="0%" stopColor="#FFFFFF" stopOpacity="0" />
+                      <Stop offset="60%" stopColor="#FFFFFF" stopOpacity="0.08" />
+                      <Stop offset="85%" stopColor="#FFFFFF" stopOpacity="0.55" />
+                      <Stop offset="100%" stopColor="#FFFFFF" stopOpacity="1" />
+                    </LinearGradient>
+                  </Defs>
+                  <Rect x="0" y="0" width="100" height="100" fill="url(#cardGrad2)" />
+                </Svg>
                 <Pressable
                   accessibilityLabel="Simpan acara"
                   onPress={() => toggleFavorite('mangongkal-holi')}
@@ -301,6 +390,7 @@ export default function HomeScreen() {
           <View className="w-16 h-16 bg-white/70 rounded-2xl border border-white/80 items-center justify-center">
             <AppIcon name="map" size={32} color="#1D4ED8" />
           </View>
+        </View>
         </View>
       </ScrollView>
     </SafeAreaView>
