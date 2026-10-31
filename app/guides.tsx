@@ -136,9 +136,6 @@ export default function GuidesScreen() {
         </Pressable>
 
         <View className="items-center">
-          <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-primary">
-            LAYANAN LOKAL
-          </Text>
           <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
             Pemandu Budaya
           </Text>
@@ -231,14 +228,10 @@ export default function GuidesScreen() {
                 </View>
 
                 <View className="flex-1 min-w-0">
-                  <View className="flex-row items-center justify-between">
+                  <View className="mb-0.5">
                     <Text className="font-raleway text-base font-medium text-on-surface tracking-wide leading-snug">
                       {guide.name}
                     </Text>
-                    <View className="flex-row items-center gap-1 bg-amber-50 border border-amber-200/50 px-2 py-0.5 rounded-full">
-                      <Ionicons name="star" size={11} color="#D97706" />
-                      <Text className="text-xs font-dmsans-bold text-amber-700">{guide.rating}</Text>
-                    </View>
                   </View>
 
                   <Text className="font-dmsans text-xs text-on-surface-variant mt-1 leading-relaxed" numberOfLines={2}>
@@ -254,27 +247,17 @@ export default function GuidesScreen() {
                 </View>
               </View>
 
-              {/* Tag Bahasa, Pengalaman & Promo */}
-              <View className="flex-row flex-wrap gap-1.5 mt-3.5 pt-3 border-t border-border/50">
-                {guide.languages.map((lang) => (
-                  <View key={lang} className="px-2.5 py-1 rounded-full bg-surface-tonal">
-                    <Text className="text-[10px] font-dmsans-medium text-on-surface-variant">{lang}</Text>
-                  </View>
-                ))}
-                <View className="px-2.5 py-1 rounded-full bg-blue-50 border border-primary/20">
-                  <Text className="text-[10px] font-dmsans-bold text-primary">
-                    {guide.experienceYears} thn • {guide.totalTrips} trip
-                  </Text>
-                </View>
-                {guide.promo && (
-                  <View className="px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/60 flex-row items-center gap-1">
-                    <Ionicons name="pricetag-outline" size={10} color="#15803D" />
+              {/* Promo Badge jika ada */}
+              {guide.promo && (
+                <View className="mt-3.5 pt-3 border-t border-border/50 flex-row">
+                  <View className="px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200/60 flex-row items-center gap-1.5">
+                    <Ionicons name="pricetag-outline" size={11} color="#15803D" />
                     <Text className="text-[10px] font-dmsans-bold text-emerald-800">
                       {guide.promo.label}
                     </Text>
                   </View>
-                )}
-              </View>
+                </View>
+              )}
 
               {/* Footer Bar: Tarif & Tombol Pesan */}
               <View className="mt-4 pt-3 border-t border-border/50 flex-row items-center justify-between">
