@@ -42,39 +42,44 @@ export default function PaymentScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-surface-canvas" edges={['top', 'bottom']}>
-      {/* Navigation Header */}
-      <View className="flex-row items-center justify-between px-4 py-2.5 bg-surface-card border-b border-card-border/60 shrink-0 z-20">
+    <SafeAreaView className="flex-1 bg-surface" edges={['top', 'bottom']}>
+      {/* Navigation Header Glassmorphic */}
+      <View className="flex-row items-center justify-between px-5 py-3 bg-white/75 border-b border-border/50 shrink-0 z-20">
         <Pressable
           accessibilityLabel="Kembali"
           onPress={() => router.back()}
-          className="w-10 h-10 items-center justify-center rounded-full active:bg-stone-100 active:opacity-80"
+          className="w-11 h-11 items-center justify-center rounded-full bg-white/70 border border-white/80 shadow-sm active:opacity-75"
         >
-          <AppIcon name="arrow-left" size={22} />
+          <AppIcon name="arrow-left" size={20} color="#23201E" />
         </Pressable>
 
-        <Text className="text-lg font-bold text-on-surface tracking-tight">
-          Pembayaran Digital
-        </Text>
+        <View className="items-center">
+          <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant">
+            CHECKOUT
+          </Text>
+          <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
+            Pembayaran Digital
+          </Text>
+        </View>
 
-        <View className="w-10 h-10" />
+        <View className="w-11 h-11" />
       </View>
 
       <ScrollView
-        className="flex-1 px-4 py-4"
-        contentContainerStyle={{ paddingBottom: 110 }}
+        className="flex-1 px-5 py-4"
+        contentContainerStyle={{ paddingBottom: 130 }}
         showsVerticalScrollIndicator={false}
       >
         {/* Booking Summary Section */}
         <View className="mb-5">
-          <Text className="text-base font-bold text-on-surface mb-2.5">
-            Ringkasan Pesanan
+          <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant mb-2">
+            RINGKASAN PESANAN
           </Text>
 
-          {/* Summary Card */}
-          <View className="bg-surface-card border border-card-border rounded-2xl p-3.5 flex-row items-center justify-between shadow-sm">
+          {/* Summary Card Glassmorphic */}
+          <View className="bg-white/80 border border-white/80 rounded-3xl p-4 flex-row items-center justify-between shadow-sm">
             <View className="flex-row items-center gap-3.5 flex-1 pr-2">
-              <View className="w-14 h-14 rounded-xl overflow-hidden shrink-0 bg-stone-100 border border-card-border">
+              <View className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 bg-surface-tonal">
                 <Image
                   source={PHOTO_COVERS.parapat}
                   className="w-full h-full"
@@ -85,18 +90,18 @@ export default function PaymentScreen() {
               <View className="flex-1">
                 <Text
                   numberOfLines={1}
-                  className="text-sm font-bold text-on-surface leading-tight"
+                  className="font-raleway text-base font-medium text-on-surface tracking-wide leading-tight"
                 >
                   Pesta Danau Toba
                 </Text>
-                <Text className="text-xs text-secondary mt-0.5">
+                <Text className="text-xs font-dmsans text-on-surface-variant mt-0.5">
                   Pantai Bebas Parapat • 2 Peserta
                 </Text>
               </View>
             </View>
 
             <View className="items-end pl-2 shrink-0">
-              <Text className="text-base font-extrabold text-ulos-red">
+              <Text className="font-dmsans-bold text-base text-primary">
                 Rp 100.000
               </Text>
             </View>
@@ -105,34 +110,34 @@ export default function PaymentScreen() {
 
         {/* Payment Method Section (PRD F5) */}
         <View className="mb-5">
-          <Text className="text-base font-bold text-on-surface mb-2.5">
-            Pilih Metode Pembayaran
+          <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant mb-2">
+            METODE PEMBAYARAN
           </Text>
 
           {/* Options Card List */}
-          <View className="bg-surface-card border border-card-border rounded-2xl shadow-sm divide-y divide-card-border overflow-hidden">
+          <View className="bg-white/80 border border-white/80 rounded-3xl shadow-sm overflow-hidden">
             {/* Option 1: QRIS */}
             <Pressable
               onPress={() => handleSelectMethod('qris')}
-              className="flex-row items-center justify-between p-3.5 active:bg-stone-50"
+              className="flex-row items-center justify-between p-4 border-b border-border/50 active:bg-surface-tonal/50"
             >
-              <View className="flex-row items-center gap-3 flex-1 pr-2">
-                <View className="w-10 h-10 rounded-xl bg-blue-50 items-center justify-center shrink-0">
+              <View className="flex-row items-center gap-3.5 flex-1 pr-2">
+                <View className="w-10 h-10 rounded-full bg-primary/10 items-center justify-center shrink-0">
                   <Ionicons name="qr-code-outline" size={20} color="#1D4ED8" />
                 </View>
                 <View className="flex-1">
-                  <Text className="text-sm font-bold text-on-surface">
+                  <Text className="font-raleway text-base font-medium text-on-surface tracking-wide">
                     QRIS (Instan)
                   </Text>
-                  <Text className="text-xs text-secondary mt-0.5">
+                  <Text className="text-xs font-dmsans text-on-surface-variant mt-0.5">
                     Gopay, OVO, ShopeePay, Dana, & Semua Bank
                   </Text>
                 </View>
               </View>
 
-              <View className="w-5 h-5 rounded-full border-2 border-ulos-red items-center justify-center">
+              <View className="w-5 h-5 rounded-full border-2 border-primary items-center justify-center">
                 {selectedMethod === 'qris' && (
-                  <View className="w-2.5 h-2.5 rounded-full bg-ulos-red" />
+                  <View className="w-2.5 h-2.5 rounded-full bg-primary" />
                 )}
               </View>
             </Pressable>
@@ -140,25 +145,27 @@ export default function PaymentScreen() {
             {/* Option 2: Virtual Account Bank */}
             <Pressable
               onPress={() => handleSelectMethod('va')}
-              className="flex-row items-center justify-between p-3.5 active:bg-stone-50"
+              className="flex-row items-center justify-between p-4 border-b border-border/50 active:bg-surface-tonal/50"
             >
-              <View className="flex-row items-center gap-3 flex-1 pr-2">
-                <View className="w-10 h-10 rounded-xl bg-stone-100 items-center justify-center shrink-0">
-                  <Ionicons name="business-outline" size={20} color="#505f76" />
+              <View className="flex-row items-center gap-3.5 flex-1 pr-2">
+                <View className="w-10 h-10 rounded-full bg-surface-tonal items-center justify-center shrink-0">
+                  <Ionicons name="business-outline" size={20} color="#4A4542" />
                 </View>
                 <View className="flex-1">
-                  <Text className="text-sm font-bold text-on-surface">
+                  <Text className="font-raleway text-base font-medium text-on-surface tracking-wide">
                     Virtual Account Bank
                   </Text>
-                  <Text className="text-xs text-secondary mt-0.5">
+                  <Text className="text-xs font-dmsans text-on-surface-variant mt-0.5">
                     BCA, Mandiri, BRI, BNI (Verifikasi Otomatis)
                   </Text>
                 </View>
               </View>
 
-              <View className="w-5 h-5 rounded-full border-2 border-stone-300 items-center justify-center">
+              <View className={`w-5 h-5 rounded-full border-2 items-center justify-center ${
+                selectedMethod === 'va' ? 'border-primary' : 'border-border'
+              }`}>
                 {selectedMethod === 'va' && (
-                  <View className="w-2.5 h-2.5 rounded-full bg-ulos-red" />
+                  <View className="w-2.5 h-2.5 rounded-full bg-primary" />
                 )}
               </View>
             </Pressable>
@@ -166,25 +173,27 @@ export default function PaymentScreen() {
             {/* Option 3: Kartu Debit / Kredit */}
             <Pressable
               onPress={() => handleSelectMethod('card')}
-              className="flex-row items-center justify-between p-3.5 active:bg-stone-50"
+              className="flex-row items-center justify-between p-4 active:bg-surface-tonal/50"
             >
-              <View className="flex-row items-center gap-3 flex-1 pr-2">
-                <View className="w-10 h-10 rounded-xl bg-stone-100 items-center justify-center shrink-0">
-                  <Ionicons name="card-outline" size={20} color="#505f76" />
+              <View className="flex-row items-center gap-3.5 flex-1 pr-2">
+                <View className="w-10 h-10 rounded-full bg-surface-tonal items-center justify-center shrink-0">
+                  <Ionicons name="card-outline" size={20} color="#4A4542" />
                 </View>
                 <View className="flex-1">
-                  <Text className="text-sm font-bold text-on-surface">
+                  <Text className="font-raleway text-base font-medium text-on-surface tracking-wide">
                     Kartu Debit / Kredit
                   </Text>
-                  <Text className="text-xs text-secondary mt-0.5">
+                  <Text className="text-xs font-dmsans text-on-surface-variant mt-0.5">
                     Visa, Mastercard, & Gerbang Pembayaran Nasional
                   </Text>
                 </View>
               </View>
 
-              <View className="w-5 h-5 rounded-full border-2 border-stone-300 items-center justify-center">
+              <View className={`w-5 h-5 rounded-full border-2 items-center justify-center ${
+                selectedMethod === 'card' ? 'border-primary' : 'border-border'
+              }`}>
                 {selectedMethod === 'card' && (
-                  <View className="w-2.5 h-2.5 rounded-full bg-ulos-red" />
+                  <View className="w-2.5 h-2.5 rounded-full bg-primary" />
                 )}
               </View>
             </Pressable>
@@ -192,15 +201,15 @@ export default function PaymentScreen() {
         </View>
 
         {/* Security Trust Info Badge */}
-        <View className="bg-emerald-50/70 rounded-2xl p-4 border border-emerald-200/80 flex-row items-start gap-3">
+        <View className="bg-surface-tonal rounded-3xl p-4 border border-border/80 flex-row items-start gap-3">
           <View className="w-8 h-8 rounded-full bg-emerald-100 items-center justify-center shrink-0">
-            <Ionicons name="shield-checkmark" size={18} color="#15803D" />
+            <Ionicons name="shield-checkmark" size={17} color="#15803D" />
           </View>
           <View className="flex-1">
-            <Text className="text-xs font-bold text-emerald-950">
-              Jaminan Transaksi Terlindungi
+            <Text className="text-[11px] font-dmsans-bold uppercase tracking-wider text-emerald-950">
+              JAMINAN TRANSAKSI TERLINDUNGI
             </Text>
-            <Text className="text-[11px] text-emerald-800/90 mt-0.5 leading-relaxed">
+            <Text className="text-[11px] font-dmsans text-on-surface-variant mt-1 leading-relaxed">
               Pembayaran diproses melalui payment gateway resmi berlisensi Bank Indonesia. Tiket digital dibuat secara instan dan kuota terjamin atomik.
             </Text>
           </View>
@@ -208,22 +217,22 @@ export default function PaymentScreen() {
       </ScrollView>
 
       {/* Elevated Bottom Action Area (Sticky) */}
-      <View className="absolute bottom-0 left-0 right-0 bg-surface-card shadow-lg px-4 pt-3 pb-6 border-t border-card-border z-30">
+      <View className="absolute bottom-0 left-0 right-0 bg-white/92 shadow-lg px-5 pt-3 pb-6 border-t border-border/50 z-30">
         {/* Primary Action CTA Button */}
         <Pressable
           onPress={handlePayNow}
-          className="w-full h-12 bg-ulos-red active:bg-ulos-redDark text-white rounded-xl font-bold flex-row items-center justify-center gap-2 shadow-sm active:opacity-90"
+          className="w-full h-14 bg-primary active:bg-blue-800 text-white rounded-full flex-row items-center justify-center gap-2 shadow-md mb-2"
         >
           <AppIcon name="wallet" size={20} color="#FFFFFF" />
-          <Text className="text-white font-bold text-base">
+          <Text className="text-white font-dmsans-medium text-base tracking-wide">
             Bayar Rp 100.000
           </Text>
         </Pressable>
 
         {/* Security Caption Reassurance */}
-        <View className="flex-row items-center justify-center gap-1.5 pt-2.5">
-          <Ionicons name="shield-outline" size={13} color="#78716C" />
-          <Text className="text-[11px] text-secondary text-center">
+        <View className="flex-row items-center justify-center gap-1.5 pt-1">
+          <Ionicons name="shield-outline" size={13} color="#8A827A" />
+          <Text className="text-[11px] font-dmsans text-on-surface-variant text-center">
             Pembayaran dienkripsi aman 256-bit SSL.
           </Text>
         </View>
