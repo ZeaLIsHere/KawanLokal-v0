@@ -1,6 +1,6 @@
 # AGENTS.md — Panduan Agen AI: KawanLokal
 
-Dokumen instruksi kerja agen AI di repositori **KawanLokal**. Rujukan utama produk: `PRD.md`.
+Dokumen instruksi kerja agen AI di repositori **KawanLokal**. Rujukan utama produk: `PRD.md` dan pelacak progres: `PROGRESS.md`.
 
 ---
 
@@ -39,6 +39,7 @@ Aplikasi mobile budaya dan pariwisata Danau Toba (Android APK via Expo, bertahap
 6. **Integritas Booking:** Pembuatan booking harus atomik (`create_booking` dengan `FOR UPDATE` di slot kapasitas) guna mencegah overbooking. Kedaluwarsa otomatis 15 menit jika belum bayar.
 8. **Siklus Tugas, Commit & Push:** Setiap menyelesaikan satu tugas atau menambah fitur baru, **wajib** melakukan commit dan push ke remote repository (`https://github.com/ZeaLIsHere/KawanLokal-v0.git`).
 9. **Penundaan Fitur Auth/Login:** Fitur autentikasi dan alur login dilewati untuk sementara sampai ada instruksi lanjutan (*callback*) dari pengguna. Layar dan navigasi diarahkan langsung ke antarmuka utama (bypass auth).
+10. **Wajib Baca PROGRESS.md:** Sebelum memulai atau melanjutkan pengerjaan fitur/bagian apa pun, agen **wajib membaca `PROGRESS.md`** guna memastikan pemahaman konteks terkini, keputusan teknis yang telah diambil, dan menghindari pengerjaan ulang.
 
 ---
 
@@ -115,7 +116,7 @@ Gunakan enum sesuai `PRD.md`:
 
 ## 5. Alur Kerja Agen AI
 
-1. **Baca Spesifikasi:** Cek `PRD.md` bagian terkait sebelum membuat kode.
+1. **Baca Spesifikasi & Progres:** Cek `PRD.md` bagian terkait serta wajib baca `PROGRESS.md` sebelum memulai atau melanjutkan penulisan kode fitur.
 2. **Minimal & Bertahap:** Buat perubahan sesedikit dan seefisien mungkin. Jangan buat scaffold fitur di luar fase yang sedang dikerjakan.
 3. **Uji Mandiri:**
    - Jalankan typecheck TypeScript / linter sebelum menyatakan selesai.
