@@ -82,36 +82,36 @@ export default function ProfileScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-surface-canvas" edges={['top', 'bottom']}>
+    <SafeAreaView className="flex-1 bg-surface" edges={['top', 'bottom']}>
       <ScrollView
         className="flex-1"
         contentContainerStyle={{ paddingBottom: 40 }}
         showsVerticalScrollIndicator={false}
       >
-        {/* Curved Gradient Header (Ulos Red Theme) */}
-        <View className="bg-ulos-red pt-3 pb-14 px-4 rounded-b-[2.5rem] shadow-md relative overflow-hidden">
+        {/* Curved Header (Royal Blue Danau Toba Theme) */}
+        <View className="bg-primary pt-3 pb-14 px-5 rounded-b-[2.5rem] shadow-md relative overflow-hidden">
           {/* Ambient Decorative Overlay */}
           <View className="absolute -top-10 -right-10 w-44 h-44 rounded-full bg-white/10 blur-xl pointer-events-none" />
           <View className="absolute top-1/2 -left-10 w-36 h-36 rounded-full bg-black/10 blur-xl pointer-events-none" />
 
           {/* Top Action Bar */}
-          <View className="flex-row items-center justify-between mb-2">
+          <View className="flex-row items-center justify-between mb-3">
             <Pressable
               accessibilityLabel="Kembali"
               onPress={() => router.back()}
-              className="w-10 h-10 rounded-full items-center justify-center bg-white/15 active:bg-white/25 active:opacity-80"
+              className="w-11 h-11 rounded-full items-center justify-center bg-white/20 border border-white/30 shadow-xs"
             >
               <AppIcon name="arrow-left" size={20} color="#FFFFFF" />
             </Pressable>
 
-            <Text className="text-base font-bold text-white tracking-wide">
+            <Text className="font-raleway text-lg font-medium text-white tracking-wide">
               Profil Wisatawan
             </Text>
 
             <Pressable
               accessibilityLabel="Pengaturan"
               onPress={() => router.push('/settings')}
-              className="w-10 h-10 rounded-full items-center justify-center bg-white/15 active:bg-white/25 active:opacity-80"
+              className="w-11 h-11 rounded-full items-center justify-center bg-white/20 border border-white/30 shadow-xs"
             >
               <Ionicons name="settings-outline" size={20} color="#FFFFFF" />
             </Pressable>
@@ -120,7 +120,7 @@ export default function ProfileScreen() {
           {/* Avatar & Profile Basic Info */}
           <View className="items-center justify-center pt-1 text-center">
             <View className="relative mb-2.5">
-              <View className="w-24 h-24 rounded-full p-1 bg-surface-card shadow-lg ring-4 ring-white/30">
+              <View className="w-24 h-24 rounded-full p-1 bg-white shadow-lg border-2 border-white/50">
                 <Image
                   source={avatarUri ? { uri: avatarUri } : PHOTO_COVERS.desaTomok}
                   className="w-full h-full rounded-full"
@@ -130,20 +130,20 @@ export default function ProfileScreen() {
               <Pressable
                 accessibilityLabel="Ubah Foto"
                 onPress={handleEditAvatar}
-                className="absolute bottom-0 right-0 w-7 h-7 bg-surface-card rounded-full shadow-md items-center justify-center active:opacity-80"
+                className="absolute bottom-0 right-0 w-8 h-8 bg-white rounded-full shadow-md items-center justify-center border border-border/60"
               >
-                <Ionicons name="camera" size={14} color="#1D4ED8" />
+                <Ionicons name="camera" size={15} color="#1D4ED8" />
               </Pressable>
             </View>
 
-            <Text className="text-xl font-bold text-white tracking-tight">
+            <Text className="font-raleway text-2xl font-medium text-white tracking-wide">
               Wisatawan KawanLokal
             </Text>
-            <Text className="text-xs text-red-100 mt-0.5 font-medium">
+            <Text className="text-xs text-blue-100 mt-0.5 font-dmsans">
               wisatawan@kawanlokal.id
             </Text>
-            <View className="mt-2 px-3 py-0.5 rounded-full bg-white/20">
-              <Text className="text-[10px] font-bold text-white uppercase tracking-wider">
+            <View className="mt-2.5 px-3.5 py-1 rounded-full bg-white/20 border border-white/25">
+              <Text className="text-[10px] font-dmsans-bold text-white uppercase tracking-wider">
                 Wisatawan Terverifikasi
               </Text>
             </View>
@@ -151,22 +151,22 @@ export default function ProfileScreen() {
         </View>
 
         {/* Overlapping Floating Content Canvas (-mt-7) */}
-        <View className="px-4 -mt-7 gap-4 z-10">
+        <View className="px-5 -mt-7 gap-4 z-10">
           {/* Stats Card (3 Columns with hairline dividers) */}
-          <View className="bg-surface-card rounded-2xl border border-card-border shadow-md py-3.5 px-2">
-            <View className="flex-row divide-x divide-card-border items-center">
-              {/* Acara Budaya */}
+          <View className="bg-white/90 rounded-3xl border border-white/90 shadow-md py-4 px-2">
+            <View className="flex-row divide-x divide-border/60 items-center">
+              {/* Acara Budaya Diikuti (icon tiket) */}
               <Pressable
                 onPress={() => router.push('/(tabs)/orders')}
-                className="flex-1 items-center justify-center py-1 active:opacity-70"
+                className="flex-1 items-center justify-center py-1"
               >
-                <View className="w-9 h-9 rounded-full bg-red-50 items-center justify-center mb-1">
-                  <Ionicons name="sparkles" size={18} color="#991B1B" />
+                <View className="w-10 h-10 rounded-full bg-blue-50 border border-primary/20 items-center justify-center mb-1.5">
+                  <Ionicons name="ticket-outline" size={18} color="#1D4ED8" />
                 </View>
-                <Text className="text-base font-extrabold text-on-surface leading-none">
+                <Text className="font-raleway text-lg font-semibold text-on-surface leading-none">
                   4
                 </Text>
-                <Text className="text-[11px] text-secondary mt-1 font-medium">
+                <Text className="text-[11px] font-dmsans text-on-surface-variant mt-1.5 font-medium">
                   Acara Diikuti
                 </Text>
               </Pressable>
@@ -174,15 +174,15 @@ export default function ProfileScreen() {
               {/* Acara Tersimpan */}
               <Pressable
                 onPress={() => router.push('/calendar')}
-                className="flex-1 items-center justify-center py-1 active:opacity-70"
+                className="flex-1 items-center justify-center py-1"
               >
-                <View className="w-9 h-9 rounded-full bg-blue-50 items-center justify-center mb-1">
-                  <Ionicons name="bookmark" size={18} color="#1D4ED8" />
+                <View className="w-10 h-10 rounded-full bg-blue-50 border border-primary/20 items-center justify-center mb-1.5">
+                  <Ionicons name="bookmark-outline" size={18} color="#1D4ED8" />
                 </View>
-                <Text className="text-base font-extrabold text-on-surface leading-none">
+                <Text className="font-raleway text-lg font-semibold text-on-surface leading-none">
                   8
                 </Text>
-                <Text className="text-[11px] text-secondary mt-1 font-medium">
+                <Text className="text-[11px] font-dmsans text-on-surface-variant mt-1.5 font-medium">
                   Tersimpan
                 </Text>
               </Pressable>
@@ -190,132 +190,112 @@ export default function ProfileScreen() {
               {/* Destinasi Toba */}
               <Pressable
                 onPress={() => router.push('/destinations')}
-                className="flex-1 items-center justify-center py-1 active:opacity-70"
+                className="flex-1 items-center justify-center py-1"
               >
-                <View className="w-9 h-9 rounded-full bg-blue-50 items-center justify-center mb-1">
-                  <Ionicons name="location" size={18} color="#1D4ED8" />
+                <View className="w-10 h-10 rounded-full bg-blue-50 border border-primary/20 items-center justify-center mb-1.5">
+                  <Ionicons name="location-outline" size={18} color="#1D4ED8" />
                 </View>
-                <Text className="text-base font-extrabold text-on-surface leading-none">
+                <Text className="font-raleway text-lg font-semibold text-on-surface leading-none">
                   7
                 </Text>
-                <Text className="text-[11px] text-secondary mt-1 font-medium">
+                <Text className="text-[11px] font-dmsans text-on-surface-variant mt-1.5 font-medium">
                   Kabupaten
                 </Text>
               </Pressable>
             </View>
           </View>
 
-          {/* Account Settings & Menu Options Card */}
-          <View className="bg-surface-card rounded-2xl border border-card-border shadow-sm overflow-hidden divide-y divide-card-border">
+          {/* Account Settings & Menu Options Card (DESIGN.md: card glassmorphic) */}
+          <View className="bg-white/85 rounded-3xl border border-white/90 shadow-sm overflow-hidden divide-y divide-border/50">
             {/* Pesanan & Tiket Saya */}
             <Pressable
               onPress={() => router.push('/(tabs)/orders')}
-              className="flex-row items-center justify-between p-3.5 active:bg-stone-50"
+              className="flex-row items-center justify-between p-4"
             >
-              <View className="flex-row items-center gap-3">
-                <View className="w-8 h-8 rounded-xl bg-blue-50 items-center justify-center">
-                  <AppIcon name="ticket" size={18} />
+              <View className="flex-row items-center gap-3.5">
+                <View className="w-9 h-9 rounded-2xl bg-blue-50 border border-primary/20 items-center justify-center">
+                  <AppIcon name="ticket" size={18} color="#1D4ED8" />
                 </View>
-                <Text className="text-sm font-semibold text-on-surface">
+                <Text className="text-sm font-dmsans-medium text-on-surface">
                   Pesanan & Tiket Digital
                 </Text>
               </View>
-              <Ionicons name="chevron-forward" size={18} color="#A8A29E" />
+              <Ionicons name="chevron-forward" size={18} color="#8A827A" />
             </Pressable>
 
             {/* Kalender Budaya Terjadwal */}
             <Pressable
               onPress={() => router.push('/calendar')}
-              className="flex-row items-center justify-between p-3.5 active:bg-stone-50"
+              className="flex-row items-center justify-between p-4"
             >
-              <View className="flex-row items-center gap-3">
-                <View className="w-8 h-8 rounded-xl bg-blue-50 items-center justify-center">
-                  <AppIcon name="calendar" size={18} />
+              <View className="flex-row items-center gap-3.5">
+                <View className="w-9 h-9 rounded-2xl bg-blue-50 border border-primary/20 items-center justify-center">
+                  <AppIcon name="calendar" size={18} color="#1D4ED8" />
                 </View>
-                <Text className="text-sm font-semibold text-on-surface">
+                <Text className="text-sm font-dmsans-medium text-on-surface">
                   Kalender Budaya Toba
                 </Text>
               </View>
-              <Ionicons name="chevron-forward" size={18} color="#A8A29E" />
+              <Ionicons name="chevron-forward" size={18} color="#8A827A" />
             </Pressable>
 
             {/* Destinasi Wisata */}
             <Pressable
               onPress={() => router.push('/destinations')}
-              className="flex-row items-center justify-between p-3.5 active:bg-stone-50"
+              className="flex-row items-center justify-between p-4"
             >
-              <View className="flex-row items-center gap-3">
-                <View className="w-8 h-8 rounded-xl bg-stone-100 items-center justify-center">
-                  <AppIcon name="map" size={18} />
+              <View className="flex-row items-center gap-3.5">
+                <View className="w-9 h-9 rounded-2xl bg-surface-tonal items-center justify-center">
+                  <AppIcon name="map" size={18} color="#23201E" />
                 </View>
-                <Text className="text-sm font-semibold text-on-surface">
+                <Text className="text-sm font-dmsans-medium text-on-surface">
                   Destinasi Budaya Sekitar Toba
                 </Text>
               </View>
-              <Ionicons name="chevron-forward" size={18} color="#A8A29E" />
+              <Ionicons name="chevron-forward" size={18} color="#8A827A" />
             </Pressable>
 
             {/* Homestay & Penginapan */}
             <Pressable
               onPress={() => router.push('/homestays')}
-              className="flex-row items-center justify-between p-3.5 active:bg-stone-50"
+              className="flex-row items-center justify-between p-4"
             >
-              <View className="flex-row items-center gap-3">
-                <View className="w-8 h-8 rounded-xl bg-stone-100 items-center justify-center">
-                  <AppIcon name="hotel" size={18} />
+              <View className="flex-row items-center gap-3.5">
+                <View className="w-9 h-9 rounded-2xl bg-surface-tonal items-center justify-center">
+                  <AppIcon name="hotel" size={18} color="#23201E" />
                 </View>
-                <Text className="text-sm font-semibold text-on-surface">
+                <Text className="text-sm font-dmsans-medium text-on-surface">
                   Homestay & Sopo Bolon
                 </Text>
               </View>
-              <Ionicons name="chevron-forward" size={18} color="#A8A29E" />
+              <Ionicons name="chevron-forward" size={18} color="#8A827A" />
             </Pressable>
 
             {/* Pengaturan Akun & Peran */}
             <Pressable
               onPress={() => router.push('/settings')}
-              className="flex-row items-center justify-between p-3.5 active:bg-stone-50"
+              className="flex-row items-center justify-between p-4"
             >
-              <View className="flex-row items-center gap-3">
-                <View className="w-8 h-8 rounded-xl bg-stone-100 items-center justify-center">
-                  <Ionicons name="settings-outline" size={18} color="#505f76" />
+              <View className="flex-row items-center gap-3.5">
+                <View className="w-9 h-9 rounded-2xl bg-surface-tonal items-center justify-center">
+                  <Ionicons name="settings-outline" size={18} color="#23201E" />
                 </View>
-                <Text className="text-sm font-semibold text-on-surface">
+                <Text className="text-sm font-dmsans-medium text-on-surface">
                   Pengaturan, Peran & Bahasa
                 </Text>
               </View>
-              <Ionicons name="chevron-forward" size={18} color="#A8A29E" />
+              <Ionicons name="chevron-forward" size={18} color="#8A827A" />
             </Pressable>
-          </View>
-
-          {/* Cultural Heritage Trust Banner */}
-          <View className="bg-gradient-to-r from-red-50 to-stone-50 border border-red-200/80 rounded-2xl p-3.5 flex-row items-center gap-3 shadow-xs">
-            <View className="w-10 h-10 rounded-xl bg-ulos-red items-center justify-center shrink-0 shadow-xs">
-              <Ionicons name="shield-checkmark" size={22} color="#FFFFFF" />
-            </View>
-            <View className="flex-1">
-              <View className="flex-row items-center gap-1.5">
-                <Text className="text-xs font-bold text-on-surface">
-                  Pelestari Warisan Adat Toba
-                </Text>
-                <View className="bg-emerald-100 px-1.5 py-0.2 rounded-full">
-                  <Text className="text-[9px] font-bold text-emerald-800">Aktif</Text>
-                </View>
-              </View>
-              <Text className="text-[11px] text-secondary mt-0.5 leading-snug">
-                Setiap pemesanan Anda mendukung langsung pengrajin ulos dan tetua adat lokal.
-              </Text>
-            </View>
           </View>
 
           {/* Logout Action Row */}
           <View className="items-center pt-2">
             <Pressable
               onPress={handleLogout}
-              className="flex-row items-center gap-2 py-2 px-5 rounded-xl active:bg-red-50 active:opacity-90"
+              className="flex-row items-center gap-2 py-2.5 px-6 rounded-full bg-white border border-border/80 shadow-xs"
             >
-              <Ionicons name="log-out-outline" size={18} color="#991B1B" />
-              <Text className="text-sm font-bold text-ulos-red">
+              <Ionicons name="log-out-outline" size={18} color="#8C4A4A" />
+              <Text className="text-xs font-dmsans-bold text-destructive uppercase tracking-wider">
                 Keluar Akun
               </Text>
             </Pressable>
