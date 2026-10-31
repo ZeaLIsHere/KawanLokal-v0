@@ -47,7 +47,7 @@ export default function SettingsScreen() {
         <Pressable
           onPress={() => {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
-            router.push('/profile');
+            router.push('/profile/edit');
           }}
           className="bg-white/85 rounded-3xl border border-white/90 p-4 shadow-sm mb-4 flex-row items-center justify-between"
         >

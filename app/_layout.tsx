@@ -72,6 +72,7 @@ export default function RootLayout() {
             <Stack.Screen name="calendar" options={{ presentation: 'card' }} />
             <Stack.Screen name="settings" options={{ presentation: 'card' }} />
             <Stack.Screen name="profile/index" options={{ presentation: 'card' }} />
+            <Stack.Screen name="profile/edit" options={{ presentation: 'card' }} />
           </Stack>
         </SafeAreaProvider>
       </I18nProvider>

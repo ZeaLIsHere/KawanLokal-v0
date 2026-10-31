@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   View,
   Text,
@@ -9,13 +9,13 @@ import {
 } from 'react-native';
 import Svg, { Defs, LinearGradient, Stop, Rect } from 'react-native-svg';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useRouter } from 'expo-router';
+import { useRouter, useFocusEffect } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AppIcon } from '@/components/AppIcon';
 import { SvgIconName } from '@/constants/svgIcons';
 import { PHOTO_COVERS } from '@/constants/localPhotos';
+import { getProfile } from '@/lib/profileStorage';
 import { useTranslation } from '@/i18n';
 
 const STORAGE_AVATAR_KEY = '@user_profile_avatar';
@@ -38,13 +38,15 @@ export default function HomeScreen() {
   const [favorites, setFavorites] = useState<Record<string, boolean>>({});
   const [avatarUri, setAvatarUri] = useState<string>('');
 
-  useEffect(() => {
-    AsyncStorage.getItem(STORAGE_AVATAR_KEY)
-      .then((stored) => {
-        if (stored) setAvatarUri(stored);
-      })
-      .catch(() => {});
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      getProfile()
+        .then((profile) => {
+          if (profile.avatarUri) setAvatarUri(profile.avatarUri);
+        })
+        .catch(() => {});
+    }, [])
+  );
 
   const toggleFavorite = (id: string) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
