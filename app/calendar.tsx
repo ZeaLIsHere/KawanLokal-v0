@@ -380,25 +380,15 @@ export default function CalendarScreen() {
                   <Rect x="0" y="0" width="100" height="100" fill={`url(#evGrad-${ev.id})`} />
                 </Svg>
 
-                {/* Floating Badges di atas Foto */}
-                <View className="absolute top-3 inset-x-3 flex-row items-center justify-between">
-                  {/* Badge Kategori Pill */}
-                  <View className="px-3 py-1 rounded-full bg-white/90 border border-white shadow-xs">
-                    <Text className="text-[10px] uppercase tracking-wider font-dmsans-bold text-primary">
-                      {ev.category}
+                {/* Floating Badge Terverifikasi di atas Foto */}
+                {ev.verified && (
+                  <View className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-white/90 border border-white shadow-xs flex-row items-center gap-1">
+                    <Ionicons name="checkmark-circle" size={13} color="#15803D" />
+                    <Text className="text-[10px] font-dmsans-bold text-emerald-700 tracking-wide">
+                      Terverifikasi
                     </Text>
                   </View>
-
-                  {/* Badge Terverifikasi */}
-                  {ev.verified && (
-                    <View className="px-2.5 py-1 rounded-full bg-white/90 border border-white shadow-xs flex-row items-center gap-1">
-                      <Ionicons name="checkmark-circle" size={13} color="#15803D" />
-                      <Text className="text-[10px] font-dmsans-bold text-emerald-700 tracking-wide">
-                        Terverifikasi
-                      </Text>
-                    </View>
-                  )}
-                </View>
+                )}
               </View>
 
               {/* Konten Detail Acara */}
@@ -536,14 +526,8 @@ export default function CalendarScreen() {
                 <Rect x="0" y="0" width="100" height="100" fill="url(#modalEventGrad)" />
               </Svg>
 
-              {/* Header Badges & Tombol Tutup */}
-              <View className="absolute top-3.5 inset-x-3.5 flex-row items-center justify-between">
-                <View className="px-3 py-1 rounded-full bg-white/90 border border-white shadow-xs">
-                  <Text className="text-[10px] uppercase tracking-wider font-dmsans-bold text-primary">
-                    {selectedEventModal.category}
-                  </Text>
-                </View>
-
+              {/* Tombol Tutup di atas Foto */}
+              <View className="absolute top-3.5 right-3.5">
                 <Pressable
                   accessibilityLabel="Tutup"
                   onPress={() => setSelectedEventModal(null)}
