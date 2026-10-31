@@ -18,33 +18,16 @@ import { PHOTO_COVERS } from '@/constants/localPhotos';
 export default function NewBookingScreen() {
   const router = useRouter();
   const params = useLocalSearchParams<{
-    service_type?: string;
-    guide_id?: string;
-    guide_name?: string;
-    guide_specialty?: string;
-    guide_district?: string;
-    guide_price?: string;
     event_id?: string;
     event_title?: string;
     event_location?: string;
     event_price?: string;
   }>();
 
-  const isGuideParam = params.service_type === 'guide';
-  const [bookingType, setBookingType] = useState<'ticket' | 'guide'>(isGuideParam ? 'guide' : 'ticket');
   const [participantCount, setParticipantCount] = useState<number>(2);
 
-  // Parsing tarif pemandu dari format string (misal "Rp 250.000" -> 250000)
-  const parsedGuidePrice = useMemo(() => {
-    if (params.guide_price) {
-      const num = parseInt(params.guide_price.replace(/[^0-9]/g, ''), 10);
-      if (!isNaN(num) && num > 0) return num;
-    }
-    return 250000;
-  }, [params.guide_price]);
-
-  // Parsing harga tiket acara dari parameter
-  const parsedEventPrice = useMemo(() => {
+  // Parsing harga tiket acara dari parameter (misal "Rp 50.000" -> 50000, Gratis -> 0)
+  const ticketPrice = useMemo(() => {
     if (params.event_price) {
       if (params.event_price.toLowerCase().includes('gratis')) return 0;
       const num = parseInt(params.event_price.replace(/[^0-9]/g, ''), 10);
@@ -53,14 +36,9 @@ export default function NewBookingScreen() {
     return 50000;
   }, [params.event_price]);
 
-  // Tiket: per peserta. Pemandu: tarif flat per rombongan trip
-  const pricePerItem = bookingType === 'ticket' ? parsedEventPrice : parsedGuidePrice;
-  const totalPrice = bookingType === 'ticket' ? participantCount * pricePerItem : pricePerItem;
-
-  const handleTypeSwitch = (type: 'ticket' | 'guide') => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
-    setBookingType(type);
-  };
+  const eventTitle = params.event_title || 'Pesta Danau Toba & Pagelaran Gondang';
+  const eventLocation = params.event_location || 'Pantai Bebas Parapat, Simalungun';
+  const totalPrice = participantCount * ticketPrice;
 
   const handleIncrement = () => {
     if (participantCount < 10) {
@@ -78,19 +56,12 @@ export default function NewBookingScreen() {
 
   const handleProceedPayment = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
-    const currentTitle = bookingType === 'guide'
-      ? (params.guide_name || 'Bona Simanjuntak')
-      : (params.event_title || 'Pesta Danau Toba & Pagelaran Gondang');
-    const currentLocation = bookingType === 'guide'
-      ? (params.guide_district || 'Dermaga Tomok, Pulau Samosir')
-      : (params.event_location || 'Pantai Bebas Parapat, Simalungun');
-
     router.push({
       pathname: '/payment',
       params: {
-        service_type: bookingType,
-        title: currentTitle,
-        location: currentLocation,
+        service_type: 'ticket',
+        title: eventTitle,
+        location: eventLocation,
         amount: String(totalPrice),
         participants: String(participantCount),
       },
@@ -111,7 +82,7 @@ export default function NewBookingScreen() {
 
         <View className="items-center">
           <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
-            Pesan Layanan
+            Pesan Tiket Acara
           </Text>
         </View>
 
@@ -135,77 +106,40 @@ export default function NewBookingScreen() {
         contentContainerStyle={{ paddingBottom: 40 }}
         showsVerticalScrollIndicator={false}
       >
-        {/* Switcher Segmented Control Glassmorphic */}
-        <View className="w-full p-1 bg-white/70 rounded-full border border-white/80 flex-row items-center justify-between mb-5 shadow-sm">
-          <Pressable
-            onPress={() => handleTypeSwitch('ticket')}
-            className={`flex-1 py-2.5 rounded-full items-center justify-center ${
-              bookingType === 'ticket' ? 'bg-primary shadow-sm' : 'bg-transparent'
-            }`}
-          >
-            <Text
-              className={`text-[10px] uppercase tracking-[0.18em] font-dmsans-bold ${
-                bookingType === 'ticket' ? 'text-white' : 'text-on-surface-variant'
-              }`}
-            >
-              Tiket Acara
-            </Text>
-          </Pressable>
-
-          <Pressable
-            onPress={() => handleTypeSwitch('guide')}
-            className={`flex-1 py-2.5 rounded-full items-center justify-center ${
-              bookingType === 'guide' ? 'bg-primary shadow-sm' : 'bg-transparent'
-            }`}
-          >
-            <Text
-              className={`text-[10px] uppercase tracking-[0.18em] font-dmsans-bold ${
-                bookingType === 'guide' ? 'text-white' : 'text-on-surface-variant'
-              }`}
-            >
-              Paket Pemandu
-            </Text>
-          </Pressable>
-        </View>
-
         {/* Booking Parameters Form Module */}
         <View className="gap-3.5 mb-5">
-          {/* Field 1: Pilihan Layanan / Acara */}
+          {/* Field 1: Acara Terpilih */}
           <View className="border border-white/80 rounded-3xl bg-white/80 p-4 flex-row items-center shadow-sm">
             <View className="w-10 h-10 rounded-full bg-primary/10 items-center justify-center mr-3.5">
               <Ionicons name="map-outline" size={18} color="#1D4ED8" />
             </View>
             <View className="flex-1">
               <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-on-surface-variant">
-                {bookingType === 'guide' ? 'Pemandu Terpilih' : 'Layanan Terpilih'}
+                Acara Terpilih
               </Text>
               <Text
                 numberOfLines={1}
                 className="font-raleway text-base font-medium text-on-surface tracking-wide mt-0.5"
               >
-                {bookingType === 'guide'
-                  ? (params.guide_name || 'Bona Simanjuntak')
-                  : (params.event_title || 'Pesta Danau Toba & Pagelaran Gondang')}
+                {eventTitle}
               </Text>
             </View>
           </View>
 
-          {/* Field 2: Kawasan / Lokasi Temu */}
+          {/* Field 2: Lokasi Acara */}
           <View className="border border-white/80 rounded-3xl bg-white/80 p-4 flex-row items-center shadow-sm">
             <View className="w-10 h-10 rounded-full bg-primary/10 items-center justify-center mr-3.5">
               <Ionicons name="location-outline" size={18} color="#1D4ED8" />
             </View>
             <View className="flex-1">
               <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-on-surface-variant">
-                {bookingType === 'guide' ? 'Titik Kumpul Temu' : 'Titik Lokasi'}
+                Lokasi Acara
               </Text>
               <Text
                 numberOfLines={1}
                 className="font-raleway text-base font-medium text-on-surface tracking-wide mt-0.5"
               >
-                {bookingType === 'guide'
-                  ? (params.guide_district || 'Dermaga Tomok, Pulau Samosir')
-                  : (params.event_location || 'Pantai Bebas Parapat, Simalungun')}
+                {eventLocation}
               </Text>
             </View>
           </View>
@@ -228,7 +162,7 @@ export default function NewBookingScreen() {
             </View>
           </View>
 
-          {/* Field 4: Jumlah Peserta dengan Kontrol +/- */}
+          {/* Field 4: Jumlah Tiket Peserta */}
           <View className="border border-white/80 rounded-3xl bg-white/80 p-4 flex-row items-center justify-between shadow-sm">
             <View className="flex-row items-center gap-3.5">
               <View className="w-10 h-10 rounded-full bg-primary/10 items-center justify-center">
@@ -236,10 +170,10 @@ export default function NewBookingScreen() {
               </View>
               <View>
                 <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-on-surface-variant">
-                  {bookingType === 'guide' ? 'Kapasitas Rombongan' : 'Jumlah Peserta'}
+                  Jumlah Tiket
                 </Text>
                 <Text className="font-raleway text-base font-medium text-on-surface tracking-wide mt-0.5">
-                  {participantCount} Orang {bookingType === 'guide' ? '(Maks. 10 org/trip)' : `(${formatRupiah(pricePerItem)}/org)`}
+                  {participantCount} Peserta ({ticketPrice === 0 ? 'Gratis' : `${formatRupiah(ticketPrice)}/tiket`})
                 </Text>
               </View>
             </View>
@@ -272,7 +206,7 @@ export default function NewBookingScreen() {
           </Text>
           <View className="flex-row justify-between items-center pb-2.5 border-b border-border/50">
             <Text className="text-xs font-dmsans text-on-surface-variant">
-              {bookingType === 'guide' ? 'Jasa Pemandu (Tarif Tur Rombongan)' : `Tiket Masuk (${participantCount}x)`}
+              Tiket Masuk Acara ({participantCount}x)
             </Text>
             <Text className="text-xs font-dmsans-medium text-on-surface">
               {formatRupiah(totalPrice)}

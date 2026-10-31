@@ -263,9 +263,8 @@ export default function GuidesScreen() {
                   onPress={() => {
                     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
                     router.push({
-                      pathname: '/booking/new',
+                      pathname: '/booking/guide',
                       params: {
-                        service_type: 'guide',
                         guide_id: guide.id,
                         guide_name: guide.name,
                         guide_specialty: guide.specialty,
