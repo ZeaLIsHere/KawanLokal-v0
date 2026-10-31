@@ -117,7 +117,7 @@ export default function HomeScreen() {
         </View>
 
         {/* Tombol CTA Eksplorasi */}
-        <View className="mb-6">
+        <View className="mb-6 items-center">
           <Pressable
             accessibilityLabel="Mulai Eksplorasi"
             accessibilityRole="button"
@@ -125,12 +125,12 @@ export default function HomeScreen() {
               Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
               router.push('/calendar');
             }}
-            className="w-full h-14 bg-primary active:bg-blue-800 rounded-full flex-row items-center justify-center gap-2.5 shadow-md active:opacity-90"
+            className="bg-primary active:bg-blue-800 rounded-full flex-row items-center justify-center px-6 py-3 gap-2 shadow-sm active:opacity-90"
           >
-            <Text className="text-white font-dmsans-bold text-base tracking-wide">
+            <Text className="text-white font-dmsans-bold text-sm tracking-wide">
               Mulai Eksplorasi
             </Text>
-            <AppIcon name="arrow-right" size={16} color="#FFFFFF" />
+            <AppIcon name="arrow-right" size={14} color="#FFFFFF" />
           </Pressable>
         </View>
 
