@@ -74,6 +74,9 @@ Dokumen catatan kemajuan pengembangan aplikasi mobile **KawanLokal** (Platform B
    - Solusi: Mengganti efek sentuh ke interaksi native murni React Native (`active:opacity-*`).
 3. **Penyaringan Log Peringatan (LogBox):**
    - Menambahkan pembungkaman peringatan internal library pihak ketiga (`ImageBackground is deprecated` dan `Reanimated dependencies on web`) di `app/_layout.tsx` agar tampilan pratinjau di ponsel bersih.
+4. **Presisi Penjajaran Vertikal Floating Pill Tab Bar:**
+   - Permasalahan: Ikon pada Floating Pill Tab Bar tidak rata tengah vertikal akibat default `justifyContent: 'flex-start'` dan padding bawaan React Navigation tab item.
+   - Solusi: Menambahkan `tabBarButton` dengan perataan tengah eksplisit (`justifyContent: 'center'`, `alignItems: 'center'`, `padding: 0`) dan indikator dot aktif berbasis `absolute` sesuai spesifikasi `DESIGN.md`.
 
 ---
 

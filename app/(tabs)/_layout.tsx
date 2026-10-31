@@ -1,4 +1,4 @@
-import { View, Platform } from 'react-native';
+import { View, Platform, Pressable } from 'react-native';
 import { Tabs } from 'expo-router';
 import { AppIcon } from '@/components/AppIcon';
 
@@ -28,6 +28,27 @@ export default function TabLayout() {
           shadowOpacity: 0.4,
           shadowRadius: 20,
         },
+        tabBarItemStyle: {
+          height: 64,
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingVertical: 0,
+        },
+        tabBarButton: ({ ref, ...props }) => (
+          <Pressable
+            {...props}
+            style={[
+              props.style,
+              {
+                height: 64,
+                justifyContent: 'center',
+                alignItems: 'center',
+                paddingTop: 0,
+                paddingBottom: 0,
+              },
+            ]}
+          />
+        ),
       }}
     >
       <Tabs.Screen
@@ -35,10 +56,10 @@ export default function TabLayout() {
         options={{
           title: 'Beranda',
           tabBarIcon: ({ focused, color }) => (
-            <View className="items-center justify-center py-1">
+            <View className="items-center justify-center relative">
               <AppIcon name="home" size={24} color={color} />
               {focused && (
-                <View className="w-1.5 h-1.5 rounded-full bg-primary mt-1" />
+                <View className="w-1 h-1 rounded-full bg-primary absolute -bottom-1.5" />
               )}
             </View>
           ),
@@ -49,10 +70,10 @@ export default function TabLayout() {
         options={{
           title: 'Jelajah',
           tabBarIcon: ({ focused, color }) => (
-            <View className="items-center justify-center py-1">
+            <View className="items-center justify-center relative">
               <AppIcon name="map" size={24} color={color} />
               {focused && (
-                <View className="w-1.5 h-1.5 rounded-full bg-primary mt-1" />
+                <View className="w-1 h-1 rounded-full bg-primary absolute -bottom-1.5" />
               )}
             </View>
           ),
@@ -63,10 +84,10 @@ export default function TabLayout() {
         options={{
           title: 'Pesanan',
           tabBarIcon: ({ focused, color }) => (
-            <View className="items-center justify-center py-1">
+            <View className="items-center justify-center relative">
               <AppIcon name="ticket" size={24} color={color} />
               {focused && (
-                <View className="w-1.5 h-1.5 rounded-full bg-primary mt-1" />
+                <View className="w-1 h-1 rounded-full bg-primary absolute -bottom-1.5" />
               )}
             </View>
           ),
