@@ -106,16 +106,12 @@ const CALENDAR_DAYS = Array.from({ length: 30 }, (_, i) => i + 1);
 export default function CalendarScreen() {
   const router = useRouter();
   const [viewMode, setViewMode] = useState<'month' | 'list'>('month');
-  const [selectedDay, setSelectedDay] = useState<number | null>(null);
   const [selectedDistrict, setSelectedDistrict] = useState<string>('Semua');
   const [selectedEventModal, setSelectedEventModal] = useState<CalendarEvent | null>(null);
 
   const handleSelectDay = (day: number) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
-    const isSame = selectedDay === day;
-    setSelectedDay(isSame ? null : day);
-
-    // Jika tanggal yang ditekan memiliki acara, tampilkan kartu pop-up acara
+    // Jika tanggal yang ditekan memiliki acara, tampilkan pop-up card di tengah layar
     const event = SEED_EVENTS.find((e) => e.day === day);
     if (event) {
       setSelectedEventModal(event);
@@ -135,10 +131,9 @@ export default function CalendarScreen() {
   const filteredEvents = useMemo(() => {
     return SEED_EVENTS.filter((ev) => {
       const matchDistrict = selectedDistrict === 'Semua' || ev.district === selectedDistrict;
-      const matchDay = selectedDay === null || ev.day === selectedDay;
-      return matchDistrict && matchDay;
+      return matchDistrict;
     });
-  }, [selectedDistrict, selectedDay]);
+  }, [selectedDistrict]);
 
   const daysWithEvents = useMemo(() => {
     return new Set(SEED_EVENTS.map((e) => e.day));
@@ -259,16 +254,6 @@ export default function CalendarScreen() {
                   November 2026
                 </Text>
               </View>
-              {selectedDay !== null && (
-                <Pressable
-                  onPress={() => setSelectedDay(null)}
-                  className="px-3 py-1 rounded-full bg-surface-tonal border border-border/60"
-                >
-                  <Text className="text-[10px] uppercase tracking-wider font-dmsans-bold text-on-surface-variant">
-                    Reset ({selectedDay} Nov)
-                  </Text>
-                </Pressable>
-              )}
             </View>
 
             {/* Header Nama Hari (7 Kolom Presisi) */}
@@ -285,7 +270,6 @@ export default function CalendarScreen() {
             {/* Grid Tanggal (7 Kolom dengan Lingkaran Presisi 36x36) */}
             <View className="flex-row flex-wrap">
               {CALENDAR_DAYS.map((day) => {
-                const isSelected = selectedDay === day;
                 const hasEvent = daysWithEvents.has(day);
 
                 return (
@@ -293,9 +277,7 @@ export default function CalendarScreen() {
                     <Pressable
                       onPress={() => handleSelectDay(day)}
                       className={`w-9 h-9 rounded-full items-center justify-center ${
-                        isSelected
-                          ? 'bg-primary shadow-sm'
-                          : hasEvent
+                        hasEvent
                           ? 'bg-blue-50/80 border border-primary'
                           : 'bg-transparent'
                       }`}
@@ -303,9 +285,7 @@ export default function CalendarScreen() {
                       <Text
                         style={{ includeFontPadding: false }}
                         className={`text-xs text-center ${
-                          isSelected
-                            ? 'font-dmsans-bold text-white'
-                            : hasEvent
+                          hasEvent
                             ? 'font-dmsans-bold text-primary'
                             : 'font-dmsans text-on-surface'
                         }`}
@@ -327,9 +307,7 @@ export default function CalendarScreen() {
               JADWAL RESMI
             </Text>
             <Text className="font-raleway text-xl font-medium text-on-surface tracking-wide">
-              {selectedDay !== null
-                ? `Acara ${selectedDay} November`
-                : 'Daftar Acara Terverifikasi'}
+              Daftar Acara Terverifikasi
             </Text>
           </View>
           <View className="px-2.5 py-1 rounded-full bg-surface-tonal">
@@ -456,7 +434,6 @@ export default function CalendarScreen() {
               </Text>
               <Pressable
                 onPress={() => {
-                  setSelectedDay(null);
                   setSelectedDistrict('Semua');
                 }}
                 className="mt-4 h-10 px-5 rounded-full bg-white border border-border items-center justify-center shadow-xs"
@@ -470,11 +447,11 @@ export default function CalendarScreen() {
         </View>
       </ScrollView>
 
-      {/* Overlay Sheet Card Keterangan Acara saat Tanggal Ditekan */}
+      {/* Overlay Modal Card Keterangan Acara saat Tanggal Ditekan (Tepat di Tengah Layar) */}
       {selectedEventModal && (
         <View
           style={StyleSheet.absoluteFill}
-          className="z-50 bg-black/40 justify-end items-center px-4 pb-6"
+          className="z-50 bg-black/50 justify-center items-center px-6"
         >
           {/* Backdrop Tap to Close */}
           <Pressable
@@ -483,10 +460,10 @@ export default function CalendarScreen() {
             onPress={() => setSelectedEventModal(null)}
           />
 
-          {/* Card Keterangan Acara */}
-          <View className="w-full max-w-md bg-white rounded-[32px] overflow-hidden border border-white/80 shadow-2xl z-10">
+          {/* Card Keterangan Acara Tengah Layar */}
+          <View className="w-full max-w-sm bg-white rounded-[32px] overflow-hidden border border-white/90 shadow-2xl z-10">
             {/* Foto Banner Acara dengan Gradasi */}
-            <View className="relative w-full h-44 bg-surface-tonal overflow-hidden">
+            <View className="relative w-full h-40 bg-surface-tonal overflow-hidden">
               <Image
                 source={selectedEventModal.coverImage}
                 className="w-full h-full"
@@ -529,7 +506,7 @@ export default function CalendarScreen() {
             </View>
 
             {/* Konten Keterangan Acara & Tombol Lanjut */}
-            <View className="p-5 pt-2">
+            <View className="p-5 pt-3">
               {/* Meta Bar */}
               <View className="flex-row items-center gap-2 mb-2">
                 <View className="flex-row items-center gap-1">
@@ -554,38 +531,40 @@ export default function CalendarScreen() {
                 </View>
               </View>
 
-              <Text className="font-raleway text-xl font-medium text-on-surface tracking-wide leading-snug">
+              <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide leading-snug">
                 {selectedEventModal.title}
               </Text>
 
-              <Text className="font-dmsans text-xs text-on-surface-variant mt-2 leading-relaxed">
+              <Text className="font-dmsans text-xs text-on-surface-variant mt-1.5 leading-relaxed">
                 {selectedEventModal.summary}
               </Text>
 
-              {/* Info HTM */}
-              <View className="mt-4 pt-3 border-t border-border/50">
-                <Text className="text-[10px] uppercase tracking-wider font-dmsans-medium text-on-surface-variant">
-                  HTM / Tiket
-                </Text>
-                <Text className="text-sm font-dmsans-bold text-primary mt-0.5">
-                  {selectedEventModal.price || 'Gratis'}
-                </Text>
-              </View>
+              {/* Info HTM & Tombol Lanjut */}
+              <View className="mt-4 pt-3 border-t border-border/50 flex-row items-center justify-between">
+                <View>
+                  <Text className="text-[10px] uppercase tracking-wider font-dmsans-medium text-on-surface-variant">
+                    HTM / Tiket
+                  </Text>
+                  <Text className="text-sm font-dmsans-bold text-primary mt-0.5">
+                    {selectedEventModal.price || 'Gratis'}
+                  </Text>
+                </View>
 
-              {/* Tombol Lanjut (button-primary) */}
-              <Pressable
-                onPress={() => {
-                  const eventId = selectedEventModal.id;
-                  setSelectedEventModal(null);
-                  router.push({ pathname: '/event/detail', params: { id: eventId } });
-                }}
-                className="mt-5 w-full h-12 bg-primary rounded-full flex-row items-center justify-center gap-2 shadow-md"
-              >
-                <Text className="text-white font-dmsans-medium text-sm tracking-wide">
-                  Lanjut
-                </Text>
-                <Ionicons name="arrow-forward" size={16} color="#FFFFFF" />
-              </Pressable>
+                {/* Tombol Lanjut (button-primary) */}
+                <Pressable
+                  onPress={() => {
+                    const eventId = selectedEventModal.id;
+                    setSelectedEventModal(null);
+                    router.push({ pathname: '/event/detail', params: { id: eventId } });
+                  }}
+                  className="h-10 px-5 bg-primary rounded-full flex-row items-center justify-center gap-1.5 shadow-md"
+                >
+                  <Text className="text-white font-dmsans-medium text-xs tracking-wide">
+                    Lanjut
+                  </Text>
+                  <Ionicons name="arrow-forward" size={14} color="#FFFFFF" />
+                </Pressable>
+              </View>
             </View>
           </View>
         </View>
