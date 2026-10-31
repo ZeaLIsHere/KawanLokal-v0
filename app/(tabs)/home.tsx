@@ -366,29 +366,42 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        {/* Promo / Sorotan Budaya Lokal */}
-        <View className="bg-surface-tonal border border-border/80 rounded-3xl p-5 shadow-sm flex-row items-center justify-between overflow-hidden relative">
-          <View className="space-y-1.5 flex-1 pr-3 z-10">
-            <Text className="font-raleway text-lg font-medium text-on-surface leading-snug">
-              Tur Budaya Desa Tomok{'\n'}
-              <Text className="text-xs font-dmsans font-normal text-on-surface-variant">
-                Bersama Pemandu Adat Berlisensi
+        {/* Acara Budaya Paling Dekat (Highlight Banner) */}
+        <View className="bg-white/85 border border-white/90 rounded-3xl p-4.5 shadow-sm flex-row items-center justify-between overflow-hidden relative">
+          <View className="flex-1 pr-3 z-10">
+            <View className="flex-row items-center gap-1.5 mb-1">
+              <View className="w-2 h-2 rounded-full bg-primary" />
+              <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-primary">
+                ACARA TERDEKAT • 2 NOV
               </Text>
+            </View>
+
+            <Text className="font-raleway text-base font-medium text-on-surface leading-snug">
+              Pesta Danau Toba & Pagelaran Gondang
             </Text>
+
+            <Text className="text-xs font-dmsans text-on-surface-variant mt-0.5">
+              Pantai Bebas Parapat • 10.00
+            </Text>
+
             <Pressable
-              onPress={() => router.push('/booking/new')}
-              className="mt-3 flex-row items-center gap-1.5 active:opacity-75"
+              onPress={() => router.push({ pathname: '/event/detail', params: { id: 'ev-1' } })}
+              className="mt-3 flex-row items-center gap-1.5"
             >
               <Text className="text-[11px] uppercase tracking-[0.15em] font-dmsans-bold text-primary">
-                PESAN LAYANAN
+                LIHAT DETAIL ACARA
               </Text>
               <Ionicons name="arrow-forward" size={13} color="#1D4ED8" />
             </Pressable>
           </View>
 
-          {/* Banner Graphic Toba */}
-          <View className="w-16 h-16 bg-white/70 rounded-2xl border border-white/80 items-center justify-center">
-            <AppIcon name="map" size={32} color="#1D4ED8" />
+          {/* Thumbnail Foto Acara Terdekat */}
+          <View className="w-20 h-20 rounded-2xl overflow-hidden bg-surface-tonal shadow-xs border border-white/80 shrink-0">
+            <Image
+              source={PHOTO_COVERS.parapat}
+              className="w-full h-full"
+              resizeMode="cover"
+            />
           </View>
         </View>
         </View>
