@@ -39,9 +39,14 @@ export default function GuideBookingScreen() {
     return 250000;
   }, [params.guide_price]);
 
-  const promoMin = params.promo_min ? parseInt(params.promo_min, 10) : 0;
-  const promoDiscount = params.promo_discount ? parseInt(params.promo_discount, 10) : 0;
-  const promoLabel = params.promo_label || '';
+  // Promo rombongan aktif untuk semua pemandu (default min. 4 orang diskon 15% jika tidak dispesifikasikan)
+  const promoMin = (params.promo_min && parseInt(params.promo_min, 10) > 0)
+    ? parseInt(params.promo_min, 10)
+    : 4;
+  const promoDiscount = (params.promo_discount && parseInt(params.promo_discount, 10) > 0)
+    ? parseInt(params.promo_discount, 10)
+    : 15;
+  const promoLabel = params.promo_label || `Diskon ${promoDiscount}% min. ${promoMin} org`;
 
   // Logika promo otomatis aktif saat kapasitas rombongan memenuhi syarat
   const hasPromo = promoMin > 0 && promoDiscount > 0;

@@ -156,8 +156,33 @@ export default function ExploreScreen() {
                   </Text>
                 </View>
                 <Pressable
-                  onPress={() => router.push('/booking/new')}
-                  className="px-5 py-2.5 bg-primary active:bg-blue-800 rounded-full shadow-sm"
+                  onPress={() => {
+                    if (service.type === 'guide') {
+                      router.push({
+                        pathname: '/booking/guide',
+                        params: {
+                          guide_id: service.id,
+                          guide_name: service.provider,
+                          guide_specialty: service.title,
+                          guide_district: service.district,
+                          guide_price: service.price,
+                          promo_min: '4',
+                          promo_discount: '15',
+                          promo_label: 'Diskon 15% min. 4 org',
+                        },
+                      });
+                    } else {
+                      router.push({
+                        pathname: '/booking/new',
+                        params: {
+                          event_title: service.title,
+                          event_location: service.district,
+                          event_price: service.price,
+                        },
+                      });
+                    }
+                  }}
+                  className="px-5 py-2.5 bg-primary rounded-full shadow-sm"
                 >
                   <Text className="text-xs font-dmsans-medium text-white tracking-wide">Pesan</Text>
                 </Pressable>

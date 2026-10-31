@@ -66,9 +66,9 @@ const SEED_GUIDES: GuideItem[] = [
     avatar: PHOTO_COVERS.ulos,
     verified: true,
     promo: {
-      minParticipants: 5,
+      minParticipants: 4,
       discountPercent: 20,
-      label: 'Diskon 20% min. 5 org',
+      label: 'Diskon 20% min. 4 org',
     },
   },
   {
@@ -85,8 +85,8 @@ const SEED_GUIDES: GuideItem[] = [
     verified: true,
     promo: {
       minParticipants: 4,
-      discountPercent: 10,
-      label: 'Diskon 10% min. 4 org',
+      discountPercent: 15,
+      label: 'Diskon 15% min. 4 org',
     },
   },
   {
@@ -101,6 +101,11 @@ const SEED_GUIDES: GuideItem[] = [
     totalTrips: 118,
     avatar: PHOTO_COVERS.gondang,
     verified: true,
+    promo: {
+      minParticipants: 4,
+      discountPercent: 10,
+      label: 'Diskon 10% min. 4 org',
+    },
   },
 ];
 
