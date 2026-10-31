@@ -43,7 +43,7 @@ export default function TicketDetailScreen() {
         title: isGuide ? `Voucher Pemandu: ${displayTitle}` : `Tiket KawanLokal: ${displayTitle}`,
         message: isGuide
           ? `Voucher Reservasi Pemandu KawanLokal\nPemandu: ${displayTitle}\nKode Booking: ${bookingCode}\nTitik Temu: ${displayLocation}\nKontak: +62 812-6421-9901`
-          : `Tiket Resmi KawanLokal\nAcara: ${displayTitle}\nKode: ${bookingCode}\nJadwal: Jumat, 2 Nov 2026 • 10.00 WIB\nLokasi: ${displayLocation}`,
+          : `Tiket Resmi KawanLokal\nAcara: ${displayTitle}\nKode: ${bookingCode}\nJadwal: Jumat, 2 Nov 2026 • 10.00\nLokasi: ${displayLocation}`,
       });
     } catch {}
   };
@@ -72,18 +72,18 @@ export default function TicketDetailScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-surface" edges={['top', 'bottom']}>
-      {/* App Top Navigation Bar */}
+      {/* App Top Navigation Bar (DESIGN.md: top-app-bar + button-icon-glass) */}
       <View className="w-full px-5 py-3 flex-row items-center justify-between bg-white/75 border-b border-border/50 z-20">
         <Pressable
           accessibilityLabel="Kembali"
           onPress={() => router.replace('/(tabs)/home')}
-          className="w-11 h-11 rounded-full items-center justify-center bg-white/80 border border-white/90 shadow-xs"
+          className="w-11 h-11 rounded-full items-center justify-center bg-white/80 border border-white/90 shadow-sm"
         >
           <AppIcon name="arrow-left" size={20} color="#23201E" />
         </Pressable>
 
         <View className="items-center">
-          <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant">
+          <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-primary">
             {isGuide ? 'BUKTI RESERVASI' : 'BUKTI TIKET'}
           </Text>
           <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
@@ -94,7 +94,7 @@ export default function TicketDetailScreen() {
         <Pressable
           accessibilityLabel="Bagikan"
           onPress={handleShare}
-          className="w-11 h-11 rounded-full items-center justify-center bg-white/80 border border-white/90 shadow-xs"
+          className="w-11 h-11 rounded-full items-center justify-center bg-white/80 border border-white/90 shadow-sm"
         >
           <Ionicons name="share-social-outline" size={18} color="#23201E" />
         </Pressable>
@@ -102,7 +102,7 @@ export default function TicketDetailScreen() {
 
       <ScrollView
         className="flex-1 px-5 pt-4"
-        contentContainerStyle={{ paddingBottom: 110 }}
+        contentContainerStyle={{ paddingBottom: 120 }}
         showsVerticalScrollIndicator={false}
       >
         {/* Hero Image Banner */}
@@ -173,7 +173,7 @@ export default function TicketDetailScreen() {
               <Ionicons name="calendar-outline" size={18} color="#1D4ED8" style={{ marginTop: 2 }} />
               <View>
                 <Text className="text-xs font-dmsans-bold text-on-surface">Jumat, 2 Nov 2026</Text>
-                <Text className="text-xs font-dmsans text-on-surface-variant mt-0.5">09:00 – 16:00 WIB</Text>
+                <Text className="text-xs font-dmsans text-on-surface-variant mt-0.5">09.00 – 16.00</Text>
               </View>
             </View>
             <View className="px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200">
@@ -215,12 +215,12 @@ export default function TicketDetailScreen() {
 
           {/* Action Hubungi Pemandu Khusus Guide Service */}
           {isGuide && (
-            <View className="w-full mt-4 pt-3 border-t border-border/50 gap-2">
+            <View className="w-full mt-4 pt-3 border-t border-border/50 gap-2.5">
               <Pressable
                 onPress={handleContactWhatsApp}
-                className="w-full h-11 bg-emerald-600 rounded-full flex-row items-center justify-center gap-2 shadow-xs"
+                className="w-full h-12 bg-emerald-600 rounded-full flex-row items-center justify-center gap-2 shadow-xs"
               >
-                <Ionicons name="logo-whatsapp" size={16} color="#FFFFFF" />
+                <Ionicons name="logo-whatsapp" size={17} color="#FFFFFF" />
                 <Text className="text-white font-dmsans-medium text-xs tracking-wide">
                   Hubungi Pemandu via WhatsApp
                 </Text>
@@ -228,9 +228,9 @@ export default function TicketDetailScreen() {
 
               <Pressable
                 onPress={handleCallGuide}
-                className="w-full h-11 bg-white border border-border rounded-full flex-row items-center justify-center gap-2 shadow-xs"
+                className="w-full h-12 bg-white border border-border rounded-full flex-row items-center justify-center gap-2 shadow-xs"
               >
-                <Ionicons name="call-outline" size={16} color="#23201E" />
+                <Ionicons name="call-outline" size={17} color="#23201E" />
                 <Text className="text-on-surface font-dmsans-medium text-xs tracking-wide">
                   Telepon (+62 812-6421-9901)
                 </Text>
@@ -267,13 +267,13 @@ export default function TicketDetailScreen() {
         </View>
       </ScrollView>
 
-      {/* Floating Bottom Action Bar */}
-      <View className="absolute bottom-0 left-0 right-0 bg-white/92 px-5 pt-3 pb-6 border-t border-border/50 shadow-lg z-30">
+      {/* Floating Bottom Action Bar (DESIGN.md: button-primary) */}
+      <View className="absolute bottom-0 left-0 right-0 bg-white/95 px-5 pt-3 pb-6 border-t border-border/50 shadow-lg z-30">
         <Pressable
           onPress={handleSaveOffline}
-          className="w-full h-13 bg-primary rounded-full flex-row items-center justify-center gap-2 shadow-md"
+          className="w-full h-14 bg-primary rounded-full flex-row items-center justify-center gap-2.5 shadow-md"
         >
-          <Ionicons name="download-outline" size={18} color="#FFFFFF" />
+          <Ionicons name="download-outline" size={20} color="#FFFFFF" />
           <Text className="text-white font-dmsans-medium text-sm tracking-wide">
             {isGuide ? 'Simpan Voucher ke Galeri' : 'Simpan Tiket ke Galeri'}
           </Text>
