@@ -366,44 +366,86 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        {/* Acara Budaya Paling Dekat (Highlight Banner) */}
-        <View className="bg-white/85 border border-white/90 rounded-3xl p-4.5 shadow-sm flex-row items-center justify-between overflow-hidden relative">
-          <View className="flex-1 pr-3 z-10">
+        {/* Acara Budaya Paling Dekat (Cinematic Full-Width Card dengan Gradasi) */}
+        <Pressable
+          onPress={() => router.push({ pathname: '/event/detail', params: { id: 'ev-1' } })}
+          className="relative w-full h-64 rounded-3xl overflow-hidden shadow-md border border-white/80 bg-surface-tonal"
+        >
+          {/* Foto Besar Memenuhi Lebar Horizontal Layar */}
+          <Image
+            source={PHOTO_COVERS.parapat}
+            style={StyleSheet.absoluteFill}
+            resizeMode="cover"
+          />
+
+          {/* Gradasi Overlay Gelap untuk Keterbacaan Teks */}
+          <Svg
+            style={StyleSheet.absoluteFill}
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            pointerEvents="none"
+          >
+            <Defs>
+              <LinearGradient
+                id="closestEventFullGrad"
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="100"
+                gradientUnits="userSpaceOnUse"
+              >
+                <Stop offset="0%" stopColor="#000000" stopOpacity="0.4" />
+                <Stop offset="35%" stopColor="#000000" stopOpacity="0.1" />
+                <Stop offset="65%" stopColor="#000000" stopOpacity="0.55" />
+                <Stop offset="100%" stopColor="#000000" stopOpacity="0.9" />
+              </LinearGradient>
+            </Defs>
+            <Rect x="0" y="0" width="100" height="100" fill="url(#closestEventFullGrad)" />
+          </Svg>
+
+          {/* Top Floating Badge Tag */}
+          <View className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full bg-white/90 border border-white shadow-xs flex-row items-center gap-1.5">
+            <View className="w-2 h-2 rounded-full bg-primary" />
+            <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-primary">
+              ACARA TERDEKAT • 2 NOV
+            </Text>
+          </View>
+
+          {/* Bottom Content Area */}
+          <View className="absolute bottom-4 left-4 right-4 z-10">
             <View className="flex-row items-center gap-1.5 mb-1">
-              <View className="w-2 h-2 rounded-full bg-primary" />
-              <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-primary">
-                ACARA TERDEKAT • 2 NOV
+              <Ionicons name="location-outline" size={13} color="#FFFFFF" />
+              <Text className="text-xs font-dmsans text-white/90">
+                Pantai Bebas Parapat, Simalungun • 10.00
               </Text>
             </View>
 
-            <Text className="font-raleway text-base font-medium text-on-surface leading-snug">
+            <Text className="font-raleway text-xl font-medium text-white tracking-wide leading-tight mb-2.5">
               Pesta Danau Toba & Pagelaran Gondang
             </Text>
 
-            <Text className="text-xs font-dmsans text-on-surface-variant mt-0.5">
-              Pantai Bebas Parapat • 10.00
-            </Text>
+            <View className="flex-row items-center justify-between pt-2.5 border-t border-white/20">
+              <View>
+                <Text className="text-[9px] uppercase tracking-wider font-dmsans-medium text-white/70">
+                  Tiket Masuk
+                </Text>
+                <Text className="text-sm font-dmsans-bold text-white mt-0.5">
+                  Rp 50.000
+                </Text>
+              </View>
 
-            <Pressable
-              onPress={() => router.push({ pathname: '/event/detail', params: { id: 'ev-1' } })}
-              className="mt-3 flex-row items-center gap-1.5"
-            >
-              <Text className="text-[11px] uppercase tracking-[0.15em] font-dmsans-bold text-primary">
-                LIHAT DETAIL ACARA
-              </Text>
-              <Ionicons name="arrow-forward" size={13} color="#1D4ED8" />
-            </Pressable>
+              <Pressable
+                onPress={() => router.push({ pathname: '/event/detail', params: { id: 'ev-1' } })}
+                className="h-9 px-4 rounded-full bg-white flex-row items-center justify-center gap-1.5 shadow-sm"
+              >
+                <Text className="text-xs font-dmsans-bold text-primary tracking-wide">
+                  Lihat Detail
+                </Text>
+                <Ionicons name="arrow-forward" size={13} color="#1D4ED8" />
+              </Pressable>
+            </View>
           </View>
-
-          {/* Thumbnail Foto Acara Terdekat */}
-          <View className="w-20 h-20 rounded-2xl overflow-hidden bg-surface-tonal shadow-xs border border-white/80 shrink-0">
-            <Image
-              source={PHOTO_COVERS.parapat}
-              className="w-full h-full"
-              resizeMode="cover"
-            />
-          </View>
-        </View>
+        </Pressable>
         </View>
       </ScrollView>
     </SafeAreaView>
