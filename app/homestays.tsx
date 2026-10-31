@@ -12,6 +12,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
+import { AppIcon } from '@/components/AppIcon';
 import { LOCAL_PHOTOS, PHOTO_COVERS } from '@/constants/localPhotos';
 
 interface HomestayItem {
@@ -98,62 +99,64 @@ export default function HomestaysScreen() {
   }, [selectedLocation, searchQuery]);
 
   return (
-    <SafeAreaView className="flex-1 bg-surface-canvas" edges={['top']}>
-      {/* Header / Top Bar */}
-      <View className="flex-row justify-between items-center px-4 py-2.5 bg-surface-card border-b border-card-border/60 z-20">
+    <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
+      {/* Top App Bar Glassmorphic (DESIGN.md: top-app-bar + button-icon-glass) */}
+      <View className="flex-row justify-between items-center px-5 py-3 bg-white/75 border-b border-border/50 z-20">
         <Pressable
           accessibilityLabel="Kembali"
           onPress={() => router.back()}
-          className="w-10 h-10 rounded-full items-center justify-center active:bg-stone-100 active:opacity-80"
+          className="w-11 h-11 rounded-full items-center justify-center bg-white/80 border border-white/90 shadow-sm"
         >
-          <Ionicons name="arrow-back" size={24} color="#131b2e" />
+          <AppIcon name="arrow-left" size={20} color="#23201E" />
         </Pressable>
 
-        <Text className="text-lg font-bold text-on-surface tracking-tight">
-          Homestay & Penginapan
-        </Text>
+        <View className="items-center">
+          <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
+            Homestay & Penginapan
+          </Text>
+        </View>
 
         <Pressable
           accessibilityLabel="Filter penginapan"
           onPress={() => {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
           }}
-          className="w-10 h-10 rounded-full items-center justify-center active:bg-stone-100 active:opacity-80"
+          className="w-11 h-11 rounded-full items-center justify-center bg-white/80 border border-white/90 shadow-sm"
         >
-          <Ionicons name="options-outline" size={22} color="#131b2e" />
+          <Ionicons name="options-outline" size={18} color="#23201E" />
         </Pressable>
       </View>
 
       <ScrollView
-        className="flex-1 px-4 pt-3"
-        contentContainerStyle={{ paddingBottom: 40 }}
+        className="flex-1 px-5 pt-4"
+        contentContainerStyle={{ paddingBottom: 60 }}
         showsVerticalScrollIndicator={false}
       >
-        {/* Search Input Field */}
-        <View className="mb-3">
-          <View className="relative flex-row items-center w-full bg-surface-card rounded-2xl border border-card-border shadow-sm px-3.5 h-12">
-            <Ionicons name="search" size={20} color="#737686" />
+        {/* Search Input Field Capsule */}
+        <View className="mb-4">
+          <View className="flex-row items-center w-full bg-white/85 rounded-full border border-white/90 shadow-xs px-4 h-12">
+            <AppIcon name="search" size={18} color="#8A827A" />
             <TextInput
               value={searchQuery}
               onChangeText={setSearchQuery}
               placeholder="Cari homestay, sopo bolon, desa..."
-              placeholderTextColor="#737686"
-              className="flex-1 ml-2.5 text-sm font-medium text-on-surface h-full"
+              placeholderTextColor="#8A827A"
+              className="flex-1 ml-2.5 text-xs font-dmsans text-on-surface h-full"
             />
             {searchQuery.length > 0 && (
               <Pressable onPress={() => setSearchQuery('')} className="p-1">
-                <Ionicons name="close-circle" size={18} color="#737686" />
+                <Ionicons name="close-circle" size={16} color="#8A827A" />
               </Pressable>
             )}
           </View>
         </View>
 
-        {/* Category Filter Chips / Horizontal Scroll */}
-        <View className="mb-4">
+        {/* Location Filter Chips (DESIGN.md: chip & chip-active) */}
+        <View className="mb-5">
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
-            className="flex-row py-1 -mx-4 px-4"
+            className="flex-row -mx-1 px-1"
           >
             {LOCATION_CHIPS.map((chip) => {
               const isSelected = selectedLocation === chip;
@@ -161,15 +164,15 @@ export default function HomestaysScreen() {
                 <Pressable
                   key={chip}
                   onPress={() => handleChipSelect(chip)}
-                  className={`mr-2 px-5 py-2 rounded-full border shadow-sm active:opacity-80 ${
+                  className={`mr-2 h-8 px-4 rounded-full items-center justify-center ${
                     isSelected
-                      ? 'bg-ulos-red border-ulos-red'
-                      : 'bg-surface-card border-card-border'
+                      ? 'bg-primary shadow-xs'
+                      : 'bg-white/80 border border-border/60'
                   }`}
                 >
                   <Text
-                    className={`text-xs font-semibold whitespace-nowrap ${
-                      isSelected ? 'text-white' : 'text-secondary'
+                    className={`text-[11px] font-dmsans-bold tracking-wider uppercase ${
+                      isSelected ? 'text-white' : 'text-on-surface-strong'
                     }`}
                   >
                     {chip}
@@ -181,10 +184,20 @@ export default function HomestaysScreen() {
         </View>
 
         {/* Featured / Hero Card: Sopo Bolon Tradisional */}
-        <View className="mb-5">
+        <View className="mb-6">
           <Pressable
-            onPress={() => router.push('/(tabs)/explore')}
-            className="relative w-full h-56 rounded-2xl overflow-hidden shadow-sm border border-card-border active:opacity-90"
+            onPress={() => {
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
+              router.push({
+                pathname: '/booking/new',
+                params: {
+                  event_title: FEATURED_HOMESTAY.title,
+                  event_location: FEATURED_HOMESTAY.location,
+                  event_price: FEATURED_HOMESTAY.priceFormatted,
+                },
+              });
+            }}
+            className="relative w-full h-60 rounded-3xl overflow-hidden shadow-sm border border-white/80 bg-surface-tonal"
           >
             <Image
               source={FEATURED_HOMESTAY.image}
@@ -192,67 +205,81 @@ export default function HomestaysScreen() {
               resizeMode="cover"
             />
             {/* Gradient Mask for Legibility */}
-            <View className="absolute inset-0 bg-gradient-to-t from-[#0b1c30]/90 via-[#0b1c30]/30 to-transparent pointer-events-none" />
+            <View className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none" />
 
-            {/* Top-Right Favorite Button */}
-            <Pressable
-              accessibilityLabel="Simpan favorit"
-              onPress={(e) => {
-                e.stopPropagation();
-                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
-                setIsFeaturedFavorite(!isFeaturedFavorite);
-              }}
-              className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/25 backdrop-blur-md items-center justify-center active:opacity-80"
-            >
-              <Ionicons
-                name={isFeaturedFavorite ? 'heart' : 'heart-outline'}
-                size={18}
-                color={isFeaturedFavorite ? '#DC2626' : '#FFFFFF'}
-              />
-            </Pressable>
+            {/* Top Badge & Favorite Button */}
+            <View className="absolute top-3.5 inset-x-3.5 flex-row items-center justify-between z-10">
+              <View className="px-3 py-1 rounded-full bg-white/90 border border-white shadow-xs">
+                <Text className="text-[10px] uppercase tracking-wider font-dmsans-bold text-primary">
+                  PROPERTI PILIHAN
+                </Text>
+              </View>
+
+              <Pressable
+                accessibilityLabel="Simpan favorit"
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
+                  setIsFeaturedFavorite(!isFeaturedFavorite);
+                }}
+                className="w-9 h-9 rounded-full bg-white/90 border border-white items-center justify-center shadow-xs"
+              >
+                <Ionicons
+                  name={isFeaturedFavorite ? 'heart' : 'heart-outline'}
+                  size={18}
+                  color={isFeaturedFavorite ? '#DC2626' : '#23201E'}
+                />
+              </Pressable>
+            </View>
 
             {/* Bottom Card Content */}
-            <View className="absolute bottom-3 left-3 right-3 flex-row justify-between items-end">
-              <View className="flex-1 pr-2">
-                <Text className="text-base font-bold text-white tracking-tight leading-snug">
+            <View className="absolute bottom-4 left-4 right-4 flex-row justify-between items-end">
+              <View className="flex-1 pr-3">
+                <Text className="font-raleway text-xl font-normal text-white tracking-wide leading-tight">
                   {FEATURED_HOMESTAY.title}
                 </Text>
-                <Text className="text-xs text-stone-300 mt-0.5">
+                <Text className="text-xs font-dmsans text-white/80 mt-1">
                   {FEATURED_HOMESTAY.location}
                 </Text>
               </View>
-              <View className="items-end">
-                <Text className="text-base font-bold text-white tracking-tight">
+              <View className="items-end shrink-0">
+                <Text className="font-dmsans-bold text-base text-white">
                   {FEATURED_HOMESTAY.priceFormatted}
                 </Text>
-                <Text className="text-[11px] text-stone-300">/malam</Text>
+                <Text className="text-[10px] font-dmsans text-white/70">/malam</Text>
               </View>
             </View>
           </Pressable>
         </View>
 
-        {/* Recommended Hotels/Homestays Section */}
-        <View className="gap-3">
+        {/* Recommended Homestays Section */}
+        <View className="mb-4">
           {/* Section Header */}
-          <View className="flex-row justify-between items-center mb-1">
-            <Text className="text-base font-bold text-on-surface">
+          <View className="mb-3.5 px-1">
+            <Text className="font-raleway text-xl font-medium text-on-surface tracking-wide">
               Penginapan Rekomendasi
             </Text>
-            <Pressable onPress={() => router.push('/(tabs)/explore')}>
-              <Text className="text-xs font-semibold text-ulos-red">Lihat Semua</Text>
-            </Pressable>
           </View>
 
-          {/* List Items (Horizontal Card Pattern) */}
-          <View className="gap-3">
+          {/* List Items (DESIGN.md: list-row pattern) */}
+          <View className="gap-3.5">
             {filteredRecommended.map((item) => (
               <Pressable
                 key={item.id}
-                onPress={() => router.push('/(tabs)/explore')}
-                className="flex-row items-center p-2.5 bg-surface-card rounded-2xl border border-card-border shadow-sm active:opacity-90"
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
+                  router.push({
+                    pathname: '/booking/new',
+                    params: {
+                      event_title: item.title,
+                      event_location: item.location,
+                      event_price: item.priceFormatted,
+                    },
+                  });
+                }}
+                className="p-3.5 bg-white/85 rounded-3xl border border-white/90 flex-row items-center shadow-sm"
               >
-                {/* Thumbnail Image 80x80 */}
-                <View className="w-20 h-20 rounded-xl overflow-hidden bg-stone-100 shrink-0">
+                {/* Thumbnail Image */}
+                <View className="w-24 h-24 rounded-2xl overflow-hidden bg-surface-tonal shrink-0 border border-white/80">
                   <Image
                     source={item.image}
                     className="w-full h-full"
@@ -261,48 +288,65 @@ export default function HomestaysScreen() {
                 </View>
 
                 {/* Middle Info Column */}
-                <View className="flex-1 min-w-0 ml-3.5 justify-between h-20 py-0.5">
+                <View className="flex-1 min-w-0 ml-3.5 justify-between py-0.5">
                   <View>
                     <Text
                       numberOfLines={1}
-                      className="text-sm font-bold text-on-surface leading-snug"
+                      className="font-raleway text-base font-medium text-on-surface leading-tight"
                     >
                       {item.title}
                     </Text>
                     <Text
                       numberOfLines={1}
-                      className="text-xs text-secondary mt-0.5"
+                      className="text-xs font-dmsans text-on-surface-variant mt-1"
                     >
                       {item.location}
                     </Text>
                   </View>
 
-                  <View className="flex-row items-center gap-1">
-                    <Ionicons name="star" size={14} color="#F59E0B" />
-                    <Text className="text-xs font-semibold text-on-surface">
-                      {item.rating.toFixed(1)}
-                    </Text>
-                  </View>
-                </View>
+                  <View className="flex-row items-center justify-between mt-2 pt-2 border-t border-border/50">
+                    <View className="flex-row items-center gap-1 bg-amber-50 border border-amber-200/50 px-2 py-0.5 rounded-full">
+                      <Ionicons name="star" size={11} color="#D97706" />
+                      <Text className="text-xs font-dmsans-bold text-amber-700">
+                        {item.rating.toFixed(1)}
+                      </Text>
+                    </View>
 
-                {/* Right Price Column */}
-                <View className="shrink-0 items-end justify-end h-20 pb-0.5 pl-2">
-                  <Text className="text-sm font-bold text-ulos-red">
-                    {item.priceFormatted}
-                  </Text>
-                  <Text className="text-[10px] text-secondary -mt-0.5">
-                    /malam
-                  </Text>
+                    <View className="items-end">
+                      <Text className="text-sm font-dmsans-bold text-primary">
+                        {item.priceFormatted}
+                      </Text>
+                      <Text className="text-[10px] font-dmsans text-on-surface-variant -mt-0.5">
+                        /malam
+                      </Text>
+                    </View>
+                  </View>
                 </View>
               </Pressable>
             ))}
 
             {filteredRecommended.length === 0 && (
-              <View className="items-center justify-center py-8">
-                <Ionicons name="bed-outline" size={36} color="#CBD5E1" />
-                <Text className="text-xs font-semibold text-on-surface mt-2">
-                  Tidak ada penginapan di lokasi ini
+              <View className="items-center justify-center py-12 px-6 bg-white/70 rounded-3xl border border-white/80 text-center shadow-sm">
+                <View className="w-14 h-14 rounded-full bg-surface-tonal items-center justify-center mb-3">
+                  <Ionicons name="bed-outline" size={26} color="#8A827A" />
+                </View>
+                <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
+                  Tidak Ada Penginapan
                 </Text>
+                <Text className="text-xs font-dmsans text-on-surface-variant text-center mt-1 max-w-[260px] leading-relaxed">
+                  Tidak ada homestay atau sopo bolon yang cocok dengan lokasi atau kata kunci ini.
+                </Text>
+                <Pressable
+                  onPress={() => {
+                    setSearchQuery('');
+                    setSelectedLocation('Semua');
+                  }}
+                  className="mt-4 h-10 px-5 rounded-full bg-white border border-border items-center justify-center shadow-xs"
+                >
+                  <Text className="text-[11px] uppercase tracking-[0.15em] font-dmsans-bold text-primary">
+                    RESET PENCARIAN
+                  </Text>
+                </Pressable>
               </View>
             )}
           </View>

@@ -99,51 +99,53 @@ export default function WorkshopsScreen() {
   }, [searchQuery, selectedLevel]);
 
   return (
-    <SafeAreaView className="flex-1 bg-surface-canvas" edges={['top']}>
-      {/* Top Header */}
-      <View className="flex-row items-center justify-between px-4 py-2.5 bg-surface-card border-b border-card-border/60 z-20">
+    <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
+      {/* Top App Bar Glassmorphic (DESIGN.md: top-app-bar + button-icon-glass) */}
+      <View className="flex-row items-center justify-between px-5 py-3 bg-white/75 border-b border-border/50 z-20">
         <Pressable
           accessibilityLabel="Kembali"
           onPress={() => router.back()}
-          className="w-10 h-10 rounded-full items-center justify-center active:bg-stone-100 active:opacity-80"
+          className="w-11 h-11 items-center justify-center rounded-full bg-white/80 border border-white/90 shadow-sm"
         >
-          <AppIcon name="arrow-left" size={22} />
+          <AppIcon name="arrow-left" size={20} color="#23201E" />
         </Pressable>
 
-        <Text className="text-lg font-bold text-on-surface tracking-tight">
-          Workshop Seni & Budaya
-        </Text>
+        <View className="items-center">
+          <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
+            Workshop Seni & Budaya
+          </Text>
+        </View>
 
-        <View className="w-10" />
+        <View className="w-11" />
       </View>
 
       <ScrollView
-        className="flex-1 px-4 pt-3"
-        contentContainerStyle={{ paddingBottom: 40 }}
+        className="flex-1 px-5 pt-4"
+        contentContainerStyle={{ paddingBottom: 60 }}
         showsVerticalScrollIndicator={false}
       >
-        {/* Search Bar */}
-        <View className="mb-3">
-          <View className="flex-row items-center w-full bg-surface-card rounded-2xl border border-card-border shadow-sm px-3.5 h-12">
-            <AppIcon name="search" size={20} />
+        {/* Search Bar Capsule (DESIGN.md: input-text glassmorphic) */}
+        <View className="mb-4">
+          <View className="flex-row items-center w-full bg-white/85 rounded-full border border-white/90 shadow-xs px-4 h-12">
+            <AppIcon name="search" size={18} color="#8A827A" />
             <TextInput
               value={searchQuery}
               onChangeText={setSearchQuery}
               placeholder="Cari workshop tenun, ukir gorga, kuliner..."
-              placeholderTextColor="#737686"
-              className="flex-1 ml-2.5 text-sm font-medium text-on-surface h-full"
+              placeholderTextColor="#8A827A"
+              className="flex-1 ml-2.5 text-xs font-dmsans text-on-surface h-full"
             />
             {searchQuery.length > 0 && (
               <Pressable onPress={() => setSearchQuery('')} className="p-1">
-                <Ionicons name="close-circle" size={18} color="#737686" />
+                <Ionicons name="close-circle" size={16} color="#8A827A" />
               </Pressable>
             )}
           </View>
         </View>
 
-        {/* Filter Chips */}
-        <View className="mb-4">
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-row">
+        {/* Filter Chips Tingkat (DESIGN.md: chip & chip-active) */}
+        <View className="mb-5">
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-row -mx-1 px-1">
             {FILTER_LEVELS.map((chip) => {
               const isSelected = selectedLevel === chip;
               return (
@@ -153,15 +155,15 @@ export default function WorkshopsScreen() {
                     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
                     setSelectedLevel(chip);
                   }}
-                  className={`mr-2 px-4 py-2 rounded-full border shadow-sm active:opacity-80 ${
+                  className={`mr-2 h-8 px-4 rounded-full items-center justify-center ${
                     isSelected
-                      ? 'bg-ulos-red border-ulos-red'
-                      : 'bg-surface-card border-card-border'
+                      ? 'bg-primary shadow-xs'
+                      : 'bg-white/80 border border-border/60'
                   }`}
                 >
                   <Text
-                    className={`text-xs font-semibold ${
-                      isSelected ? 'text-white' : 'text-on-surface'
+                    className={`text-[11px] font-dmsans-bold tracking-wider uppercase ${
+                      isSelected ? 'text-white' : 'text-on-surface-strong'
                     }`}
                   >
                     {chip}
@@ -172,51 +174,64 @@ export default function WorkshopsScreen() {
           </ScrollView>
         </View>
 
-        {/* List of Workshops */}
-        <View className="gap-3.5">
+        {/* Section Title */}
+        <View className="mb-3.5 px-1">
+          <Text className="font-raleway text-xl font-medium text-on-surface tracking-wide">
+            Kelas & Pengalaman
+          </Text>
+        </View>
+
+        {/* List of Workshops (DESIGN.md: card glassmorphic) */}
+        <View className="gap-4">
           {filteredWorkshops.map((ws) => (
             <View
               key={ws.id}
-              className="bg-surface-card rounded-2xl border border-card-border overflow-hidden shadow-sm"
+              className="bg-white/85 rounded-3xl border border-white/90 overflow-hidden shadow-sm"
             >
-              <View className="relative w-full h-40 bg-stone-100">
+              {/* Photo Cover */}
+              <View className="relative w-full h-44 bg-surface-tonal">
                 <Image
                   source={ws.image}
                   className="w-full h-full"
                   resizeMode="cover"
                 />
-                <View className="absolute top-3 right-3 bg-white/90 backdrop-blur-md px-2 py-0.5 rounded-full flex-row items-center gap-1">
-                  <AppIcon name="star" size={13} />
-                  <Text className="text-xs font-bold text-on-surface">{ws.rating}</Text>
+                <View className="absolute top-3 right-3 bg-white/90 border border-white px-2.5 py-1 rounded-full flex-row items-center gap-1 shadow-xs">
+                  <Ionicons name="star" size={12} color="#D97706" />
+                  <Text className="text-xs font-dmsans-bold text-amber-700">{ws.rating}</Text>
+                </View>
+                <View className="absolute top-3 left-3 bg-white/90 border border-white px-2.5 py-1 rounded-full shadow-xs">
+                  <Text className="text-[10px] uppercase tracking-wider font-dmsans-bold text-primary">
+                    {ws.level}
+                  </Text>
                 </View>
               </View>
 
-              <View className="p-4">
-                <Text className="text-base font-bold text-on-surface leading-snug">
+              <View className="p-5 pt-3.5">
+                <Text className="font-raleway text-base font-medium text-on-surface tracking-wide leading-snug">
                   {ws.title}
                 </Text>
 
-                <Text className="text-xs text-secondary mt-1">
+                <Text className="text-xs font-dmsans text-on-surface-variant mt-1">
                   {ws.studioName} • {ws.district}
                 </Text>
 
-                <View className="flex-row items-center gap-1.5 mt-2 bg-stone-50 p-2 rounded-xl">
-                  <Ionicons name="time-outline" size={14} color="#78716C" />
-                  <Text className="text-[11px] font-medium text-stone-700">
+                <View className="flex-row items-center gap-2 mt-3 bg-surface-tonal p-2.5 rounded-2xl border border-border/50">
+                  <Ionicons name="time-outline" size={14} color="#1D4ED8" />
+                  <Text className="text-xs font-dmsans-medium text-on-surface-strong">
                     Durasi: {ws.duration}
                   </Text>
                 </View>
 
-                <View className="mt-2">
-                  <Text className="text-[11px] text-secondary">
-                    Termasuk: <Text className="text-stone-800">{ws.included}</Text>
-                  </Text>
-                </View>
+                <Text className="text-xs font-dmsans text-on-surface-variant mt-2.5 leading-relaxed">
+                  Termasuk: <Text className="text-on-surface-strong font-dmsans-medium">{ws.included}</Text>
+                </Text>
 
-                <View className="mt-3.5 pt-3 border-t border-card-border flex-row items-center justify-between">
+                <View className="mt-4 pt-3 border-t border-border/50 flex-row items-center justify-between">
                   <View>
-                    <Text className="text-[10px] text-secondary">Biaya / Peserta</Text>
-                    <Text className="text-base font-extrabold text-ulos-red">
+                    <Text className="text-[10px] uppercase tracking-wider font-dmsans-medium text-on-surface-variant">
+                      Biaya / Peserta
+                    </Text>
+                    <Text className="text-base font-dmsans-bold text-primary mt-0.5">
                       {ws.pricePerPerson}
                     </Text>
                   </View>
@@ -224,12 +239,19 @@ export default function WorkshopsScreen() {
                   <Pressable
                     onPress={() => {
                       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
-                      router.push('/booking/new');
+                      router.push({
+                        pathname: '/booking/new',
+                        params: {
+                          event_title: ws.title,
+                          event_location: `${ws.studioName}, ${ws.district}`,
+                          event_price: ws.pricePerPerson,
+                        },
+                      });
                     }}
-                    className="px-4 py-2 bg-ulos-red active:bg-ulos-redDark rounded-xl flex-row items-center gap-1.5 shadow-sm active:opacity-90"
+                    className="h-10 px-5 bg-primary rounded-full flex-row items-center justify-center gap-1.5 shadow-xs"
                   >
-                    <AppIcon name="suitcase" size={16} color="#FFFFFF" />
-                    <Text className="text-xs font-bold text-white">Ikuti Kelas</Text>
+                    <Ionicons name="school-outline" size={14} color="#FFFFFF" />
+                    <Text className="text-white font-dmsans-medium text-xs tracking-wide">Ikuti Kelas</Text>
                   </Pressable>
                 </View>
               </View>
@@ -237,14 +259,27 @@ export default function WorkshopsScreen() {
           ))}
 
           {filteredWorkshops.length === 0 && (
-            <View className="items-center justify-center py-12 px-6">
-              <View className="w-14 h-14 rounded-2xl bg-stone-100 items-center justify-center mb-3">
-                <AppIcon name="suitcase" size={28} />
+            <View className="items-center justify-center py-12 px-6 bg-white/70 rounded-3xl border border-white/80 text-center shadow-sm">
+              <View className="w-14 h-14 rounded-full bg-surface-tonal items-center justify-center mb-3">
+                <Ionicons name="brush-outline" size={26} color="#8A827A" />
               </View>
-              <Text className="text-sm font-bold text-on-surface">Tidak ada workshop ditemukan</Text>
-              <Text className="text-xs text-secondary text-center mt-1">
-                Silakan cari dengan kata kunci lain.
+              <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
+                Tidak Ada Workshop
               </Text>
+              <Text className="font-dmsans text-xs text-on-surface-variant text-center mt-1 max-w-[260px] leading-relaxed">
+                Tidak ada kelas workshop yang cocok dengan kata kunci atau tingkat yang Anda pilih.
+              </Text>
+              <Pressable
+                onPress={() => {
+                  setSearchQuery('');
+                  setSelectedLevel('Semua');
+                }}
+                className="mt-4 h-10 px-5 rounded-full bg-white border border-border items-center justify-center shadow-xs"
+              >
+                <Text className="text-[11px] uppercase tracking-[0.15em] font-dmsans-bold text-primary">
+                  RESET PENCARIAN
+                </Text>
+              </Pressable>
             </View>
           )}
         </View>
