@@ -118,15 +118,8 @@ export default function HomestaysScreen() {
           </Text>
         </View>
 
-        <Pressable
-          accessibilityLabel="Filter penginapan"
-          onPress={() => {
-            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
-          }}
-          className="w-11 h-11 rounded-full items-center justify-center bg-white/80 border border-white/90 shadow-sm"
-        >
-          <Ionicons name="options-outline" size={18} color="#23201E" />
-        </Pressable>
+        {/* Spacer seimbang */}
+        <View className="w-11" />
       </View>
 
       <ScrollView
