@@ -9,26 +9,28 @@ import {
   Share,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useRouter } from 'expo-router';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { AppIcon } from '@/components/AppIcon';
-import { LOCAL_PHOTOS, PHOTO_COVERS } from '@/constants/localPhotos';
-
-const HERO_IMAGE = PHOTO_COVERS.torTor;
-const EVENT_GALLERY = [...LOCAL_PHOTOS.torTor, ...LOCAL_PHOTOS.desaTomok.slice(0, 4)];
+import { CULTURAL_EVENTS, DEFAULT_EVENT } from '@/constants/culturalEvents';
 
 export default function EventDetailScreen() {
   const router = useRouter();
+  const params = useLocalSearchParams<{ id?: string }>();
+
+  // Ambil data acara spesifik sesuai ID yang dipilih pengguna
+  const currentEvent = (params.id && CULTURAL_EVENTS[params.id]) ? CULTURAL_EVENTS[params.id] : DEFAULT_EVENT;
+
   const [isSaved, setIsSaved] = useState(false);
 
   const handleShare = async () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
     try {
       await Share.share({
-        title: 'Upacara Mangongkal Holi - KawanLokal',
+        title: `${currentEvent.title} - KawanLokal`,
         message:
-          'KawanLokal: Upacara Mangongkal Holi\nLokasi: Desa Adat Tomok, Samosir\nJadwal: 15 - 17 Nov 2026 (WIB)\nStatus: Terbuka untuk wisatawan dengan etiket adat.',
+          `KawanLokal: ${currentEvent.title}\nLokasi: ${currentEvent.location}\nJadwal: ${currentEvent.scheduleText}\nHTM: ${currentEvent.price}`,
       });
     } catch {}
   };
@@ -40,7 +42,7 @@ export default function EventDetailScreen() {
       isSaved ? 'Dihapus dari Simpanan' : 'Acara Disimpan',
       isSaved
         ? 'Acara telah dihapus dari daftar acara tersimpan Anda.'
-        : 'Acara berhasil disimpan ke daftar pengingat. Notifikasi pengingat H-7 dan H-1 akan aktif.'
+        : `Acara ${currentEvent.title} berhasil disimpan ke daftar pengingat. Notifikasi pengingat H-7 dan H-1 akan aktif.`
     );
   };
 
@@ -48,7 +50,7 @@ export default function EventDetailScreen() {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
     Alert.alert(
       'Kalender HP',
-      'Jadwal Upacara Mangongkal Holi berhasil disinkronkan ke kalender perangkat Anda (Zona WIB).'
+      `Jadwal ${currentEvent.title} berhasil disinkronkan ke kalender perangkat Anda (Zona WIB).`
     );
   };
 
@@ -104,7 +106,7 @@ export default function EventDetailScreen() {
         {/* Hero Destination / Event Card (DESIGN.md: card glassmorphic) */}
         <View className="relative w-full h-56 rounded-3xl overflow-hidden shadow-sm border border-white/80 mb-5 bg-surface-tonal">
           <Image
-            source={HERO_IMAGE}
+            source={currentEvent.coverImage}
             className="w-full h-full"
             resizeMode="cover"
           />
@@ -115,16 +117,16 @@ export default function EventDetailScreen() {
             <View className="flex-row items-center gap-1.5 mb-1">
               <Ionicons name="location-outline" size={14} color="#FFFFFF" />
               <Text className="text-xs font-dmsans-medium text-white/90">
-                Desa Adat Tomok, Samosir
+                {currentEvent.location}
               </Text>
             </View>
             <Text className="font-raleway text-2xl font-normal text-white tracking-wide leading-tight mb-1.5">
-              Upacara Mangongkal Holi
+              {currentEvent.title}
             </Text>
             <View className="flex-row items-center gap-2">
               <Ionicons name="calendar-outline" size={14} color="#FFFFFF" />
               <Text className="text-xs font-dmsans text-white/85">
-                3 Hari Prosesi • 15 - 17 Nov 2026 (WIB)
+                {currentEvent.scheduleText}
               </Text>
             </View>
           </View>
@@ -147,7 +149,7 @@ export default function EventDetailScreen() {
           </View>
 
           <Text className="font-dmsans text-xs text-on-surface-variant leading-relaxed">
-            Upacara Mangongkal Holi merupakan tradisi sakral pemindahan tulang-belulang leluhur ke tugu keluarga permanen. Bertujuan menyatukan seluruh keturunan marga dalam satu tempat peristirahatan terhormat, sebagai wujud bhakti tertinggi anak-cucu serta pengikat tali persaudaraan dalihan na tolu.
+            {currentEvent.philosophy}
           </Text>
         </View>
 
@@ -161,24 +163,14 @@ export default function EventDetailScreen() {
           </View>
 
           <View className="gap-2.5">
-            <View className="flex-row items-start gap-2.5">
-              <Text className="text-xs font-dmsans-bold text-amber-800">•</Text>
-              <Text className="text-xs font-dmsans text-on-surface-strong flex-1 leading-relaxed">
-                Wajib mengenakan Ulos ragi hotang atau busana sopan menutup bahu dan lutut.
-              </Text>
-            </View>
-            <View className="flex-row items-start gap-2.5">
-              <Text className="text-xs font-dmsans-bold text-amber-800">•</Text>
-              <Text className="text-xs font-dmsans text-on-surface-strong flex-1 leading-relaxed">
-                Dilarang melintas sembarangan di depan tetua adat saat lantunan doa tonggo-tonggo.
-              </Text>
-            </View>
-            <View className="flex-row items-start gap-2.5">
-              <Text className="text-xs font-dmsans-bold text-amber-800">•</Text>
-              <Text className="text-xs font-dmsans text-on-surface-strong flex-1 leading-relaxed">
-                Mintalah izin panitia sebelum mendokumentasikan prosesi pembukaan peti tulang leluhur.
-              </Text>
-            </View>
+            {currentEvent.etiquettes.map((etiquette, idx) => (
+              <View key={idx} className="flex-row items-start gap-2.5">
+                <Text className="text-xs font-dmsans-bold text-amber-800">•</Text>
+                <Text className="text-xs font-dmsans text-on-surface-strong flex-1 leading-relaxed">
+                  {etiquette}
+                </Text>
+              </View>
+            ))}
           </View>
         </View>
 
@@ -192,56 +184,26 @@ export default function EventDetailScreen() {
           </Text>
 
           <View className="gap-4">
-            {/* Hari 1 */}
-            <View className="flex-row items-start gap-3.5">
-              <View className="w-16 pt-0.5">
-                <Text className="text-xs font-dmsans-bold text-primary">Hari 1</Text>
-                <Text className="text-[10px] font-dmsans text-on-surface-variant">10.00 WIB</Text>
-              </View>
-              <View className="w-2.5 h-2.5 rounded-full bg-primary mt-1.5" />
-              <View className="flex-1 pb-3 border-b border-border/50">
-                <Text className="font-raleway text-sm font-medium text-on-surface tracking-wide leading-snug">
-                  Penyambutan Marga & Gondang Sabangunan
-                </Text>
-                <Text className="text-xs font-dmsans text-on-surface-variant mt-1 leading-relaxed">
-                  Tarian Tortor pembuka oleh raja huta dan tetua adat marga bersangkutan.
-                </Text>
-              </View>
-            </View>
-
-            {/* Hari 2 */}
-            <View className="flex-row items-start gap-3.5">
-              <View className="w-16 pt-0.5">
-                <Text className="text-xs font-dmsans-bold text-primary">Hari 2</Text>
-                <Text className="text-[10px] font-dmsans text-on-surface-variant">09.00 WIB</Text>
-              </View>
-              <View className="w-2.5 h-2.5 rounded-full bg-primary mt-1.5" />
-              <View className="flex-1 pb-3 border-b border-border/50">
-                <Text className="font-raleway text-sm font-medium text-on-surface tracking-wide leading-snug">
-                  Penggalian & Pencucian Tulang Leluhur
-                </Text>
-                <Text className="text-xs font-dmsans text-on-surface-variant mt-1 leading-relaxed">
-                  Ritual sakral pembersihan tulang leluhur dengan air perasan jeruk purut wangi.
-                </Text>
-              </View>
-            </View>
-
-            {/* Hari 3 */}
-            <View className="flex-row items-start gap-3.5">
-              <View className="w-16 pt-0.5">
-                <Text className="text-xs font-dmsans-bold text-primary">Hari 3</Text>
-                <Text className="text-[10px] font-dmsans text-on-surface-variant">13.00 WIB</Text>
-              </View>
-              <View className="w-2.5 h-2.5 rounded-full bg-primary mt-1.5" />
-              <View className="flex-1">
-                <Text className="font-raleway text-sm font-medium text-on-surface tracking-wide leading-snug">
-                  Penyemayaman ke Tugu & Pesta Syukur
-                </Text>
-                <Text className="text-xs font-dmsans text-on-surface-variant mt-1 leading-relaxed">
-                  Penyemayaman abadi di tugu keluarga diiringi jamuan makan bersama khas Danau Toba.
-                </Text>
-              </View>
-            </View>
+            {currentEvent.itinerary.map((item, idx) => {
+              const isLast = idx === currentEvent.itinerary.length - 1;
+              return (
+                <View key={idx} className="flex-row items-start gap-3.5">
+                  <View className="w-16 pt-0.5">
+                    <Text className="text-xs font-dmsans-bold text-primary">{item.dayLabel}</Text>
+                    <Text className="text-[10px] font-dmsans text-on-surface-variant">{item.time}</Text>
+                  </View>
+                  <View className="w-2.5 h-2.5 rounded-full bg-primary mt-1.5" />
+                  <View className={`flex-1 ${!isLast ? 'pb-3 border-b border-border/50' : ''}`}>
+                    <Text className="font-raleway text-sm font-medium text-on-surface tracking-wide leading-snug">
+                      {item.title}
+                    </Text>
+                    <Text className="text-xs font-dmsans text-on-surface-variant mt-1 leading-relaxed">
+                      {item.description}
+                    </Text>
+                  </View>
+                </View>
+              );
+            })}
           </View>
         </View>
 
@@ -253,13 +215,13 @@ export default function EventDetailScreen() {
                 DOKUMENTASI
               </Text>
               <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
-                Galeri Lapangan ({EVENT_GALLERY.length} Foto)
+                Galeri Lapangan ({currentEvent.gallery.length} Foto)
               </Text>
             </View>
           </View>
 
           <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-row -mx-1 px-1">
-            {EVENT_GALLERY.map((photo, idx) => (
+            {currentEvent.gallery.map((photo, idx) => (
               <View
                 key={idx}
                 className="w-52 h-36 rounded-3xl overflow-hidden mr-3 bg-surface-tonal border border-white/80 shadow-sm"
@@ -284,14 +246,14 @@ export default function EventDetailScreen() {
               <View>
                 <View className="flex-row items-center gap-1">
                   <Ionicons name="star" size={12} color="#D97706" />
-                  <Text className="text-xs font-dmsans-bold text-amber-700">4.95</Text>
-                  <Text className="text-[10px] font-dmsans text-on-surface-variant">(120+ ulasan)</Text>
+                  <Text className="text-xs font-dmsans-bold text-amber-700">{currentEvent.rating}</Text>
+                  <Text className="text-[10px] font-dmsans text-on-surface-variant">({currentEvent.reviewCount})</Text>
                 </View>
                 <Text className="font-raleway text-base font-medium text-on-surface leading-tight mt-0.5">
-                  Komunitas Pemandu Adat Tomok
+                  {currentEvent.communityName}
                 </Text>
                 <Text className="text-xs font-dmsans text-on-surface-variant mt-0.5">
-                  Pemandu Resmi Berlisensi Samosir
+                  {currentEvent.communitySubtitle}
                 </Text>
               </View>
             </View>
@@ -311,11 +273,25 @@ export default function EventDetailScreen() {
           </Pressable>
 
           <Pressable
-            onPress={() => router.push('/booking/new')}
+            onPress={() => {
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
+              router.push({
+                pathname: '/booking/new',
+                params: {
+                  service_type: 'ticket',
+                  event_id: currentEvent.id,
+                  event_title: currentEvent.title,
+                  event_location: currentEvent.location,
+                  event_price: currentEvent.price,
+                },
+              });
+            }}
             className="flex-1 h-13 rounded-full bg-primary items-center justify-center flex-row gap-2 shadow-md"
           >
             <Ionicons name="ticket-outline" size={17} color="#FFFFFF" />
-            <Text className="text-xs font-dmsans-bold text-white">Pesan Tiket</Text>
+            <Text className="text-xs font-dmsans-bold text-white">
+              {currentEvent.price === 'Gratis' ? 'Daftar Tiket Gratis' : `Pesan • ${currentEvent.price}`}
+            </Text>
           </Pressable>
         </View>
       </View>

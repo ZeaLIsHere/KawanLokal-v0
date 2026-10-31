@@ -344,7 +344,7 @@ export default function CalendarScreen() {
           {filteredEvents.map((ev) => (
             <Pressable
               key={ev.id}
-              onPress={() => router.push('/event/detail')}
+              onPress={() => router.push({ pathname: '/event/detail', params: { id: ev.id } })}
               className="bg-white/85 rounded-3xl border border-white/90 overflow-hidden shadow-sm"
             >
               {/* Foto Cover dengan Gradasi Lembut ke Body Card */}
@@ -429,7 +429,7 @@ export default function CalendarScreen() {
                   </View>
 
                   <Pressable
-                    onPress={() => router.push('/event/detail')}
+                    onPress={() => router.push({ pathname: '/event/detail', params: { id: ev.id } })}
                     className="h-9 px-4 bg-primary rounded-full flex-row items-center justify-center gap-1.5 shadow-xs"
                   >
                     <Text className="text-white font-dmsans-medium text-xs tracking-wide">
@@ -575,8 +575,9 @@ export default function CalendarScreen() {
               {/* Tombol Lanjut (button-primary) */}
               <Pressable
                 onPress={() => {
+                  const eventId = selectedEventModal.id;
                   setSelectedEventModal(null);
-                  router.push('/event/detail');
+                  router.push({ pathname: '/event/detail', params: { id: eventId } });
                 }}
                 className="mt-5 w-full h-12 bg-primary rounded-full flex-row items-center justify-center gap-2 shadow-md"
               >

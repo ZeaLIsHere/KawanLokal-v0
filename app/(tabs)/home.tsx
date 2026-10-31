@@ -236,8 +236,8 @@ export default function HomeScreen() {
           <View className="flex-row gap-3.5">
             {/* Card 1: Pesta Danau Toba */}
             <Pressable
-              onPress={() => router.push('/calendar')}
-              className="flex-1 bg-white/80 rounded-3xl border border-white/80 overflow-hidden shadow-sm active:opacity-90"
+              onPress={() => router.push({ pathname: '/event/detail', params: { id: 'ev-1' } })}
+              className="flex-1 bg-white/80 rounded-3xl border border-white/80 overflow-hidden shadow-sm"
             >
               <View className="relative w-full aspect-[4/3] bg-surface-tonal overflow-hidden">
                 <Image
@@ -271,7 +271,7 @@ export default function HomeScreen() {
                 <Pressable
                   accessibilityLabel="Simpan acara"
                   onPress={() => toggleFavorite('pesta-toba')}
-                  className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/70 border border-white/60 items-center justify-center shadow-sm active:opacity-80"
+                  className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/70 border border-white/60 items-center justify-center shadow-sm"
                 >
                   <Ionicons
                     name={favorites['pesta-toba'] ? 'heart' : 'heart-outline'}
@@ -301,8 +301,8 @@ export default function HomeScreen() {
 
             {/* Card 2: Upacara Mangongkal Holi */}
             <Pressable
-              onPress={() => router.push('/calendar')}
-              className="flex-1 bg-white/80 rounded-3xl border border-white/80 overflow-hidden shadow-sm active:opacity-90"
+              onPress={() => router.push({ pathname: '/event/detail', params: { id: 'ev-2' } })}
+              className="flex-1 bg-white/80 rounded-3xl border border-white/80 overflow-hidden shadow-sm"
             >
               <View className="relative w-full aspect-[4/3] bg-surface-tonal overflow-hidden">
                 <Image
@@ -336,7 +336,7 @@ export default function HomeScreen() {
                 <Pressable
                   accessibilityLabel="Simpan acara"
                   onPress={() => toggleFavorite('mangongkal-holi')}
-                  className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/70 border border-white/60 items-center justify-center shadow-sm active:opacity-80"
+                  className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/70 border border-white/60 items-center justify-center shadow-sm"
                 >
                   <Ionicons
                     name={favorites['mangongkal-holi'] ? 'heart' : 'heart-outline'}

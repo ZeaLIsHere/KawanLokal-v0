@@ -24,6 +24,10 @@ export default function NewBookingScreen() {
     guide_specialty?: string;
     guide_district?: string;
     guide_price?: string;
+    event_id?: string;
+    event_title?: string;
+    event_location?: string;
+    event_price?: string;
   }>();
 
   const isGuideParam = params.service_type === 'guide';
@@ -39,8 +43,18 @@ export default function NewBookingScreen() {
     return 250000;
   }, [params.guide_price]);
 
+  // Parsing harga tiket acara dari parameter
+  const parsedEventPrice = useMemo(() => {
+    if (params.event_price) {
+      if (params.event_price.toLowerCase().includes('gratis')) return 0;
+      const num = parseInt(params.event_price.replace(/[^0-9]/g, ''), 10);
+      if (!isNaN(num)) return num;
+    }
+    return 50000;
+  }, [params.event_price]);
+
   // Tiket: per peserta. Pemandu: tarif flat per rombongan trip
-  const pricePerItem = bookingType === 'ticket' ? 50000 : parsedGuidePrice;
+  const pricePerItem = bookingType === 'ticket' ? parsedEventPrice : parsedGuidePrice;
   const totalPrice = bookingType === 'ticket' ? participantCount * pricePerItem : pricePerItem;
 
   const handleTypeSwitch = (type: 'ticket' | 'guide') => {
@@ -64,16 +78,19 @@ export default function NewBookingScreen() {
 
   const handleProceedPayment = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
+    const currentTitle = bookingType === 'guide'
+      ? (params.guide_name || 'Bona Simanjuntak')
+      : (params.event_title || 'Pesta Danau Toba & Pagelaran Gondang');
+    const currentLocation = bookingType === 'guide'
+      ? (params.guide_district || 'Dermaga Tomok, Pulau Samosir')
+      : (params.event_location || 'Pantai Bebas Parapat, Simalungun');
+
     router.push({
       pathname: '/payment',
       params: {
         service_type: bookingType,
-        title: bookingType === 'guide'
-          ? (params.guide_name || 'Bona Simanjuntak')
-          : 'Pesta Danau Toba & Pagelaran Gondang',
-        location: bookingType === 'guide'
-          ? (params.guide_district || 'Dermaga Tomok, Pulau Samosir')
-          : 'Pantai Bebas Parapat, Simalungun',
+        title: currentTitle,
+        location: currentLocation,
         amount: String(totalPrice),
         participants: String(participantCount),
       },
@@ -172,7 +189,7 @@ export default function NewBookingScreen() {
                 >
                   {bookingType === 'guide'
                     ? (params.guide_name || 'Bona Simanjuntak')
-                    : 'Pesta Danau Toba & Pagelaran Gondang'}
+                    : (params.event_title || 'Pesta Danau Toba & Pagelaran Gondang')}
                 </Text>
               </View>
             </View>
@@ -195,7 +212,7 @@ export default function NewBookingScreen() {
                 >
                   {bookingType === 'guide'
                     ? (params.guide_district || 'Dermaga Tomok, Pulau Samosir')
-                    : 'Pantai Bebas Parapat, Simalungun'}
+                    : (params.event_location || 'Pantai Bebas Parapat, Simalungun')}
                 </Text>
               </View>
             </View>
