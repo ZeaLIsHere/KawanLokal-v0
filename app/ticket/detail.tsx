@@ -78,11 +78,6 @@ export default function TicketDetailScreen() {
             resizeMode="cover"
           />
           <View className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
-          <View className="absolute bottom-2.5 left-3 bg-ulos-red/90 px-2.5 py-0.5 rounded-full">
-            <Text className="text-[10px] font-bold text-white tracking-wide">
-              FESTIVAL BUDAYA AKBAR
-            </Text>
-          </View>
         </View>
 
         {/* Route & Event Information Card */}

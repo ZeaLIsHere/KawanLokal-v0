@@ -140,12 +140,6 @@ export default function OnboardingScreen() {
                   className="w-full h-full"
                   resizeMode="cover"
                 />
-                {/* Badge Tag */}
-                <View className="absolute top-3 left-3 bg-stone-900/70 backdrop-blur-md px-3 py-1 rounded-full">
-                  <Text className="text-[10px] font-bold text-white tracking-wider">
-                    {slide.tag}
-                  </Text>
-                </View>
 
                 {/* Subtle bottom gradient */}
                 <View className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white/70 via-white/10 to-transparent pointer-events-none" />

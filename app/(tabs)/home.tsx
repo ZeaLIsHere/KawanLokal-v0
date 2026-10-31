@@ -206,9 +206,6 @@ export default function HomeScreen() {
                   className="w-full h-full"
                   resizeMode="cover"
                 />
-                <View className="absolute top-2 left-2 bg-ulos-red/90 px-2 py-0.5 rounded-full">
-                  <Text className="text-[10px] font-bold text-white">Festival</Text>
-                </View>
                 <Pressable
                   accessibilityLabel="Simpan acara"
                   onPress={() => toggleFavorite('pesta-toba')}
@@ -251,9 +248,6 @@ export default function HomeScreen() {
                   className="w-full h-full"
                   resizeMode="cover"
                 />
-                <View className="absolute top-2 left-2 bg-stone-900/80 px-2 py-0.5 rounded-full">
-                  <Text className="text-[10px] font-bold text-white">Adat Terbuka</Text>
-                </View>
                 <Pressable
                   accessibilityLabel="Simpan acara"
                   onPress={() => toggleFavorite('mangongkal-holi')}
@@ -290,11 +284,6 @@ export default function HomeScreen() {
         {/* Promo / Sorotan Budaya Lokal */}
         <View className="bg-gradient-to-r from-red-50 via-stone-50 to-white border border-red-100 rounded-2xl p-4 shadow-sm flex-row items-center justify-between overflow-hidden relative">
           <View className="space-y-1 flex-1 pr-2 z-10">
-            <View className="self-start px-2.5 py-0.5 rounded-full bg-blue-100">
-              <Text className="text-ulos-red text-[10px] font-bold tracking-wide">
-                PENGALAMAN OTENTIK
-              </Text>
-            </View>
             <Text className="text-base font-bold text-on-surface leading-tight mt-1">
               Tur Budaya Desa Tomok{'\n'}
               <Text className="text-xs font-medium text-secondary">

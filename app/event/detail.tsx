@@ -107,20 +107,6 @@ export default function EventDetailScreen() {
           />
           <View className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/40 to-transparent pointer-events-none" />
 
-          {/* Top Badges */}
-          <View className="absolute top-3 left-3 right-3 flex-row justify-between items-center z-10">
-            <View className="px-2.5 py-1 rounded-full bg-ulos-red shadow-sm">
-              <Text className="text-[10px] font-bold text-white tracking-wide uppercase">
-                Terbuka Wisatawan
-              </Text>
-            </View>
-            <View className="px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-md shadow-sm">
-              <Text className="text-[10px] font-bold text-on-surface">
-                #VERIFIKASI-KURATOR-089
-              </Text>
-            </View>
-          </View>
-
           {/* Bottom Card Content */}
           <View className="absolute bottom-3 left-4 right-4 z-10">
             <View className="flex-row items-center gap-1 mb-0.5">

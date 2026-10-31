@@ -191,11 +191,6 @@ export default function TicketsScreen() {
                   className="w-full h-full"
                   resizeMode="cover"
                 />
-                <View className="absolute top-3 left-3 bg-ulos-red px-2.5 py-1 rounded-full">
-                  <Text className="text-[10px] font-bold text-white tracking-wide">
-                    {ticket.category}
-                  </Text>
-                </View>
                 <View className="absolute top-3 right-3 bg-white/90 backdrop-blur-md px-2 py-0.5 rounded-full flex-row items-center gap-1">
                   <AppIcon name="star" size={13} />
                   <Text className="text-xs font-bold text-on-surface">{ticket.rating}</Text>

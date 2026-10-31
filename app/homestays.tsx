@@ -211,13 +211,6 @@ export default function HomestaysScreen() {
               />
             </Pressable>
 
-            {/* Featured Badge */}
-            <View className="absolute top-3 left-3 bg-ulos-red px-2.5 py-0.5 rounded-full">
-              <Text className="text-[10px] font-bold text-white tracking-wide">
-                PILIHAN UTAMA
-              </Text>
-            </View>
-
             {/* Bottom Card Content */}
             <View className="absolute bottom-3 left-3 right-3 flex-row justify-between items-end">
               <View className="flex-1 pr-2">

@@ -215,11 +215,6 @@ export default function DestinationsScreen() {
                   className="w-full h-full"
                   resizeMode="cover"
                 />
-                <View className="absolute top-1.5 left-1.5 bg-black/60 px-2 py-0.5 rounded-md">
-                  <Text className="text-[9px] font-semibold text-white">
-                    {dest.category}
-                  </Text>
-                </View>
               </View>
 
               {/* Details */}
