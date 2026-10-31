@@ -110,9 +110,6 @@ export default function NewBookingScreen() {
         </Pressable>
 
         <View className="items-center">
-          <Text className="text-[10px] uppercase tracking-[0.2em] font-dmsans-bold text-on-surface-variant">
-            FORMULIR
-          </Text>
           <Text className="font-raleway text-lg font-medium text-on-surface tracking-wide">
             Pesan Layanan
           </Text>
@@ -174,70 +171,61 @@ export default function NewBookingScreen() {
         {/* Booking Parameters Form Module */}
         <View className="gap-3.5 mb-5">
           {/* Field 1: Pilihan Layanan / Acara */}
-          <View className="border border-white/80 rounded-3xl bg-white/80 p-4 flex-row items-center justify-between shadow-sm">
-            <View className="flex-row items-center gap-3.5 flex-1 pr-2">
-              <View className="w-10 h-10 rounded-full bg-primary/10 items-center justify-center">
-                <Ionicons name={bookingType === 'guide' ? 'person' : 'sparkles'} size={18} color="#1D4ED8" />
-              </View>
-              <View className="flex-1">
-                <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-on-surface-variant">
-                  {bookingType === 'guide' ? 'Pemandu Terpilih' : 'Layanan Terpilih'}
-                </Text>
-                <Text
-                  numberOfLines={1}
-                  className="font-raleway text-base font-medium text-on-surface tracking-wide mt-0.5"
-                >
-                  {bookingType === 'guide'
-                    ? (params.guide_name || 'Bona Simanjuntak')
-                    : (params.event_title || 'Pesta Danau Toba & Pagelaran Gondang')}
-                </Text>
-              </View>
+          <View className="border border-white/80 rounded-3xl bg-white/80 p-4 flex-row items-center shadow-sm">
+            <View className="w-10 h-10 rounded-full bg-primary/10 items-center justify-center mr-3.5">
+              <Ionicons name="map-outline" size={18} color="#1D4ED8" />
             </View>
-            <Ionicons name="chevron-down" size={18} color="#8A827A" />
+            <View className="flex-1">
+              <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-on-surface-variant">
+                {bookingType === 'guide' ? 'Pemandu Terpilih' : 'Layanan Terpilih'}
+              </Text>
+              <Text
+                numberOfLines={1}
+                className="font-raleway text-base font-medium text-on-surface tracking-wide mt-0.5"
+              >
+                {bookingType === 'guide'
+                  ? (params.guide_name || 'Bona Simanjuntak')
+                  : (params.event_title || 'Pesta Danau Toba & Pagelaran Gondang')}
+              </Text>
+            </View>
           </View>
 
           {/* Field 2: Kawasan / Lokasi Temu */}
-          <View className="border border-white/80 rounded-3xl bg-white/80 p-4 flex-row items-center justify-between shadow-sm">
-            <View className="flex-row items-center gap-3.5 flex-1 pr-2">
-              <View className="w-10 h-10 rounded-full bg-primary/10 items-center justify-center">
-                <Ionicons name="location-outline" size={18} color="#1D4ED8" />
-              </View>
-              <View className="flex-1">
-                <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-on-surface-variant">
-                  {bookingType === 'guide' ? 'Titik Kumpul Temu' : 'Titik Lokasi'}
-                </Text>
-                <Text
-                  numberOfLines={1}
-                  className="font-raleway text-base font-medium text-on-surface tracking-wide mt-0.5"
-                >
-                  {bookingType === 'guide'
-                    ? (params.guide_district || 'Dermaga Tomok, Pulau Samosir')
-                    : (params.event_location || 'Pantai Bebas Parapat, Simalungun')}
-                </Text>
-              </View>
+          <View className="border border-white/80 rounded-3xl bg-white/80 p-4 flex-row items-center shadow-sm">
+            <View className="w-10 h-10 rounded-full bg-primary/10 items-center justify-center mr-3.5">
+              <Ionicons name="location-outline" size={18} color="#1D4ED8" />
             </View>
-            <Ionicons name="chevron-down" size={18} color="#8A827A" />
+            <View className="flex-1">
+              <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-on-surface-variant">
+                {bookingType === 'guide' ? 'Titik Kumpul Temu' : 'Titik Lokasi'}
+              </Text>
+              <Text
+                numberOfLines={1}
+                className="font-raleway text-base font-medium text-on-surface tracking-wide mt-0.5"
+              >
+                {bookingType === 'guide'
+                  ? (params.guide_district || 'Dermaga Tomok, Pulau Samosir')
+                  : (params.event_location || 'Pantai Bebas Parapat, Simalungun')}
+              </Text>
+            </View>
           </View>
 
-          {/* Field 3: Jadwal & Waktu WIB */}
-          <View className="border border-white/80 rounded-3xl bg-white/80 p-4 flex-row items-center justify-between shadow-sm">
-            <View className="flex-row items-center gap-3.5 flex-1 pr-2">
-              <View className="w-10 h-10 rounded-full bg-primary/10 items-center justify-center">
-                <Ionicons name="calendar-outline" size={18} color="#1D4ED8" />
-              </View>
-              <View className="flex-1">
-                <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-on-surface-variant">
-                  Jadwal Kegiatan (WIB)
-                </Text>
-                <Text
-                  numberOfLines={1}
-                  className="font-raleway text-base font-medium text-on-surface tracking-wide mt-0.5"
-                >
-                  Jumat, 2 Nov 2026 • 10.00 WIB
-                </Text>
-              </View>
+          {/* Field 3: Jadwal & Waktu */}
+          <View className="border border-white/80 rounded-3xl bg-white/80 p-4 flex-row items-center shadow-sm">
+            <View className="w-10 h-10 rounded-full bg-primary/10 items-center justify-center mr-3.5">
+              <Ionicons name="calendar-outline" size={18} color="#1D4ED8" />
             </View>
-            <Ionicons name="chevron-down" size={18} color="#8A827A" />
+            <View className="flex-1">
+              <Text className="text-[10px] uppercase tracking-[0.18em] font-dmsans-bold text-on-surface-variant">
+                Jadwal Kegiatan
+              </Text>
+              <Text
+                numberOfLines={1}
+                className="font-raleway text-base font-medium text-on-surface tracking-wide mt-0.5"
+              >
+                Jumat, 2 Nov 2026 • 10.00
+              </Text>
+            </View>
           </View>
 
           {/* Field 4: Jumlah Peserta dengan Kontrol +/- */}
