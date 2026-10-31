@@ -12,6 +12,7 @@ import { useRouter, useFocusEffect } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { AppIcon } from '@/components/AppIcon';
+import { StyleSheet } from 'react-native';
 import { PHOTO_COVERS } from '@/constants/localPhotos';
 import { getOrders, cancelOrder, StoredOrder, OrderStatus } from '@/lib/ordersStorage';
 import { useTranslation } from '@/i18n';
@@ -80,18 +81,24 @@ export default function OrdersScreen() {
 
   const filteredOrders = orders.filter((order) => order.status === activeTab);
 
-  const getImageSource = (imageKey: StoredOrder['imageKey']) => {
-    switch (imageKey) {
-      case 'desaTomok':
-        return PHOTO_COVERS.desaTomok;
-      case 'ulos':
-        return PHOTO_COVERS.ulos;
-      case 'homestaySopo':
-        return PHOTO_COVERS.homestaySopo;
-      case 'parapat':
-      default:
-        return PHOTO_COVERS.parapat;
+  const getImageSource = (order: StoredOrder) => {
+    const titleLower = (order.title || '').toLowerCase();
+    if (titleLower.includes('mangongkal') || titleLower.includes('tomok')) {
+      return PHOTO_COVERS.desaTomok;
     }
+    if (titleLower.includes('ulos') || order.service_type === 'workshop') {
+      return PHOTO_COVERS.ulos;
+    }
+    if (titleLower.includes('gondang')) {
+      return PHOTO_COVERS.gondang;
+    }
+    if (titleLower.includes('sopo') || titleLower.includes('homestay') || order.service_type === 'homestay') {
+      return PHOTO_COVERS.homestaySopo;
+    }
+    if (order.service_type === 'guide') {
+      return PHOTO_COVERS.desaTomok;
+    }
+    return PHOTO_COVERS.parapat;
   };
 
   return (
@@ -182,11 +189,14 @@ export default function OrdersScreen() {
                 onPress={() => handleCardPress(order)}
                 className="flex-row items-center gap-3.5"
               >
-                {/* Photo Thumbnail */}
-                <View className="w-22 h-22 rounded-2xl overflow-hidden bg-surface-tonal shrink-0 border border-white/80">
+                {/* Photo Thumbnail Presisi 88x88 */}
+                <View
+                  style={{ width: 88, height: 88 }}
+                  className="rounded-2xl overflow-hidden bg-surface-tonal shrink-0 border border-white/80 relative"
+                >
                   <Image
-                    source={getImageSource(order.imageKey)}
-                    className="w-full h-full"
+                    source={getImageSource(order)}
+                    style={StyleSheet.absoluteFill}
                     resizeMode="cover"
                   />
                 </View>

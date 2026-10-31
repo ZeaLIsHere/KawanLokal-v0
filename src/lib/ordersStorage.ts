@@ -91,14 +91,19 @@ export async function createOrder(input: CreateOrderInput): Promise<StoredOrder>
   const randomCode = Math.floor(100 + Math.random() * 900);
   const bookingCode = `#${codePrefix}-2026-${randomCode}`;
 
-  const imageKey: StoredOrder['imageKey'] =
-    input.service_type === 'guide'
-      ? 'desaTomok'
-      : input.service_type === 'workshop'
-      ? 'ulos'
-      : input.service_type === 'homestay'
-      ? 'homestaySopo'
-      : 'parapat';
+  const titleLower = (input.title || '').toLowerCase();
+  let imageKey: StoredOrder['imageKey'] = 'parapat';
+  if (titleLower.includes('tomok') || titleLower.includes('mangongkal')) {
+    imageKey = 'desaTomok';
+  } else if (titleLower.includes('ulos') || input.service_type === 'workshop') {
+    imageKey = 'ulos';
+  } else if (titleLower.includes('sopo') || titleLower.includes('homestay') || input.service_type === 'homestay') {
+    imageKey = 'homestaySopo';
+  } else if (input.service_type === 'guide') {
+    imageKey = 'desaTomok';
+  } else {
+    imageKey = 'parapat';
+  }
 
   const travelersLabel =
     input.service_type === 'homestay'
