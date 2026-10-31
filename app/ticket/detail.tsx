@@ -167,8 +167,8 @@ export default function TicketDetailScreen() {
             </View>
           </View>
 
-          {/* Date, Timing & Status Pill */}
-          <View className="bg-surface-tonal rounded-2xl p-3.5 flex-row items-center justify-between border border-border/60">
+          {/* Date & Timing */}
+          <View className="bg-surface-tonal rounded-2xl p-3.5 flex-row items-center border border-border/60">
             <View className="flex-row items-start gap-2.5">
               <Ionicons name="calendar-outline" size={18} color="#1D4ED8" style={{ marginTop: 2 }} />
               <View>
@@ -176,27 +176,18 @@ export default function TicketDetailScreen() {
                 <Text className="text-xs font-dmsans text-on-surface-variant mt-0.5">09.00 – 16.00</Text>
               </View>
             </View>
-            <View className="px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200">
-              <Text className="text-xs font-dmsans-bold text-emerald-700">LUNAS / SIAP</Text>
-            </View>
           </View>
         </View>
 
         {/* QR Code / Voucher Verification Card */}
         <View className="bg-white/85 rounded-3xl p-5 border border-white/90 shadow-sm mb-4 items-center">
-          <View className="flex-row items-center justify-between w-full pb-3 border-b border-dashed border-border/80 mb-4">
-            <View>
-              <Text className="text-[10px] uppercase tracking-wider font-dmsans-medium text-on-surface-variant">
-                {isGuide ? 'KODE RESERVASI PEMANDU' : 'KODE TIKET DIGITAL'}
-              </Text>
-              <Text className="font-raleway text-base font-semibold text-on-surface mt-0.5">
-                {bookingCode}
-              </Text>
-            </View>
-            <View className="px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 flex-row items-center gap-1">
-              <Ionicons name="cloud-offline" size={13} color="#15803D" />
-              <Text className="text-[10px] font-dmsans-bold text-emerald-800">Tersedia Offline</Text>
-            </View>
+          <View className="w-full pb-3 border-b border-dashed border-border/80 mb-4">
+            <Text className="text-[10px] uppercase tracking-wider font-dmsans-medium text-on-surface-variant">
+              {isGuide ? 'KODE RESERVASI PEMANDU' : 'KODE TIKET DIGITAL'}
+            </Text>
+            <Text className="font-raleway text-base font-semibold text-on-surface mt-0.5">
+              {bookingCode}
+            </Text>
           </View>
 
           {/* QR Code Container */}
